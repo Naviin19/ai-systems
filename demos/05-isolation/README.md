@@ -48,7 +48,7 @@ Work ran concurrently where the graph allows, and every merge reached main one a
 
 ## How to break it
 
-Take the lock away. In `worker.ts`, change `await withMergeLock(merge, { lockPath, timeoutMs: 60_000 });` to `await merge();`, then run `npm run demo:isolation` again. The processes now rebase and fast-forward `main` at the same moment. Part 2 reports that some of them could not merge into main, prints what git refused, and exits 1.
+Take the lock away. In `worker.ts`, change `await withMergeLock(merge, { lockPath, timeoutMs: 60_000 });` to `await merge();`, then run `npm run demo:isolation` again. The processes now rebase and fast-forward `main` at the same moment. Part 2 reports how many processes could not merge into main, prints what git refused, and exits 1.
 
 What git refuses varies from run to run. Seen on one run: one commit reached `main`; another process hit git's own index lock (`Unable to create '…/.git/index.lock': File exists`); two failed to update `HEAD` because another merge had moved it first.
 

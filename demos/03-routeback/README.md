@@ -107,7 +107,7 @@ The judge clears its bar, and route-back retries only the failures it can learn 
 
 ## What this is
 
-**Production code throughout; the judge is replayed, and the part 3 failures are written in the orchestrator's formats.**
+**A reduced harness around the production path: production code throughout, with the judge replayed and the part 3 failures written in the orchestrator's formats.**
 
 - **Every module is extracted from the factory, and each file's header names what changed.**
   - `route-back.ts` is the orchestrator's classifier, masker, signature and oscillation guard.
