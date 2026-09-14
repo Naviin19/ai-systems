@@ -4,10 +4,23 @@
   "private": true,
   "description": "The published architecture of a multi-agent AI factory and the runtime it ships to.",
   "license": "MIT",
-  "engines": { "node": ">=20" },
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
-    "diagrams": "python3 tools/diagram-compiler/build.py",
-    "diagrams:verify": "python3 tools/diagram-compiler/verify.py",
-    "reference-set": "python3 tools/diagram-compiler/build_pdf.py && python3 tools/diagram-compiler/to_pdf.py && python3 tools/diagram-compiler/verify_pdf.py"
+    "demo:routeback": "tsx demos/03-routeback/run.ts",
+    "demo:attest": "tsx demos/06-attest/run.ts",
+    "diagrams": "python tools/diagram-compiler/build.py",
+    "diagrams:verify": "python tools/diagram-compiler/verify.py",
+    "reference-set": "python tools/diagram-compiler/build_pdf.py && python tools/diagram-compiler/to_pdf.py && python tools/diagram-compiler/verify_pdf.py"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.6",
+    "tsx": "^4.23.13",
+    "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "zod": "^4.6.5"
   }
 }
