@@ -65,7 +65,7 @@ It also reports that the committed JSON Schema has drifted from its source, at t
 
 ## What this is
 
-**The production code, over the real contracts; the agent graph is captured as a fixture.**
+**The production path over the real contracts; the agent graph is captured as a fixture.**
 
 - **The contracts are the factory's own schemas.** `contracts/types/` holds the handoff envelope and the seven schema files it imports, extracted verbatim.
 - **So is the enforcement.** The compiler, the edge registry and the agent graph are in `contracts/enforcement/`; the blast-radius walk and its generated registry are in `contracts/registry/`. `json-schema.ts` holds the generator and the comparison that the factory's gate R22 uses. Each file's header names what changed on extraction. The only real change is that the compiler's command-line section is removed.
