@@ -172,11 +172,34 @@ if arch:
         fails.append("architecture.md does not declare the contested figures")
 
 # --- 4. real text geometry, measured in a browser ----------------------------
+# The plates' font stack resolves to Segoe UI on Windows and to a wider face such
+# as DejaVu Sans on a Linux runner, so a label that fits on one can overflow on
+# the other. VERIFY_FONT measures every plate set in one named font instead. A
+# font the browser does not have would fall back silently and prove nothing, so
+# it is refused.
+FONT = os.environ.get("VERIFY_FONT", "").strip()
+print(f"geometry font: {FONT or 'the plates own font stack'}")
+FONT_PROBE = """(font) => {
+    const ns = 'http://www.w3.org/2000/svg';
+    const width = (family) => {
+      const t = document.createElementNS(ns, 'text');
+      t.setAttribute('font-size', '40'); t.style.fontFamily = family;
+      t.textContent = 'mmmmmmmmmmlli WWW 0123';
+      document.documentElement.appendChild(t);
+      const w = t.getBBox().width; t.remove(); return w;
+    };
+    const installed = ['monospace', 'serif'].some((g) => width(`"${font}", ${g}`) !== width(g));
+    for (const e of document.querySelectorAll('text')) e.style.fontFamily = `"${font}"`;
+    return installed;
+}"""
 with sync_playwright() as p:
     b = p.chromium.launch(); pg = b.new_page()
     for f in FILES:
         n = os.path.basename(f)
         pg.goto(pathlib.Path(f).as_uri()); pg.wait_for_timeout(220)
+        if FONT and not pg.evaluate(FONT_PROBE, FONT):
+            fails.append(f"VERIFY_FONT={FONT!r} is not installed in the browser, so its text would fall back to another face")
+            break
         r = pg.evaluate("""() => {
             const vb = document.documentElement.viewBox.baseVal;
             return {w: vb.width, h: vb.height, t: [...document.querySelectorAll('text')]

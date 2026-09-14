@@ -1,0 +1,2 @@
+playwright==1.62.0
+pypdf==6.18.1
