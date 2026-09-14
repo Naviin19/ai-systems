@@ -1,0 +1,219 @@
+{
+  "schema_version": "1.1",
+  "handoff_id": "e7a2fcb6-f358-45c0-8383-404a3c65ffba",
+  "producing_agent_id": "test-fixture.agent-12-prompt-manager",
+  "consuming_agent_ids": [
+    "test-fixture.orchestrator"
+  ],
+  "pipeline_run_id": "7ed6859b-5a26-4f1c-a01c-1d0c843172c9",
+  "timestamp": "2026-05-19T23:36:39.910Z",
+  "gate_result_id": "071f5092-1a96-4564-8a91-8deb9309a8e6",
+  "behavioral_assessment": {
+    "trust_verification": {
+      "upstream_agent_id": "test-fixture.agent-03a-pipeline-designer",
+      "checks": [
+        {
+          "check_type": "schema_valid",
+          "result": true,
+          "detail": "PipelineDesign upstream artifact validates against PipelineDesignSchema"
+        },
+        {
+          "check_type": "quality_gate_passed",
+          "result": true,
+          "detail": "Walker outputs derived: Pass A=1, Pass B=1"
+        },
+        {
+          "check_type": "no_silent_failures",
+          "result": true,
+          "detail": "Emit-batch: 2 succeeded, 0 failed (all surfaced)"
+        },
+        {
+          "check_type": "decisions_respected",
+          "result": true,
+          "detail": "Tier and surface decisions from pipeline-design propagated into emitted contracts"
+        }
+      ],
+      "trust_verdict": "proceed"
+    },
+    "self_assessment": {
+      "estimated_I": {
+        "deviation_score": 7,
+        "deviation_evidence": {
+          "prediction_violated": "Smoke fixture is deliberately small — does not exercise multi-agent merge cases at scale",
+          "mechanism": "form",
+          "decay_position": 0
+        },
+        "coherence_score": 9,
+        "coherence_evidence": {
+          "coherence_anchor": "Every emitted prompt traces back to a pipeline-design candidate via derives_from",
+          "anchor_served": true,
+          "contradictions_found": 0,
+          "resolution_approach": "N/A — single-product smoke fixture"
+        },
+        "agency_score": 8.5,
+        "agency_evidence": {
+          "sources_traceable": true,
+          "confidence_signals_present": true,
+          "user_can_verify": true,
+          "action_surfaces_provided": true
+        },
+        "I_score": 8,
+        "weakest_term": "D",
+        "weakest_evidence": "Smoke fixture exercises one agent and one transition; deviation is low by design",
+        "evaluator": "self",
+        "model_used": "claude-opus-4-7",
+        "calibration_version": "1.0"
+      },
+      "weakest_term": "D",
+      "weakest_evidence": "Smoke fixture exercises one agent and one transition; deviation is low by design",
+      "honest_flags": [
+        {
+          "flag": "fixture is single-agent — does not exercise multi-agent merge cases",
+          "severity": "info"
+        },
+        {
+          "flag": "self_test invocations carry placeholder values from derive-intents synthesis",
+          "severity": "info"
+        }
+      ],
+      "confidence_floor": 0.9
+    }
+  },
+  "discovery_compliance": null,
+  "decisions_made": [
+    {
+      "decision_id": "D1",
+      "description": "Emitted 2 prompts from 2 drafts (1 Pass A + 1 Pass B candidates)",
+      "rationale": "Pass A and Pass B candidates had distinct stems — no merge required; all drafts validated against PromptContractSchema",
+      "constraints_downstream": "Orchestrator must treat each emitted prompt as independently invocable",
+      "reversible": true
+    }
+  ],
+  "known_limitations": [
+    {
+      "limitation": "Pass 1 envelope — self_test_summary remains null per PromptManagerPayload refinement 6",
+      "impact": "low",
+      "suggested_mitigation": "Re-run at Pass 4 to populate self_test_summary; envelope schema rejects non-null in passes 1-3"
+    },
+    {
+      "limitation": "Canon hash captured at run start; canon_drift_detected=false assumes no concurrent canon mutation",
+      "impact": "low",
+      "suggested_mitigation": "Re-run Manager if prompts/_canon.md is edited between runs"
+    }
+  ],
+  "failed_attempts": [],
+  "per_consumer_instructions": {
+    "test-fixture.orchestrator": {
+      "instructions": "Prompt library is at prompts/. Each prompt has a .md (authoritative per Decision 2) and a .contract.json (derived). Re-run Manager if canon shifts.",
+      "priority_fields": [
+        "prompts",
+        "stats",
+        "canon_drift_detected"
+      ],
+      "watch_for": [
+        "status='deferred' prompts will not run until dependencies land",
+        "canon_drift_detected=true requires Manager re-run before consuming prompts"
+      ]
+    }
+  },
+  "verification_commands": [
+    {
+      "command": "node -e \"const e=JSON.parse(require('fs').readFileSync('tests/fixtures/products/test-fixture/.manager/handoff.json','utf8'));process.exit(e.boundary_payload.stats.min_prompt_multiplier_score>=7.5?0:1)\"",
+      "expected_result": "exit 0",
+      "description": "Every emitted prompt cleared the 7.5 multiplier floor"
+    }
+  ],
+  "soul_ledger_appends": [],
+  "soul_ledger_archive": [],
+  "handoff_boundary": "PROMPT_MANAGER",
+  "boundary_payload": {
+    "emitted_by": "12-prompt-manager",
+    "build_id": "55fddf82-e8c3-48c3-8db7-692c4c319d67",
+    "pass": "1",
+    "product": "test-fixture",
+    "library_path": "prompts/",
+    "prompts": [
+      {
+        "prompt_id": "test-fixture.produce-audit-report",
+        "current_version": "1.0.0",
+        "status": "regenerated",
+        "tier": "PRECISION",
+        "intent_summary": "A summary of audit findings for the test-fixture product, structured for downstream operator review and automated quality gating.",
+        "invocation_surface": [
+          "embedded-in-product",
+          "cli",
+          "product-api",
+          "inter-product-bus"
+        ],
+        "has_embedded_in_product": true,
+        "prompt_multiplier_score": 7.5,
+        "resonance_floor": 7.5,
+        "deferred_reason": null,
+        "conflict_path": null,
+        "self_test_passed": null
+      },
+      {
+        "prompt_id": "test-fixture.start-running",
+        "current_version": "1.0.0",
+        "status": "regenerated",
+        "tier": "PRECISION",
+        "intent_summary": "Start the running action",
+        "invocation_surface": [
+          "embedded-in-product",
+          "cli",
+          "product-api",
+          "inter-product-bus"
+        ],
+        "has_embedded_in_product": true,
+        "prompt_multiplier_score": 7.5,
+        "resonance_floor": 7.5,
+        "deferred_reason": null,
+        "conflict_path": null,
+        "self_test_passed": null
+      }
+    ],
+    "stats": {
+      "total_prompts": 2,
+      "active_count": 2,
+      "deferred_count": 0,
+      "conflict_count": 0,
+      "archived_count": 0,
+      "regenerated_in_this_build": 2,
+      "unchanged_in_this_build": 0,
+      "tier_distribution": {
+        "FORENSIC": 0,
+        "PRECISION": 2,
+        "SYNTHESIS": 0,
+        "NARRATIVE": 0
+      },
+      "embedded_in_product_count": 2,
+      "cli_count": 2,
+      "product_api_count": 2,
+      "inter_product_bus_count": 2,
+      "mean_prompt_multiplier_score": 7.5,
+      "min_prompt_multiplier_score": 7.5
+    },
+    "canon_snapshot": "65eda3007253d18ae7fbac38ae72d2e2ea25439dedc86907979a3d75823cae96",
+    "canon_drift_detected": false,
+    "canon_drift_message": null,
+    "self_test_summary": null,
+    "manager_soul_ledger": {
+      "surface_observations": [
+        "Pipeline design exposes 1 agent(s), 2 state(s), 1 transition(s) — narrow surface for fixture smoke",
+        "Pass A produced 1 candidates across tiers: PRECISION=1",
+        "Agents with broadest outbound surface: 04-frontend-core=1",
+        "Pass B produced 1 candidates from 1 transitions (0 skipped).",
+        "2/2 states are operator-meaningful.",
+        "Pass B tier distribution: PRECISION=1"
+      ],
+      "derivation_difficulties": [
+        "No candidates skipped during projection"
+      ],
+      "tier_distribution_note": "Tier mix: PRECISION=2",
+      "recommendations_for_downstream": [
+        "Treat this fixture as a wire-format probe — emitted prompts are illustrative, not load-bearing",
+        "Inspect prompts/*.contract.json to see the exact tier/surface/skill projection per intent"
+      ]
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "routeback",
+  "command": "demo:routeback",
+  "kind": "reduced harness around the production path",
+  "extracted_on": "2026-09-14",
+  "extracted_from": [
+    { "sha": "d4904660b78eec347356be53f221f2b59aafe2f2", "path": "scripts/lib/route-back.ts", "symbols": ["classifyRouteBack", "maskVolatile", "failureSignature", "isOscillation"] },
+    { "sha": "d4904660b78eec347356be53f221f2b59aafe2f2", "path": "lib/v6-router/cross-family-verify.ts", "symbols": ["parseJudgeReply", "buildJudgeRequestBody", "JUDGE_SYSTEM"] },
+    { "sha": "d4904660b78eec347356be53f221f2b59aafe2f2", "path": "scripts/calibration/lib/judge-recording.ts", "symbols": ["matchRecording", "requestHash", "readRecording", "recordingSource"] },
+    { "sha": "d4904660b78eec347356be53f221f2b59aafe2f2", "path": "scripts/calibration/measure-judge-catch-rate.ts", "symbols": ["seedDefect", "benignVariant", "buildSamples", "false_reject_rate", "MIN_POPULATION"] },
+    { "sha": "d4904660b78eec347356be53f221f2b59aafe2f2", "path": "scripts/master-agentic-orchestrator.ts", "symbols": ["function matchHeuristic", "prior_error: maskVolatile(errText).slice(0, 6000)", "quality gate failed: ${gate.failed}", "SCHEMA_VALIDATION_FAIL: ${cfg.id} handoff payload does not match HandoffEnvelopeSchema."] },
+    { "sha": "d4904660b78eec347356be53f221f2b59aafe2f2", "path": "scripts/lib/evidence-commitment.ts", "symbols": ["canonicalJson", "sha256"] },
+    { "sha": "d4904660b78eec347356be53f221f2b59aafe2f2", "path": "tests/fixtures/calibration/cross-family-replay.jsonl", "symbols": ["cross-family-judge-catch-rate"] },
+    { "sha": "d4904660b78eec347356be53f221f2b59aafe2f2", "path": "skills/operational/error-heuristics.json", "symbols": ["tsc-001", "schema-001"] }
+  ],
+  "volatile": [],
+  "tamper": {
+    "file": "demos/03-routeback/fixtures/tests/fixtures/calibration/agent-handoffs/run-corpus-seed-01/agent-01/handoff.json",
+    "find": "\"CreateCorpusRequest\"",
+    "replace": "\"CreateCorpusRequestV2\"",
+    "expect_exit": 1,
+    "expect_line": "REPLAY_REFUSED"
+  }
+}

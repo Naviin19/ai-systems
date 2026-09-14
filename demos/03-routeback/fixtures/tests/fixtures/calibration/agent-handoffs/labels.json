@@ -1,0 +1,13 @@
+{
+  "_about": "[AIS3-3] Ground truth for scripts/calibration/measure-judge-catch-rate.ts on this snapshot. An artifact without a label is a clean source. A labelled artifact was read and found defective by the judge's own REJECT criteria, and is judged once, as written, in the defective population. Keys are <run>/<agent-dir>.",
+  "run-corpus-mtpbz94k/agent-12": {
+    "population": "defective",
+    "defect_class": "real_vacuous_contradiction",
+    "note": "A real agent-12 emission that halted: boundary_payload.prompts is empty, yet stats claims mean_prompt_multiplier_score and min_prompt_multiplier_score of 7.5 over total_prompts 0. Vacuous and internally contradictory, so it is not clean ground truth (verified in the JSON 2026-09-14)."
+  },
+  "run-corpus-mtpc7jza/agent-12": {
+    "population": "defective",
+    "defect_class": "real_vacuous_contradiction",
+    "note": "A real agent-12 emission that halted: boundary_payload.prompts is empty, yet stats claims mean_prompt_multiplier_score and min_prompt_multiplier_score of 7.5 over total_prompts 0. Vacuous and internally contradictory, so it is not clean ground truth (verified in the JSON 2026-09-14)."
+  }
+}

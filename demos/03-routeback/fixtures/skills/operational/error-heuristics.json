@@ -1,0 +1,194 @@
+{
+  "_source": "Pass 2 \u2014 P2-06 (TD4). Pattern strings are conservative regex matches against tool stderr. New entries must come from a real failed run, not guesswork.",
+  "version": "1.0",
+  "patterns": [
+    {
+      "id": "tsc-001",
+      "category": "tsc",
+      "pattern": "error TS2304: Cannot find name '(.+)'",
+      "fix": "Add import for the named symbol or install missing @types package.",
+      "verify": "npx tsc --noEmit"
+    },
+    {
+      "id": "tsc-002",
+      "category": "tsc",
+      "pattern": "error TS2307: Cannot find module '(.+)'",
+      "fix": "Run `npm install <module>` or correct the relative path.",
+      "verify": "npx tsc --noEmit"
+    },
+    {
+      "id": "tsc-003",
+      "category": "tsc",
+      "pattern": "error TS2322: Type '.+' is not assignable to type '.+'",
+      "fix": "Adjust the value to match the declared type, or widen the type with a union.",
+      "verify": "npx tsc --noEmit"
+    },
+    {
+      "id": "tsc-004",
+      "category": "tsc",
+      "pattern": "error TS7006: Parameter '.+' implicitly has an 'any' type",
+      "fix": "Add explicit type annotation to the parameter.",
+      "verify": "npx tsc --noEmit"
+    },
+    {
+      "id": "tsc-005",
+      "category": "tsc",
+      "pattern": "error TS2591: Cannot find name '(process|require|__dirname)'",
+      "fix": "Add `\"types\": [\"node\"]` to tsconfig.json compilerOptions.",
+      "verify": "npx tsc --noEmit"
+    },
+    {
+      "id": "tsc-006",
+      "category": "tsc",
+      "pattern": "error TS2339: Property '.+' does not exist on type",
+      "fix": "Either add the property to the type or assert/narrow the value via Zod parse before access.",
+      "verify": "npx tsc --noEmit"
+    },
+    {
+      "id": "npm-001",
+      "category": "npm",
+      "pattern": "npm ERR! code ENOENT.*package.json",
+      "fix": "Run `npm install` from the directory containing package.json.",
+      "verify": "test -f package.json"
+    },
+    {
+      "id": "npm-002",
+      "category": "npm",
+      "pattern": "npm ERR! 404 '(.+)' is not in this registry",
+      "fix": "Check package name spelling. If scoped, ensure registry config allows the scope.",
+      "verify": "npm view <pkg>"
+    },
+    {
+      "id": "npm-003",
+      "category": "npm",
+      "pattern": "npm ERR! peer dep missing",
+      "fix": "Install the missing peer dependency listed in the error.",
+      "verify": "npm ls"
+    },
+    {
+      "id": "npm-004",
+      "category": "npm",
+      "pattern": "EACCES: permission denied",
+      "fix": "Do NOT run `sudo npm install`. Fix npm prefix to a user-owned directory.",
+      "verify": "npm config get prefix"
+    },
+    {
+      "id": "next-001",
+      "category": "next-build",
+      "pattern": "Module not found: Can't resolve '(.+)'",
+      "fix": "Add the module to package.json or correct the import path.",
+      "verify": "npx next build"
+    },
+    {
+      "id": "next-002",
+      "category": "next-build",
+      "pattern": "Unhandled Runtime Error.*Hydration failed",
+      "fix": "Eliminate non-deterministic rendering: no Date.now(), Math.random(), or browser-only APIs in server components.",
+      "verify": "npx next build"
+    },
+    {
+      "id": "next-003",
+      "category": "next-build",
+      "pattern": "Error: Image with src.+has invalid \"width\" property",
+      "fix": "Add explicit width and height to <Image> components.",
+      "verify": "npx next build"
+    },
+    {
+      "id": "next-004",
+      "category": "next-build",
+      "pattern": "Cannot use import statement outside a module",
+      "fix": "Add `\"type\": \"module\"` to package.json or rename file to .mjs.",
+      "verify": "npx next build"
+    },
+    {
+      "id": "playwright-001",
+      "category": "playwright",
+      "pattern": "TimeoutError: locator\\.\\w+: Timeout .+ exceeded",
+      "fix": "Increase timeout or wait for a more specific element. Check that the element is actually rendered.",
+      "verify": "npx playwright test --grep <name>"
+    },
+    {
+      "id": "playwright-002",
+      "category": "playwright",
+      "pattern": "Error: browserType\\.launch.*Executable doesn't exist",
+      "fix": "Run `npx playwright install` to download browser binaries.",
+      "verify": "npx playwright install --dry-run"
+    },
+    {
+      "id": "playwright-003",
+      "category": "playwright",
+      "pattern": "expect.+toBeVisible.+but locator resolved to (\\d+) elements",
+      "fix": "Make the locator unique. Use getByTestId, getByRole, or .first().",
+      "verify": "npx playwright test"
+    },
+    {
+      "id": "playwright-004",
+      "category": "playwright",
+      "pattern": "ssim_delta_pct.+(3\\.[6-9]|[4-9]\\.\\d+)",
+      "fix": "Visual regression beyond 3.5% SSIM. Identify drifting DOM via document.elementFromPoint(x,y) and adjust styles to match Golden Master.",
+      "verify": "npx playwright test --grep @visual-compiler"
+    },
+    {
+      "id": "supabase-001",
+      "category": "supabase",
+      "pattern": "PGRST.*JWT expired",
+      "fix": "Refresh the Supabase session token or re-authenticate.",
+      "verify": "supabase status"
+    },
+    {
+      "id": "supabase-002",
+      "category": "supabase",
+      "pattern": "permission denied for (table|schema) (.+)",
+      "fix": "Check RLS policies on the named table. The role attempting access lacks the required policy.",
+      "verify": "supabase db diff"
+    },
+    {
+      "id": "supabase-003",
+      "category": "supabase",
+      "pattern": "duplicate key value violates unique constraint",
+      "fix": "Use upsert (.upsert()) instead of insert, or check for existence before insert.",
+      "verify": "supabase db reset"
+    },
+    {
+      "id": "supabase-004",
+      "category": "supabase",
+      "pattern": "relation \"(.+)\" does not exist",
+      "fix": "Run `supabase db reset` to apply pending migrations, or add the missing migration file.",
+      "verify": "supabase db reset && supabase gen types typescript --local"
+    },
+    {
+      "id": "orchestrator-001",
+      "category": "orchestrator",
+      "pattern": "LEARNING_LOG_GATE.*learning.log.incomplete",
+      "fix": "The agent did not fill Q1-Q2 in build-log/agent-learning-log.md. This means the build was NOT run through formal playbook dispatch. Re-run via: npx tsx scripts/master-agentic-orchestrator.ts --product <name>",
+      "verify": "grep -c \"DATE_COMPLETED\" build-log/agent-learning-log.md \u2192 0 (all placeholders replaced with real dates)"
+    },
+    {
+      "id": "orchestrator-002",
+      "category": "orchestrator",
+      "pattern": "NO ORCHESTRATOR EVENTS|events.jsonl.*No such",
+      "fix": "No events.jsonl found \u2014 the build bypassed the orchestrator entirely. This is a protocol violation. All builds MUST run through scripts/master-agentic-orchestrator.ts.",
+      "verify": "ls verification/runs/*/events.jsonl | head -1 \u2192 returns a file path"
+    },
+    {
+      "id": "d3-001",
+      "pattern": "D3_ABSORPTION_GATE_FAIL",
+      "fix": "Rebuild absorption_status from current pipeline state: absorbs[] must reference known upstream handoff_ids, leaves_for_downstream[] must match declared downstream dependencies, and the lifecycle state must not be stale."
+    },
+    {
+      "id": "schema-001",
+      "pattern": "SCHEMA_VALIDATION_FAIL",
+      "fix": "Re-emit the handoff strictly through the emit_handoff tool with the boundary_payload matching the declared outboundBoundary variant; address each listed Zod issue path exactly."
+    },
+    {
+      "id": "payload-001",
+      "pattern": "quality gate failed: npx tsx scripts/validate-payload",
+      "fix": "Correct the handoff JSON against the boundary schema named in the gate command; the raw validator output above lists the failing fields."
+    },
+    {
+      "id": "gate-catchall-001",
+      "pattern": "quality gate failed:",
+      "fix": "Read the raw gate output above; fix exactly what it names, nothing else. This catch-all only fires when no more specific heuristic (tsc-00x, npm-00x, ...) matched the output."
+    }
+  ]
+}

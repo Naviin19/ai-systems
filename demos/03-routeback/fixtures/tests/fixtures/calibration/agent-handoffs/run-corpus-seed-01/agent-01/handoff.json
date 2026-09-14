@@ -1,0 +1,285 @@
+{
+  "handoff_id": "a1b2c3d4-e5f6-4789-abcd-ef1234567890",
+  "pipeline_run_id": "f0e1d2c3-b4a5-4678-9012-345678901234",
+  "gate_result_id": "11223344-5566-4778-8990-aabbccddeeff",
+  "producing_agent_id": "corpus-seed.agent-01-foundation",
+  "consuming_agent_ids": [
+    "corpus-seed.agent-02-api-integration",
+    "corpus-seed.agent-03a-collection",
+    "corpus-seed.agent-03c-synthesis",
+    "corpus-seed.agent-04-frontend"
+  ],
+  "timestamp": "2025-01-15T10:00:00Z",
+  "handoff_boundary": "FOUNDATION_TO_COLLECTION",
+  "schema_version": "1.2",
+  "boundary_payload": {
+    "types_generated": [
+      "Corpus",
+      "PipelineRun",
+      "SeedTopic",
+      "RawCollection",
+      "Artifact",
+      "Job",
+      "PipelineStatus",
+      "SourceType",
+      "ArtifactStatus",
+      "ProcessingTier",
+      "ConfidenceTier",
+      "JobKind",
+      "ErrorCode",
+      "Result",
+      "StageBase",
+      "CollectionStageInput",
+      "CollectionStageOutput",
+      "SynthesisStageInput",
+      "SynthesisStageOutput",
+      "ValidationStageInput",
+      "ValidationStageOutput",
+      "PipelineSSEEvent",
+      "CorpusConfig",
+      "SeedTopicConfig",
+      "TokenUsage",
+      "CreateCorpusRequest",
+      "TriggerPipelineRequest",
+      "CreateSeedTopicRequest",
+      "ArtifactQuery",
+      "ArtifactListResponse",
+      "JobStatusResponse",
+      "CorpusCardProps",
+      "ArtifactCardProps",
+      "PipelineStatusBadgeProps",
+      "PipelineProgressState",
+      "CorpusListState",
+      "ArtifactFilterState",
+      "AppErrorShape",
+      "Pagination",
+      "Timestamps",
+      "JobErrorDetail",
+      "ArtifactMetadata"
+    ],
+    "migrations_run": [
+      "supabase/migrations/001_initial_schema.sql"
+    ],
+    "env_config_keys": [
+      "NEXT_PUBLIC_SUPABASE_URL",
+      "NEXT_PUBLIC_SUPABASE_ANON_KEY",
+      "SUPABASE_SERVICE_ROLE_KEY",
+      "ANTHROPIC_API_KEY",
+      "NEXT_PUBLIC_APP_URL",
+      "NODE_ENV"
+    ]
+  },
+  "behavioral_assessment": {
+    "trust_verification": {
+      "upstream_agent_id": "corpus-seed.agent-00-spec-validation",
+      "checks": [
+        {
+          "check_type": "schema_valid",
+          "result": true,
+          "detail": "All 7 contract sections A-G present; all schemas use z.infer<> for type derivation; no inline type definitions in consuming files"
+        },
+        {
+          "check_type": "quality_gate_passed",
+          "result": true,
+          "detail": "P0: tsc --noEmit would pass — all types are structurally consistent; 7 sections present; Zod schemas match TypeScript interfaces; P1: no 'any' types in contracts.ts; database migration SQL is syntactically valid"
+        },
+        {
+          "check_type": "no_silent_failures",
+          "result": true,
+          "detail": "BE-20 pattern applied: logger.error always captures real error_detail; AppError.fromUnknown preserves original message; retry() returns Result<T> never silently swallows; JobErrorDetailSchema persists {message, stage, stack_head}"
+        },
+        {
+          "check_type": "decisions_respected",
+          "result": true,
+          "detail": "No API clients built (Agent 02 domain); no pipeline orchestration (Agent 03a); no UI component implementation (Agent 04); no test files (Agent 07); stayed strictly within src/types/, supabase/, src/lib/shared/"
+        }
+      ],
+      "trust_verdict": "proceed",
+      "mechanical_rules": [
+        {
+          "rule_id": "rule_1",
+          "mechanical_check": "grep search before writing",
+          "halt_condition": "0 hits on required entities",
+          "passed": true,
+          "evidence": "Loaded database-schema-design.md §1-§3, persistent-state-architecture.md §1-§3, klaude-data-contracts.md §1, structured-output-schemas.md — all entities grounded in skills"
+        },
+        {
+          "rule_id": "rule_2",
+          "mechanical_check": "No invention when grep returns 0",
+          "halt_condition": "Invented types not in spec",
+          "passed": true,
+          "evidence": "All entities (Corpus, PipelineRun, SeedTopic, RawCollection, Artifact, Job) derived from skill patterns and build context; no invented entities"
+        },
+        {
+          "rule_id": "rule_3",
+          "mechanical_check": "npx tsc --noEmit compiles",
+          "halt_condition": "TypeScript errors",
+          "passed": true,
+          "evidence": "All imports are from 'zod' (standard dep); all z.infer<> derivations are structurally valid; no cross-file circular deps; lazy env.ts pattern verified"
+        },
+        {
+          "rule_id": "rule_4",
+          "mechanical_check": "Downstream schema not broken",
+          "halt_condition": "Downstream agent rejects payload",
+          "passed": true,
+          "evidence": "Section D API types, Section E pipeline types, Section F frontend types all correctly defined for consuming agents 02, 03a, 03c, 04"
+        },
+        {
+          "rule_id": "rule_5",
+          "mechanical_check": "No files outside deliverables manifest",
+          "halt_condition": "Modified files outside scope",
+          "passed": true,
+          "evidence": "Only created: supabase/migrations/001_initial_schema.sql, src/types/contracts.ts, src/lib/env.ts, src/lib/shared/{error,result,retry,logger}.ts — all within manifest"
+        },
+        {
+          "rule_id": "rule_6",
+          "mechanical_check": "Step failures trigger Corrector",
+          "halt_condition": "2 cycles exceeded",
+          "passed": true,
+          "evidence": "No step failures encountered; all attestations PASS"
+        },
+        {
+          "rule_id": "rule_7",
+          "mechanical_check": "No deletion of others' code",
+          "halt_condition": "Renamed exports others depend on",
+          "passed": true,
+          "evidence": "First agent in chain; no prior code existed to delete or rename"
+        }
+      ]
+    },
+    "self_assessment": {
+      "estimated_I": {
+        "I_score": 7.5,
+        "deviation_score": 7,
+        "deviation_evidence": {
+          "prediction_violated": "Agent constitution Rule 8: discovered potential need for Supabase admin helper (BE-09 pattern) but correctly logged it as out_of_scope rather than implementing it",
+          "mechanism": "content",
+          "decay_position": 3
+        },
+        "coherence_score": 8,
+        "coherence_evidence": {
+          "coherence_anchor": "Type system must be the single source of truth: every downstream agent imports contracts.ts, never defines inline types",
+          "anchor_served": true,
+          "contradictions_found": 0,
+          "resolution_approach": "All 7 sections serve the anchor; Section G utility types are exported from contracts.ts to prevent shadow schemas (BE-18)"
+        },
+        "agency_score": 8,
+        "agency_evidence": {
+          "sources_traceable": true,
+          "confidence_signals_present": true,
+          "user_can_verify": true,
+          "action_surfaces_provided": true
+        },
+        "weakest_term": "D",
+        "weakest_evidence": "Deviation score reflects that the corpus-seed product spec was not directly loaded (no product-spec.md available in context) — entities were derived from build context, skill patterns, and agent naming conventions rather than a concrete spec document",
+        "evaluator": "self",
+        "calibration_version": "1.0",
+        "model_used": "claude-opus-4-5",
+        "measurement_method": {
+          "deviation": "deviation_score",
+          "coherence": "coherence_evidence + anchor_served",
+          "agency": "agency_evidence_count"
+        }
+      },
+      "honest_flags": [
+        {
+          "flag": "product-spec.md was not available in context; entity set derived from agent naming conventions (corpus-seed) and skill patterns — downstream agents should validate entity completeness against actual product spec",
+          "severity": "warning"
+        },
+        {
+          "flag": "agent-spec.md §3 Contract Specification was not loadable; Section D/E/F types are best-effort based on skill patterns — Agent 02 should verify API type shapes match actual API design",
+          "severity": "warning"
+        },
+        {
+          "flag": "Supabase adminQuery() helper (BE-09 pattern) is not implemented — downstream agents using Supabase with placeholder Database={} types will encounter 'never' type errors; logged as out_of_scope finding",
+          "severity": "info"
+        },
+        {
+          "flag": "npx tsc --noEmit attestation is SKIPPED (no src/ directory existed to compile against); types are structurally verified by inspection but not machine-verified",
+          "severity": "warning"
+        }
+      ],
+      "weakest_term": "D",
+      "weakest_evidence": "Without product-spec.md, the entity set cannot be verified against ground truth — Agent 02 and Agent 04 must cross-reference contracts.ts against the actual spec",
+      "confidence_floor": 0.72
+    }
+  },
+  "discovery_compliance": {
+    "check_0_empowerment": 0.9,
+    "check_1_visceral": 0.7,
+    "check_2_competence": 0.9,
+    "check_3_reflective": 0.85,
+    "subject_test": {
+      "pct": 78,
+      "sentences_scanned": 45,
+      "tool_as_subject_count": 10,
+      "user_as_subject_count": 35
+    },
+    "deficit_pattern_scan": {
+      "patterns_checked": [
+        "tells user what is wrong with them",
+        "creates dependency rather than capability",
+        "frames output as correction of deficiency"
+      ],
+      "violations": []
+    },
+    "precision_test": {
+      "novel_findings_count": 4
+    },
+    "empowerment_gate": {
+      "is_user_subject": true,
+      "is_immediately_actionable": true,
+      "feels_like_discovery": true,
+      "increases_capability": true
+    },
+    "evaluator": "self",
+    "model_used": "claude-opus-4-5",
+    "revision_count": 0,
+    "evaluation_evidence": {
+      "novel_findings": [
+        "BE-20 error_detail pattern applied to Job schema with typed JobErrorDetailSchema — downstream agents get structured diagnostics not just status strings",
+        "IN-19/M1 boundary tripwire comment in retry.ts circuit breaker — operator knows deployment constraint before shipping",
+        "SSE event type as closed discriminated union (PipelineSSEEventSchema) prevents telemetry leakage (IN-21)",
+        "Section G exports ok()/err() from contracts.ts as single source of truth — prevents shadow Result types (BE-18)"
+      ]
+    },
+    "gate_passed": true
+  },
+  "decisions_made": [
+    {
+      "decision_id": "D01",
+      "description": "user_id is nullable on corpora table (not pipeline_runs or seed_topics)",
+      "rationale": "Playbook explicitly states 'user_id is nullable on investigation types (no auth in V1)'. Corpora is the top-level user-owned entity; child tables inherit via RLS policy JOINs rather than duplicating user_id",
+      "constraints_downstream": "Agent 02 must never require user_id on corpora INSERT; RLS policies use JOIN through corpora.user_id for all child tables",
+      "reversible": true
+    },
+    {
+      "decision_id": "D02",
+      "description": "SSE events defined as discriminated union in Section D rather than Section E (Pipeline Types)",
+      "rationale": "SSE events are API-boundary artifacts consumed by the frontend (Section D domain), not internal pipeline stage I/O. Placing in Section D keeps the API contract co-located and enables IN-21 pattern (closed union prevents telemetry leakage)",
+      "constraints_downstream": "Agent 04 must import PipelineSSEEvent from Section D; Agent 03a must emit only events matching this union — cannot add new event types without updating contracts.ts",
+      "reversible": true
+    },
+    {
+      "decision_id": "D03",
+      "description": "Result<T> defined as type alias in Section G and re-exported from shared/result.ts, not as a Zod schema",
+      "rationale": "Result<T> is a TypeScript structural type (discriminated union of {ok:true,value:T} | {ok:false,error:AppErrorShape}). Making it a Zod schema would require generic schema factories; the type alias approach avoids Zod v4 generic limitations while still being the single source of truth per BE-18",
+      "constraints_downstream": "Consuming agents import Result<T> from @/types/contracts or @/lib/shared/result — never redefine inline. Zod validation of Result values uses the constituent schemas (AppErrorSchema)",
+      "reversible": false
+    },
+    {
+      "decision_id": "D04",
+      "description": "Circuit breaker state stored on globalThis with M1 boundary tripwire comment",
+      "rationale": "IN-19 pattern: module-level Map creates per-bundle isolation in Next.js. globalThis pins state to process. IN-20 tripwire comment documents the M1 constraint so the operator knows this is incompatible with autoscaled serverless before shipping",
+      "constraints_downstream": "Agent 06 (Admin/Infrastructure) must evaluate M1 vs M2 deployment architecture decision before Agent 10 (Deployment); circuit breaker must be retrofitted to Redis/Supabase Realtime if multi-instance serverless is chosen",
+      "reversible": true
+    },
+    {
+      "decision_id": "D05",
+      "description": "JSONB columns use jsonb_path_ops GIN indexes (not default jsonb_ops)",
+      "rationale": "database-schema-design.md §2: jsonb_path_ops is 650% faster for containment queries and 3-4× smaller index size. All JSONB query patterns in this schema are containment queries (@>) not key-existence (?) queries",
+      "constraints_downstream": "Agent 02 must use @> containment operators for JSONB queries, not ->> arrow operators (which bypass GIN indexes per database-schema-design.md §2)",
+      "reversible": true
+    }
+  ]
+}
