@@ -3,12 +3,18 @@
     "target": "ES2022",
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "lib": ["ES2022"],
+    "lib": [
+      "ES2022"
+    ],
     "strict": true,
-    "noUncheckedIndexedAccess": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "types": ["node"]
+    "types": [
+      "node"
+    ]
   },
-  "include": ["demos/**/*.ts", "contracts/**/*.ts"]
+  "include": [
+    "demos/**/*.ts",
+    "contracts/**/*.ts"
+  ]
 }
