@@ -1,0 +1,9 @@
+* text=auto eol=lf
+
+# Demo 06 hashes file contents. A checkout that rewrites line endings produces
+# different SHA-256 values on Windows than on Linux, which would break the demo
+# for a reason that has nothing to do with the claim it exists to make.
+demos/06-attest/fixtures/** text eol=lf
+
+# Artwork is generated and diffed in CI; keep it byte-identical across platforms.
+docs/diagrams/*.svg text eol=lf
