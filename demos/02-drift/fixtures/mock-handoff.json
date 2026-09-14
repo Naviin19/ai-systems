@@ -1,0 +1,7 @@
+{
+  "from_agent": "test-fixture.agent-12-prompt-manager",
+  "schema_version": "1.1",
+  "payload": {
+    "mock": true
+  }
+}

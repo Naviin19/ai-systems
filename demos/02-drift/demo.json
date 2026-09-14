@@ -1,0 +1,22 @@
+{
+  "name": "drift",
+  "command": "demo:drift",
+  "kind": "production path over real agent-12 output, with an illustrative margin series",
+  "extracted_on": "2026-09-14",
+  "extracted_from": [
+    { "sha": "d4904660b78eec347356be53f221f2b59aafe2f2", "path": "scripts/lib/semantic-drift.ts", "symbols": ["export async function detectAgentDrift", "export function marginCompression", "blocking: drifted && effective_mode === 'enforcing'"] },
+    { "sha": "d4904660b78eec347356be53f221f2b59aafe2f2", "path": "scripts/lib/embed-output.ts", "symbols": ["export function embedTextDeterministic", "'trigram-hash-64-v1'"] },
+    { "sha": "d4904660b78eec347356be53f221f2b59aafe2f2", "path": "scripts/lib/post-emit-checks.ts", "symbols": ["process.env.DRIFT_THRESHOLD ?? '0.82'", "DRIFT_MARGIN_COMPRESSING", "halt-reason: semantic-drift"] },
+    { "sha": "d4904660b78eec347356be53f221f2b59aafe2f2", "path": "build-log/semantic-baseline/agent-12/build-run-1779234583241-d54d39.jsonl", "symbols": ["trigram-hash-64-v1"] },
+    { "sha": "d4904660b78eec347356be53f221f2b59aafe2f2", "path": "tests/fixtures/calibration/agent-handoffs/run-corpus-mtpc7jza/agent-12/handoff.json", "symbols": ["corpus-seed.agent-12-prompt-manager"] },
+    { "sha": "d4904660b78eec347356be53f221f2b59aafe2f2", "path": "tests/fixtures/calibration/agent-handoffs/run-receipt-proof-01/agent-12/handoff.json", "symbols": ["\"mock\": true"] }
+  ],
+  "volatile": [],
+  "tamper": {
+    "file": "demos/02-drift/fixtures/current-run.json",
+    "find": "candidates/run-corpus-mtpc7jza.json",
+    "replace": "mock-handoff.json",
+    "expect_exit": 1,
+    "expect_line": "at the enforcing level drift blocks the run"
+  }
+}

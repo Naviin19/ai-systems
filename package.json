@@ -10,6 +10,7 @@
   },
   "scripts": {
     "demo:contract": "tsx demos/01-contract/run.ts",
+    "demo:drift": "tsx demos/02-drift/run.ts",
     "demo:isolation": "tsx demos/05-isolation/run.ts",
     "demo:routeback": "tsx demos/03-routeback/run.ts",
     "demo:attest": "tsx demos/06-attest/run.ts",

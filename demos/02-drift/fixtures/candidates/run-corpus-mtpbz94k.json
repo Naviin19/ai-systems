@@ -1,0 +1,448 @@
+{
+  "schema_version": "1.2",
+  "producing_agent_id": "corpus-seed.agent-12-prompt-manager",
+  "consuming_agent_ids": [
+    "corpus-seed.orchestrator",
+    "corpus-seed.agent-04-frontend-core",
+    "corpus-seed.agent-05-frontend-intelligence"
+  ],
+  "pipeline_run_id": "00000000-0000-0000-0000-000000000000",
+  "timestamp": "2026-06-01T00:00:00Z",
+  "gate_result_id": "00000000-0000-0000-0000-000000000000",
+  "handoff_boundary": "PROMPT_MANAGER",
+  "behavioral_assessment": {
+    "trust_verification": {
+      "upstream_agent_id": "corpus-seed.agent-03a",
+      "checks": [
+        {
+          "check_type": "no_silent_failures",
+          "result": false,
+          "detail": "Pre-flight inputs (verification/spec-validation.json, verification/foundation-handoff.json, verification/runs/$RUN_ID/agent-03a/handoff.json, pipeline-design.json, prompts/_canon.md) are not accessible in this dispatch. No filesystem/grep tool is available — only load_skill and emit_handoff. Cannot confirm upstream handoffs exist or validate."
+        },
+        {
+          "check_type": "schema_valid",
+          "result": false,
+          "detail": "Cannot run HandoffEnvelopeSchema.safeParse against upstream agent-03a handoff because the file is not readable in this environment."
+        },
+        {
+          "check_type": "decisions_respected",
+          "result": true,
+          "detail": "No upstream decisions were overridden; the agent halted rather than fabricating derivations that would violate upstream contracts."
+        },
+        {
+          "check_type": "quality_gate_passed",
+          "result": false,
+          "detail": "The supplied quality-gate command chain (prompts/*.contract.json parse, @skill: citation grep, tsc, run-tests.ts, derive-pydantic.ts) could not be executed — no shell/filesystem access and no prompts were emitted."
+        }
+      ],
+      "trust_verdict": "halt"
+    },
+    "self_assessment": {
+      "estimated_I": {
+        "deviation_score": 3,
+        "deviation_evidence": {
+          "prediction_violated": "Operator expected an emitted prompt library; instead the agent surfaces a hard blocker (missing inputs + no execution surface) that would otherwise fail silently downstream.",
+          "mechanism": "content",
+          "decay_position": 0
+        },
+        "coherence_score": 8,
+        "coherence_evidence": {
+          "coherence_anchor": "Emit only what can be truthfully verified; never fabricate a prompt library.",
+          "anchor_served": true,
+          "contradictions_found": 0,
+          "resolution_approach": "Applied spec-gate-fail HALT per halt-triggers skill; every conditional step attested SKIPPED, not PASS."
+        },
+        "agency_score": 7,
+        "agency_evidence": {
+          "sources_traceable": true,
+          "confidence_signals_present": true,
+          "user_can_verify": true,
+          "action_surfaces_provided": true
+        },
+        "I_score": 5,
+        "weakest_term": "D",
+        "weakest_evidence": "Deviation is low by design — a HALT is a floor-preserving non-action, not a novel derivation. The value is in refusing to fabricate, not in surprising output.",
+        "evaluator": "self",
+        "calibration_version": "1.0",
+        "measurement_method": {
+          "deviation": "deviation_score",
+          "coherence": "coherence_evidence + anchor_served",
+          "agency": "agency_evidence_count"
+        },
+        "model_used": "claude"
+      },
+      "weakest_term": "D",
+      "weakest_evidence": "A HALT deliberately produces no novel prompt derivations; deviation is minimal because the correct action is to withhold fabricated output.",
+      "honest_flags": [
+        {
+          "flag": "No filesystem, grep, or shell tool is available in this dispatch — only load_skill and emit_handoff. The playbook's Phase 1-7 pipeline (walkers, compose, emit, self-test) cannot be executed.",
+          "severity": "critical"
+        },
+        {
+          "flag": "Required pre-flight inputs (upstream handoffs, pipeline-design.json, prompts/_canon.md, Manager scripts, templates) cannot be confirmed to exist. Per Constitution Rule 2, HALT rather than invent.",
+          "severity": "critical"
+        },
+        {
+          "flag": "build-log/agent-learning-log.md could not be written (no write tool). The Q1-Q6 debrief content is embedded verbatim in decisions_made and known_limitations below so it is not lost.",
+          "severity": "warning"
+        },
+        {
+          "flag": "IDs (pipeline_run_id, gate_result_id, handoff_id) are set to the nil UUID because the real run context was not supplied in this dispatch.",
+          "severity": "warning"
+        },
+        {
+          "flag": "No prompts were emitted, so canon_snapshot is set to the SHA-256 of the empty string (well-known sentinel e3b0c442...) rather than a fabricated canon hash.",
+          "severity": "info"
+        }
+      ],
+      "confidence_floor": 0.9
+    }
+  },
+  "discovery_compliance": null,
+  "decisions_made": [
+    {
+      "decision_id": "D1-HALT-spec-gate",
+      "description": "Halted at the pre-flight gate (spec-gate-fail trigger) instead of proceeding with derivation.",
+      "rationale": "Agent Constitution Rule 2 (grep returns 0 hits / inputs unconfirmable -> HALT, never invent) and halt-triggers-and-stop-conditions.md §1 spec-gate-fail (mandatory operator review before proceeding). Required inputs and the Manager script/template toolchain are not accessible in this dispatch.",
+      "constraints_downstream": "Downstream prompt-consuming agents receive an empty, active-count-zero library. They must not assume any prompt_id exists until this agent is re-dispatched with filesystem access and confirmed inputs.",
+      "reversible": true
+    },
+    {
+      "decision_id": "D2-no-fabrication",
+      "description": "Emitted zero prompts and an empty stats block rather than synthesizing plausible prompt contracts.",
+      "rationale": "Prompt Constitution Directive 4 (Operational Boundaries): never fabricate data; state when information is unavailable. Fabricating a library would violate Source Integrity and produce a schema-valid but false handoff.",
+      "constraints_downstream": "The build manifest / prompt library must be produced by a re-dispatch, not inferred from this envelope.",
+      "reversible": true
+    },
+    {
+      "decision_id": "D3-honest-attestation",
+      "description": "Every playbook step with a ⚡ Verify directive is attested SKIPPED (not PASS), because no verify command was executed.",
+      "rationale": "Step Attestation Contract: claiming PASS without running the verify is an attestation lie causing immediate HALT. SKIPPED is the truthful status for a conditional/blocked step.",
+      "constraints_downstream": "Orchestrator will not re-run SKIPPED verifies; it should treat this dispatch as blocked and re-dispatch.",
+      "reversible": true
+    },
+    {
+      "decision_id": "D4-learning-log-embedded",
+      "description": "LEARNING LOG (Agent 12) embedded here because build-log/agent-learning-log.md is not writable in this dispatch. Q1: Playbook mission — derive candidate intents via boundary + state-machine walkers over pipeline-design.json, project them into PromptContracts (7.5 Multiplier floor, tier classification, 5-tier input union), compose bodies, emit {prompt_id}.md + .contract.json pairs, reconcile operator edits, self-test, and emit a PROMPT_MANAGER handoff. Q2: What happened — loaded governance skills (master-prompt-architecture §1-5, prompt-multiplier §3-4, temperature-profiles, discovery-frame, prompt-constitution, halt-triggers) successfully; but the derivation/emission pipeline could not run because no filesystem/shell tool was provided and no pre-flight input could be confirmed. Halted at spec-gate. Q3: What surfaced — (a) missing execution surface: agent has only load_skill + emit_handoff; (b) unconfirmable inputs: all five required pre-flight files; (c) unwritable learning log. Q4: What resolved it — applied Constitution Rule 2 + halt-triggers spec-gate-fail; emitted a truthful zero-prompt HALT envelope with SKIPPED attestations and this embedded log. Q5: Playbook should say instead — ADD an explicit pre-flight branch: 'If dispatched without filesystem/tool access or with unresolvable inputs, emit a HALT handoff with trust_verdict=halt and SKIPPED attestations rather than attempting derivation'; CHANGE the learning-log instruction to allow embedding the log in the handoff when the log file is unwritable; ADD nil-UUID guidance for run/gate IDs when run context is absent.",
+      "rationale": "The orchestrator rejects a handoff if Q1/Q2 are empty; preserving the mandated debrief content in-envelope satisfies the intent when the file cannot be written.",
+      "constraints_downstream": "On re-dispatch, transcribe this embedded log into build-log/agent-learning-log.md under '## Agent 12'.",
+      "reversible": true
+    }
+  ],
+  "known_limitations": [
+    {
+      "limitation": "No prompt library was derived or emitted. active_count = 0, total_prompts = 0.",
+      "impact": "high",
+      "suggested_mitigation": "Re-dispatch agent-12 in an environment with filesystem/shell access and confirmed upstream handoffs, pipeline-design.json, prompts/_canon.md, the scripts/prompt-manager toolchain, and templates/prompts/*."
+    },
+    {
+      "limitation": "Pre-flight input existence could not be verified (no grep/test access).",
+      "impact": "high",
+      "suggested_mitigation": "Orchestrator should run the Section 3 pre-flight checks and only dispatch agent-12 once all five checks pass."
+    },
+    {
+      "limitation": "The supplied quality-gate command chain (contract.json parse, @skill: citation grep, tsc --noEmit, run-tests.ts, derive-pydantic.ts) was not run.",
+      "impact": "medium",
+      "suggested_mitigation": "Run the full quality-gate chain after a successful re-dispatch that actually emits prompts."
+    },
+    {
+      "limitation": "build-log/agent-learning-log.md was not written; the Q1-Q5 debrief is embedded in decision D4-learning-log-embedded.",
+      "impact": "medium",
+      "suggested_mitigation": "Transcribe D4's embedded log into the learning-log file during re-dispatch or by the orchestrator."
+    },
+    {
+      "limitation": "canon_snapshot is the SHA-256 of the empty string (no canon read), not a real product canon hash.",
+      "impact": "low",
+      "suggested_mitigation": "Populate canon_snapshot from prompts/_canon.md on re-dispatch."
+    }
+  ],
+  "failed_attempts": [
+    {
+      "what_was_tried": "Executing the Phase 1 walkers (boundaryWalker / stateMachineWalker) over pipeline-design.json to derive candidate intents.",
+      "why_it_failed": "pipeline-design.json is not accessible and no code-execution/filesystem tool is available in this dispatch.",
+      "should_retry": true
+    },
+    {
+      "what_was_tried": "Running Section 3 pre-flight checks (test -f on the five required inputs; npx tsc --noEmit; run-tests.ts).",
+      "why_it_failed": "No shell/filesystem tool exists in this dispatch; the agent's only tools are load_skill and emit_handoff.",
+      "should_retry": true
+    },
+    {
+      "what_was_tried": "Writing the Agent 12 section of build-log/agent-learning-log.md.",
+      "why_it_failed": "No file-write tool available. Content preserved in decision D4-learning-log-embedded instead.",
+      "should_retry": true
+    }
+  ],
+  "per_consumer_instructions": {
+    "corpus-seed.orchestrator": {
+      "instructions": "Treat this as a HALT (spec-gate-fail). Do not advance the pipeline on the assumption a prompt library exists. Run Section 3 pre-flight checks; re-dispatch agent-12 with filesystem/shell access and confirmed inputs. Transcribe decision D4's embedded learning log into build-log/agent-learning-log.md.",
+      "priority_fields": [
+        "behavioral_assessment.trust_verification.trust_verdict",
+        "known_limitations",
+        "failed_attempts"
+      ],
+      "watch_for": [
+        "trust_verdict == halt",
+        "boundary_payload.stats.total_prompts == 0",
+        "honest_flags with severity critical"
+      ]
+    },
+    "corpus-seed.agent-04-frontend-core": {
+      "instructions": "No prompts are available yet. Do not reference any prompt_id from this build. Wait for a re-dispatch that emits an active library.",
+      "priority_fields": [
+        "boundary_payload.prompts",
+        "boundary_payload.stats.active_count"
+      ],
+      "watch_for": [
+        "active_count == 0"
+      ]
+    },
+    "corpus-seed.agent-05-frontend-intelligence": {
+      "instructions": "No prompts are available yet. Do not bind runtime enrichment to any prompt_id from this build. Wait for a re-dispatch that emits an active library.",
+      "priority_fields": [
+        "boundary_payload.prompts",
+        "boundary_payload.stats.embedded_in_product_count"
+      ],
+      "watch_for": [
+        "active_count == 0",
+        "embedded_in_product_count == 0"
+      ]
+    }
+  },
+  "verification_commands": [
+    {
+      "command": "test -f verification/spec-validation.json && test -f verification/foundation-handoff.json && test -f pipeline-design.json && test -f prompts/_canon.md && echo PREFLIGHT-OK",
+      "expected_result": "Prints PREFLIGHT-OK only when all four required inputs exist; otherwise a non-zero exit identifies the missing input that caused this HALT.",
+      "description": "Confirms the pre-flight inputs that were unavailable in this dispatch, gating any re-dispatch."
+    },
+    {
+      "command": "npx tsc --noEmit && npx tsx scripts/prompt-manager/run-tests.ts",
+      "expected_result": "Exit 0 for both, proving the Manager toolchain compiles and its unit tests pass before re-dispatch.",
+      "description": "Validates the derivation/emission toolchain the playbook depends on."
+    },
+    {
+      "command": "ls prompts/*.md prompts/*.contract.json prompts/_build-manifest.json 2>/dev/null | wc -l",
+      "expected_result": "0 in this dispatch (no library emitted); >0 after a successful re-dispatch.",
+      "description": "Confirms this HALT emitted zero prompt artifacts, consistent with total_prompts=0."
+    }
+  ],
+  "soul_ledger_appends": [
+    {
+      "judgment_type": "DESIGN",
+      "decision": "Halt-and-report is the correct output when a derivation agent is dispatched without its execution surface or confirmable inputs.",
+      "rationale": "Preserves Source Integrity (Directive 3) and Operational Boundaries (Directive 4); a fabricated library would be schema-valid but false, poisoning every downstream prompt consumer."
+    }
+  ],
+  "soul_ledger_archive": [],
+  "step_attestations": [
+    {
+      "step_id": "3",
+      "step_title": "PRE-FLIGHT CHECKS",
+      "verify_kind": "fenced",
+      "verify_command": "test -f verification/spec-validation.json || { echo \"FAIL: agent-00 handoff missing\"; exit 1; }",
+      "claimed_status": "FAIL",
+      "evidence": "No filesystem/shell tool available in this dispatch; input existence cannot be confirmed. Pre-flight cannot pass -> spec-gate-fail HALT.",
+      "agent_cycle": 1
+    },
+    {
+      "step_id": "1.1",
+      "step_title": "Boundary walker",
+      "verify_kind": "prose",
+      "verify_command": "",
+      "claimed_status": "SKIPPED",
+      "evidence": "Phase 1 not reached; halted at pre-flight. pipeline-design.json unavailable and no execution surface.",
+      "agent_cycle": 1
+    },
+    {
+      "step_id": "1.2",
+      "step_title": "State-machine walker",
+      "verify_kind": "prose",
+      "verify_command": "",
+      "claimed_status": "SKIPPED",
+      "evidence": "Phase 1 not reached; halted at pre-flight.",
+      "agent_cycle": 1
+    },
+    {
+      "step_id": "2.1",
+      "step_title": "Merge cross-pass duplicates",
+      "verify_kind": "prose",
+      "verify_command": "",
+      "claimed_status": "SKIPPED",
+      "evidence": "No candidates derived; Phase 2 not reached.",
+      "agent_cycle": 1
+    },
+    {
+      "step_id": "2.2",
+      "step_title": "Tier resolution + input declarations",
+      "verify_kind": "prose",
+      "verify_command": "",
+      "claimed_status": "SKIPPED",
+      "evidence": "No candidates derived; Phase 2 not reached.",
+      "agent_cycle": 1
+    },
+    {
+      "step_id": "2.3",
+      "step_title": "Skill citation projection",
+      "verify_kind": "prose",
+      "verify_command": "",
+      "claimed_status": "SKIPPED",
+      "evidence": "No drafts produced; Phase 2 not reached.",
+      "agent_cycle": 1
+    },
+    {
+      "step_id": "2.4",
+      "step_title": "Resonance floor + Multiplier score",
+      "verify_kind": "prose",
+      "verify_command": "",
+      "claimed_status": "SKIPPED",
+      "evidence": "No drafts produced; Phase 2 not reached.",
+      "agent_cycle": 1
+    },
+    {
+      "step_id": "2.5",
+      "step_title": "Validate draft against full PromptContractSchema",
+      "verify_kind": "prose",
+      "verify_command": "",
+      "claimed_status": "SKIPPED",
+      "evidence": "No drafts to validate; Phase 2 not reached.",
+      "agent_cycle": 1
+    },
+    {
+      "step_id": "3.3",
+      "step_title": "Atomic write of artifact pair",
+      "verify_kind": "prose",
+      "verify_command": "",
+      "claimed_status": "SKIPPED",
+      "evidence": "No drafts to emit; Phase 3 not reached.",
+      "agent_cycle": 1
+    },
+    {
+      "step_id": "4.3",
+      "step_title": "Archive prior versions",
+      "verify_kind": "prose",
+      "verify_command": "",
+      "claimed_status": "SKIPPED",
+      "evidence": "Reconciliation (regeneration-mode) not applicable; no prior manifest readable and Phase 4 not reached.",
+      "agent_cycle": 1
+    },
+    {
+      "step_id": "4.4",
+      "step_title": "Surface conflicts",
+      "verify_kind": "prose",
+      "verify_command": "",
+      "claimed_status": "SKIPPED",
+      "evidence": "No merges performed; Phase 4 not reached.",
+      "agent_cycle": 1
+    },
+    {
+      "step_id": "5.3",
+      "step_title": "Write prompts/_build-manifest.json",
+      "verify_kind": "prose",
+      "verify_command": "",
+      "claimed_status": "SKIPPED",
+      "evidence": "No prompts to manifest; Phase 5 not reached.",
+      "agent_cycle": 1
+    },
+    {
+      "step_id": "6.1",
+      "step_title": "Self-test each prompt_id with non-null self_test",
+      "verify_kind": "prose",
+      "verify_command": "",
+      "claimed_status": "SKIPPED",
+      "evidence": "No emitted contracts to self-test; Phase 6 not reached.",
+      "agent_cycle": 1
+    },
+    {
+      "step_id": "7.4",
+      "step_title": "Dual-artifact write",
+      "verify_kind": "inline",
+      "verify_command": "npx tsx scripts/validate-handoff.ts --dual verification/runs/$RUN_ID/agent-12/",
+      "claimed_status": "SKIPPED",
+      "evidence": "Cannot write dual artifacts to disk (no filesystem tool); this envelope is emitted via emit_handoff instead. Validate-handoff cannot be run in this dispatch.",
+      "agent_cycle": 1
+    }
+  ],
+  "out_of_scope_findings": [
+    "This dispatch provided a skill manifest and two tools (load_skill, emit_handoff) but no filesystem/shell/write surface, which the agent-12 playbook's 7-phase derivation pipeline strictly requires. Recommend the orchestrator classify agent-12 as a producer requiring a dedicated session with tool access (cf. Lesson U-13/U-14: emitter-vs-producer), or provide read access to the five pre-flight inputs before dispatch."
+  ],
+  "absorption_status": {
+    "absorbs": [],
+    "leaves_for_downstream": [
+      "Full prompt-library derivation and emission remains to be done by a re-dispatch with filesystem access.",
+      "Transcription of the embedded Agent 12 learning log into build-log/agent-learning-log.md."
+    ],
+    "safe_to_prune_after": "2026-12-01T00:00:00Z",
+    "state": "active"
+  },
+  "context_enrichment": {
+    "microcorrectors_fired": [
+      "spec-gate-fail HALT (halt-triggers §1)",
+      "no-fabrication guard (prompt-constitution Directive 4)",
+      "honest-attestation guard (Step Attestation Contract)"
+    ],
+    "token_budget_used_pct": 42
+  },
+  "boundary_payload": {
+    "emitted_by": "12-prompt-manager",
+    "build_id": "00000000-0000-0000-0000-000000000000",
+    "pass": "4",
+    "product": "corpus-seed",
+    "library_path": "prompts/",
+    "prompts": [],
+    "stats": {
+      "total_prompts": 0,
+      "active_count": 0,
+      "deferred_count": 0,
+      "conflict_count": 0,
+      "archived_count": 0,
+      "regenerated_in_this_build": 0,
+      "unchanged_in_this_build": 0,
+      "tier_distribution": {
+        "FORENSIC": 0,
+        "PRECISION": 0,
+        "SYNTHESIS": 0,
+        "NARRATIVE": 0
+      },
+      "embedded_in_product_count": 0,
+      "cli_count": 0,
+      "product_api_count": 0,
+      "inter_product_bus_count": 0,
+      "mean_prompt_multiplier_score": 7.5,
+      "min_prompt_multiplier_score": 7.5
+    },
+    "canon_snapshot": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "canon_drift_detected": false,
+    "canon_drift_message": null,
+    "self_test_summary": {
+      "total_run": 0,
+      "passed": 0,
+      "failed": 0,
+      "failed_prompt_ids": []
+    },
+    "manager_soul_ledger": {
+      "surface_observations": [
+        "This dispatch exposed no product surface to walk — pipeline-design.json, upstream handoffs, and the canon snapshot were not accessible. The Manager's derivation depends entirely on those inputs, none of which could be confirmed.",
+        "The agent's tool surface (load_skill + emit_handoff only) is an emitter surface, but the playbook requires a producer surface (walk + compose + write files)."
+      ],
+      "derivation_difficulties": [
+        "Zero candidate intents could be derived: the boundary walker and state-machine walker both require a readable pipeline-design.json, which was unavailable.",
+        "No prior _build-manifest.json could be read, so reconcile-vs-first-build mode could not even be determined."
+      ],
+      "tier_distribution_note": "No tiers assigned — the library is empty because the derivation pipeline halted at the pre-flight gate. Tier distribution is all-zero, not a design signal.",
+      "recommendations_for_downstream": [
+        "Re-dispatch agent-12 with confirmed pre-flight inputs and filesystem/shell/write access; then run the full quality-gate chain.",
+        "Transcribe the embedded Agent 12 learning log (decision D4-learning-log-embedded) into build-log/agent-learning-log.md under '## Agent 12'.",
+        "Treat total_prompts=0 as a blocked state, not a valid empty library."
+      ]
+    }
+  },
+  "evidence_commitment": {
+    "root_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "committed_at": "2026-06-01T00:00:00Z",
+    "revealed_at": null,
+    "entry_count": 0,
+    "entries": []
+  },
+  "handoff_id": "00000000-0000-0000-0000-000000000000",
+  "revision_count": 0
+}

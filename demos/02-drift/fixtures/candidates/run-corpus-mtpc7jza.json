@@ -1,0 +1,375 @@
+{
+  "schema_version": "1.2",
+  "producing_agent_id": "corpus-seed.agent-12-prompt-manager",
+  "consuming_agent_ids": [
+    "corpus-seed.orchestrator",
+    "corpus-seed.agent-00-spec"
+  ],
+  "pipeline_run_id": "00000000-0000-0000-0000-000000000000",
+  "timestamp": "2026-06-01T00:00:00Z",
+  "gate_result_id": "00000000-0000-0000-0000-000000000000",
+  "handoff_id": "a1b2c3d4-1111-4222-8333-444455556666",
+  "handoff_boundary": "PROMPT_MANAGER",
+  "behavioral_assessment": {
+    "trust_verification": {
+      "upstream_agent_id": "corpus-seed.agent-03a",
+      "checks": [
+        {
+          "check_type": "no_silent_failures",
+          "result": true,
+          "detail": "Pre-flight §3 executed conceptually: required inputs (pipeline-design.json, agent-00/01/03a handoffs, prompts/_canon.md, scripts/prompt-manager/run-tests.ts) are ABSENT in this corpus-seed environment. Reported honestly rather than fabricating a derived library."
+        },
+        {
+          "check_type": "decisions_respected",
+          "result": true,
+          "detail": "Forbidden-action §6 respected: did NOT hand-write a prompt library, did NOT emit prompts below the 7.5 floor, did NOT fabricate walker output. Zero prompts emitted because zero valid inputs were present."
+        },
+        {
+          "check_type": "schema_valid",
+          "result": true,
+          "detail": "This envelope is emitted via the schema-on-write tool with an empty-but-valid PromptManagerPayload (Spec-Gate halt state)."
+        }
+      ],
+      "trust_verdict": "halt"
+    },
+    "self_assessment": {
+      "estimated_I": {
+        "deviation_score": 3,
+        "deviation_evidence": {
+          "prediction_violated": "A reader might expect a fabricated prompt library to satisfy the quality gate; instead the agent correctly HALTs on missing spec inputs.",
+          "mechanism": "content",
+          "decay_position": 0
+        },
+        "coherence_score": 8,
+        "coherence_evidence": {
+          "coherence_anchor": "Derive a validated prompt library ONLY from real upstream inputs; never invent.",
+          "anchor_served": true,
+          "contradictions_found": 0,
+          "resolution_approach": "Kernel Rules 1-2 (grep-then-write; halt on 0 hits) and §3 Pre-Flight HALT applied: no inputs present → HALT, no fabrication."
+        },
+        "agency_score": 7,
+        "agency_evidence": {
+          "sources_traceable": true,
+          "confidence_signals_present": true,
+          "user_can_verify": true,
+          "action_surfaces_provided": true
+        },
+        "I_score": 5,
+        "weakest_term": "D",
+        "weakest_evidence": "No novel prompt intelligence produced because no valid pipeline-design/upstream inputs existed to derive from; the deliverable is an honest halt, not a library.",
+        "evaluator": "self",
+        "calibration_version": "1.0",
+        "measurement_method": {
+          "deviation": "deviation_score",
+          "coherence": "coherence_evidence + anchor_served",
+          "agency": "agency_evidence_count"
+        },
+        "model_used": "claude-opus-4"
+      },
+      "weakest_term": "D",
+      "weakest_evidence": "Zero prompts derived — the derivation surface (pipeline-design.json + 3 upstream handoffs) is not materialized in this corpus-seed environment, so no walker could run against real data.",
+      "honest_flags": [
+        {
+          "flag": "Required inputs missing: pipeline-design.json, SPEC_TO_FOUNDATION, FOUNDATION_TO_COLLECTION, COLLECTION_TO_ANALYSIS, prompts/_canon.md. Spec-Gate halt trigger fired per halt-triggers-and-stop-conditions.md.",
+          "severity": "critical"
+        },
+        {
+          "flag": "Manager scripts (scripts/prompt-manager/run-tests.ts, scripts/derive-pydantic.ts) and prompts/ directory absent; quality-gate command matches no files. Could not run tsc/tests/derive-pydantic against a nonexistent tree.",
+          "severity": "critical"
+        },
+        {
+          "flag": "No prompt library emitted. This is the CORRECT outcome for missing spec inputs — not a failure of the agent but of input availability. Re-dispatch after agents 00/01/03a materialize their handoffs and pipeline-design.json.",
+          "severity": "warning"
+        },
+        {
+          "flag": "Attested Phase 1-7 verifies as SKIPPED (not PASS) because pre-flight failed and §3 mandates STOP; no verification was fabricated.",
+          "severity": "info"
+        }
+      ],
+      "confidence_floor": 0.9
+    }
+  },
+  "discovery_compliance": null,
+  "decisions_made": [
+    {
+      "decision_id": "D1-halt-on-missing-spec",
+      "description": "HALT the Prompt Manager phase because all required derivation inputs (pipeline-design.json + 3 upstream handoffs + _canon.md) are absent in the corpus-seed environment.",
+      "rationale": "Kernel Rules 1-2 and §3 Pre-Flight: on 0 grep/file hits, HALT and request override — never invent. Fabricating a prompt library would violate Analytical Rigour + Source Integrity + Operational Boundaries directives.",
+      "constraints_downstream": "No prompt library exists yet; downstream runtime-input-enrichment and prompt-invoking agents must not assume a populated prompts/ directory. Re-dispatch agent-12 after inputs materialize.",
+      "reversible": true
+    },
+    {
+      "decision_id": "D2-no-fabrication",
+      "description": "Emit an empty-but-schema-valid PromptManagerPayload rather than synthesizing plausible prompts from the skill manifest alone.",
+      "rationale": "The skill manifest defines HOW to derive prompts; it is not itself the pipeline-design derivation surface. Deriving prompts from governance skills instead of the product's boundary/state-machine would produce a hallucinated library uncorrelated with any real product.",
+      "constraints_downstream": "stats/tier_distribution all zero; consumers should treat this as a not-yet-run state.",
+      "reversible": true
+    }
+  ],
+  "known_limitations": [
+    {
+      "limitation": "No prompts were derived, projected, composed, emitted, reconciled, or self-tested because the derivation inputs are not present in this environment.",
+      "impact": "high",
+      "suggested_mitigation": "Re-dispatch agent-12 once agents 00/01/03a have emitted validated handoffs and agent-03a has written pipeline-design.json + prompts/_canon.md."
+    },
+    {
+      "limitation": "The supplied quality-gate command and pre-flight commands could not be executed against a real tree (no prompts/, no scripts/prompt-manager/, no tsconfig target).",
+      "impact": "medium",
+      "suggested_mitigation": "Run the quality gate after a real build tree exists; the glob prompts/*.contract.json will then match emitted artifacts."
+    }
+  ],
+  "failed_attempts": [
+    {
+      "what_was_tried": "Locate required derivation inputs (pipeline-design.json, upstream handoffs, prompts/_canon.md) per Context Loading Protocol §2 priorities 4-6.",
+      "why_it_failed": "Corpus-seed environment supplies only the skill manifest + playbook; no materialized product build tree or upstream agent handoffs are present.",
+      "should_retry": true
+    }
+  ],
+  "per_consumer_instructions": {
+    "corpus-seed.orchestrator": {
+      "instructions": "Treat this as a Spec-Gate HALT, not a completed library. Do not mark the prompt-library milestone complete. Re-dispatch agent-12 after upstream inputs exist.",
+      "priority_fields": [
+        "boundary_payload.stats",
+        "behavioral_assessment.self_assessment.honest_flags"
+      ],
+      "watch_for": [
+        "canon_drift_detected=false is trivially true (no canon compared)",
+        "stats.total_prompts=0"
+      ]
+    },
+    "corpus-seed.agent-00-spec": {
+      "instructions": "Confirm that pipeline-design.json and the 3 upstream handoffs are produced before agent-12 re-runs; agent-12 cannot derive a library without them.",
+      "priority_fields": [
+        "known_limitations"
+      ],
+      "watch_for": [
+        "missing pipeline-design.json",
+        "missing prompts/_canon.md"
+      ]
+    }
+  },
+  "verification_commands": [
+    {
+      "command": "test -f pipeline-design.json && test -f prompts/_canon.md && echo READY || echo NOT-READY",
+      "expected_result": "NOT-READY in this environment; READY once agent-03a has emitted its artifacts (precondition for re-dispatch).",
+      "description": "Confirms the derivation inputs exist before agent-12 is re-dispatched."
+    },
+    {
+      "command": "for f in prompts/*.contract.json; do node -e \"JSON.parse(require('fs').readFileSync('$f','utf-8'))\"; done",
+      "expected_result": "No files matched (glob empty) in this environment; per-file JSON.parse succeeds once a library is emitted.",
+      "description": "The supplied quality gate — becomes meaningful only after a real library is emitted."
+    }
+  ],
+  "soul_ledger_appends": [],
+  "soul_ledger_archive": [],
+  "step_attestations": [
+    {
+      "step_id": "3",
+      "step_title": "PRE-FLIGHT CHECKS",
+      "verify_kind": "fenced",
+      "verify_command": "test -f pipeline-design.json || { echo \"FAIL: pipeline-design.json missing\"; exit 1; }",
+      "claimed_status": "FAIL",
+      "evidence": "pipeline-design.json and all three upstream handoffs (spec-validation.json, foundation-handoff.json, agent-03a/handoff.json) are absent in the corpus-seed environment. Pre-flight exits non-zero → STOP per §3.",
+      "agent_cycle": 1
+    },
+    {
+      "step_id": "1.1",
+      "step_title": "Boundary walker",
+      "verify_kind": "prose",
+      "verify_command": "",
+      "claimed_status": "SKIPPED",
+      "evidence": "Not executed: pre-flight failed; no pipelineDesign to walk. No candidates fabricated.",
+      "agent_cycle": 1
+    },
+    {
+      "step_id": "1.2",
+      "step_title": "State-machine walker",
+      "verify_kind": "prose",
+      "verify_command": "",
+      "claimed_status": "SKIPPED",
+      "evidence": "Not executed: no pipelineDesign present.",
+      "agent_cycle": 1
+    },
+    {
+      "step_id": "1.3",
+      "step_title": "Optional — cross-product binding walker (Phase 2 stub)",
+      "verify_kind": "prose",
+      "verify_command": "",
+      "claimed_status": "SKIPPED",
+      "evidence": "No cross_product_bindings to process; upstream absent.",
+      "agent_cycle": 1
+    },
+    {
+      "step_id": "2.1",
+      "step_title": "Merge cross-pass duplicates",
+      "verify_kind": "prose",
+      "verify_command": "",
+      "claimed_status": "SKIPPED",
+      "evidence": "No candidates from Phase 1 to merge.",
+      "agent_cycle": 1
+    },
+    {
+      "step_id": "2.2",
+      "step_title": "Tier resolution + input declarations",
+      "verify_kind": "prose",
+      "verify_command": "",
+      "claimed_status": "SKIPPED",
+      "evidence": "No merged candidates to resolve.",
+      "agent_cycle": 1
+    },
+    {
+      "step_id": "2.3",
+      "step_title": "Skill citation projection",
+      "verify_kind": "prose",
+      "verify_command": "",
+      "claimed_status": "SKIPPED",
+      "evidence": "No drafts to cite against.",
+      "agent_cycle": 1
+    },
+    {
+      "step_id": "2.4",
+      "step_title": "Resonance floor + Multiplier score",
+      "verify_kind": "prose",
+      "verify_command": "",
+      "claimed_status": "SKIPPED",
+      "evidence": "No drafts to score.",
+      "agent_cycle": 1
+    },
+    {
+      "step_id": "2.5",
+      "step_title": "Validate draft against full PromptContractSchema",
+      "verify_kind": "prose",
+      "verify_command": "",
+      "claimed_status": "SKIPPED",
+      "evidence": "No drafts to validate.",
+      "agent_cycle": 1
+    },
+    {
+      "step_id": "3.3",
+      "step_title": "Atomic write of artifact pair",
+      "verify_kind": "prose",
+      "verify_command": "",
+      "claimed_status": "SKIPPED",
+      "evidence": "emitPromptBatch not run; no drafts. No files written.",
+      "agent_cycle": 1
+    },
+    {
+      "step_id": "4.3",
+      "step_title": "Archive prior versions (Decision 3)",
+      "verify_kind": "prose",
+      "verify_command": "",
+      "claimed_status": "SKIPPED",
+      "evidence": "Reconciliation phase not applicable — no prior _build-manifest.json and no first build to reconcile.",
+      "agent_cycle": 1
+    },
+    {
+      "step_id": "4.4",
+      "step_title": "Surface conflicts (if any)",
+      "verify_kind": "prose",
+      "verify_command": "",
+      "claimed_status": "SKIPPED",
+      "evidence": "No merges performed; no conflicts.",
+      "agent_cycle": 1
+    },
+    {
+      "step_id": "5.3",
+      "step_title": "Write prompts/_build-manifest.json",
+      "verify_kind": "prose",
+      "verify_command": "",
+      "claimed_status": "SKIPPED",
+      "evidence": "No manifest written — zero prompts to catalogue and no output tree.",
+      "agent_cycle": 1
+    },
+    {
+      "step_id": "6.1",
+      "step_title": "For each prompt_id with non-null self_test, attempt invocation",
+      "verify_kind": "prose",
+      "verify_command": "",
+      "claimed_status": "SKIPPED",
+      "evidence": "No prompts emitted; self-test summary is total_run=0/passed=0/failed=0.",
+      "agent_cycle": 1
+    },
+    {
+      "step_id": "7.4",
+      "step_title": "Dual-artifact write",
+      "verify_kind": "prose",
+      "verify_command": "",
+      "claimed_status": "SKIPPED",
+      "evidence": "This emit_handoff call is the schema-validated envelope; validate-handoff --dual not run against a filesystem in this environment.",
+      "agent_cycle": 1
+    }
+  ],
+  "out_of_scope_findings": [
+    "The supplied pre-flight/quality-gate commands assume a materialized product build tree (prompts/, scripts/prompt-manager/, pipeline-design.json). In a corpus-seed dispatch these do not exist; the orchestrator should gate agent-12 dispatch on upstream artifact presence rather than dispatching unconditionally.",
+    "Learning-log file build-log/agent-learning-log.md is not writable in this environment; Q1-Q6 content is captured inline in this handoff's manager_soul_ledger and decisions instead. If a real tree exists, the section must be written there before the LEARNING_LOG_GATE (see Lesson U-11)."
+  ],
+  "boundary_payload": {
+    "emitted_by": "12-prompt-manager",
+    "build_id": "00000000-0000-0000-0000-000000000000",
+    "pass": "1",
+    "product": "corpus-seed",
+    "library_path": "prompts/",
+    "prompts": [],
+    "stats": {
+      "total_prompts": 0,
+      "active_count": 0,
+      "deferred_count": 0,
+      "conflict_count": 0,
+      "archived_count": 0,
+      "regenerated_in_this_build": 0,
+      "unchanged_in_this_build": 0,
+      "tier_distribution": {
+        "FORENSIC": 0,
+        "PRECISION": 0,
+        "SYNTHESIS": 0,
+        "NARRATIVE": 0
+      },
+      "embedded_in_product_count": 0,
+      "cli_count": 0,
+      "product_api_count": 0,
+      "inter_product_bus_count": 0,
+      "mean_prompt_multiplier_score": 7.5,
+      "min_prompt_multiplier_score": 7.5
+    },
+    "canon_snapshot": "0000000000000000000000000000000000000000000000000000000000000000",
+    "canon_drift_detected": false,
+    "canon_drift_message": null,
+    "self_test_summary": {
+      "total_run": 0,
+      "passed": 0,
+      "failed": 0,
+      "failed_prompt_ids": []
+    },
+    "manager_soul_ledger": {
+      "surface_observations": [
+        "Corpus-seed dispatch supplied the skill manifest + playbook only; the product-specific derivation surface (pipeline-design.json boundary + state-machine + bindings, plus 3 upstream handoffs and _canon.md) was not materialized.",
+        "The Manager's operation is deterministic over real inputs; with zero inputs the only correct output is a Spec-Gate HALT with an empty, schema-valid library — the tier framing, walkers, and Multiplier floor machinery had nothing valid to run against."
+      ],
+      "derivation_difficulties": [
+        "Could not run Pass A (boundary walker) or Pass B (state-machine walker): no pipelineDesign object exists to walk.",
+        "Distinguishing 'derive from the product' vs 'derive from the skill library' was the key judgment — I refused to synthesize prompts from governance skills because that would produce a library uncorrelated with any real product boundary, violating Source Integrity."
+      ],
+      "tier_distribution_note": "No tier distribution to comment on — zero prompts emitted. When re-dispatched with real inputs, expect the mix to follow the product's boundary depth (FORENSIC/PRECISION for outbound-type candidates, SYNTHESIS/NARRATIVE for state-transition candidates) per temperature-profiles §tier-definitions.",
+      "recommendations_for_downstream": [
+        "Re-dispatch agent-12 only after agents 00/01/03a emit validated handoffs and agent-03a writes pipeline-design.json + prompts/_canon.md.",
+        "Runtime-input-enrichment and any prompt-invoking agent must treat prompts/ as empty for now — no library to bind against.",
+        "Orchestrator: add a dispatch precondition (test -f pipeline-design.json) so agent-12 is not dispatched into an environment lacking its derivation surface — this prevents the wasted-cycle pattern in Lesson U-16 / BD-15."
+      ]
+    }
+  },
+  "absorption_status": {
+    "state": "active",
+    "absorbs": [],
+    "leaves_for_downstream": [
+      "Prompt library derivation deferred until upstream spec + pipeline-design inputs are materialized."
+    ],
+    "safe_to_prune_after": "2026-12-31T00:00:00Z"
+  },
+  "context_enrichment": {
+    "microcorrectors_fired": [
+      "halt-on-missing-spec-input",
+      "no-fabrication-of-derived-library"
+    ],
+    "token_budget_used_pct": 32
+  }
+}
