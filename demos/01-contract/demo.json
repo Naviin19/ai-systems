@@ -1,0 +1,22 @@
+{
+  "name": "contract",
+  "command": "demo:contract",
+  "kind": "production path over the real contracts, with the agent graph captured as a fixture",
+  "extracted_on": "2026-09-14",
+  "extracted_from": [
+    { "sha": "d4904660b78eec347356be53f221f2b59aafe2f2", "path": "contracts/types/operational/handoff-envelope.ts", "symbols": ["HandoffEnvelopeSchema", "pixel_diff_status: z.enum(['PASS', 'FAIL'])"] },
+    { "sha": "d4904660b78eec347356be53f221f2b59aafe2f2", "path": "contracts/enforcement/compatibility/contract-compiler.ts", "symbols": ["compileContracts", "checkSubtype", "boundaryVariant", "lintStepFileReads"] },
+    { "sha": "d4904660b78eec347356be53f221f2b59aafe2f2", "path": "contracts/enforcement/edge-registry.ts", "symbols": ["EDGE_DECLARATIONS", "p.pixel_diff_status !== 'PASS'"] },
+    { "sha": "d4904660b78eec347356be53f221f2b59aafe2f2", "path": "contracts/registry/blast-radius.ts", "symbols": ["prompt_traceability", "Total blast radius"] },
+    { "sha": "d4904660b78eec347356be53f221f2b59aafe2f2", "path": "scripts/generate-json-schemas.ts", "symbols": ["export function renderSchema"] },
+    { "sha": "d4904660b78eec347356be53f221f2b59aafe2f2", "path": "scripts/contracts-vs-json-schema.ts", "symbols": ["function deepEqual", "function firstDiff"] }
+  ],
+  "volatile": [],
+  "tamper": {
+    "file": "contracts/types/operational/handoff-envelope.ts",
+    "find": "pixel_diff_status: z.enum(['PASS', 'FAIL']),",
+    "replace": "pixel_diff_status: z.string(),",
+    "expect_exit": 1,
+    "expect_line": "the producer does not restrict it to PASS, FAIL"
+  }
+}

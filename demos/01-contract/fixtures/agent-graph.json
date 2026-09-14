@@ -1,0 +1,166 @@
+{
+  "$comment": "Today's agent graph as contracts/enforcement/agent-graph.ts loads it from configs/agent-*.config.ts, captured at d490466 on 2026-09-14: each agent's key, dependencies and outbound boundary.",
+  "agents": [
+    {
+      "id": "agent-00-spec-validator",
+      "key": "agent-00",
+      "dependsOn": [],
+      "outboundBoundary": "SPEC_TO_FOUNDATION"
+    },
+    {
+      "id": "agent-01-foundation",
+      "key": "agent-01",
+      "dependsOn": [
+        "agent-00"
+      ],
+      "outboundBoundary": "FOUNDATION_TO_COLLECTION"
+    },
+    {
+      "id": "agent-02-api-integration",
+      "key": "agent-02",
+      "dependsOn": [
+        "agent-01"
+      ],
+      "outboundBoundary": "API_TO_COLLECTION"
+    },
+    {
+      "id": "agent-03a-collection",
+      "key": "agent-03a",
+      "dependsOn": [
+        "agent-02"
+      ],
+      "outboundBoundary": "COLLECTION_TO_ANALYSIS"
+    },
+    {
+      "id": "agent-03b-analysis",
+      "key": "agent-03b",
+      "dependsOn": [
+        "agent-03a"
+      ],
+      "outboundBoundary": "ANALYSIS_TO_SYNTHESIS"
+    },
+    {
+      "id": "agent-03c-synthesis",
+      "key": "agent-03c",
+      "dependsOn": [
+        "agent-03b",
+        "agent-01"
+      ],
+      "outboundBoundary": "SYNTHESIS_TO_FRONTEND"
+    },
+    {
+      "id": "agent-04-frontend-core",
+      "key": "agent-04",
+      "dependsOn": [
+        "agent-03c"
+      ],
+      "outboundBoundary": "FRONTEND_CORE_TO_BROWSER_TESTING"
+    },
+    {
+      "id": "agent-05-frontend-intelligence",
+      "key": "agent-05",
+      "dependsOn": [
+        "agent-04",
+        "agent-03c"
+      ],
+      "outboundBoundary": "FRONTEND_INTELLIGENCE_TO_ADMIN"
+    },
+    {
+      "id": "agent-06-admin",
+      "key": "agent-06",
+      "dependsOn": [
+        "agent-05"
+      ],
+      "outboundBoundary": "ADMIN_TO_TESTING"
+    },
+    {
+      "id": "agent-07-testing",
+      "key": "agent-07",
+      "dependsOn": [
+        "agent-06"
+      ],
+      "outboundBoundary": "TESTING_TO_DEPLOYMENT"
+    },
+    {
+      "id": "agent-08-browser-testing",
+      "key": "agent-08",
+      "dependsOn": [
+        "agent-04"
+      ],
+      "outboundBoundary": "BROWSER_TO_CRAFTSMANSHIP"
+    },
+    {
+      "id": "agent-09-craftsmanship",
+      "key": "agent-09",
+      "dependsOn": [
+        "agent-08"
+      ],
+      "outboundBoundary": "CRAFTSMANSHIP_TO_DEPLOYMENT"
+    },
+    {
+      "id": "agent-10-deployment",
+      "key": "agent-10",
+      "dependsOn": [
+        "agent-09",
+        "agent-07"
+      ],
+      "outboundBoundary": "DEPLOYMENT_COMPLETE"
+    },
+    {
+      "id": "agent-11-sugar-trainer",
+      "key": "agent-11",
+      "dependsOn": [
+        "agent-10"
+      ],
+      "outboundBoundary": "HARDENING_TO_LEARNING"
+    },
+    {
+      "id": "agent-12-prompt-manager",
+      "key": "agent-12",
+      "dependsOn": [
+        "agent-00",
+        "agent-01",
+        "agent-03a"
+      ],
+      "outboundBoundary": "PROMPT_MANAGER"
+    },
+    {
+      "id": "agent-marketing-availability-builder",
+      "key": "agent-marketing-availability-builder",
+      "dependsOn": [
+        "agent-research-synthesizer"
+      ],
+      "outboundBoundary": "AVAILABILITY_TO_LIBRARY"
+    },
+    {
+      "id": "agent-marketing-availability-validator",
+      "key": "agent-marketing-availability-validator",
+      "dependsOn": [
+        "agent-marketing-availability-builder"
+      ],
+      "outboundBoundary": "RESEARCH_VALIDATOR_TO_LEARNING"
+    },
+    {
+      "id": "agent-research-graph-builder",
+      "key": "agent-research-graph-builder",
+      "dependsOn": [
+        "agent-research-reader"
+      ],
+      "outboundBoundary": "GRAPH_TO_SYNTHESIS"
+    },
+    {
+      "id": "agent-research-reader",
+      "key": "agent-research-reader",
+      "dependsOn": [],
+      "outboundBoundary": "READER_TO_GRAPH"
+    },
+    {
+      "id": "agent-research-synthesizer",
+      "key": "agent-research-synthesizer",
+      "dependsOn": [
+        "agent-research-graph-builder"
+      ],
+      "outboundBoundary": "SYNTHESIS_TO_PRODUCT"
+    }
+  ]
+}
