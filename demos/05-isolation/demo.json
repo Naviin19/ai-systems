@@ -1,0 +1,19 @@
+{
+  "name": "isolation",
+  "command": "demo:isolation",
+  "kind": "reduced harness around the production path",
+  "extracted_on": "2026-09-14",
+  "extracted_from": [
+    { "sha": "d4904660b78eec347356be53f221f2b59aafe2f2", "path": "scripts/lib/merge-lock.ts", "symbols": ["withMergeLock", "holderAlive", "tryTakeOver"] },
+    { "sha": "d4904660b78eec347356be53f221f2b59aafe2f2", "path": "scripts/lib/agent-scheduler.ts", "symbols": ["runScheduled", "planWaves"] },
+    { "sha": "d4904660b78eec347356be53f221f2b59aafe2f2", "path": "scripts/master-agentic-orchestrator.ts", "symbols": ["function createWorktree", "function mergeSandbox", "function rebaseOntoMain", "function nukeSandbox", "rebaseOntoMain(mergeSandboxRef, logger);"] }
+  ],
+  "volatile": [],
+  "tamper": {
+    "file": "demos/05-isolation/worker.ts",
+    "find": "await withMergeLock(merge, { lockPath, timeoutMs: 60_000 });",
+    "replace": "await merge();",
+    "expect_exit": 1,
+    "expect_line": "processes could not merge into main"
+  }
+}

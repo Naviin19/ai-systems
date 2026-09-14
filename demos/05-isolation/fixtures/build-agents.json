@@ -1,0 +1,98 @@
+{
+  "$comment": "The factory's 15 build agents and their dependencies, read from configs/agent-*.config.ts at d490466 on 2026-09-14. The five research agents are left out: they join a run only with --include-research.",
+  "agents": [
+    {
+      "id": "agent-00",
+      "dependsOn": []
+    },
+    {
+      "id": "agent-01",
+      "dependsOn": [
+        "agent-00"
+      ]
+    },
+    {
+      "id": "agent-02",
+      "dependsOn": [
+        "agent-01"
+      ]
+    },
+    {
+      "id": "agent-03a",
+      "dependsOn": [
+        "agent-02"
+      ]
+    },
+    {
+      "id": "agent-03b",
+      "dependsOn": [
+        "agent-03a"
+      ]
+    },
+    {
+      "id": "agent-03c",
+      "dependsOn": [
+        "agent-03b",
+        "agent-01"
+      ]
+    },
+    {
+      "id": "agent-04",
+      "dependsOn": [
+        "agent-03c"
+      ]
+    },
+    {
+      "id": "agent-05",
+      "dependsOn": [
+        "agent-04",
+        "agent-03c"
+      ]
+    },
+    {
+      "id": "agent-06",
+      "dependsOn": [
+        "agent-05"
+      ]
+    },
+    {
+      "id": "agent-07",
+      "dependsOn": [
+        "agent-06"
+      ]
+    },
+    {
+      "id": "agent-08",
+      "dependsOn": [
+        "agent-04"
+      ]
+    },
+    {
+      "id": "agent-09",
+      "dependsOn": [
+        "agent-08"
+      ]
+    },
+    {
+      "id": "agent-10",
+      "dependsOn": [
+        "agent-09",
+        "agent-07"
+      ]
+    },
+    {
+      "id": "agent-11",
+      "dependsOn": [
+        "agent-10"
+      ]
+    },
+    {
+      "id": "agent-12",
+      "dependsOn": [
+        "agent-00",
+        "agent-01",
+        "agent-03a"
+      ]
+    }
+  ]
+}
