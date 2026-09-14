@@ -1,0 +1,78 @@
+{
+  "root_hash": "c9ff87132162debc64e62bb6634621eed161197316bf0779d6fb889038f8a356",
+  "committed_at": "2026-09-14T00:00:00.000Z",
+  "revealed_at": null,
+  "entry_count": 14,
+  "entries": [
+    {
+      "id": "att:3",
+      "hash": "0b163e8b9585d11e261207bb2db8063a97157b36fd269a737afd2d94e33c4f1d",
+      "cycle": 1
+    },
+    {
+      "id": "att:1.1",
+      "hash": "a79775cfd3d2d9df56cbbec3aacc1507e9362fdd791ddbfddbfb4c33bc7f1189",
+      "cycle": 1
+    },
+    {
+      "id": "att:1.2",
+      "hash": "60a695743e839f558f7c43ccb0a620bed0f0b1c41c93586e68627cfc6f9971a0",
+      "cycle": 1
+    },
+    {
+      "id": "att:2.1",
+      "hash": "e35f0705fb01cc027cb1cd05a17ed986faf8226fef52ee11111483e41125742f",
+      "cycle": 1
+    },
+    {
+      "id": "att:2.2",
+      "hash": "1b3f228afead96b49cdff7e803f2cf6abada7b3765a135e3198a8d8a7532dd2c",
+      "cycle": 1
+    },
+    {
+      "id": "att:2.3",
+      "hash": "0255e13dcc13032d35bbe1343c279d4d70709cac47fb91d5fc2a7de04c21b467",
+      "cycle": 1
+    },
+    {
+      "id": "att:2.4",
+      "hash": "b10d6fd46df5046d73bd2b167ca1c8504d14752886f968875da2f77aac1120b8",
+      "cycle": 1
+    },
+    {
+      "id": "att:2.5",
+      "hash": "5fe607a26356bd439e9b54e63d8953b84d51a563c39e2d8e87e8f4837caf8067",
+      "cycle": 1
+    },
+    {
+      "id": "att:3.3",
+      "hash": "3e48599091cc73b7d74953ee1fca4e3182d08bbc334ff73453fb82a22df0bf7e",
+      "cycle": 1
+    },
+    {
+      "id": "att:4.3",
+      "hash": "3285850deadd9cf55173e0506df12d2dea718f0005397404a330f3f698cdb61f",
+      "cycle": 1
+    },
+    {
+      "id": "att:4.4",
+      "hash": "6a12dfca95700e4b357814de566eadf8369255d02b16a46a2a28a6204e92d132",
+      "cycle": 1
+    },
+    {
+      "id": "att:5.3",
+      "hash": "6dcb19081498b5f05885cb3539278f502c92100fc9c30bccab5b7ad10e43c2de",
+      "cycle": 1
+    },
+    {
+      "id": "att:6.1",
+      "hash": "313823ef79747760bdaf0eadc15d8f1e16235618e32e3de688164897b8588493",
+      "cycle": 1
+    },
+    {
+      "id": "att:7.4",
+      "hash": "a4faaeb96c8b7cf058e0fd65c7de145286f6dc2e6eea8055ffd00b48f7e5ce93",
+      "cycle": 1
+    }
+  ]
+}

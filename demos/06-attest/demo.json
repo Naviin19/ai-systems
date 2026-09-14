@@ -1,0 +1,21 @@
+{
+  "name": "attest",
+  "command": "demo:attest",
+  "kind": "reduced harness around the production path",
+  "extracted_on": "2026-09-14",
+  "extracted_from": [
+    { "sha": "d4904660b78eec347356be53f221f2b59aafe2f2", "path": "scripts/lib/evidence-commitment.ts", "symbols": ["commitHandoffEvidence", "verifyCommitment", "revealRerun", "collectEvidenceEntries", "canonicalJson"] },
+    { "sha": "d4904660b78eec347356be53f221f2b59aafe2f2", "path": "scripts/lib/cross-family-pass.ts", "symbols": ["runCrossFamilyPass", "judgeRead", "EVIDENCE_COMMITMENT_MISMATCH", "EVIDENCE_REJUSTIFIED"] },
+    { "sha": "d4904660b78eec347356be53f221f2b59aafe2f2", "path": "lib/v6-router/cross-family-verify.ts", "symbols": ["parseJudgeReply", "CrossFamilyVerdict"] },
+    { "sha": "d4904660b78eec347356be53f221f2b59aafe2f2", "path": "contracts/types/shared/index.ts", "symbols": ["EvidenceRefSchema", "EvidenceCommitmentSchema"] },
+    { "sha": "d4904660b78eec347356be53f221f2b59aafe2f2", "path": "tests/fixtures/calibration/cross-family-replay.jsonl", "symbols": ["run-corpus-mtpbz94k_agent-12_handoff.json"] }
+  ],
+  "volatile": [],
+  "tamper": {
+    "file": "demos/06-attest/fixtures/handoff.json",
+    "find": "input existence cannot be confirmed",
+    "replace": "input existence was confirmed",
+    "expect_exit": 1,
+    "expect_line": "judge not invoked — evidence changed after commitment"
+  }
+}
