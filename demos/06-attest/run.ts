@@ -2,7 +2,7 @@
 // moved after its commitment. Every check here is the factory's own code, extracted: see README.md.
 import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { EvidenceCommitmentSchema } from '../../contracts/evidence-commitment';
+import { EvidenceCommitmentSchema } from '../../contracts/types/shared/index';
 import { collectEvidenceEntries, commitHandoffEvidence, type EvidenceCommitment } from './evidence-commitment';
 import { runCrossFamilyPass, type CrossFamilyRejection } from './cross-family-pass';
 import { parseJudgeReply, type CrossFamilyVerdict } from './cross-family-verify';
