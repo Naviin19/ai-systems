@@ -20,6 +20,9 @@ const { agents } = JSON.parse(readFileSync(join(HERE, 'fixtures/build-agents.jso
 const logger: EventLogger = { emit: () => '' };
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 const git = (args: string, cwd?: string) => execSync(`git -c user.name=demo -c user.email=demo@example.invalid -c core.autocrlf=false ${args}`, { cwd, stdio: 'pipe' }).toString().trim();
+// The extracted sandbox code calls git with no identity flags, and a rebase records a committer. On a machine with no git
+// identity, such as a fresh CI runner, every rebase would be refused, so the demo gives one to itself and its workers.
+Object.assign(process.env, { GIT_AUTHOR_NAME: 'demo', GIT_AUTHOR_EMAIL: 'demo@example.invalid', GIT_COMMITTER_NAME: 'demo', GIT_COMMITTER_EMAIL: 'demo@example.invalid' });
 
 const root = mkdtempSync(join(tmpdir(), 'demo-isolation-'));
 const fresh = (name: string): string => {
@@ -129,5 +132,5 @@ try {
 
 line(exitCode === 0
   ? '\nWork ran concurrently where the graph allows, and every merge reached main one at a time.'
-  : '\nWithout serialised merges, work that finished together did not all reach main.');
+  : '\nWork that finished together did not all reach main. What git refused is listed above.');
 process.exit(exitCode);
