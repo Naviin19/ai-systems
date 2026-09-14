@@ -1,0 +1,21 @@
+{
+  "name": "receipts",
+  "command": "demo:receipts",
+  "kind": "production path over the ledger of one real agent dispatch",
+  "extracted_on": "2026-09-14",
+  "extracted_from": [
+    { "sha": "d4904660b78eec347356be53f221f2b59aafe2f2", "path": "scripts/lib/receipt.ts", "symbols": ["export function buildReceipt", "const CHARS_PER_TOKEN = 4;", "return ReceiptSchema.parse(receipt);"] },
+    { "sha": "d4904660b78eec347356be53f221f2b59aafe2f2", "path": "contracts/types/measurement/receipt.ts", "symbols": ["export const RECEIPT_SEPARABILITY_STATEMENT", "separability_statement: z.literal(RECEIPT_SEPARABILITY_STATEMENT)"] },
+    { "sha": "d4904660b78eec347356be53f221f2b59aafe2f2", "path": "scripts/master-agentic-orchestrator.ts", "symbols": ["function emitReceiptGiven", "opts.logger?.emit(\"SKILL_LOADED\", {", "const receipt = buildReceipt({"] },
+    { "sha": "bfdfc1a0e7ff75569a1ce5af32983ee105b34aaa", "path": "tests/fixtures/calibration/agent-handoffs/run-corpus-mtpc7jza/events.jsonl", "symbols": ["\"RECEIPT_GIVEN\"", "\"SKILL_LOADED\"", "\"cache_read\":163785"] },
+    { "sha": "bfdfc1a0e7ff75569a1ce5af32983ee105b34aaa", "path": "tests/fixtures/calibration/agent-handoffs/run-corpus-mtpc7jza/agent-12/handoff.md", "symbols": ["HALT the Prompt Manager phase"] }
+  ],
+  "volatile": [],
+  "tamper": {
+    "file": "demos/04-receipts/receipt.ts",
+    "find": "separability_statement: RECEIPT_SEPARABILITY_STATEMENT,",
+    "replace": "separability_statement: 'The cited skills shaped this output.',",
+    "expect_exit": 1,
+    "expect_line": "The receipt contract refuses this receipt"
+  }
+}
