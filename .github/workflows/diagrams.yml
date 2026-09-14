@@ -1,0 +1,30 @@
+name: diagrams
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  plates:
+    name: Plates regenerate unchanged and verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python -m pip install -r tools/diagram-compiler/requirements.txt
+      # Chromium measures each plate's real text geometry; --with-deps installs the fonts the labels are set in.
+      - run: python -m playwright install --with-deps chromium
+      - name: Regenerate the plates, and require no change
+        run: |
+          python tools/diagram-compiler/build.py
+          git diff --exit-code -- docs/diagrams
+      - name: Grammar, counts and text geometry
+        run: python tools/diagram-compiler/verify.py
+      - name: The reference set
+        run: |
+          python tools/diagram-compiler/build_pdf.py
+          python tools/diagram-compiler/to_pdf.py
+          python tools/diagram-compiler/verify_pdf.py
