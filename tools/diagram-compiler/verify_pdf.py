@@ -59,10 +59,10 @@ for lig, plain in (("\ufb00","ff"),("\ufb01","fi"),("\ufb02","fl"),
                    ("\ufb03","ffi"),("\ufb04","ffl")):
     alltext = alltext.replace(lig, plain)
 # one probe per plate, so a plate that silently failed to embed is caught
-for probe in ("merge.lock", "git worktree", "19 preflight", "Level-0 hubs",
-              "classifyRouteBack", "RECEIPT_GIVEN", "divergence_id", "AGENTS.md",
-              "decision-ledger.jsonl", "whitespace-hunter", "contract-compiler.ts",
-              "Termination condition"):
+for probe in ("33 CI gate ids", "13 measured hubs", "merge.lock", "19 preflight",
+              "contract-compiler.ts", "classifyRouteBack", "RECEIPT_GIVEN", "Declare hot?",
+              "AGENTS.md", "decision-ledger.jsonl", "gatewayCall", "divergence_id",
+              "whitespace-hunter"):
     if probe not in alltext:
         fails.append(f"plate text not selectable in the PDF: {probe!r} missing")
 
@@ -71,8 +71,12 @@ for n in range(1, 11):
     if f"plate {n:02d} of 10" not in alltext.lower():
         fails.append(f"plate {n:02d} missing from the document")
 
-# counts still reconcile in the files that ship to the repo
-for f, want, mw in (('01-operating-system', 152, 3.0), ('06-context-residency', 152, 7.0)):
+# counts still reconcile in the files that ship to the repo, against the evidence document's
+# figures rather than a literal, so this file is not a third place the number lives
+import json
+_ev = open(os.path.join(REPO, 'docs', 'evidence.md'), encoding='utf-8').read()
+_files = json.loads(re.findall(r'```json\s*(\{.*?\})\s*```', _ev, re.S)[-1])['drawn']['skill_files']['value']
+for f, want, mw in (('01-operating-system', _files, 3.0), ('06-context-residency', _files, 7.0)):
     src = open(OUT_FULL + f + '.svg', encoding='utf-8').read()
     got = len([w for w in re.findall(r'<rect [^>]*(?<!stroke-)width="([\d.]+)"', src)
                if float(w) <= mw])

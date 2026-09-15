@@ -88,7 +88,7 @@ for k, key, mw, what in [("01", "skill_files", 3.0, "substrate ticks"),
         f"d{k}: {what} -> {got} drawn, evidence doc says {want}"
         + ("" if got == want else "  MISMATCH"))
 
-TICKS = [("03", "coral", "preflight_gates"),
+TICKS = [("03", "coral", "preflight_features"),
          ("03", "teal",  "total_agents"),
          ("05", "coral", "route_back_cap"),
          ("07", "coral", "hardening_clean_rounds"),
@@ -128,9 +128,9 @@ for key, spec in DRAWN.items():
                              f"agreement with an unrelated count of the same size")
 
 # --- 3. every drawn figure is accounted for in the evidence document ----------
-for n in ("152", "0.82", "0.70", "0.10", "30%", "20%", "10", "SHA-256",
-          "classifyRouteBack", "receipt.ts", "residual-baseline.ts",
-          "skill-ref-count.ts", "divergence_id", "AGENTS.md", "43", "11"):
+for n in ("218", "0.82", "0.70", "0.10", "30%", "20%", "SHA-256",
+          "classifyRouteBack", "receipt.ts", "skill-ref-count.ts", "contract-compiler.ts",
+          "askDeclareHot", "divergence_id", "AGENTS.md", "5739a97"):
     if n not in ev:
         warns.append(f"evidence doc does not mention {n}")
 

@@ -9,121 +9,122 @@ BARE = OUT_BARE
 FIGS = [
  ("01","01-operating-system","The operating system",
   "A system with a build side and a run side, not a folder of scripts.",
-  "The taper is the argument: one substrate carries a build side and a run side. "
-  "Narrower layers sit above wider ones, so the compression from the corpus to the "
-  "products is visible rather than asserted.",
-  "A fifth product joined the band. Whitespace Hunter went live on 2 September at a "
-  "public URL, which makes it the only claim on this plate a reader can settle without "
-  "trusting the plate.",
-  [("audited","agent counts"),("contested","152 files, gate count"),
-   ("unverified","product status")]),
+  "The taper is the argument: one corpus of skill files carries the factory that builds "
+  "products and the call-site discipline for its model calls. Narrower layers sit above "
+  "wider ones, so the compression from the corpus to the products is visible rather than "
+  "asserted.",
+  "The counts are re-measured and no longer contested: 218 skill files and 33 CI gate ids. "
+  "Archer2 is live, and the product band reads four built and one specced.",
+  [("audited","218 files, 20 agents, 33 CI gate ids"),("audited","product status, 14 Sep")]),
 
  ("02","02-knowledge-substrate","The knowledge substrate",
-  "A citation graph whose important nodes are computed, not nominated.",
-  "A skill file becomes Level-0 by being cited twenty times by other skill files. "
-  "Nobody nominates it, and a pre-commit hook gates on the set the graph produces. "
-  "Hubs are drawn at equal size because the ranking exists but the per-hub counts were "
-  "never recorded.",
-  "Redrawn, not corrected. The plate stacked eight named layers, which is a filing "
-  "cabinet: it said the corpus was organised, the least interesting true thing about "
-  "it. The taxonomy survives as background; the graph is now the subject.",
-  [("shipped","skill-ref-count.ts, .husky/pre-commit"),("audited","11 hubs"),
-   ("contested","152 files, 8 or 9 layers")]),
+  "Importance in the corpus is measured, and the measurement is checked.",
+  "A skill file is a measured hub when twenty or more other skill files cite it, and every "
+  "node is drawn at the size of its own count. Three files are declared by hand, so the "
+  "Level-0 set is fourteen, and pre-commit checks hold the hubs' names and anchors.",
+  "Every node is now sized by its measured count, and the edges are gone, because the "
+  "factory records how often a skill is cited, not by whom. The defect edge starts at agent "
+  "00's config, and the panel names the checks that catch its class.",
+  [("shipped","skill-ref-count.ts, verify-hub-integrity.mjs, audit-hub-citations.mjs"),
+   ("audited","13 measured hubs, a set of 14")]),
 
  ("03","03-compiler-spine","The compiler spine",
   "Orchestration with isolation, not a prompt chain.",
-  "Agents run concurrently in separate git worktrees and contend for the trunk through "
-  "a file-lock mutex. Drawn as a linear chain, this was wrong.",
-  "Only the gate label moved. feature-descriptor.md reports nineteen preflight gates "
-  "and verify-all.ts reports thirty checks; whether that is a superset or a different "
-  "object is unresolved, so the plate draws the narrower claim and says why.",
-  [("shipped","master-agentic-orchestrator.ts"),("contested","19 against 30")]),
+  "Every agent whose dependencies have finished starts at once, up to four, each in its "
+  "own git worktree, and results reach trunk one at a time under a file lock. The strip is "
+  "the build graph's real twelve waves.",
+  "Redrawn from a chain to waves: the scheduler that runs agents together landed after the "
+  "plate was drawn. The orchestrator's own start gates now sit beside the nineteen "
+  "preflight features.",
+  [("shipped","agent-scheduler.ts, merge-lock.ts, review-gate.ts"),
+   ("audited","12 waves, at most 2 at once")]),
 
  ("04","04-contract-spine","The contract spine",
-  "One source of truth, and the impact of changing it is computed.",
-  "A single schema derives every downstream surface. Generated surfaces and "
-  "hand-maintained ones are drawn at equal prominence: the drift is labelled rather "
-  "than airbrushed.",
-  "Nineteen hand-authored contracts are reported to derive forty-three generated "
-  "schemas. If that holds it is the compression argument as a number, so it is drawn "
-  "as a label rather than as structure until the two counts are reconciled.",
-  [("shipped","contract-compiler.ts, blast-radius.ts"),("contested","19 against 43")]),
+  "One source of truth, and the reach of changing it is computed.",
+  "Zod is the source. What is generated is gated in CI, and what is kept by hand is drawn in "
+  "coral because it can drift. Each emitted handoff is parsed against its boundary schema, "
+  "and the contract compiler checks declared reads by structural subtyping.",
+  "Forty-eight contracts generate forty-eight schemas, one to one, so there is no ratio to "
+  "draw. contract-compiler.ts is now a blocking CI gate, and the blast-radius frontier is "
+  "the widest the registry holds.",
+  [("shipped","R22, R31, R32, HandoffEnvelopeSchema"),("audited","48 contracts, 46 hand-kept schemas")]),
 
  ("05","05-verification-stack","The verification stack",
-  "Four paths, and the evidence is frozen before any of them is chosen.",
+  "Four outcomes, and a failure retrying can fix is told apart from one it cannot.",
   "Direction encodes outcome: up and to the left returns, down terminates, straight "
-  "continues. A failure is classified before it is acted on, so a compiler error is "
-  "re-dispatched with its traceback as input while a fabrication halts. The attempt "
-  "cap is drawn because a retry loop without a visible ceiling is the thing an "
-  "experienced reader is already worried about.",
-  "The most consequential correction in this revision. The plate drew two outcomes for "
-  "the fortnight after the system grew a third. It also began at the first check, when "
-  "the stack actually begins one step earlier: evidence is hash-locked before anything "
-  "reads it, so the judge cannot be accused of grading a moving target.",
-  [("shipped","EvidenceCommitmentSchema, classifyRouteBack, residual-baseline.ts")]),
+  "continues. Evidence is committed when an agent emits. Only the first three checks can "
+  "route back, and every later failure halts.",
+  "The most corrected plate in the set. It now draws the checks in the order the code runs "
+  "them, the evidence commitment at the entrance, and the drift audit after the merge; a "
+  "retry also needs a matching error heuristic.",
+  [("shipped","route-back.ts, evidence-commitment.ts, semantic-drift.ts, attestation-verifier.ts")]),
 
  ("06","06-context-residency","Context residency",
   "Budgeting is a measurement, and so is uptake.",
-  "What sits inside the window and what waits outside it. Token reduction is a cost "
-  "claim; receipts make the harder one, recording what was injected against what the "
-  "model actually cited. The industry treats those as the same event.",
-  "The efficiency figure is now half the plate rather than all of it. The two receipt "
-  "records are drawn as structure rather than as bars, because no measured series has "
-  "been recorded and drawing one would be inventing it.",
-  [("shipped","PROGRESSIVE_DISCLOSURE, receipt.ts"),("audited","~70% reduction"),
-   ("unverified","class counts")]),
+  "What sits inside the window and what waits outside it. Token reduction is a cost claim; "
+  "receipts make the harder one, recording what was given against what the agent cited, "
+  "and the receipt contract says a citation proves injection, not influence.",
+  "The reduction is the recorded one, 196K to 521K down to 7K to 31K tokens per agent, "
+  "beside today's loads. A named section now loads only that section.",
+  [("shipped","load_skill, skill-sections.ts, receipt.ts"),
+   ("audited","the reduction and today's loads, estimated")]),
 
  ("07","07-hardening-loop","The hardening loop",
   "Promotion requires a proof of convergence.",
-  "The loop has an exit condition rather than an operator's judgement: two clean rounds "
-  "in a row, or it keeps going. The human sits inside the loop as a steering call, not "
-  "above it as an approver.",
-  "Unchanged but for its ticks. The termination condition now draws its two rounds as "
-  "unit marks, so the count and the claim cannot drift apart.",
-  [("shipped","agent-11-sugar-trainer.config.ts")]),
+  "Two clean rounds in a row lead to the declare-hot question, which the orchestrator asks "
+  "between rounds. Yes ends hot, stop ends the loop, extend runs one more round, and the "
+  "cap moves with each extension.",
+  "The declare-hot question and the stop condition were specified and never built. They are "
+  "built now, and the plate draws all four endings and the handoff that carries them.",
+  [("shipped","hardening-state.ts, askDeclareHot, agent-11-steps.md")]),
 
  ("08","08-learning-loops","The learning loops",
-  "Two loops: one a person gates, one that earns its own entries.",
-  "A rule reaches permanent context only after it has been observed in two independent "
-  "sessions, and it leaves again when its retire condition fires. A memory that only "
-  "grows is a memory nobody trusts, so the decay rule is drawn rather than described.",
-  "Promoted from designed protocol to shipped code, which is the most valuable kind of "
-  "change in this corpus. The convention lane, the promotion threshold and the decay "
-  "rule are files, not intentions, and the ledger both lanes write to is append-only.",
-  [("shipped","capture-rule.mjs, promote.mjs, AGENTS.md, decision-ledger.jsonl")]),
+  "Two loops, and in both a person decides what becomes permanent.",
+  "A rule that recurs across two sessions is promoted by a person, and a finding seen once "
+  "decays on the board. The amendment lane's human approval is the only route, and the "
+  "decision ledger is a third store the pipeline reads back.",
+  "The build telemetry is drawn as stored rather than read, because no loop reads it yet. "
+  "The tiers that would skip the human gate are marked not in force, by operator ruling.",
+  [("shipped","capture-rule.mjs, promote.mjs, AGENTS.md, decision-ledger.jsonl"),
+   ("audited","the amendment lane, a protocol")]),
 
  ("09","09-runtime-engine","The runtime engine",
-  "Production operation with cost governance, not just a build pipeline.",
-  "Routing is a decision the system makes per task, and cost is a condition that can "
-  "stop a run, so both belong in the same grammar as the build-time gates.",
-  "The telemetry that leaves this engine now includes receipts and residual margins, "
-  "and the last row names a running service. A URL either loads or it does not, which "
-  "makes it the cheapest evidence in the set.",
-  [("shipped","model-router, llm-gateway, mcp-infra, whitespace-hunter")]),
+  "The packages a product runs on, and the product that runs on them.",
+  "The caller names a tier, the router resolves a model and the gateway dispatches it. Cost "
+  "does not stop a run. Author's app is the production caller; Whitespace Hunter, the "
+  "product with a public URL, uses none of this.",
+  "Rebuilt from what exists. Session context, a load estimator, complexity routing and cost "
+  "circuit breakers were drawn and do not exist, and the product on the gateway moves from "
+  "Whitespace Hunter to Author.",
+  [("shipped","llm-gateway, model-router, mcp-infra"),("audited","Author's gateway client")]),
 
  ("10","10-two-lane-execution","Two-lane execution",
   "The constraint is scoped, not total.",
-  "Lane 2 is drawn dashed throughout because it is entirely boundary condition, and the "
-  "boundary has exactly one opening. What crosses is an identifier under a parity "
-  "check, never a payload, so the guarantee is visible as the absence of a second "
-  "crossing rather than as a labelled box.",
-  "New. Every other plate argues that the system refuses things, which leaves an "
-  "unanswered objection: a pipeline this rigid cannot produce anything new. This is "
-  "also the least evidenced plate in the set, and its caption says so.",
-  [("audited","imagination protocol v1.1, no implementing file named")]),
+  "Divergence is allowed in two fenced places: one flag-gated candidate from agent 03c at "
+  "gate A, and an opt-in product runtime. Both share one candidate contract and one verdict "
+  "path, and a person judges every candidate.",
+  "The implementing files are named, and the tier is shipped. What travels is the whole "
+  "candidate as an opaque rider, not an identifier under a parity check, and the two lanes "
+  "share a contract.",
+  [("shipped","divergence-candidate.ts, applyImaginationFlag, validate-handoff.ts"),
+   ("audited","never run live")]),
 ]
 
 CHANGED = [
- ("Plates","9","10","protocol"),
- ("Verification outcomes","halt or warn","pass, warn, route back, halt","code"),
- ("Where the stack begins","at the first check","at the evidence commitment","code"),
- ("Knowledge substrate","8 named layers","a citation graph, 11 derived hubs","code"),
- ("Context claim","~70% fewer tokens","tokens given against tokens used","code"),
- ("Learning","one human-gated loop","two loops, one of them automatic","code"),
- ("Products","four","five, one at a public URL","code"),
- ("Exploration","absent","plate 10","audit"),
- ("Preflight gates","19","19 or 30, unresolved","contested"),
- ("Architecture layers","8","8 or 9, unresolved","contested"),
+ ("Skill files","152, contested","218","code"),
+ ("CI gates","30 against 19","33 gate ids; 19 preflight features","code"),
+ ("Level-0 hubs","11","13 measured, 14 in the set","code"),
+ ("Architecture layers","8 or 9","9","code"),
+ ("Dispatch","a linear chain","12 waves, at most 2 at once","code"),
+ ("Contracts and schemas","19 against 43","48 and 48, one to one","code"),
+ ("Verification order","as described","as the code runs it","code"),
+ ("Context reduction","about 70%","196K–521K to 7K–31K","commit"),
+ ("Hardening exits","clean rounds or a cap","declare hot: yes, extend or stop","code"),
+ ("Unapproved learning tiers","described as applying","not in force","ruling"),
+ ("Cost governance","circuit breakers","none; deltas that only flag","code"),
+ ("MCP connectors","six","three in the default lineup","code"),
+ ("Product on the gateway","Whitespace Hunter","Author","code"),
+ ("Archer2","dormant","live","Vercel"),
 ]
 
 GRAMMAR = [
@@ -141,76 +142,71 @@ FORMS = [
  ("Broken rhythm","A deliberate exception. Plate 08's human gate is the case."),
 ]
 TIERS = [
- ("shipped","A named file or package in the repository implements it. Ask to see the file."),
- ("audited","Counted or observed during a repository read, or confirmed by the author without a named file. Not re-counted from code."),
- ("contested","Two sources give different values and the conflict is unresolved. Treat as unknown, not as an average."),
- ("unverified","No traceable source. Disregard until checked."),
+ ("shipped","A named file implements it. Ask to see the file."),
+ ("audited","Counted or observed at a named commit, or in a named source on a named date. A count is audited, because no file implements a number."),
+ ("contested","Two sources give different values and the conflict is open. Nothing drawn in this set is contested."),
+ ("unverified","No traceable source. Nothing unverified is drawn."),
 ]
 
 STRUCTURE = [
- ("Skill files","152, possibly 164","contested","note; Stage 7 wired 12 parked skills","was 204"),
- ("Architecture layers","8 or 9","contested","note gives 8; the September read gives 9","was 9, unnamed"),
- ("Preflight gates","19","contested","feature-descriptor.md","was 21"),
- ("Verification checks","30","contested","verify-all.ts; relationship to the 19 unknown","absent"),
- ("Typed handoff contracts","19","contested","contracts/CONTRACT_CATALOG.md","absent"),
- ("Generated JSON schemas","43","contested","unified Zod tree","absent"),
- ("Contract families","3","audited","note","absent"),
- ("Build agents","15","audited","note, corroborated twice","was six stages summing to 20"),
- ("Research agents","5, named","audited","note, corroborated twice","absent"),
- ("Total agents","20","audited","two independent sources agree","the one figure drawn bare"),
- ("Level-0 hub skills","11","audited","skills at 20 or more citations","absent"),
- ("Graded prompt corpus","471","audited","residual baseline corpus","absent"),
+ ("Skill files","218","audited","skills/, per-layer indexes excluded","was 152, contested"),
+ ("In a manifest, parked","170, 48","audited","agent configs, retired-skills.json","new"),
+ ("Architecture layers","9","audited","architecture_layer in frontmatter","was 8 or 9"),
+ ("Agents","20: 15 build, 5 research","audited","configs/agent-*.config.ts","unchanged"),
+ ("Build waves","12, at most 2 at once","audited","dependsOn, the scheduler's rule","new"),
+ ("CI gate ids","33","audited","verify-all.ts","was 30, contested"),
+ ("Preflight features","19","audited","prompts/feature-descriptor.md","were called gates"),
+ ("Registered contracts","48, in five tiers","audited","SCHEMA_REGISTRY","was 19, contested"),
+ ("Generated JSON Schemas","48","audited","one per registry entry","was 43, contested"),
+ ("Per-agent I/O schemas","46","audited","contracts/schemas/agents","new"),
+ ("Measured Level-0 hubs","13, in a set of 14","audited","skill-ref-counts.json","was 11"),
+ ("Static prompt load","6,926 to 17,684 tokens","audited","token-budget-baseline.json","new"),
 ]
 
 MECHANISM = [
- ("Pipeline topology","Parallel, git-worktree isolated, mutex-gated merge","master-agentic-orchestrator.ts","standing"),
- ("Merge serialisation",".sandboxes/.merge.lock","master-agentic-orchestrator.ts","standing"),
- ("Contract enforcement","Structural subtyping asserted at build time","contract-compiler.ts","standing"),
- ("Change impact","Breadth-first traversal of the contract import graph","blast-radius.ts","standing"),
- ("Runtime prompt surface","Compiled from contracts, not hand-written","agent-12-prompt-manager.config.ts","standing"),
- ("Decode discipline","Constrained decoding via forced emit_handoff","master-agentic-orchestrator.ts","standing"),
- ("Faithfulness judge","Markdown against JSON, temperature 0.2, scored 0-10","verify-handoff-faithfulness.ts","standing"),
- ("Drift embedder","trigram-hash-64-v1, deterministic, zero cost","detect-semantic-drift.ts","standing"),
- ("Drift threshold","0.82 cosine against baseline","detect-semantic-drift.ts","standing"),
- ("Enforcement ladder","disabled, advisory, enforcing","detect-semantic-drift.ts","standing"),
- ("Judge catch rate floor","At least 0.70","measure-judge-catch-rate.ts","standing"),
- ("Judge false reject ceiling","At most 0.10","measure-judge-catch-rate.ts","standing"),
- ("Context reduction","Roughly 70% of system prompt tokens","PROGRESSIVE_DISCLOSURE","standing"),
- ("Hardening round size","10 Playwright runs per round","agent-11-sugar-trainer.config.ts","standing"),
- ("Termination condition","Two consecutive clean rounds","agent-11-sugar-trainer.config.ts","standing"),
- ("Router tiers","Forensic, Precision, Synthesis, Narrative","packages/model-router","standing"),
- ("Cost circuit breaker","Cost drift past 30% of SLA","packages/llm-gateway","standing"),
- ("Wall-time circuit breaker","Wall-time drift past 20% of SLA","packages/llm-gateway","standing"),
- ("MCP connectors","6, named","packages/mcp-infra","standing"),
- ("Market discovery service","Live, public, DataForSEO-backed","whitespace-hunter.vercel.app","1-2 Sep"),
- ("Decision ledger","Append-only JSONL, schema-validated","build-log/decision-ledger.jsonl","1-6 Sep"),
- ("Evidence commitment","SHA-256 hash-lock taken before the judge reads anything","EvidenceCommitmentSchema","1-6 Sep"),
- ("Route-back classifier","Failure traceback re-dispatched as structured input","classifyRouteBack","1-6 Sep"),
- ("Route-back cap","At most 3 attempts, A-B-A oscillation detected","classifyRouteBack","1-6 Sep"),
- ("Given-vs-done receipts","RECEIPT_GIVEN against RECEIPT","receipt.ts","1-6 Sep"),
- ("Residual baseline","score, floor and margin tracked over time","residual-baseline.ts","1-6 Sep"),
- ("Two-lane execution","Lane 1 strict, Lane 2 exploratory, one crossing","imagination protocol v1.1","6-13 Sep"),
- ("Divergence transport","divergence_id under K4 parity check","agent 03c explore mode","6-13 Sep"),
- ("Level-0 hub gate","Commits gated on hub-skill integrity, 20 citations","skill-ref-count.ts, .husky/pre-commit","12 Sep"),
- ("Convention flywheel","Rule promoted after 2 independent sessions","capture-rule.mjs, promote.mjs, AGENTS.md","12 Sep"),
- ("Rule decay","Declarative stale-when and retire-when","convention lane","12 Sep"),
+ ("Dependency-wave dispatch","Starts each agent once its dependencies finish, up to 4","agent-scheduler.ts","shipped"),
+ ("Merge serialisation","Rebase, then fast-forward, under .merge.lock","merge-lock.ts","shipped"),
+ ("Schema on write","safeParse on each emitted payload","orchestrator","shipped"),
+ ("Contract compiler","Declared reads checked by structural subtyping (R31)","contract-compiler.ts","shipped"),
+ ("Change impact","Breadth-first over the registry's imports; run by hand","blast-radius.ts","shipped"),
+ ("Evidence commitment","SHA-256 when an agent emits, verified before any judge","evidence-commitment.ts","shipped"),
+ ("Route-back","3 classes, a matching heuristic, A-B-A cut, 3 attempts","route-back.ts (classifyRouteBack)","shipped"),
+ ("Faithfulness judge","Narrative against JSON; warns, blocks at gates A and B","verify-handoff-faithfulness.ts","shipped"),
+ ("Semantic drift","Trigram-hash embedder, floor 0.82, enforcing at two baselines","semantic-drift.ts","shipped"),
+ ("Step attestation","Re-runs each step's verify; blocking","attestation-verifier.ts","shipped"),
+ ("Drift audit","Every declared skill indexed in the prompt; after the merge","drift-audit.ts","shipped"),
+ ("Section loading","A numbered or named section, never a silent whole file","skill-sections.ts","shipped"),
+ ("Receipts","RECEIPT_GIVEN at dispatch, RECEIPT after the gates","receipt.ts","shipped"),
+ ("Hardening termination","Two clean rounds, then declare hot: yes, extend or stop","hardening-state.ts, askDeclareHot","shipped"),
+ ("Convention promotion","Two sessions, or a recorded reason, by a person","promote.mjs, AGENTS.md","shipped"),
+ ("Decision ledger","Append-only, schema-validated, injected by R23","decision-ledger.jsonl","shipped"),
+ ("Amendment lane","A protocol whose human approval is the only tier in force","learning-loop.md","audited"),
+ ("LLM gateway","Provider adapters and per-call latency; its cost cap cannot fire","llm-gateway","shipped"),
+ ("MCP host","Three default servers, replayed in CI","mcp-infra","shipped"),
+ ("Imagination lanes","One flag-gated candidate at gate A; an opt-in product runtime","runtime-imagination, validate-handoff.ts","shipped"),
+]
+
+PRODUCTS = [
+ ("Ark","A brand book researched and written from a URL","Live; deployed 7 Sep"),
+ ("Author","A content playbook compiler, from a brand's URL","Live; deployed 26 Jul"),
+ ("Archer2","B2B sales intelligence for a target account","Live; deployed 26 Jul"),
+ ("Whitespace Hunter","Runway scoring for emerging categories, at "
+  '<span style="white-space:nowrap">whitespace-hunter.vercel.app</span>',"Live since 1 Sep"),
+ ("Auteur","AI creative production","Specced"),
 ]
 
 OUT_OF_SET = [
  ("Residency class counts","12 resident / 60 index / 132 paged",
-  "Sums to 204, which was the wrong total. The three classes survive; the counts do not."),
- ("Product status","Ark live, Author live, Archer2 dormant, Auteur specced",
-  "Not corroborated by any source document. Drawn, but plate 01 says so."),
- ("Per-layer file counts","never stated",
-  "No source gives a distribution. Plate 02 draws the corpus as a graph rather than as "
-  "equal rows, so it implies none."),
+  "No source, and the counts summed to the wrong total."),
  ("Build-time compression","2-4 weeks against 6-9 months",
   "A comparative claim with no measured baseline on either side."),
  ("Intervention reduction","up to 80% fewer manual interventions",
   "No instrument produces this number. The phrase 'up to' is doing all the work."),
  ("Trend surge magnitudes","18x, +1800%",
-  "Real outputs of a real tool, presented as headline figures rather than as one run's "
-  "result. If used at all they belong to a named query on a named date."),
+  "One run's output from a real tool, not a headline figure."),
+ ("Type-check saving","about 6 seconds per dispatch",
+  "Not measured, and no plate makes a claim it would support."),
+ ("Graded prompt corpus","471","Not re-counted in this audit."),
 ]
 
 def strip(slug):
@@ -234,7 +230,7 @@ plate_pages = "\n".join(f'''
   <div class="art">{svg}</div>
   <div class="meta">
     <div><p class="lab">Reading</p><p>{reading}</p></div>
-    <div><p class="lab">Changed from the previous set</p><p>{note}</p>
+    <div><p class="lab">Changed in this revision</p><p>{note}</p>
          <p class="lab lab2">Evidence</p><div class="chips">{chips(ts)}</div></div>
   </div>
 </section>''' for (n, slug, title, claim, reading, note, ts), svg in zip(FIGS, plates))
@@ -251,7 +247,9 @@ struct = "".join(f'<tr><th>{a}</th><td class="now">{b}</td><td class="tier">{c}<
                  f'<td class="src">{d}</td><td class="was2">{e}</td></tr>'
                  for a, b, c, d, e in STRUCTURE)
 mech = "".join(f'<tr><th>{a}</th><td>{b}</td><td class="src">{c}</td>'
-               f'<td class="tier">{dte}</td></tr>' for a, b, c, dte in MECHANISM)
+               f'<td class="tier">{t}</td></tr>' for a, b, c, t in MECHANISM)
+prods = "".join(f'<tr><th>{a}</th><td>{b}</td><td class="tier">{c}</td></tr>'
+                for a, b, c in PRODUCTS)
 outset = "".join(f'<tr><th>{a}</th><td class="was">{b}</td><td>{c}</td></tr>'
                  for a, b, c in OUT_OF_SET)
 
@@ -366,24 +364,24 @@ code{{font-family:var(--mono);font-size:.88em;background:var(--panel);
 <svg width="0" height="0" style="position:absolute"><style>{shared}</style></svg>
 
 <section class="cover">
-  <p class="eyebrow">Reference set · ten plates · revised September 2026</p>
+  <p class="eyebrow">Reference set · ten plates · re-audited September 2026</p>
   <h1>AI operating system</h1>
   <p class="stand">Ten diagrams, each proving a different claim about the same system.
-  Six architecture changes landed in the three weeks before this revision; four plates
-  were redrawn and one is new. Prepared as reference artwork for the public
+  Every claim was re-audited against the factory's code on 14 September 2026, and every
+  plate was redrawn from the result. Prepared as reference artwork for the public
   <span style="font-family:var(--mono);font-size:.9em">ai-systems</span>
   repository.</p>
   <ul class="facts">
-    <li><b>10</b>plates</li><li><b>05</b>redrawn or added</li>
-    <li><b>04</b>figures contested</li><li><b>{today}</b>compiled</li>
+    <li><b>10</b>plates</li><li><b>245</b>claims audited</li>
+    <li><b>0</b>figures contested</li><li><b>{today}</b>compiled</li>
   </ul>
   <div class="derived">
     <p class="lab">Derived from</p>
     <ul>
-      <li>ai-systems-brief.md <em>— positioning, visual grammar, corrections table</em></li>
-      <li>skill-ecosystem-note.md <em>— architecture inventory and counts</em></li>
-      <li>resume-bullets <em>— twelve named engineering mechanisms</em></li>
-      <li>the September repository read <em>— six dated upgrades, 23 Aug to 13 Sep</em></li>
+      <li>skill-ecosystem at 5739a97 <em>— the factory, private, read at a named commit</em></li>
+      <li>four product repositories <em>— read-only, each at a named commit</em></li>
+      <li>Vercel production deployments <em>— product status, 14 September 2026</em></li>
+      <li>plans/ais-plate-claims.json <em>— 245 claims, every citation resolved by a script</em></li>
     </ul>
   </div>
   <p class="colophon">Every figure in this set carries its own evidence tier. There is
@@ -405,7 +403,7 @@ code{{font-family:var(--mono);font-size:.88em;background:var(--panel);
   <hr class="rule">
   <h2>Evidence tiers</h2>
   <p class="col">Each plate states what its claim rests on. Nothing is tiered higher than
-  its weakest input: a plate whose structure is shipped but whose count is audited is
+  its weakest input: a plate whose mechanism is shipped but whose count is audited is
   labelled for both.</p>
   <div class="two" style="grid-template-columns:1fr"><ul class="tierlist">{tiers}</ul></div>
 </section>
@@ -421,22 +419,21 @@ code{{font-family:var(--mono);font-size:.88em;background:var(--panel);
 
 <section class="page">
   <p class="eyebrow">What changed</p>
-  <h2>Corrections and additions</h2>
-  <p class="col">The previous set was compiled before six architecture changes landed
-  between 23 August and 13 September. Most of these rows are additions. Two are
-  corrections to claims the set was actively making: the verification plate drew two
-  outcomes for a fortnight after the system grew a third, and it began the stack at the
-  first check when the stack in fact begins one step earlier. The last two rows are
-  neither: they are figures that were stated with more confidence than the sources
-  support, and they have been demoted rather than quietly picked.</p>
+  <h2>The re-audit</h2>
+  <p class="col">The previous set was drawn from notes and a repository read. On
+  14 September every claim it made was checked against the factory's code: of 245 claims,
+  98 held, 127 were corrected, 9 were removed and 11 were added. Most rows below are counts
+  that were contested and are now measured. The rest are mechanisms the plates drew that
+  the code does not have.</p>
   <table class="keep"><thead><tr><th>Figure</th><th>Was</th><th>Now</th><th>From</th></tr></thead>
   <tbody>{changed}</tbody></table>
-  <p class="col" style="margin-top:6mm;color:var(--mute);font-size:8.4pt">Rows sourced
-  from <em>code</em> rest on named files. Rows marked <em>contested</em> are the ones
-  worth dwelling on: two sources disagree, and the set draws the narrower claim with the
-  conflict on the face of the plate rather than averaging them or choosing the more
-  impressive. A reader who finds one undeclared conflict stops trusting every other
-  number, which is why declaring them costs less than hiding them.</p>
+  <p class="col" style="margin-top:6mm;color:var(--mute);font-size:8.4pt">The audit also
+  found defects in the factory itself: a producer agent was handed no prompt the drift
+  audit could read, a named skill section loaded the whole file, three connector tools
+  called actor paths that do not exist, and agent 11's declare-hot question was specified
+  and never asked. Each was fixed, with a check that fails without the fix, before the
+  plates were redrawn from the fixed code. Where the code was wrong, the drawing did not
+  move to hide it.</p>
 </section>
 
 {plate_pages}
@@ -444,65 +441,46 @@ code{{font-family:var(--mono);font-size:.88em;background:var(--panel);
 <section class="page">
   <p class="eyebrow">Figures and evidence</p>
   <h2>Structure</h2>
-  <p class="col">The counts that carry the structural argument. None has been re-counted
-  from code, and six are actively contested between two sources. Author confirmation
-  raises a <em>mechanism</em> to shipped when the source names the file that implements
-  it, because a file is a thing a reader can be shown. It does not raise a <em>count</em>,
-  because a count has no file to point at — only an arithmetic nobody has re-run.</p>
+  <p class="col">The counts that carry the structural argument, each measured at factory
+  commit 5739a97. A count is audited, not shipped, because no file implements a number;
+  the audit records how each one was measured.</p>
   <table><thead><tr><th>Figure</th><th>Value</th><th>Tier</th><th>Source</th>
   <th>Changed</th></tr></thead><tbody>{struct}</tbody></table>
   <hr class="rule">
   <h2>Mechanism</h2>
-  <p class="col">Every mechanism drawn in the set, the file that implements it, and when
-  it landed. The dates are part of the evidence: a corpus showing eleven dated changes in
-  three weeks is a system under active development, which is a different and better claim
-  than a finished portfolio piece.</p>
-  <table><thead><tr><th>Figure</th><th>Value</th><th>Source</th><th>Landed</th></tr>
+  <p class="col">Every mechanism the set draws and the file that implements it. The
+  amendment lane is the one row that is a protocol rather than code.</p>
+  <table><thead><tr><th>Mechanism</th><th>What it does</th><th>Implemented in</th><th>Tier</th></tr>
   </thead><tbody>{mech}</tbody></table>
 </section>
 
 <section class="page owed">
-  <p class="eyebrow">Open items</p>
-  <h2>Unverified, and therefore not drawn</h2>
+  <p class="eyebrow">Products and open items</p>
+  <h2>Products</h2>
+  <p class="col">Built with the factory. Status is audited from each project's Vercel
+  production deployments on 14 September 2026; the repositories are private.</p>
+  <table class="keep"><thead><tr><th>Product</th><th>What it is</th><th>Status</th></tr>
+  </thead><tbody>{prods}</tbody></table>
+  <hr class="rule">
+  <h2>Not drawn</h2>
   <table><thead><tr><th>Figure</th><th>Previous value</th><th>Why it is out</th></tr>
   </thead><tbody>{outset}</tbody></table>
-  <hr class="rule">
-  <h2>Still owed to the repository</h2>
-  <p class="col">Contested is the weak rank in this set and audited is the next weakest.
-  Twelve figures carry the structural argument and none has been re-counted from code.
-  Record the command beside each number, not just the number: a figure with the command
-  that produced it is evidence, and a figure without one is a claim.</p>
-  <ul>
-    <li>Count <code>SKILL.md</code> under the skills tree, against <b>152</b> or <b>164</b>, and state which definition was used</li>
-    <li>Read the layer taxonomy in the skill-file standard: is <code>connectors</code> a ninth layer, against <b>8</b> or <b>9</b></li>
-    <li>Count gate definitions in the pipeline config, against <b>19</b></li>
-    <li>Count checks in <code>verify-all.ts</code>, against <b>30</b>, and settle whether they are a superset of the 19</li>
-    <li>Count entries in <code>contracts/CONTRACT_CATALOG.md</code>, against <b>19</b></li>
-    <li>Count generated JSON schemas, against <b>43</b>, and confirm they derive from the 19</li>
-    <li>Run <code>skill-ref-count.ts --check-level0</code> and record its output verbatim, against <b>11</b></li>
-    <li>Count the residual baseline corpus, against <b>471</b></li>
-    <li>Run the dual assembly and record what it actually prints, against <b>~70%</b></li>
-    <li>Name the file that implements two-lane execution — plate 10 is the only plate resting on a single unnamed source</li>
-  </ul>
-  <p class="col">One figure is documented but deliberately undrawn: the six-second
-  type-check saving per dispatch from incremental <code>tsbuildinfo</code> seeding. No
-  plate in this set makes a claim it would support, and a figure without a claim is
-  decoration.</p>
   <p class="col">One defect is recorded here because it is worth publishing rather than
   despite being embarrassing. <code>agent-00.config.ts</code> cited a section anchor that
-  did not resolve, so the spec validator — first in the pipeline, the gate every build
+  did not exist, so the spec validator — first in the pipeline, the gate every build
   passes through — was handed the literal string <code>[section not found]</code> where
   its constitution should have been. A citation that silently resolves to an error string
   is worse than one that throws, because the pipeline keeps running and everything
-  downstream is confidently built on nothing. Found by audit rather than by symptom,
-  fixed on 12 September, and the Level-0 gate on plate 02 now catches the class.</p>
+  downstream is confidently built on nothing. It was fixed on 12 September, and since
+  14 September a citation to a section that does not exist fails in pre-commit and in CI.</p>
   <p class="colophon">The plates are compiled, not drawn. A grammar module holds the
   colour roles, ticks, gates and taper as primitives, and each plate is written in terms
   of those, so a grammar violation is impossible to express rather than something a
   reviewer has to catch. It is the argument plate 04 makes about schemas, applied to the
-  artwork. Source and regeneration instructions ship beside the SVGs in
-  <code>diagrams/_src</code>. Committed as SVG, not raster: it renders natively on
-  GitHub, appears in diffs, and lets a reviewer watch the architecture change over time.</p>
+  artwork. The source and its regeneration instructions are in
+  <code>tools/diagram-compiler</code>. The plates are committed as SVG, not raster: they
+  render natively on GitHub, appear in diffs, and let a reviewer watch the architecture
+  change over time.</p>
 </section>
 </body></html>'''
 

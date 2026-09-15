@@ -58,6 +58,6 @@ it vanished from the PDF and nowhere else.
 
 ## Height budget
 
-The print page fits roughly `H = 690` before the evidence chips are pushed off the bottom.
-Plate 05 is the tallest in the set at 692 and is the constraint worth remembering: if it
-grows, something else on it has to shrink.
+The print page fits roughly `H = 690` of bare artwork before the evidence chips are pushed
+onto the next page. Plate 05 is the tallest in the set at 700 and is the constraint worth
+remembering: if it grows, something else on it has to shrink.
