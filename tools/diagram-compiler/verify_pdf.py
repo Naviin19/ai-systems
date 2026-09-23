@@ -8,7 +8,7 @@ warnings.filterwarnings('ignore')
 from playwright.sync_api import sync_playwright
 
 
-fails = []
+fails, warns = [], []
 
 with sync_playwright() as p:
     b = p.chromium.launch(); pg = b.new_page()
@@ -52,6 +52,34 @@ r = PdfReader(REPO + '/docs/ai-operating-system.pdf')
 imgs = sum(len(pg.images) for pg in r.pages)
 if imgs:
     fails.append(f"{imgs} raster image(s) embedded -- plates should be vector")
+
+# The print build declares --sans:"Carlito","Liberation Sans",sans-serif and then
+# silently takes whatever the machine has, so the same source published different
+# typography from different machines and nothing said so. The PDF names the faces it
+# embedded; that is the only ground truth, and the browser probes for this are not
+# reliable (an absent font falls back to the browser default, not to the generic
+# family, and document.fonts.check answers "usable", which is true of everything).
+_embedded = set()
+for _pg in r.pages:
+    _res = _pg.get('/Resources') or {}
+    _fd = _res.get('/Font') or {}
+    try:
+        _fd = _fd.get_object()
+    except Exception:
+        _fd = {}
+    for _k, _v in (_fd.items() if hasattr(_fd, 'items') else []):
+        try:
+            _embedded.add(str(_v.get_object().get('/BaseFont')).split('+')[-1].lstrip('/'))
+        except Exception:
+            pass
+print("print faces embedded:", ", ".join(sorted(_embedded)) or "none")
+_declared = ('Carlito', 'LiberationSans')
+if _embedded and not any(d in e.replace('-', '').replace(' ', '')
+                         for e in _embedded for d in _declared):
+    warns.append("the print build declares Carlito and Liberation Sans and embedded "
+                 f"{', '.join(sorted(_embedded))} instead, so this PDF's typography is "
+                 "this machine's rather than the one build_pdf.py names. Install the "
+                 "declared face, embed it, or change the declaration to the truth.")
 
 alltext = "\n".join(pg.extract_text() for pg in r.pages)
 # the typeface sets fi/fl as ligatures, so probes are compared against unligatured text
@@ -101,6 +129,7 @@ for f, want, mw in (('01-operating-system', _files, 3.0), ('06-context-residency
 
 print("=== PASS ===" if not fails else "=== FAILURES ===")
 for x in fails: print(" !", x)
+for x in warns: print(" ~", x)
 print(f"pages {len(r.pages)} · raster images {imgs} · {len(_plates)} plates "
       f"· text selectable")
 sys.exit(1 if fails else 0)
