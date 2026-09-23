@@ -59,17 +59,33 @@ for lig, plain in (("\ufb00","ff"),("\ufb01","fi"),("\ufb02","fl"),
                    ("\ufb03","ffi"),("\ufb04","ffl")):
     alltext = alltext.replace(lig, plain)
 # one probe per plate, so a plate that silently failed to embed is caught
-for probe in ("33 CI gate ids", "13 measured hubs", "merge.lock", "19 preflight",
+# One probe per plate, so a plate that silently failed to embed is caught. The
+# probes name IDENTIFIERS, never figures: "19 preflight" and "33 CI gate ids" were
+# in this list, and both went stale the moment the factory moved, which turns a
+# liveness probe into a second place the number lives.
+for probe in ("CI gate ids", "measured hubs", "merge.lock", "preflight",
               "contract-compiler.ts", "classifyRouteBack", "RECEIPT_GIVEN", "Declare hot?",
               "AGENTS.md", "decision-ledger.jsonl", "gatewayCall", "divergence_id",
               "whitespace-hunter"):
     if probe not in alltext:
         fails.append(f"plate text not selectable in the PDF: {probe!r} missing")
 
-# every plate reached the document
-for n in range(1, 11):
-    if f"plate {n:02d} of 10" not in alltext.lower():
-        fails.append(f"plate {n:02d} missing from the document")
+# Every plate reached the document. The count comes from the plates on disk and the
+# label from the document itself, so adding a plate cannot leave this asserting the
+# old number -- which is exactly what it did: it looked for "of 10" while the builder
+# had moved to "of 11", and reported all ten as missing.
+_plates = sorted(glob.glob(OUT_FULL + '*.svg'))
+_labels = set(re.findall(r'plate (\d+) of (\d+)', alltext.lower()))
+if not _labels:
+    fails.append("no 'plate N of M' label found in the PDF at all -- the probe cannot "
+                 "tell a missing plate from a renamed label")
+else:
+    _of = {m for _, m in _labels}
+    if len(_of) != 1 or int(next(iter(_of))) != len(_plates):
+        fails.append(f"the PDF says 'of {sorted(_of)}' but {len(_plates)} plates exist")
+    for n in range(1, len(_plates) + 1):
+        if str(n) not in {a.lstrip('0') or '0' for a, _ in _labels}:
+            fails.append(f"plate {n:02d} missing from the document")
 
 # counts still reconcile in the files that ship to the repo, against the evidence document's
 # figures rather than a literal, so this file is not a third place the number lives
@@ -85,5 +101,6 @@ for f, want, mw in (('01-operating-system', _files, 3.0), ('06-context-residency
 
 print("=== PASS ===" if not fails else "=== FAILURES ===")
 for x in fails: print(" !", x)
-print(f"pages {len(r.pages)} · raster images {imgs} · 10 plates · text selectable")
+print(f"pages {len(r.pages)} · raster images {imgs} · {len(_plates)} plates "
+      f"· text selectable")
 sys.exit(1 if fails else 0)

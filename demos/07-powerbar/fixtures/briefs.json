@@ -1,0 +1,25 @@
+{
+  "_note": "Demo inputs, written for this demo. They are the sort of thing a sales rep types into the box; nothing here is a recorded user session.",
+  "briefs": [
+    {
+      "label": "first draft",
+      "text": "we sell observability software and want to get into fintech"
+    },
+    {
+      "label": "more words, no more information",
+      "text": "we sell observability software and we would really like to get into the financial services space this year because we think there is a lot of opportunity there for us to grow"
+    },
+    {
+      "label": "names the account",
+      "text": "we sell observability software and want to break into Tata Capital this year, they are a large financial services group and we think there is real opportunity for us to grow with them over time"
+    },
+    {
+      "label": "account, trigger and budget",
+      "text": "we sell observability tooling and want to break into Tata Capital. They appointed a new CTO in March and announced a core banking modernisation initiative with a stated budget, so the timing is right. They currently use an incumbent APM vendor across the lending business unit."
+    },
+    {
+      "label": "short and dense",
+      "text": "Breaking into Tata Capital: new CTO appointed March, core banking transformation funded, incumbent APM in the lending division."
+    }
+  ]
+}

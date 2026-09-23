@@ -1,0 +1,22 @@
+{
+  "name": "silence",
+  "command": "demo:silence",
+  "kind": "reduced harness around the production path",
+  "extracted_on": "2026-09-21",
+  "extracted_from": [
+    { "path": "scripts/silence-audit.ts", "symbols": ["selfTest", "SELF_TEST_FAILED", "EXIT_DETECTOR_BROKEN", "corpus floor", "COUNT_COLLAPSE", "--write-baseline", "the four-guard doctrine in the file header"] },
+    { "path": "scripts/silence-audit/types.ts", "symbols": ["SilenceSite", "SilenceRule", "siteHash", "content-hash keying rationale"] },
+    { "path": "scripts/silence-audit/rules/unchecked-db-write.ts", "symbols": ["rule shape", "mutator set", "what counts as observed"] }
+  ],
+  "volatile": [
+    "The production rules walk a TypeScript AST with ts-morph; these match on text. The guards are matcher-agnostic, which is why the reduction is honest, but a text matcher misses a multi-line write.",
+    "The corpus is four files written for this demo. The baseline counts describe only those four files."
+  ],
+  "tamper": {
+    "file": "demos/08-silence/fixtures/known-positive/unchecked-db-write/planted.ts",
+    "find": "  await db.from('deliveries').update({ delivered: true }).eq('id', id);",
+    "replace": "  const { error } = await db.from('deliveries').update({ delivered: true }).eq('id', id);",
+    "expect_exit": 2,
+    "expect_line": "SELF_TEST_FAILED — refusing to scan the corpus."
+  }
+}

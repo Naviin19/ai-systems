@@ -1,0 +1,22 @@
+{
+  "name": "powerbar",
+  "command": "demo:powerbar",
+  "kind": "reduced harness around the production path",
+  "extracted_on": "2026-09-21",
+  "extracted_from": [
+    { "path": "src/app/api/evaluate-input/route.ts", "symbols": ["fallbackEval", "PowerEvalSchema", "SharpeningQuestionSchema", "MIN_CHARS", "MAX_CHARS", "source literals"] },
+    { "path": "src/lib/sharpening/questions.ts", "symbols": ["SHARPEN_QUESTIONS", "computeLockOn", "TARGET_FILLED_RE", "TRIGGER_FILLED_RE", "BUDGET_FILLED_RE", "COMPETITOR_FILLED_RE", "CONTEXT_FILLED_RE"] },
+    { "path": "src/hooks/use-power-eval.ts", "symbols": ["debounce window", "abort-on-keystroke"] }
+  ],
+  "volatile": [
+    "The grader's model id and its measured latency are not exercised here: this demo runs the deterministic path only.",
+    "The semantic score used in section 4 is an input to the formula under test, not a measurement."
+  ],
+  "tamper": {
+    "file": "demos/07-powerbar/sharpening.ts",
+    "find": "const base = Math.max(charLevel, semanticLevel);",
+    "replace": "const base = Math.min(charLevel, semanticLevel);",
+    "expect_exit": 1,
+    "expect_line": "a dense short brief launches with no questions answered  FAILED"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "enrich",
+  "command": "demo:enrich",
+  "kind": "live — calls a real model and spends real money",
+  "live": true,
+  "keys": ["ANTHROPIC_API_KEY", "OPENROUTER_API_KEY"],
+  "max_calls": 3,
+  "extracted_on": "2026-09-21",
+  "extracted_from": [
+    { "path": "packages/runtime-input-enrichment/src/enricher.ts", "symbols": ["InputEnricher", "enrich", "doEnrich", "computeCacheKey", "normalizeJsonSchema", "inFlight de-duplication", "EnrichmentTruncatedError", "CACHE_KEY_VERSION", "forced tool_choice on emit_enriched", "$schema strip"] },
+    { "path": "packages/runtime-input-enrichment/src/cache/memory-lru.ts", "symbols": ["MemoryLRUCache", "LRU refresh by Map insertion order"] },
+    { "path": "packages/runtime-input-enrichment/src/cache/adapter.ts", "symbols": ["CacheAdapter"] },
+    { "path": "packages/runtime-input-enrichment/src/system-prompt.ts", "symbols": ["INPUT / TRANSFORMATION / OUTPUT / CONSTRAINTS shape", "floor interpolation"] }
+  ],
+  "volatile": [
+    "Model ids and prices change. The default model will be superseded.",
+    "The truncation path and the two-attempt retry are not exercised: payloads here are far below the cap and the first attempt succeeds.",
+    "The ensemble path (one enrichment, canonical serialisation, byte-identical payloads for N families) is not run.",
+    "The system prompt here is a compact restatement of the package's, not a byte copy."
+  ],
+  "verified": {
+    "on": "2026-09-21",
+    "provider": "openrouter",
+    "result": "7 of 7 checks held on 2 live dispatches",
+    "no_key_path": "exit 0",
+    "no_credits_path": "exit 2, named reason"
+  }
+}

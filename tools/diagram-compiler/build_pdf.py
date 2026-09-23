@@ -7,125 +7,39 @@ BARE = OUT_BARE
 
 # num, slug, title, claim, reading (the diagram's own caption), what changed, tiers
 FIGS = [
- ("01","01-operating-system","The operating system",
-  "A system with a build side and a run side, not a folder of scripts.",
-  "The taper is the argument: one corpus of skill files carries the factory that builds "
-  "products and the call-site discipline for its model calls. Narrower layers sit above "
-  "wider ones, so the compression from the corpus to the products is visible rather than "
-  "asserted.",
-  "The counts are re-measured and no longer contested: 218 skill files and 33 CI gate ids. "
-  "Archer2 is live, and the product band reads four built and one specced.",
-  [("audited","218 files, 20 agents, 33 CI gate ids"),("audited","product status, 14 Sep")]),
+ ('01', '01-operating-system', 'The operating system', 'A system with a build side and a run side, not a folder of scripts.', 'The taper is the argument: one corpus of skill files carries the factory that builds products and the call-site discipline for its model calls. Narrower layers sit above wider ones, so the compression from the corpus to the products is visible rather than asserted.', 'An AI system becomes an organization. Two halves under one corpus, with the same rules governing who may do what on each side. The question it answers is organizational rather than technical: what does each part own, and what must it hand over.', [('audited', '218 files, 20 agents, 33 CI gate ids'), ('audited', 'product status, 14 Sep')]),
 
- ("02","02-knowledge-substrate","The knowledge substrate",
-  "Importance in the corpus is measured, and the measurement is checked.",
-  "A skill file is a measured hub when twenty or more other skill files cite it, and every "
-  "node is drawn at the size of its own count. Three files are declared by hand, so the "
-  "Level-0 set is fourteen, and pre-commit checks hold the hubs' names and anchors.",
-  "Every node is now sized by its measured count, and the edges are gone, because the "
-  "factory records how often a skill is cited, not by whom. The defect edge starts at agent "
-  "00's config, and the panel names the checks that catch its class.",
-  [("shipped","skill-ref-count.ts, verify-hub-integrity.mjs, audit-hub-citations.mjs"),
-   ("audited","13 measured hubs, a set of 14")]),
+ ('02', '02-knowledge-substrate', 'The knowledge substrate', 'Importance in the corpus is measured, and the measurement is checked.', "A skill file is a measured hub when twenty or more other skill files cite it, and every node is drawn at the size of its own count. Three files are declared by hand, so the Level-0 set is fourteen, and pre-commit checks hold the hubs' names and anchors.", 'Knowledge becomes a substrate. Documents stop being reference material an author consults and become an addressable layer the system reads, with importance measured rather than asserted and the measurement itself checked.', [('shipped', 'skill-ref-count.ts, verify-hub-integrity.mjs, audit-hub-citations.mjs'), ('audited', '13 measured hubs, a set of 14')]),
 
- ("03","03-compiler-spine","The compiler spine",
-  "Orchestration with isolation, not a prompt chain.",
-  "Every agent whose dependencies have finished starts at once, up to four, each in its "
-  "own git worktree, and results reach trunk one at a time under a file lock. The strip is "
-  "the build graph's real twelve waves.",
-  "Redrawn from a chain to waves: the scheduler that runs agents together landed after the "
-  "plate was drawn. The orchestrator's own start gates now sit beside the nineteen "
-  "preflight features.",
-  [("shipped","agent-scheduler.ts, merge-lock.ts, review-gate.ts"),
-   ("audited","12 waves, at most 2 at once")]),
+ ('03', '03-compiler-spine', 'The compiler spine', 'Orchestration with isolation, not a prompt chain.', "Every agent whose dependencies have finished starts at once, up to four, each in its own git worktree, and results reach trunk one at a time under a file lock. The strip is the build graph's real twelve waves.", "A build process becomes a compiler, and agents become workers. Ambiguous work is decomposed into a dependency graph, scheduled in waves, and executed by workers that cannot see or corrupt each other's state. The isolation is physical, a worktree each, not a convention.", [('shipped', 'agent-scheduler.ts, merge-lock.ts, review-gate.ts'), ('audited', '12 waves, at most 2 at once')]),
 
- ("04","04-contract-spine","The contract spine",
-  "One source of truth, and the reach of changing it is computed.",
-  "Zod is the source. What is generated is gated in CI, and what is kept by hand is drawn in "
-  "coral because it can drift. Each emitted handoff is parsed against its boundary schema, "
-  "and the contract compiler checks declared reads by structural subtyping.",
-  "Forty-eight contracts generate forty-eight schemas, one to one, so there is no ratio to "
-  "draw. contract-compiler.ts is now a blocking CI gate, and the blast-radius frontier is "
-  "the widest the registry holds.",
-  [("shipped","R22, R31, R32, HandoffEnvelopeSchema"),("audited","48 contracts, 46 hand-kept schemas")]),
+ ('04', '04-contract-spine', 'The contract spine', 'One source of truth, and the reach of changing it is computed.', 'Zod is the source. What is generated is gated in CI, and what is kept by hand is drawn in coral because it can drift. Each emitted handoff is parsed against its boundary schema, and the contract compiler checks declared reads by structural subtyping.', 'Handoffs become contracts. What passes between two agents stops being a message one hopes the next can read, and becomes a typed shape a compiler proves the consumer can accept.', [('shipped', 'R22, R31, R32, HandoffEnvelopeSchema'), ('audited', '48 contracts, 46 hand-kept schemas')]),
 
- ("05","05-verification-stack","The verification stack",
-  "Four outcomes, and a failure retrying can fix is told apart from one it cannot.",
-  "Direction encodes outcome: up and to the left returns, down terminates, straight "
-  "continues. Evidence is committed when an agent emits. Only the first three checks can "
-  "route back, and every later failure halts.",
-  "The most corrected plate in the set. It now draws the checks in the order the code runs "
-  "them, the evidence commitment at the entrance, and the drift audit after the merge; a "
-  "retry also needs a matching error heuristic.",
-  [("shipped","route-back.ts, evidence-commitment.ts, semantic-drift.ts, attestation-verifier.ts")]),
+ ('05', '05-verification-stack', 'The verification stack', 'Four outcomes, and a failure retrying can fix is told apart from one it cannot.', 'Direction encodes outcome: up and to the left returns, down terminates, straight continues. Evidence is committed when an agent emits. Only the first three checks can route back, and every later failure halts.', 'Agent trust becomes verification. Nothing an agent says about its own work is taken on its word. Each claim is checked against evidence fixed before the question was asked, and a failure retrying can fix is told apart from one it cannot.', [('shipped', 'route-back.ts, evidence-commitment.ts, semantic-drift.ts, attestation-verifier.ts')]),
 
- ("06","06-context-residency","Context residency",
-  "Budgeting is a measurement, and so is uptake.",
-  "What sits inside the window and what waits outside it. Token reduction is a cost claim; "
-  "receipts make the harder one, recording what was given against what the agent cited, "
-  "and the receipt contract says a citation proves injection, not influence.",
-  "The reduction is the recorded one, 196K to 521K down to 7K to 31K tokens per agent, "
-  "beside today's loads. A named section now loads only that section.",
-  [("shipped","load_skill, skill-sections.ts, receipt.ts"),
-   ("audited","the reduction and today's loads, estimated")]),
+ ('06', '06-context-residency', 'Context residency', 'Budgeting is a measurement, and so is uptake.', 'What sits inside the window and what waits outside it. Token reduction is a cost claim; receipts make the harder one, recording what was given against what the agent cited, and the receipt contract says a citation proves injection, not influence.', 'Knowledge becomes addressable on demand. An agent carries an index rather than a library, and fetches what the work turns out to need. Residency is budgeted, and uptake is measured separately, because being given a document is not the same as using one.', [('shipped', 'load_skill, skill-sections.ts, receipt.ts'), ('audited', "the reduction and today's loads, estimated")]),
 
- ("07","07-hardening-loop","The hardening loop",
-  "Promotion requires a proof of convergence.",
-  "Two clean rounds in a row lead to the declare-hot question, which the orchestrator asks "
-  "between rounds. Yes ends hot, stop ends the loop, extend runs one more round, and the "
-  "cap moves with each extension.",
-  "The declare-hot question and the stop condition were specified and never built. They are "
-  "built now, and the plate draws all four endings and the handoff that carries them.",
-  [("shipped","hardening-state.ts, askDeclareHot, agent-11-steps.md")]),
+ ('07', '07-hardening-loop', 'The hardening loop', 'Promotion requires a proof of convergence.', 'Two clean rounds in a row lead to the declare-hot question, which the orchestrator asks between rounds. Yes ends hot, stop ends the loop, extend runs one more round, and the cap moves with each extension.', 'Promotion becomes a proof of convergence. A product is not declared ready because it looks ready. It is declared ready when repeated runs stop producing new failure modes, and a person confirms the ending.', [('shipped', 'hardening-state.ts, askDeclareHot, agent-11-steps.md')]),
 
- ("08","08-learning-loops","The learning loops",
-  "Two loops, and in both a person decides what becomes permanent.",
-  "A rule that recurs across two sessions is promoted by a person, and a finding seen once "
-  "decays on the board. The amendment lane's human approval is the only route, and the "
-  "decision ledger is a third store the pipeline reads back.",
-  "The build telemetry is drawn as stored rather than read, because no loop reads it yet. "
-  "The tiers that would skip the human gate are marked not in force, by operator ruling.",
-  [("shipped","capture-rule.mjs, promote.mjs, AGENTS.md, decision-ledger.jsonl"),
-   ("audited","the amendment lane, a protocol")]),
+ ('08', '08-learning-loops', 'The learning loops', 'Two loops, and in both a person decides what becomes permanent.', "A rule that recurs across two sessions is promoted by a person, and a finding seen once decays on the board. The amendment lane's human approval is the only route, and the decision ledger is a third store the pipeline reads back.", 'Experience becomes institutional learning. What a run discovers does not stay in that run. Observations become candidate rules, recurrence across sessions promotes them, and a person decides what becomes permanent.', [('shipped', 'capture-rule.mjs, promote.mjs, AGENTS.md, decision-ledger.jsonl'), ('audited', 'the amendment lane, a protocol')]),
 
- ("09","09-runtime-engine","The runtime engine",
-  "The packages a product runs on, and the product that runs on them.",
-  "The caller names a tier, the router resolves a model and the gateway dispatches it. Cost "
-  "does not stop a run. Author's app is the production caller; Whitespace Hunter, the "
-  "product with a public URL, uses none of this.",
-  "Rebuilt from what exists. Session context, a load estimator, complexity routing and cost "
-  "circuit breakers were drawn and do not exist, and the product on the gateway moves from "
-  "Whitespace Hunter to Author.",
-  [("shipped","llm-gateway, model-router, mcp-infra"),("audited","Author's gateway client")]),
+ ('09', '09-runtime-engine', 'The runtime engine', 'The packages a product runs on, and the product that runs on them.', "The caller names a tier, the router resolves a model and the gateway dispatches it. Cost does not stop a run. Author's app is the production caller; Whitespace Hunter, the product with a public URL, uses none of this.", "The build's disciplines become a runtime platform. The rules that govern how agents build a product also govern how the finished product talks to a model: one registered call site per decision, one routing layer, one place a failure is named.", [('shipped', 'llm-gateway, model-router, mcp-infra'), ('audited', "Author's gateway client")]),
 
- ("10","10-two-lane-execution","Two-lane execution",
-  "The constraint is scoped, not total.",
-  "Divergence is allowed in two fenced places: one flag-gated candidate from agent 03c at "
-  "gate A, and an opt-in product runtime. Both share one candidate contract and one verdict "
-  "path, and a person judges every candidate.",
-  "The implementing files are named, and the tier is shipped. What travels is the whole "
-  "candidate as an opaque rider, not an identifier under a parity check, and the two lanes "
-  "share a contract.",
-  [("shipped","divergence-candidate.ts, applyImaginationFlag, validate-handoff.ts"),
-   ("audited","never run live")]),
+ ('10', '10-two-lane-execution', 'Two-lane execution', 'The constraint is scoped, not total.', 'Divergence is allowed in two fenced places: one flag-gated candidate from agent 03c at gate A, and an opt-in product runtime. Both share one candidate contract and one verdict path, and a person judges every candidate.', 'Agent disagreement becomes bounded divergence. A system built entirely for compliance will reproduce known answers. Divergence is allowed in two fenced lanes, judged by a person, and counted only by whether a kept idea survives.', [('shipped', 'divergence-candidate.ts, applyImaginationFlag, validate-handoff.ts'), ('audited', 'never run live')]),
+
+ ("11","11-prompts-as-specifications","Prompts as specifications",
+  "A prompt is an artifact with a declared shape, graded before it is used.",
+  "Three declared specifications, five scoring dimensions of which the LOWEST is the "
+  "score, and a floor set per surface: 8.5 for the prompts that judge other work, 4.0 "
+  "for a directory index. Below the floor a prompt is rewritten once, then blocked.",
+  "Prompts become specifications. A prompt stops being prose someone wrote well and "
+  "becomes an artifact with a declared shape, scored against a bar set by what the "
+  "prompt is for, before it is allowed to run.",
+  [("shipped","craftsmanship-gate.ts, enrich-prompt.ts, SURFACE_FLOORS"),
+   ("audited","30 surfaces, 5 floor levels, 313 of 1,116 below floor")])
 ]
 
-CHANGED = [
- ("Skill files","152, contested","218","code"),
- ("CI gates","30 against 19","33 gate ids; 19 preflight features","code"),
- ("Level-0 hubs","11","13 measured, 14 in the set","code"),
- ("Architecture layers","8 or 9","9","code"),
- ("Dispatch","a linear chain","12 waves, at most 2 at once","code"),
- ("Contracts and schemas","19 against 43","48 and 48, one to one","code"),
- ("Verification order","as described","as the code runs it","code"),
- ("Context reduction","about 70%","196K–521K to 7K–31K","commit"),
- ("Hardening exits","clean rounds or a cap","declare hot: yes, extend or stop","code"),
- ("Unapproved learning tiers","described as applying","not in force","ruling"),
- ("Cost governance","circuit breakers","none; deltas that only flag","code"),
- ("MCP connectors","six","three in the default lineup","code"),
- ("Product on the gateway","Whitespace Hunter","Author","code"),
- ("Archer2","dormant","live","Vercel"),
-]
+
 
 GRAMMAR = [
  ("teal","Teal","Platform substrate: layers, stages, checks, lanes"),
@@ -189,7 +103,7 @@ MECHANISM = [
 PRODUCTS = [
  ("Ark","A brand book researched and written from a URL","Live; deployed 7 Sep"),
  ("Author","A content playbook compiler, from a brand's URL","Live; deployed 26 Jul"),
- ("Archer2","B2B sales intelligence for a target account","Live; deployed 26 Jul"),
+ ("Archer","B2B sales intelligence for a target account","Live; deployed 26 Jul"),
  ("Whitespace Hunter","Runway scoring for emerging categories, at "
   '<span style="white-space:nowrap">whitespace-hunter.vercel.app</span>',"Live since 1 Sep"),
  ("Auteur","AI creative production","Specced"),
@@ -224,21 +138,19 @@ def chips(ts):
 
 plate_pages = "\n".join(f'''
 <section class="page plate">
-  <p class="eyebrow">Plate {n} of 10</p>
+  <p class="eyebrow">Plate {n} of 11</p>
   <h2>{title}</h2>
   <p class="claim">{claim}</p>
   <div class="art">{svg}</div>
   <div class="meta">
     <div><p class="lab">Reading</p><p>{reading}</p></div>
-    <div><p class="lab">Changed in this revision</p><p>{note}</p>
+    <div><p class="lab">The transformation</p><p>{note}</p>
          <p class="lab lab2">Evidence</p><div class="chips">{chips(ts)}</div></div>
   </div>
 </section>''' for (n, slug, title, claim, reading, note, ts), svg in zip(FIGS, plates))
 
 toc = "".join(f'<li><span class="n">{n}</span><span class="t">{t}</span>'
               f'<span class="c">{c}</span></li>' for n, s, t, c, *_ in FIGS)
-changed = "".join(f'<tr><th>{a}</th><td class="was">{b}</td><td class="now">{c}</td>'
-                  f'<td class="src">{d}</td></tr>' for a, b, c, d in CHANGED)
 gram = "".join(f'<li><span class="sw s-{k}"></span><b>{n}</b>{d}</li>' for k, n, d in GRAMMAR)
 forms = "".join(f'<li><b>{n}</b>{d}</li>' for n, d in FORMS)
 tiers = "".join(f'<li><span class="chip c-{k}"><b>{k}</b></span><span>{d}</span></li>'
@@ -364,15 +276,15 @@ code{{font-family:var(--mono);font-size:.88em;background:var(--panel);
 <svg width="0" height="0" style="position:absolute"><style>{shared}</style></svg>
 
 <section class="cover">
-  <p class="eyebrow">Reference set · ten plates · re-audited September 2026</p>
+  <p class="eyebrow">Reference set · eleven plates · September 2026</p>
   <h1>AI operating system</h1>
-  <p class="stand">Ten diagrams, each proving a different claim about the same system.
-  Every claim was re-audited against the factory's code on 14 September 2026, and every
-  plate was redrawn from the result. Prepared as reference artwork for the public
+  <p class="stand">Eleven diagrams, each showing a different behaviour of the same system.
+  Every figure was measured against the factory's code on 14 September 2026, and every
+  plate was drawn from the measurement. Prepared as reference artwork for the public
   <span style="font-family:var(--mono);font-size:.9em">ai-systems</span>
   repository.</p>
   <ul class="facts">
-    <li><b>10</b>plates</li><li><b>245</b>claims audited</li>
+    <li><b>11</b>plates</li><li><b>0</b>figures unverified</li>
     <li><b>0</b>figures contested</li><li><b>{today}</b>compiled</li>
   </ul>
   <div class="derived">
@@ -381,7 +293,7 @@ code{{font-family:var(--mono);font-size:.88em;background:var(--panel);
       <li>skill-ecosystem at 5739a97 <em>— the factory, private, read at a named commit</em></li>
       <li>four product repositories <em>— read-only, each at a named commit</em></li>
       <li>Vercel production deployments <em>— product status, 14 September 2026</em></li>
-      <li>plans/ais-plate-claims.json <em>— 245 claims, every citation resolved by a script</em></li>
+      <li>plans/ais-plate-claims.json <em>— every citation resolved by a script</em></li>
     </ul>
   </div>
   <p class="colophon">Every figure in this set carries its own evidence tier. There is
@@ -417,24 +329,6 @@ code{{font-family:var(--mono);font-size:.88em;background:var(--panel);
   <ul class="toc">{toc}</ul>
 </section>
 
-<section class="page">
-  <p class="eyebrow">What changed</p>
-  <h2>The re-audit</h2>
-  <p class="col">The previous set was drawn from notes and a repository read. On
-  14 September every claim it made was checked against the factory's code: of 245 claims,
-  98 held, 127 were corrected, 9 were removed and 11 were added. Most rows below are counts
-  that were contested and are now measured. The rest are mechanisms the plates drew that
-  the code does not have.</p>
-  <table class="keep"><thead><tr><th>Figure</th><th>Was</th><th>Now</th><th>From</th></tr></thead>
-  <tbody>{changed}</tbody></table>
-  <p class="col" style="margin-top:6mm;color:var(--mute);font-size:8.4pt">The audit also
-  found defects in the factory itself: a producer agent was handed no prompt the drift
-  audit could read, a named skill section loaded the whole file, three connector tools
-  called actor paths that do not exist, and agent 11's declare-hot question was specified
-  and never asked. Each was fixed, with a check that fails without the fix, before the
-  plates were redrawn from the fixed code. Where the code was wrong, the drawing did not
-  move to hide it.</p>
-</section>
 
 {plate_pages}
 

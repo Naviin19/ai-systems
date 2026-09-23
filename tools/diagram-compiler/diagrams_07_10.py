@@ -39,7 +39,7 @@ def d07(bare=False):
                   ink="mute", anchor="end"))
 
     # the two conditions the loop counts
-    b.append(box(28, 264, 280, 58, "gray", dashed=True))
+    b.append(box(28, 264, 280, 58, "gray"))
     b.append(text(168, 287, "A cap of five rounds", TITLE_PX, "gray", anchor="middle"))
     b.append(ticks(168 - ticks_width(5) / 2, 294, 5, "gray", h=8, opacity="0.7"))
     b.append(text(168, 316, "plus one per extend, two at most", SUB_PX, "gray",
@@ -102,7 +102,7 @@ def d08(bare=False):
     route by rule: the tiers that would skip it are not in force (operator ruling,
     14 September). The two-session threshold gates promotion."""
     b = [section(M, 96, "Recorded, and not yet read by either loop")]
-    b.append(box(M, 106, CW, 46, "gray"))
+    b.append(box(M, 106, CW, 46, "gray", fill=False))
     b.append(text(M + 18, 128, "verification/feedback/feedback.jsonl", TITLE_PX, "gray"))
     b.append(text(M + 18, 145, "Gate outcomes · receipt counts · tokens and wall time · "
                   "craftsmanship margins", SUB_PX, "gray", opacity="0.72"))
@@ -147,12 +147,12 @@ def d08(bare=False):
             b.append(conn(x - 16, 412, x - 2, 412, "gray", opacity="0.7"))
 
     b.append(conn(260, 440, 260, 462, "gray", opacity="0.7"))
-    b.append(box(152, 464, 216, 44, "gray", dashed=True))
+    b.append(box(152, 464, 216, 44, "gray"))
     b.append(text(260, 485, "run/board/", TITLE_PX, "gray", anchor="middle"))
     b.append(text(260, 501, "Seen once; decays when swept", SUB_PX, "gray",
                   anchor="middle", opacity="0.74"))
 
-    b.append(conn(580, 440, 580, 462, "gray", opacity="0.7"))
+    b.append(conn(368, 486, 450, 486, "gray"))
     b.append(box(452, 464, 200, 44, "coral", dashed=True))
     b.append(text(552, 485, "Retire", TITLE_PX, "coral", anchor="middle"))
     b.append(text(552, 501, "retire-when, on --review", SUB_PX, "coral",
@@ -202,8 +202,7 @@ def d09(bare=False):
         b.append(cbox(x, 176, 150, 46, t, None, "teal"))
         b.append(conn(x + 75, 222, x + 75, 236, "gray", arrow=False, opacity="0.6"))
     b.append(conn(103, 236, 577, 236, "gray", arrow=False, opacity="0.6"))
-    for cx in (178, 502):
-        b.append(conn(cx, 236, cx, 252, "gray", opacity="0.6"))
+    b.append(conn(178, 236, 178, 252, "gray", opacity="0.6"))
 
     b.append(box(28, 254, 300, 84, "teal"))
     b.append(text(46, 278, "LLM gateway", TITLE_PX, "teal"))
@@ -217,7 +216,7 @@ def d09(bare=False):
     b.append(text(370, 314, "Replayed in CI from recordings", SUB_PX, "teal", opacity="0.72"))
     b.append(text(370, 330, "Off in builds unless enabled", SUB_PX, "teal", opacity="0.55"))
 
-    b.append(box(M, 362, CW, 50, "gray", dashed=True))
+    b.append(box(M, 362, CW, 50, "gray"))
     b.append(text(M + 18, 384, "Cost and latency are measured, not enforced", TITLE_PX, "gray"))
     b.append(text(M + 18, 402, "No cost cap can fire, and the factory's build-end deltas "
                   "only flag", SUB_PX, "gray", opacity="0.72"))
@@ -279,7 +278,7 @@ def d10(bare=False):
                   "coral", dashed=True))
 
     # separate execution, shared contract: the divider stops at the shared band
-    b.append(conn(340, 124, 340, 402, "gray", arrow=False, dashed=True, opacity="0.6"))
+    b.append(conn(340, 124, 340, 402, "gray", arrow=False))
     for cx in (LX + LW / 2, RX_ + RW / 2):
         b.append(conn(cx, 402, cx, 420, "gray", opacity="0.65"))
     b.append(box(M, 422, CW, 46, "teal"))

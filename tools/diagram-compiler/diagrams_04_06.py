@@ -116,20 +116,29 @@ def d05(bare=False):
                           right="SHA-256, before any gate", dashed=True))
     b.append(conn(CX, 188, CX, 194, "gray", opacity="0.6"))
 
+    # The role carries the outcome, because colour is read before any text is.
+    # coral is the grammar's enforcement role -- "gates, halts" -- so the two layers
+    # that halt are coral and the rest stay teal, which is what the plate's own coral
+    # swatch ("Halt: no new agents start") already promised. Warn-only layers are NOT
+    # given gray: gray means structural, and stretching it to mean "warns" would
+    # overload a role to fix a plate. The warn/route-back distinction stays in the
+    # right-hand label, where a reader who wants it will look.
     layers = [("Quality gates",      "Per-agent commands, such as tsc",           "routes back",       "teal"),
               ("Schema on write",    "HandoffEnvelopeSchema.safeParse",           "routes back",       "teal"),
               ("D3 absorption",      "When absorption is declared",               "routes back",       "teal"),
-              ("Commitment verified", "The evidence has not moved",               "halts on mismatch", "teal"),
+              ("Commitment verified", "The evidence has not moved",               "halts on mismatch", "coral"),
               ("Faithfulness judge", "Markdown against JSON, 0 to 10",            "warns; halts at A, B", "teal"),
               ("R24, drift, release gate", "Contradictions, semantic drift, release", "warn or halt", "teal"),
-              ("Step attestation",   "Re-runs each step's verify against the claim", "halts",          "teal")]
+              ("Step attestation",   "Re-runs each step's verify against the claim", "halts",          "coral")]
     y, mids = 196, []
     for name, sub, level, role in layers:
         b.append(labelled_box(SX, y, SW, 36, name, sub, role, right=level))
         mids.append(y + 18)
         if y > 196:
             b.append(conn(CX, y - 6, CX, y - 1, "gray", opacity="0.6"))
-        y += 42
+        # 36-tall boxes six apart sat closer to each other than their own text sat to
+        # their edges, so the seven read as one object. Twelve apart separates them.
+        y += 48
     b.append(conn(CX, y - 6, CX, y - 1, "gray", opacity="0.6"))
     b.append(labelled_box(SX, y, SW, 30, "Merged to trunk", None, "gray", pad=18,
                           right="under .merge.lock"))
@@ -230,7 +239,7 @@ def d06(bare=False):
     not sections and tokens."""
     b = [section(M, 96, "Context window"), section(388, 96, "Skill corpus on disk")]
     FX, FW, FY, FH = M, 320, 106, 296
-    b.append(box(FX, FY, FW, FH, "gray", dashed=True, r=8, fill=False))
+    b.append(region(FX, FY, FW, FH, "gray", r=8))
 
     b.append(text(FX + 24, 130, "Full inlining: 196K to 521K tokens", SUB_PX, ink="mute"))
     b.append(text(FX + 24, 150, "Kernel and index: 7K to 31K tokens", TITLE_PX, ink="mute"))
@@ -245,11 +254,11 @@ def d06(bare=False):
     b.append(text(FX + 24, 386, "Also resident: step plan and lessons", SUB_PX, ink="mute"))
 
     GX, GY, cols = 388, 112, 20
-    for i in range(218):
+    for i in range(219):
         b.append(f'<rect x="{GX + (i % cols) * 13}" y="{GY + (i // cols) * 13}" '
-                 f'width="7" height="9" rx="1.5" fill="{L("gray","s")}" '
-                 f'opacity="0.45" class="gray-f"/>')
-    b.append(text(GX, GY + 166, "218 files", TITLE_PX, "gray"))
+                 f'width="7" height="9" rx="0" fill="{L("gray","m")}" '
+                 f'class="gray-m"/>')
+    b.append(text(GX, GY + 166, "219 files", TITLE_PX, "gray"))
     b.append(text(GX, GY + 184, "Paged in on demand, except the kernel", SUB_PX, "gray",
                   opacity="0.72"))
 

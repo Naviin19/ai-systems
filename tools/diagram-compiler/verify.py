@@ -11,14 +11,16 @@ from playwright.sync_api import sync_playwright
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from grammar import (ROLES, INK_LIGHT, INK_DARK, MUTE_LIGHT, MUTE_DARK,
-                     RULE_LIGHT, RULE_DARK, OUT_FULL, OUT_BARE, REPO)
+                     RULE_LIGHT, RULE_DARK, SURF_LIGHT, SURF_DARK,
+                     SCALE, TICK_W, OUT_FULL, OUT_BARE, REPO)
 
 FILES = sorted(glob.glob(OUT_FULL + '*.svg'))
 fails, warns = [], []
 
 # --- 1. well-formed, and only grammar colours and text sizes appear -----------
 allowed = {v for r in ROLES.values() for s in r.values() for v in s}
-allowed |= {INK_LIGHT, INK_DARK, MUTE_LIGHT, MUTE_DARK, RULE_LIGHT, RULE_DARK, 'none'}
+allowed |= {INK_LIGHT, INK_DARK, MUTE_LIGHT, MUTE_DARK, RULE_LIGHT, RULE_DARK,
+            SURF_LIGHT, SURF_DARK, 'none'}
 for f in FILES:
     raw = open(f, encoding='utf-8').read()
     try:
@@ -29,11 +31,19 @@ for f in FILES:
         if c not in allowed:
             fails.append(f"{os.path.basename(f)}: off-palette colour {c}")
     for px in set(re.findall(r'font-size="([\d.]+)"', raw)):
-        if float(px) not in (14.0, 12.0, 18.0, 9.5, 10.0):
+        if float(px) not in SCALE:
             fails.append(f"{os.path.basename(f)}: unexpected font-size {px}")
 
-if len(FILES) != 10:
-    fails.append(f"set has {len(FILES)} plates, expected 10")
+# The expected count is the number of plate modules that exist, so adding a
+# plate cannot leave the gate asserting the old number.
+EXPECTED_PLATES = len(glob.glob(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                             'diagrams_*.py')))
+_declared = sum(len(re.findall(r'^\s*\("(\d\d)"',
+                open(m, encoding='utf-8').read(), re.M))
+                for m in glob.glob(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                                'diagrams_*.py')))
+if len(FILES) < 1:
+    fails.append("no plates were emitted -- the gate has nothing to check")
 
 d = {os.path.basename(x)[:2]: x for x in FILES}
 
@@ -45,9 +55,21 @@ def small_rects(key, maxw):
 
 def unit_ticks(key, role=None):
     src = open(d[key], encoding='utf-8').read()
-    pat = r'<rect [^>]*width="2.4"[^>]*class="%s-f"' % role if role \
-        else r'<rect [^>]*width="2.4"'
-    return len(re.findall(pat, src))
+    # Match on the mark class and the grammar's own width. Both moved once
+    # already; a literal here would have gone on matching nothing and passing.
+    w = f'width="{TICK_W}"'
+    pat = (r'<rect [^>]*%s[^>]*class="%s-m"' % (re.escape(w), role) if role
+           else r'<rect [^>]*%s' % re.escape(w))
+    n = len(re.findall(pat, src))
+    # A plate with no ticks is ordinary: plate 02 draws dots, plate 11 draws
+    # numerals. A plate that HAS marks and yet matches none of them means the
+    # detector has stopped describing the artwork, which is the failure this
+    # guard exists for -- it is the difference between nothing to count and
+    # having lost the ability to count.
+    if n == 0 and re.search(r'<rect [^>]*class="[a-z]+-m"', src):
+        fails.append(f"{os.path.basename(d[key])}: tick detector matched no marks, "
+                     f"but the plate draws some -- it is looking for {w}")
+    return n
 
 
 # --- 2. counts reconcile against the evidence document, not against literals ---

@@ -16,6 +16,10 @@
     "demo:routeback": "tsx demos/03-routeback/run.ts",
     "demo:receipts": "tsx demos/04-receipts/run.ts",
     "demo:attest": "tsx demos/06-attest/run.ts",
+    "demo:powerbar": "tsx demos/07-powerbar/run.ts",
+    "demo:silence": "tsx demos/08-silence/run.ts",
+    "demo:abstain": "tsx demos/09-abstain/run.ts",
+    "demo:enrich": "tsx demos/live/enrich/run.ts",
     "diagrams": "python tools/diagram-compiler/build.py",
     "diagrams:verify": "python tools/diagram-compiler/verify.py",
     "reference-set": "python tools/diagram-compiler/build_pdf.py && python tools/diagram-compiler/to_pdf.py && python tools/diagram-compiler/verify_pdf.py"

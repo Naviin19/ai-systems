@@ -1,0 +1,22 @@
+{
+  "_readme": "Sites accepted the day the ratchet was switched on. Keyed by normalised content, never file:line.",
+  "generatedAt": "2026-09-21",
+  "rules": {
+    "unchecked-db-write": {
+      "count": 1,
+      "hashes": [
+        "4fceb8ad59d6"
+      ]
+    },
+    "paid-call-without-run-marker": {
+      "count": 1,
+      "hashes": [
+        "afcab55513f0"
+      ]
+    },
+    "dead-key-read": {
+      "count": 0,
+      "hashes": []
+    }
+  }
+}

@@ -1,10 +1,10 @@
 # Architecture
 
-The ten claims this repository makes, in prose.
+The eleven behaviours the plates show, in prose.
 
-Every claim below is also a plate in `docs/diagrams/`. This file exists because some readers cannot see images — text-extracting systems, terminal readers, anything consuming the repository as plain text — and a claim that survives only as a picture never reaches them. Nothing here depends on a diagram rendering.
+Every section below is also a plate in `docs/diagrams/`. This file exists because some readers cannot see images — text-extracting systems, terminal readers, anything consuming the repository as plain text — and what survives only as a picture never reaches them. Nothing here depends on a diagram rendering.
 
-Each section was rewritten on 14 September 2026 from a re-audit of the factory at commit `5739a97`. [`evidence.md`](evidence.md) has every figure, its tier and how it was measured.
+Each section was written from the factory's code at commit `5739a97`, on 14 September 2026. [`evidence.md`](evidence.md) has every figure, its tier and how it was measured.
 
 ---
 
@@ -12,27 +12,27 @@ Each section was rewritten on 14 September 2026 from a re-audit of the factory a
 
 A factory that builds software products with AI agents, and the runtime packages those products can run on, over one corpus of skill files.
 
-The factory is twenty agent configurations: fifteen that build a product and five that run a research pipeline. An orchestrator dispatches them in dependency waves, each agent in its own git worktree. Every handoff between agents is parsed against a typed contract and passed through a verification stack before the next agent reads it. The corpus is 218 skill files, which agents cite and load a section at a time rather than carrying whole.
+The factory is twenty agent configurations: fifteen that build a product and five that run a research pipeline. An orchestrator dispatches them in dependency waves, each agent in its own git worktree. Every handoff between agents is parsed against a typed contract and passed through a verification stack before the next agent reads it. The corpus is 219 skill files, which agents cite and load a section at a time rather than carrying whole.
 
 The run side is a set of packages: an LLM gateway, a model router and an MCP host for connectors. Author's app sends its model calls through its own copy of the gateway.
 
-Four products are built and live: Ark, Author, Archer2 and Whitespace Hunter. A fifth, Auteur, is specced. The factory and the product repositories are private. This repository is the published methods section: the architecture, the evidence for it, and demonstrations that run the factory's own code over data the factory recorded.
+Four products run on it and are live: [Ark](https://ark-now.vercel.app), [Author](https://author-now.vercel.app), [Archer](https://archer2.vercel.app) and [Whitespace Hunter](https://whitespace-hunter.vercel.app). A fifth, Auteur, is specced. This repository is the published architecture: what the system does, the evidence for each figure, and demonstrations that run the code itself.
 
 ---
 
 ## 1. The operating system
 
-**Claim.** It is a system with a build side and a run side, not a folder of scripts.
+It is a system with a build side and a run side, not a folder of scripts.
 
 One corpus of skill files carries both halves, and the layers taper, narrower above wider, so the compression from the corpus to the products is a shape rather than an assertion. The build side is the orchestrator and its twenty agents. Model choices are recorded one per call site: CI fails when a model call in the factory's own code has no recorded decision, and the gateway refuses a call site it does not know.
 
-Whitespace Hunter, live since 1 September at `whitespace-hunter.vercel.app`, is the product a reader can open without trusting anything in this repository.
+[Whitespace Hunter](https://whitespace-hunter.vercel.app), live since 1 September, is a product a reader can open without trusting anything in this repository.
 
-*Evidence: audited — 218 skill files, 20 agents and 33 CI gate ids, counted at factory `5739a97`; product status from Vercel production deployments on 14 September.*
+*Evidence: audited — 219 skill files, 20 agents and 39 CI gate ids, counted at factory `2fe954ea`; product status from Vercel production deployments on 14 September.*
 
 ## 2. The knowledge substrate
 
-**Claim.** Importance in the corpus is measured, and the measurement is checked.
+Importance in the corpus is measured, and the measurement is checked.
 
 The skill files cite each other. A file is a measured hub when twenty or more other skill files cite it; the count is of distinct citing files, not of mentions. Thirteen files clear that line, measured by `scripts/skill-ref-count.ts`. Three files are also declared Level 0 by hand, and one of them, `master-prompt-architecture.md`, measures eighteen, so the Level-0 set is fourteen. Declaration is a judgement the measurement never revokes.
 
@@ -42,11 +42,11 @@ The factory records how often each skill is cited, not by whom, so the plate siz
 
 The checks exist because of a real defect. `configs/agent-00.config.ts` cited a section of `agent-constitution.md` that did not exist, so agent 00, the spec validator and first in the pipeline, was handed the literal string `[section not found]` where its constitution should have been. The entry was removed on 12 September, and since 14 September a citation to a missing section fails before it lands.
 
-*Evidence: shipped — `skill-ref-count.ts`, `verify-hub-integrity.mjs`, `audit-hub-citations.mjs`, `.husky/pre-commit`, R33. Audited — thirteen measured hubs in a set of fourteen, and 218 files in nine layers.*
+*Evidence: shipped — `skill-ref-count.ts`, `verify-hub-integrity.mjs`, `audit-hub-citations.mjs`, `.husky/pre-commit`, R33. Audited — thirteen measured hubs in a set of fourteen, and 219 files in nine layers.*
 
 ## 3. The compiler spine
 
-**Claim.** Orchestration with isolation, not a prompt chain.
+Orchestration with isolation, not a prompt chain.
 
 The agents form a dependency graph. The orchestrator's scheduler starts every agent whose dependencies inside the run have finished, up to `ORCH_MAX_PARALLEL`, four by default; one is the sequential fallback. The build graph resolves to twelve waves in which at most two agents overlap, three when the research cluster joins. The first failure stops new starts, and agents already running finish.
 
@@ -60,7 +60,7 @@ The plate once drew a linear chain. That was right about the code until the sche
 
 ## 4. The contract spine
 
-**Claim.** One source of truth, and the reach of changing it is computed.
+One source of truth, and the reach of changing it is computed.
 
 The source is hand-written Zod: 52 files under `contracts/types`, from which `SCHEMA_REGISTRY` registers 48 contracts in five tiers. The JSON Schemas, the contract registry and its catalog are generated from the registry. R22 regenerates every schema in memory and fails CI on any difference, and R32 fails when the registry or the catalog is stale. TypeScript types come from the same source by inference; they are typechecked, not generated.
 
@@ -74,7 +74,7 @@ Handoffs are one contract, `HandoffEnvelopeSchema`, a union of 24 boundary varia
 
 ## 5. The verification stack
 
-**Claim.** Four outcomes, and a failure that retrying can fix is told apart from one it cannot.
+Four outcomes, and a failure that retrying can fix is told apart from one it cannot.
 
 When an agent emits, the orchestrator commits the evidence behind its claims: a SHA-256 over its step attestations, the evidence references in its handoff, and the files those references name. Quality gates run next, such as `tsc` in the agent's sandbox, then schema on write and the D3 absorption check. Before any judge reads the handoff, the orchestrator recomputes the commitment and halts if anything moved. A producer's handoff, written by a separate session, is committed when the orchestrator first sees it, after schema on write and D3.
 
@@ -90,7 +90,7 @@ Two judges are calibrated against seeded defects, with a bar of a catch rate of 
 
 ## 6. Context residency
 
-**Claim.** Budgeting is a measurement, and so is uptake.
+Budgeting is a measurement, and so is uptake.
 
 An agent the orchestrator dispatches does not carry the skill files it may need. Its prompt holds the agent kernel, inlined, and one index line per skill in its manifest, with the skill's description. When a step needs a skill, the agent calls `load_skill` for the whole file, a numbered section, or a section named by its heading. Loaded text counts against a 60,000-token cap. When full inlining was replaced on 1 June 2026, the recorded effect was 196K–521K tokens per agent down to 7K–31K, measured by estimate. On 14 September the static loads ran from 6,926 to 17,684 tokens.
 
@@ -102,7 +102,7 @@ Token reduction is a cost claim, and the weaker kind. Receipts record uptake: `R
 
 ## 7. The hardening loop
 
-**Claim.** Promotion requires a proof of convergence.
+Promotion requires a proof of convergence.
 
 After deployment, agent 11 hardens a product one round at a time against its staging site. Each round runs the Playwright suite ten times, groups the failures by signature, and asks a person twice: first to mark each failure mode as a bug or a flake, then to approve each proposed edit before it is committed. The edits land on a hardening branch, staging is redeployed, and the ten runs repeat. A round is clean only when all ten pass and no failure mode is left, and the orchestrator demotes a clean claim that fresh test artifacts do not back.
 
@@ -114,7 +114,7 @@ The agent reaches a person through the steering tool, which a build gives agents
 
 ## 8. The learning loops
 
-**Claim.** Two loops, and in both a person decides what becomes permanent.
+Two loops, and in both a person decides what becomes permanent.
 
 The amendment lane is a documented protocol, `learning-loop.md`, carried out by agents and the operator: capture a learning event, structure it, propose an amendment, stop for a person's approval, apply it with its cascade, and verify it within 48 hours. Human approval is the only route. The protocol also describes two tiers that would apply changes without approval; by operator ruling on 14 September they are a future design, not in force, with named conditions for switching either on. No code enforces the gate, which makes it a rule rather than a mechanism.
 
@@ -128,21 +128,21 @@ Each build also stores its outcomes as Feedback rows: gate results, receipt coun
 
 ## 9. The runtime engine
 
-**Claim.** The packages a product runs on, and the product that runs on them.
+The packages a product runs on, and the product that runs on them.
 
 The run side is three packages. The model router resolves a model for the tier its caller names — FORENSIC, SYNTHESIS, NARRATIVE or VISION — preferring a model the request or the stage pins. Nothing in it classifies how hard a task is. The LLM gateway dispatches each call through a provider adapter, OpenRouter always and Anthropic directly when a key is set, and records the call's latency. The MCP host starts connector servers, and its default lineup is three: Apify, Apollo and human steering. CI replays all three as real processes against recorded fixtures, and a build gives agents their tools only when `MCP_TOOLS_ENABLED` is set.
 
 Cost does not stop a run. The gateway's cost cap prices a call at zero tokens, so it cannot trip, and the factory has no run cost cap, by operator ruling. At the end of each build the factory compares every agent's tokens and wall time with its baseline and flags an agent at +30% or +20%; the comparison is advisory.
 
-Author's app is the production caller: it sends its pipeline's model calls through its own copy of the gateway, one call site per stage. Whitespace Hunter, the product with a public URL, uses none of these packages; it collects from DataForSEO on a weekly cron.
+Author's app is the production caller: it sends its pipeline's model calls through its own copy of the gateway, one call site per stage. Whitespace Hunter uses none of these packages; it collects from DataForSEO on a weekly cron.
 
 *Evidence: shipped — `packages/llm-gateway`, `packages/model-router`, `packages/mcp-infra`, `test-connector-replay.ts`, `scripts/benchmark/measure-routing.ts`. Audited — Author's `gateway-client.ts` at `833dec6`, and Whitespace Hunter's code at `1c0529c`.*
 
 ## 10. Two-lane execution
 
-**Claim.** The constraint is scoped, not total.
+The constraint is scoped, not total.
 
-Every claim above is about refusal, which leaves an obvious objection: a pipeline this rigid cannot produce anything new. The factory allows divergence in two fenced places.
+Everything above is about refusal, which leaves an obvious objection: a pipeline this rigid cannot produce anything new. The factory allows divergence in two fenced places.
 
 Lane A is in the factory, and off by default. When `IMAGINATION_MODE` is on, agent 03c attaches exactly one divergent candidate to its gate-A handoff, and the person at gate A judges it. While the flag is off, the orchestrator strips any candidate from any agent's handoff before it is validated or written. Lane B, the primary lane, is in a product's runtime: on opt-in, agent 03b authors an imagination playbook for the product, and `reimagine()` derives candidates from the playbook's divergence operators, each with its own `divergence_id`.
 
@@ -152,11 +152,23 @@ The code is shipped; the factory lane has never been switched on. No other agent
 
 *Evidence: shipped — `divergence-candidate.ts` and the envelope rider, `applyImaginationFlag` in the orchestrator, `packages/runtime-imagination`, `validate-handoff.ts`, `record-divergence-verdict.ts`, `recordDivergenceVerdict`. Audited — never run live, and zero judged candidates at the last reading.*
 
+## 11. Prompts as specifications
+
+A prompt is an artifact with a declared shape, graded before it is used.
+
+Every prompt the system writes, uses or embeds declares an input, a transformation and an output, and is scored on five dimensions — specificity, structure, constraints, completeness, actionability — before it is allowed to run. The score is the **lowest** dimension rather than the mean, so a prompt cannot compensate for being unactionable by being well structured. Across the grade cache the weakest dimension is completeness, at a mean of 7.19.
+
+The floor is not one number. Thirty surfaces each carry their own, at five levels: 8.5 for system prompts, scorers, adversarial judges and the questions put to a person; 8.0 for session dispatch and handoff narratives; 7.5 for instructions, build prompts, playbooks and step files; 7.0 for tool and schema descriptions; 4.0 for directory indexes and templates. The highest bar sits on the prompts that judge other work, so the bar is a claim about consequence rather than about length.
+
+A prompt below its floor is rewritten once automatically and blocked on a second failure. What the gate does not reach is drawn on the plate: the score judges a prompt, not the output that prompt produces, and nothing connects the two. Of 1,116 graded prompts, 313 sit below their floor and are in the corpus anyway — the gate holds what passes through it, not what is already there.
+
+*Evidence: shipped — `craftsmanship-gate.ts`, `enrich-prompt.ts`, `SURFACE_FLOORS` in `craftsmanship-surface-policy.ts`, `prompt-multiplier.md`. Audited — 30 surfaces at five floor levels, and 1,116 graded prompts of which 313 below floor.*
+
 ---
 
 ## Contested figures
 
-None of the figures the plates draw is contested. The set published before this revision carried four open conflicts, and the re-audit settled each from code: 218 skill files, nine layers, thirty-three CI gate ids beside nineteen preflight features, and 48 contracts generating 48 schemas one to one. [`evidence.md`](evidence.md) records how each was measured, and its §5 lists what changed.
+None of the figures the plates draw is contested. [`evidence.md`](evidence.md) records how each was measured.
 
 `evidence.md` is also the file the diagram compiler reads its expected counts from: change a figure there and the plate that draws it fails until it is redrawn; change a plate and it fails until the figure is corrected. Neither can be edited alone.
 
@@ -166,4 +178,4 @@ Four tiers, and nothing is tiered higher than its weakest input.
 
 **Shipped** means a named file implements it, and the right response is to ask to see the file. **Audited** means counted or observed at a named commit or on a named date; a count is audited, because no file implements a number. **Contested** means two sources disagree and the conflict is open; nothing drawn is contested today. **Unverified** means no traceable source, and nothing unverified is drawn.
 
-The audit behind these sections holds 245 claims, each with citations into the factory or a product repository that a script resolves. Where a plate claimed more than the code did, the plate was corrected. Where the code was wrong, the factory was fixed first and the plate was drawn from the fix.
+Every figure in these sections carries citations into the factory or a product repository that a script resolves to the lines that show it.

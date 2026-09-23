@@ -1,0 +1,12 @@
+{
+  "_note": "One cluster's six signal verdicts, written for this demo. Two signals abstain for the reason the live product abstains on them today: the collectors behind them need credentials that are not set.",
+  "cluster": "ai-governance",
+  "signals": [
+    { "signal_type": "vocabulary_instability", "score": 72, "fired": true,  "abstained": false, "abstain_reason": null, "evidence": { "labels": 5, "concentration": 0.31 } },
+    { "signal_type": "formal_vocabulary",      "score": 64, "fired": true,  "abstained": false, "abstain_reason": null, "evidence": { "formal_share": 0.64 } },
+    { "signal_type": "difficulty_lag",         "score": 88, "fired": true,  "abstained": false, "abstain_reason": null, "evidence": { "pairs": 7, "scored_top_half": ["ai governance framework", "ai risk register"], "vendor_proxy_caveat": "the difficulty metric is a vendor proxy — signal 3 measures the vendor’s model of competition, not the market itself" } },
+    { "signal_type": "serp_churn",             "score": null, "fired": false, "abstained": true,  "abstain_reason": "no SERP snapshots collected yet (collection wiring lands with creds)", "evidence": { "abstained": "no SERP snapshots collected yet" } },
+    { "signal_type": "cross_platform_lead",    "score": null, "fired": false, "abstained": true,  "abstain_reason": "no cross-platform mentions collected yet (collection wiring lands with creds)", "evidence": { "abstained": "no cross-platform mentions collected yet" } },
+    { "signal_type": "cohort_fixed_trend",     "score": 81, "fired": true,  "abstained": false, "abstain_reason": null, "evidence": { "smoothed_growth": 2.4, "spike_guarded": true } }
+  ]
+}

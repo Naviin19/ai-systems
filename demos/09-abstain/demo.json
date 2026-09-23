@@ -1,0 +1,23 @@
+{
+  "name": "abstain",
+  "command": "demo:abstain",
+  "kind": "reduced harness around the production path",
+  "extracted_on": "2026-09-21",
+  "extracted_from": [
+    { "path": "lib/pipeline/composite.ts", "symbols": ["compositeScore", "WEIGHTS", "renormalisation over non-abstaining signals", "breakdown lists all six"] },
+    { "path": "contracts.ts", "symbols": ["SignalResultSchema", "score nullable", "abstained", "abstain_reason", "WHITESPACE_SCORE_THRESHOLD_OPENING", "WHITESPACE_SCORE_THRESHOLD_CLOSING"] },
+    { "path": "lib/pipeline/signals.ts", "symbols": ["abstain", "VENDOR_PROXY_CAVEAT", "caveat carried in evidence"] }
+  ],
+  "volatile": [
+    "The six signal verdicts are written for this demo; the scorers that produce them are not run here.",
+    "classify() is reduced to the composite thresholds; the production classifier also consults a volume floor and a trend ratio.",
+    "compositeIfAbstentionWereZero exists only in this demo, as the counterfactual being argued against."
+  ],
+  "tamper": {
+    "file": "demos/09-abstain/composite.ts",
+    "find": "  const live = signals.filter((s) => !s.abstained && s.score !== null);",
+    "replace": "  const live = signals;",
+    "expect_exit": 1,
+    "expect_line": "treating an abstention as zero changes the verdict                FAILED"
+  }
+}

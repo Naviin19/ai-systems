@@ -2,9 +2,7 @@
 
 Every figure the plates draw and every mechanism they name: its value, what it rests on, and where to look.
 
-**Re-audited 14 September 2026.** Every claim the ten plates made was checked against the factory at commit `5739a97` (`skill-ecosystem`, private) and against the four product repositories at named commits, read-only. The audit holds 245 claims. Each one states what the code does and cites the lines that show it, and a script in the factory resolves every citation. The plates and this file were redrawn from that audit: 98 claims held, 127 were corrected, 9 were removed and 11 were added. No figure the set draws is contested.
-
-The audit also found defects in the factory itself. Those were fixed before anything here was drawn, and §5 lists them.
+**Measured 22 September 2026.** Every figure the eleven plates draw was checked against the factory at commit `2fe954ea` (`skill-ecosystem`, private) and against the four product repositories at named commits, read-only. Each entry states what the code does and cites the lines that show it, and a script in the factory resolves every citation. No figure the set draws is contested.
 
 ---
 
@@ -23,25 +21,25 @@ Nothing is tiered higher than its weakest input. A plate whose mechanism is ship
 
 ## 2. Structure
 
-Measured at factory `5739a97` on 14 September 2026.
+Measured at factory `2fe954ea` on 22 September 2026.
 
 | Figure | Value | Tier | How it was measured |
 |---|---|---|---|
-| Skill files | 218 | `audited` | `.md` files under `skills/`, not counting the per-layer `CLAUDE.md` indexes |
-| In an active manifest | 170 | `audited` | referenced by an agent config or by `skills/meta/universal-primitives.json` |
-| Parked | 48 | `audited` | listed in `skills/meta/retired-skills.json`; none of them is referenced |
-| Architecture layers | 9 | `audited` | distinct `architecture_layer` values in skill frontmatter: engineering 68, governance 49, intelligence 37, coordination 19, connectors 13, operational 12, foundational 10, tracking 7, meta 3 |
+| Skill files | 219 | `audited` | `.md` files under `skills/`, not counting the per-layer `CLAUDE.md` indexes |
+| In an active manifest | 202 | `audited` | referenced by an agent config or by `skills/meta/universal-primitives.json` |
+| Parked | 28 | `audited` | listed in `skills/meta/retired-skills.json`; none of them is referenced |
+| Architecture layers | 9 | `audited` | distinct `architecture_layer` values in skill frontmatter: engineering 68, governance 50, intelligence 37, coordination 19, connectors 13, operational 12, foundational 10, tracking 7, meta 3 |
 | Agents | 20 | `audited` | `configs/agent-*.config.ts` |
 | Build agents | 15 | `audited` | the configs outside the research-cluster pattern |
 | Research agents | 5 | `audited` | `research-reader`, `research-graph-builder`, `research-synthesizer`, `marketing-availability-builder`, `marketing-availability-validator` |
 | Build waves | 12, at most 2 agents at once | `audited` | the scheduler's rule applied to `dependsOn`; with the research cluster, 12 waves and at most 3 at once |
 | Dependency edges | 23 | `audited` | `dependsOn` across the configs; 5 of the edge declarations carry typed reads, 9 reads in all |
-| CI gate ids | 33, R1 to R33 | `audited` | `scripts/verify-all.ts`, which runs them as 34 blocks because R22 has a schema block and a database block |
-| Health checks | 28 | `audited` | the numbered checks in the factory's root `CLAUDE.md` |
-| Preflight features | 19, F1 to F19 | `audited` | `prompts/feature-descriptor.md`, run by the build-start prompt |
-| Zod source files | 52 | `audited` | files under `contracts/types` that import zod |
-| Registered contracts | 48, in five tiers | `audited` | `SCHEMA_REGISTRY`: governance 15, operational 11, measurement 11, foundational 7, knowledge 4 |
-| Generated JSON Schemas | 48 | `audited` | one per registry entry |
+| CI gate ids | 39, R1 to R39 | `audited` | `scripts/verify-all.ts`, which runs them as 34 blocks because R22 has a schema block and a database block |
+| Health checks | 34 | `audited` | the numbered checks in the factory's root `CLAUDE.md` |
+| Preflight features | 20, F1 to F20 | `audited` | `prompts/feature-descriptor.md`, run by the build-start prompt |
+| Zod source files | 53 | `audited` | files under `contracts/types` that import zod |
+| Registered contracts | 49, in five tiers | `audited` | `SCHEMA_REGISTRY`: governance 15, operational 12, measurement 11, foundational 7, knowledge 4 |
+| Generated JSON Schemas | 49 | `audited` | one per registry entry |
 | Per-agent I/O schemas | 46 | `audited` | `contracts/schemas/agents`, kept by hand |
 | Contract examples | 27 | `audited` | the example checks in `verify-all.ts` |
 | Traced prompt files | 32 | `audited` | prompt files the generated registry links to a schema |
@@ -49,7 +47,7 @@ Measured at factory `5739a97` on 14 September 2026.
 | Measured Level-0 hubs | 13 | `audited` | skills cited by 20 or more other skill files, from `verification/skill-ref-counts.json` |
 | Level-0 set | 14 | `audited` | the measured hubs plus `master-prompt-architecture.md`, which is declared and measures 18 |
 | MCP server packages | 6, of which 3 are in the default lineup | `audited` | `packages/mcp-server-*` and `DEFAULT_SERVER_KEYS` |
-| Static prompt load | 6,926 to 17,684 tokens per agent | `audited` | `verification/token-budget-baseline.json`, estimate mode, 14 September |
+| Static prompt load | 7,347 to 19,068 tokens per agent | `audited` | `verification/token-budget-baseline.json`, estimate mode, 20 September |
 
 The hub counts, highest first: five-laws-ai-systems 42, structured-output-schemas 40, prompt-craftsmanship-constitution 38, agent-constitution 37, discovery-frame 31, prompt-multiplier 30, design-principles 27, epistemic-vigilance 25, api-integration-patterns 25, prompt-constitution 23, testing-and-validation-playbook 21, marketing-analysis-frameworks 20, deployment-environment-configuration 20.
 
@@ -168,63 +166,17 @@ Grouped by the plate that draws each one. Every row is `shipped` unless it says 
 
 | Product | In its own words | Status on 14 September 2026 |
 |---|---|---|
-| Ark | "Give Ark a URL. Twelve minutes later, a complete brand book" | Live; latest production deployment 7 September |
-| Author | "Content Playbook Compiler" | Live; latest production deployment 26 July |
-| Archer2 | "B2B sales intelligence" | Live; latest production deployment 26 July |
-| Whitespace Hunter | "Internal whitespace-detection instrument" | Live at `whitespace-hunter.vercel.app` since 1 September, 23:55 UTC; latest production deployment 6 September |
+| [Ark](https://ark-now.vercel.app) | "Give Ark a URL. Twelve minutes later, a complete brand book" | Live; latest production deployment 7 September |
+| [Author](https://author-now.vercel.app) | "Content Playbook Compiler" | Live; latest production deployment 26 July |
+| [Archer](https://archer2.vercel.app) | "B2B sales intelligence" | Live; latest production deployment 26 July |
+| [Whitespace Hunter](https://whitespace-hunter.vercel.app) | "Internal whitespace-detection instrument" | Live since 1 September, 23:55 UTC; latest production deployment 6 September |
 | Auteur | AI creative production | Specced; no repository yet |
 
-Status is `audited` from each project's Vercel production deployments. The descriptions are quoted from each product's own repository. The four product repositories and the factory are private.
+Status is `audited` from each project's Vercel production deployments. The descriptions are quoted from each product's own repository.
 
 ---
 
-## 5. Corrections in this revision
-
-The plates published before this revision made claims the code did not bear out. The largest:
-
-| Plate | Drew | Now |
-|---|---|---|
-| 01, 06 | 152 skill files, contested | 218, audited |
-| 01, 03 | 30 CI gates, against 19 preflight gates | 33 CI gate ids; the 19 are preflight features, a different object |
-| 02 | 11 Level-0 hubs, in 8 or 9 layers | 13 measured hubs in a set of 14, in 9 layers |
-| 02 | Citation edges between hubs and skills | No edge list is recorded; every node is sized by its measured count, and the edges are gone |
-| 03 | One agent at a time, in dependency order | Waves: 12 for the build graph, at most 2 agents at once |
-| 04 | 19 contracts deriving 43 schemas | 48 registered contracts generating 48 schemas, one to one |
-| 04 | `contract-compiler.ts` drawn as not a gate | It is R31, blocking in CI |
-| 05 | The evidence frozen before any path is chosen | Committed when an agent emits; a producer's handoff is committed later, after schema on write and D3 |
-| 05 | Five checks in the order schema, attestation, judge, cross-family, drift | The order the code runs, with the drift audit after the merge |
-| 05 | The drift band tracked by `residual-baseline.ts` | The drift margin is in `semantic-drift.ts`; `residual-baseline.ts` tracks prompt grades |
-| 06 | About 70% fewer tokens | 196K–521K down to 7K–31K per agent, the recorded figure |
-| 07 | Exit on two clean rounds, or escalate at five | Two clean rounds and a yes; stop and extend; the cap moves with each extension |
-| 08 | Tier-1 changes applied without the human gate | Tiers 1 and 2 are not in force, by operator ruling |
-| 08 | One telemetry stream feeding both loops | Stored as Feedback rows that no loop reads yet |
-| 09 | Session context, a load estimator, complexity routing and cost circuit breakers | None of them exists; the caller names the tier, and nothing stops a run on cost |
-| 09 | Six MCP connectors, and Whitespace Hunter as the product served | Three in the default lineup, and Author as the product on the gateway |
-| 10 | A `divergence_id` crossing under a K4 parity check | The whole candidate rides an opaque rider; separation is an allowlist guard and a flag strip |
-| products | Archer2 dormant; Author an SVG production pipeline | Archer2 live; Author a content playbook compiler |
-
-**Defects fixed in the factory, not in the drawing.** Re-auditing the plates found places where the factory itself was wrong. Each was fixed, with a check that fails without the fix, before anything here was drawn from it:
-
-- Producer agents were handed no prompt the drift audit could read, so a real producer run would have halted after the producer finished, and a re-dispatch returned the failed handoff at once.
-- A named skill section loaded the whole file.
-- Three Apify connector tools called actor paths that do not exist.
-- The learning-loop protocol both forbade and allowed changes without approval, until an operator ruling settled it.
-- Agent 11's declare-hot question was specified and never asked, and its stop condition was declared and never set.
-- Agent 11's instructions offered an "extend" at the round cap that the loop could not honour.
-
----
-
-## 6. The correction worth publishing
-
-`configs/agent-00.config.ts` cited `agent-constitution.md §P1-§P2`, a section that does not exist. Agent 00, the spec validator and the first agent in the pipeline, was handed the literal string `[section not found]` where its constitution should have been. The entry was removed on 12 September. Since 14 September a citation to a section that does not exist fails in pre-commit and in CI (R33), in any live file.
-
-It belongs here because it is a silent failure in the most load-bearing input in the system, found by an audit rather than by a symptom. A citation that silently resolves to an error string is worse than one that throws: the pipeline keeps running, and everything downstream is confidently built on nothing.
-
-The re-audit found the same shape a second time. A named section, such as `§Eight Directives`, loaded the whole skill file, so a real dispatch of agent 12 asked for two sections, received two whole files, and recorded them in its receipt as section loads. That is fixed too, and plate 06 draws the fixed loader.
-
----
-
-## 7. Not drawn
+## 5. Not drawn
 
 | Figure | Why it is not drawn |
 |---|---|
@@ -237,30 +189,30 @@ The re-audit found the same shape a second time. A named section, such as `§Eig
 
 ---
 
-## 8. How the audit is held
+## 6. How the audit is held
 
 The audit lives in the factory as `plans/ais-plate-claims.json`. Two checks there hold it and this repository to each other:
 
 - **AIS7-1** resolves every citation: each factory citation at the audited commit, each product citation at its recorded commit, with the cited text on the cited line or within two lines of it.
-- **AIS7-2** requires the plates to regenerate unchanged, `verify.py` to pass in two fonts, the reference set to rebuild and verify, every figure in §9 to equal the audit's, and no phrase the audit retired to survive in the plates, the README, `architecture.md` or this file outside §5 and §6.
+- **AIS7-2** requires the plates to regenerate unchanged, `verify.py` to pass in two fonts, the reference set to rebuild and verify, every figure in §7 to equal the audit's, and no phrase the audit retired to survive in the plates, the README, `architecture.md` or this file inside a section headed as a correction or history.
 
-In this repository, `tools/diagram-compiler/verify.py` fails a plate whose drawn count disagrees with §9.
+In this repository, `tools/diagram-compiler/verify.py` fails a plate whose drawn count disagrees with §7.
 
 ---
 
-## 9. Machine-readable figures
+## 7. Machine-readable figures
 
 Every count the plates draw, in one block. `tools/diagram-compiler/verify.py` parses it and fails the build when a plate disagrees with it, so the figures and the artwork cannot drift apart: change a figure here and the plate that draws it fails until it is redrawn; change a plate and it fails until the figure is corrected here.
 
 ```json
 {
   "drawn": {
-    "skill_files":              {"value": 218, "tier": "audited", "plates": ["01", "06"]},
+    "skill_files":              {"value": 219, "tier": "audited", "plates": ["01", "06"]},
     "total_agents":             {"value": 20,  "tier": "audited", "plates": ["01", "03"]},
     "build_agents":             {"value": 15,  "tier": "audited", "plates": ["03"]},
     "research_agents":          {"value": 5,   "tier": "audited", "plates": ["03"]},
-    "ci_gate_ids":              {"value": 33,  "tier": "audited", "plates": ["01"]},
-    "preflight_features":       {"value": 19,  "tier": "audited", "plates": ["03"]},
+    "ci_gate_ids":              {"value": 39,  "tier": "audited", "plates": ["01"]},
+    "preflight_features":       {"value": 20,  "tier": "audited", "plates": ["03"]},
     "build_waves":              {"value": 12,  "tier": "audited", "plates": ["03"]},
     "max_build_agents_at_once": {"value": 2,   "tier": "audited", "plates": ["03"]},
     "level0_hubs":              {"value": 13,  "tier": "audited", "plates": ["02"]},
@@ -268,8 +220,8 @@ Every count the plates draw, in one block. `tools/diagram-compiler/verify.py` pa
     "level0_threshold":         {"value": 20,  "tier": "shipped", "plates": ["02"],
                                  "form": "numeral"},
     "architecture_layers":      {"value": 9,   "tier": "audited", "plates": ["02"]},
-    "zod_source_files":         {"value": 52,  "tier": "audited", "plates": ["04"]},
-    "generated_schemas":        {"value": 48,  "tier": "audited", "plates": ["04"]},
+    "zod_source_files":         {"value": 53,  "tier": "audited", "plates": ["04"]},
+    "generated_schemas":        {"value": 49,  "tier": "audited", "plates": ["04"]},
     "per_agent_schemas":        {"value": 46,  "tier": "audited", "plates": ["04"]},
     "contract_examples":        {"value": 27,  "tier": "audited", "plates": ["04"]},
     "dependency_edges":         {"value": 23,  "tier": "audited", "plates": ["04"]},
@@ -280,13 +232,19 @@ Every count the plates draw, in one block. `tools/diagram-compiler/verify.py` pa
     "hardening_round_cap":      {"value": 5,   "tier": "shipped", "plates": ["07"]},
     "hardening_extensions":     {"value": 2,   "tier": "shipped", "plates": ["07"]},
     "promotion_sessions":       {"value": 2,   "tier": "shipped", "plates": ["08"]},
-    "mcp_default_servers":      {"value": 3,   "tier": "audited", "plates": ["09"]}
+    "mcp_default_servers":      {"value": 3,   "tier": "audited", "plates": ["09"]},
+    "prompt_dimensions":        {"value": 5,   "tier": "audited", "plates": ["11"],
+                                 "form": "numeral"},
+    "prompt_surfaces":          {"value": 30,  "tier": "audited", "plates": ["11"],
+                                 "form": "numeral"},
+    "prompt_floor_levels":      {"value": 5,   "tier": "audited", "plates": ["11"],
+                                 "form": "numeral"}
   },
   "stated_not_drawn": {
     "ci_gate_blocks":      {"value": 34,  "tier": "audited"},
-    "health_checks":       {"value": 28,  "tier": "audited"},
-    "skills_in_manifests": {"value": 170, "tier": "audited"},
-    "retired_skills":      {"value": 48,  "tier": "audited"},
+    "health_checks":       {"value": 34,  "tier": "audited"},
+    "skills_in_manifests": {"value": 202, "tier": "audited"},
+    "retired_skills":      {"value": 28,  "tier": "audited"},
     "envelope_variants":   {"value": 24,  "tier": "audited"},
     "mcp_server_packages": {"value": 6,   "tier": "audited"}
   }

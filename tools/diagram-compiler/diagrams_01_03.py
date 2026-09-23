@@ -9,21 +9,20 @@ def d01(bare=False):
     CI gate ids in verify-all.ts, measured at factory 5739a97."""
     b = []
     b.append(section(124, 96, "Products built with the factory"))
-    prods = [("Ark", "Live"), ("Author", "Live"), ("Archer2", "Live"),
+    prods = [("Ark", "Live"), ("Author", "Live"), ("Archer", "Live"),
              ("Whitespace", "Live"), ("Auteur", "Specced")]
     px, pw = 124, 80
     for i, (n, st) in enumerate(prods):
         x = px + i * (pw + 8)
-        b.append(box(x, 108, pw, 58, "purple", dashed=(st == "Specced")))
-        b.append(text(x + pw / 2, 133, n, TITLE_PX, "purple", anchor="middle"))
-        b.append(text(x + pw / 2, 150, st, SUB_PX, "purple",
-                      anchor="middle", opacity="0.7"))
-        b.append(conn(x + pw / 2, 166, x + pw / 2, 194, "gray", dashed=True,
-                      arrow=False, opacity="0.5"))
+        b.append(box(x, 112, pw, 44, "purple", dashed=(st == "Specced")))
+        b.append(text(x + pw / 2, 130, n, TITLE_PX, "purple", anchor="middle",
+                      weight=500))
+        b.append(text(x + pw / 2, 146, st, SUB_PX, "purple", anchor="middle"))
+        b.append(conn(x + pw / 2, 156, x + pw / 2, 194, "gray", arrow=False))
 
     b.append(labelled_box(105, 196, 470, 52, "Gates",
                           "Halt, route back, or warn", "coral",
-                          right="33 CI gate ids", dashed=True))
+                          right="39 CI gate ids", dashed=True))
     b.append(conn(340, 262, 340, 250, "gray", opacity="0.5"))
 
     b.append(labelled_box(70, 262, 264, 58, "Build-time factory",
@@ -33,11 +32,12 @@ def d01(bare=False):
     b.append(conn(202, 336, 202, 322, "gray", opacity="0.5"))
     b.append(conn(478, 336, 478, 322, "gray", opacity="0.5"))
 
-    b.append(box(40, 336, 600, 62, "teal"))
-    b.append(text(58, 361, "Knowledge substrate", TITLE_PX, "teal"))
-    b.append(text(622, 361, "218 skill files", SUB_PX, "teal",
-                  anchor="end", opacity="0.78"))
-    b.append(ticks(58, 372, 218, "teal", h=10, gap=1.19, w=1.4, opacity="0.42"))
+    b.append(box(40, 336, 600, 62, "teal", sw=1.75))
+    b.append(text(58, 361, "Knowledge substrate", TITLE_PX, "teal", weight=500))
+    b.append(text(622, 361, "219 skill files", SUB_PX, "teal",
+                  anchor="end", weight=500, mono=True))
+    b.append(ticks(58, 366, 110, "teal", h=6, gap=2.6, w=2.4))
+    b.append(ticks(58, 376, 109, "teal", h=6, gap=2.6, w=2.4))
 
     return svg("01", "The operating system",
                "A build side and a run side over one corpus; four products built, one specced.",
@@ -48,7 +48,7 @@ def d01(bare=False):
                "with no repository yet. Whitespace Hunter is the one with a public URL, "
                "whitespace-hunter.vercel.app. The file count is drawn as ticks because it must "
                "reconcile with plate 06.",
-               "audited - counts at factory 5739a97 (218 files, 20 agents, 33 CI gate ids); "
+               "audited - counts at factory 2fe954ea (219 files, 20 agents, 39 CI gate ids); "
                "product status from Vercel production deployments, 14 Sep",
                bare=bare)
 
@@ -57,12 +57,12 @@ def d01(bare=False):
 # Measured at factory 5739a97, verification/skill-ref-counts.json, per_skill[].skills_internal:
 # the number of other skill files that cite each skill. Every node is drawn at a radius read
 # from its own count, so a larger node is a skill more files cite.
-HUB_CITATIONS = [42, 40, 38, 37, 31, 30, 27, 25, 25, 23, 21, 20, 20]
+HUB_CITATIONS = [42, 40, 38, 38, 31, 30, 27, 26, 25, 23, 21, 20, 20]
 DECLARED_ONLY = 18          # master-prompt-architecture.md: declared Level 0, measures 18
 OTHER_CITATIONS = (
-    [19] * 2 + [17] * 2 + [16] * 3 + [15] + [14] * 2 + [13] * 3 + [12] * 2 + [11] * 5
-    + [10] * 7 + [9] * 3 + [8] * 4 + [7] * 9 + [6] * 12 + [5] * 14 + [4] * 22
-    + [3] * 28 + [2] * 39 + [1] * 22 + [0] * 24)
+    [19] * 2 + [17] * 3 + [16] * 2 + [15] * 2 + [14] + [13] * 3 + [12] * 2 + [11] * 5
+    + [10] * 8 + [9] * 2 + [8] * 4 + [7] * 9 + [6] * 12 + [5] * 15 + [4] * 22
+    + [3] * 27 + [2] * 39 + [1] * 22 + [0] * 25)
 LAYERS = ("Foundational", "Governance", "Coordination", "Engineering", "Connectors",
           "Intelligence", "Operational", "Tracking", "Meta")
 
@@ -78,11 +78,11 @@ def d02(bare=False):
     often each skill is cited, not by whom. The Level-0 set is fourteen, thirteen
     measured and one declared. The defect edge comes from agent 00's config, outside
     the skill graph, and the checks named are the ones that catch its class."""
-    assert len(HUB_CITATIONS) + 1 + len(OTHER_CITATIONS) == 218
-    b = [section(M, 96, "218 skill files, each drawn at its measured citation count")]
+    assert len(HUB_CITATIONS) + 1 + len(OTHER_CITATIONS) == 219
+    b = [section(M, 96, "219 skill files, each drawn at its measured citation count")]
 
     GX, GY, GW, GH = M, 118, CW, 210
-    b.append(box(GX, GY, GW, GH, "gray", dashed=True, r=8, fill=False))
+    b.append(region(GX, GY, GW, GH, "gray", r=8))
 
     hubs = [(214, 172), (286, 154), (352, 184), (256, 216), (322, 234),
             (190, 242), (390, 150), (398, 224), (150, 198), (288, 272),
@@ -97,7 +97,7 @@ def d02(bare=False):
     # the defect the checks now catch: a citation from a config, into a hub, to nothing
     b.append(box(520, 150, 116, 30, "gray"))
     b.append(text(578, 170, "agent-00 config", SUB_PX, "gray", anchor="middle"))
-    b.append(hair(520, 165, 265, 214, "coral", "0.85", dashed=True))
+    b.append(hair(520, 165, 265, 214, "coral"))
     b.append(f'<path d="M270,209 l6,6 M276,209 l-6,6" stroke="{L("coral","s")}" '
              f'stroke-width="1.3" stroke-linecap="round" class="coral-o"/>')
 
@@ -108,7 +108,7 @@ def d02(bare=False):
              f'fill="none" stroke="{L("teal","s")}" stroke-width="1" stroke-dasharray="2 1.5" '
              f'class="teal-o"/>')
 
-    b.append(box(132, 134, 292, 168, "teal", dashed=True, r=10, fill=False))
+    b.append(region(132, 134, 292, 168, "teal", r=10))
     b.append(text(138, 128, "Level 0: 13 measured hubs, 1 declared", SUB_PX, "teal"))
     b.append(numeral(424, 318, "Measured: cited by 20 or more skill files", "teal", SUB_PX,
                      anchor="end"))
@@ -187,9 +187,9 @@ def d03(bare=False):
     b.append(text(M + 18, 127, "Preflight", TITLE_PX, "coral"))
     b.append(text(M + 18, 143, "Checked by the build-start prompt before dispatch",
                   SUB_PX, "coral", opacity="0.72"))
-    b.append(text(M + CW - 18, 127, "19 preflight features", SUB_PX, "coral",
-                  anchor="end", opacity="0.78"))
-    b.append(ticks(M + CW - 18 - ticks_width(19), 134, 19, "coral", h=9, opacity="0.6"))
+    b.append(text(M + CW - 18, 127, "20 preflight features", SUB_PX, "coral",
+                  anchor="end", weight=500))
+    b.append(ticks(M + CW - 18 - ticks_width(20), 134, 20, "coral", h=9))
     b.append(labelled_box(M, 158, CW, 40, "Start gates in main()", None, "coral",
                           right="baseline · install guard · preflight check", dashed=True))
     b.append(conn(340, 198, 340, 214, "gray", opacity="0.6"))
