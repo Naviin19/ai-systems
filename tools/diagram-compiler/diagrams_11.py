@@ -83,18 +83,26 @@ def d11(bare=False):
         b.append(conn(sx[i] + 150, gy + 47, sx[i + 1] - 2, gy + 47, "gray", opacity="0.7"))
 
     # --- what the gate does not reach -----------------------------------------------
+    # Wrapped, not hand-broken. These two lines were fitted to the font this plate
+    # happened to be drawn under; the second measured 760 units against a 680-unit
+    # frame on the Linux CI runner, whose default sans is wider. The measure is the
+    # same 82 characters the caption uses, and the box takes its height from the
+    # number of lines that come back, so a longer sentence grows the box instead of
+    # leaving the frame.
     ny = gy + 94
-    b.append(box(28, ny, 624, 62, "gray", dashed=True))
+    notes = (wrap("The score judges a prompt, not the output that prompt produces; "
+                  "nothing here connects the two.", 82)
+             + wrap("313 of 1,116 graded prompts sit below their floor and are in the "
+                    "corpus anyway: the gate holds what passes through it.", 82))
+    nh = 30 + 17 * len(notes)
+    b.append(box(28, ny, 624, nh, "gray", dashed=True))
     b.append(text(44, ny + 22, "What this does not reach", SUB_PX, "gray", weight=500))
-    b.append(text(44, ny + 40, "The score judges a prompt, not the output that prompt produces; "
-                               "nothing here connects the two.", SUB_PX, "gray", opacity="0.78"))
-    b.append(text(44, ny + 55, "313 of 1,116 graded prompts sit below their floor and are in the "
-                               "corpus anyway: the gate holds what passes through it.",
-                  SUB_PX, "gray", opacity="0.78"))
+    for _i, _ln in enumerate(notes):
+        b.append(text(44, ny + 41 + _i * 17, _ln, SUB_PX, "gray"))
 
     return svg("11", "Prompts as specifications",
                "A prompt is an artifact with a declared shape, graded before it is used.",
-               "".join(b), ny + 62,
+               "".join(b), ny + nh,
                "Every prompt the system writes, uses or embeds declares an input, a transformation "
                "and an output, and is scored on five dimensions before it is allowed to run. The "
                "score is the lowest dimension rather than the mean, so a prompt cannot compensate "
