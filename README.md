@@ -51,7 +51,7 @@ If you read one, read the first.
 
 ## The thirteen plates
 
-Each plate shows one behaviour of the system in operation.
+Each plate shows one behaviour of the factory in operation.
 [`docs/architecture.md`](docs/architecture.md) carries all thirteen in prose, for anything that does not
 render images.
 

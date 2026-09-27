@@ -79,7 +79,7 @@ FORMS = [
 TIERS = [
  ("shipped","A named file implements it. Ask to see the file."),
  ("audited","Counted or observed at a named commit, or in a named source on a named date. A count is audited, because no file implements a number."),
- ("contested","Two sources give different values and the conflict is open. Nothing drawn in this set is contested."),
+ ("contested","Two sources give different values and the conflict is open. Nothing drawn in this set has an unresolved conflicting source."),
  ("unverified","No traceable source. Nothing unverified is drawn."),
 ]
 
