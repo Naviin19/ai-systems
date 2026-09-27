@@ -42,7 +42,7 @@ reaches it.
 
 | Document | The question it answers |
 |---|---|
-| [**Engineering Probabilistic Systems**](docs/ENGINEERING.md) | What was built, and why does each mechanism have to exist? Thirteen mechanisms on one dependency spine, each stage answering a question the one before it cannot — from knowledge and specification through contracts, orchestration and abstention to verification, runtime, learning and the product surface. |
+| [**Engineering Probabilistic Systems**](docs/ENGINEERING.md) | What was built, and why does each mechanism have to exist? Thirteen mechanisms on one dependency spine — the engineering sequence, a different cut from the thirteen plates — each stage answering a question the one before it cannot — from knowledge and specification through contracts, orchestration and abstention to verification, runtime, learning and the product surface. |
 | [**The Systems Thesis**](docs/THE-SYSTEMS-THESIS.md) | What do I hold to be true about building these systems, and how strong is the evidence for each claim? |
 | [**Executable Expertise**](docs/EXECUTABLE-EXPERTISE.md) | Can domain expertise be compiled into a system, or only described to one? |
 | [**Brand as an API**](docs/BRAND-AS-AN-API.md) | What does that look like in one domain? A brand book produced by one product and consumed as a typed object by two others, over a graph of the marketing canon. |
@@ -114,6 +114,13 @@ private; a link below opens the running product.
 | [Author](https://author-now.vercel.app) | Compiles a multi-channel content playbook from that brand book, read as a typed object rather than as prose |
 | [Archer](https://archer2.vercel.app) | B2B sales intelligence: a verdict, target personas and pitch material for one account |
 | [Whitespace Hunter](https://whitespace-hunter.vercel.app) | Scores how much runway an emerging category has left, from search and SERP signals |
+
+Each product, as its public URL served it on 27 September 2026. The repositories stay private; the
+products do not.
+
+| [![Ark](docs/products/ark.png)](https://ark-now.vercel.app) | [![Author](docs/products/author.png)](https://author-now.vercel.app) |
+|---|---|
+| [![Archer](docs/products/archer.png)](https://archer2.vercel.app) | [![Whitespace Hunter](docs/products/whitespace-hunter.png)](https://whitespace-hunter.vercel.app) |
 
 ## What this rests on
 

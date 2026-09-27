@@ -19,7 +19,7 @@ cannot be.
 
 ## Four principles
 
-Thirteen mechanisms follow. They are instances of four ideas, and the four are the part worth
+Thirteen mechanisms follow, ordered as a dependency spine; the thirteen plates in [architecture.md](architecture.md) are a different cut of the same system, by behaviour, and the two sets do not map one to one. The mechanisms are instances of four ideas, and the four are the part worth
 carrying somewhere else.
 
 **1 · Put the deterministic thing first.** Numbers are computed before a model may mention them.
@@ -142,8 +142,9 @@ and the observable condition that would flip it.
 
 A data shape written down in more than one place will diverge; the only question is when. The
 defence is not discipline, because discipline is exactly what fails under deadline. It is
-derivation: one source of truth, everything else generated from it, so there is no second copy left
-to drift.
+derivation: one source of truth for every registered contract, and everything downstream of the
+registry generated from it, so there is no second copy left to drift. The 46 per-agent I/O schemas
+are kept by hand outside that registry, and are named as such.
 
 55 source files hold 2,165 schema declarations. 52 JSON Schema files are generated from them, 50 of
 them registered, and 46 per-agent I/O schemas are kept by hand beside them. The handoff envelope

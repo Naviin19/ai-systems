@@ -1,6 +1,6 @@
 # Figures and evidence
 
-Every figure the plates draw and every mechanism they name: its value, what it rests on, and where to look.
+Every figure the plates draw and every mechanism they name: its value, what it rests on, and where to look. This public repository holds the architecture and its verification artifacts; the figures are audited against the private factory at the pinned commits named below.
 
 **Figures measured 27 September 2026 at `5d5fb3f1` and citations audited 14 September at `5739a97` — both commits of the factory, `skill-ecosystem`, not of this repository.** Every figure the plates draw was checked against the factory (`skill-ecosystem`, private) and against the four product repositories at named commits, read-only. Each entry states what the code does and cites the lines that show it, and a script in the factory resolves every citation at the commit it names. No figure the plates draw has an unresolved conflicting source.
 
