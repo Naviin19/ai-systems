@@ -127,6 +127,33 @@ for f, want, mw in (('01-operating-system', _files, 3.0), ('06-context-residency
     if got != want:
         fails.append(f"{f}: {got} ticks drawn, {want} labelled")
 
+# The structure page prints figures from a table in build_pdf.py. That table is a copy, and a
+# copy drifts; it sat at the previous audit's values for five days while this verifier passed,
+# because nothing read the page. Every value evidence.md holds is now checked on the page that
+# prints it, so the PDF cannot publish a number the evidence document does not.
+_evjson = json.loads(re.findall(r'```json\s*(\{.*?\})\s*```', _ev, re.S)[-1])
+_drawn, _stated = _evjson['drawn'], _evjson['stated_not_drawn']
+_row = lambda label: re.search(r'^\| ' + re.escape(label) + r' \| ([^|]+?) \|', _ev, re.M).group(1).strip()
+_expect = {
+    'Skill files':            f"{_drawn['skill_files']['value']}",
+    'In a manifest, parked':  f"{_stated['skills_in_manifests']['value']}, {_stated['retired_skills']['value']}",
+    'CI gate ids':            f"{_drawn['ci_gate_ids']['value']}",
+    'Preflight features':     f"{_drawn['preflight_features']['value']}",
+    'Registered contracts':   _row('Registered contracts'),
+    'Generated JSON Schemas': f"{_drawn['generated_schemas']['value']}",
+    'Per-agent I/O schemas':  f"{_drawn['per_agent_schemas']['value']}",
+    'Static prompt load':     _row('Static prompt load').replace(' per agent', ''),
+}
+_page = next((pg.extract_text() for pg in r.pages
+              if 'Static prompt load' in pg.extract_text() and 'Registered contracts' in pg.extract_text()), None)
+if _page is None:
+    fails.append("the structure page (Figure / Value / Tier / Source / Changed) was not found")
+else:
+    _flat = re.sub(r'\s+', ' ', _page)
+    for _label, _value in _expect.items():
+        if f"{_label} {_value}" not in _flat:
+            fails.append(f"structure page: '{_label}' does not read '{_value}', which evidence.md holds")
+
 print("=== PASS ===" if not fails else "=== FAILURES ===")
 for x in fails: print(" !", x)
 for x in warns: print(" ~", x)

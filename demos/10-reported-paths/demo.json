@@ -1,0 +1,25 @@
+{
+  "name": "reported-paths",
+  "command": "demo:reported-paths",
+  "kind": "production path over fixture handoffs",
+  "extracted_on": "2026-09-27",
+  "extracted_from": [
+    { "path": "scripts/lib/reported-paths.ts", "symbols": ["scanReportedPaths", "valuesAt", "isPathShaped", "PATH_SHAPED_EXTRA", "ScanResult", "the {runDir} root rule", "UNEVALUATED on zero claims"] },
+    { "path": "contracts/enforcement/reported-path-fields.ts", "symbols": ["REPORTED_PATH_FIELDS", "the 16 declared leaves", "RUN_ARTIFACT_ROOTS"] },
+    { "path": "contracts/enforcement/reported-path-types.ts", "symbols": ["PathKind", "PathFieldRow", "filesystem | route | foreign"] },
+    { "path": "scripts/verify-reported-paths.ts", "symbols": ["selfTest legs: fabrication, honest-empty, written, anti-vacuous-zero-handoffs, route-never-resolved"] }
+  ],
+  "volatile": [
+    "The scanner, valuesAt, isPathShaped and PATH_SHAPED_EXTRA are unchanged. The declaration's 16 rows are unchanged in boundary, path, kind, author and roots; each row's prose note is shortened to one line.",
+    "The parity leg (discoverPathShapedFields, checkParity), which holds the declaration to the generated envelope schema on every commit, is not carried: the schema is not published here. The 16-row inventory is copied, not re-derived.",
+    "The mode switch (REPORTED_PATHS_MODE) and the report file are not carried; run.ts owns the exit contract. Four of the factory's nine self-test legs run here, over committed fixture handoffs instead of temp-planted ones.",
+    "The fixture handoffs carry only the fields the scanner reads (handoff_boundary, boundary_payload, route_reports); they are not full envelopes and are not schema-validated here."
+  ],
+  "tamper": {
+    "file": "demos/10-reported-paths/reported-paths.ts",
+    "find": "            if (existsSync(abs)) { exists = true; resolvedAt = abs; break; }",
+    "replace": "            if (abs) { exists = true; resolvedAt = abs; break; }",
+    "expect_exit": 2,
+    "expect_line": "SELF_TEST_FAILED — refusing to report a scan clean."
+  }
+}

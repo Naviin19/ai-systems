@@ -1,0 +1,7 @@
+{
+  "_readme": "What is on record for agent-ee: every filesystem instruction its playbook carries, with its class and line.",
+  "agent": "agent-ee",
+  "evidence": [
+    "NO_ROUTE — 11: test -f product-spec.md || exit 1"
+  ]
+}

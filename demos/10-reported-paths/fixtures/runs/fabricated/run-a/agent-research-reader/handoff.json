@@ -1,0 +1,10 @@
+{
+  "handoff_boundary": "READER_TO_GRAPH",
+  "boundary_payload": {
+    "session_id": "sess-1",
+    "notes_emitted": ["reading-notes/source.notes.md"],
+    "concept_count_total": 10,
+    "paradigm_anchors_used": ["anchor1"],
+    "ensemble_composition": "4-way-diverse"
+  }
+}

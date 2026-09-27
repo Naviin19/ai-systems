@@ -8,16 +8,26 @@ different reason.
 ## Does an index make the work better, or only cheaper?
 
 An agent here carries a list of what exists rather than the documents themselves, and fetches what it needs
-when it needs it. That this is cheaper is settled: the full corpus would be 1.78M tokens, and an agent
-carries between 7,000 and 19,000.
+when it needs it. Cheaper is settled. Better is not.
 
-Whether it produces *better* work is a separate question. One controlled run says yes — having the right
-document present raised the grade by 0.617, and carrying extra documents alongside it lowered the grade by
-0.813. But the thing being graded was a set exercise, not a real build, and three documents were tested
-rather than two hundred.
+Four positive effect sizes have been published and withdrawn, each by the next for an instrument defect:
++2.955 (an output cap returned empty answers, graded at the floor), +1.4 to +1.9 (a restricted analysis of
+contaminated data), +0.851 (a rubric derived from the skill body, and 47 baseline fetch-stubs scored as
+answers), then −0.179 on a rubric that names no skill. That instrument carries a positive control: handed
+the right vocabulary and the wrong question, it drops overall by 3.13 against a threshold pre-committed at
+2.0.
 
-The honest position: cheaper is proven, better is suggested, and the gap between a graded exercise and a
-product someone ships is where most of my doubt sits.
+A four-arm Gate 0 run on gpt-4o-mini finds the right document worth having and extra resident documents
+costly, but both effects are carried by one skill of three; a second run puts the relevant-document figure
+at +0.480. An independent resident-load ladder on sonnet-4 shows no slope across 15K–80K of resident text.
+
+A second arc is underway: 166 tasks drawn from recorded production failures, each carrying the fix that
+worked; a picker that pairs task to skill the way an agent does, by reading one-line descriptions, joined
+by majority of three; and a loss-rate guard that withholds the headline when more than 2% of cells are
+lost, because uneven timeouts across workers measure the harness rather than the corpus.
+
+What would settle it: a paired delta on production-failure tasks, under a rubric that discriminates and a
+positive control, on the model the factory dispatches, with no arm at the ceiling.
 
 ## Do typed handoffs actually stop errors spreading?
 
@@ -29,6 +39,10 @@ I cannot test it here. Of twenty-three places where one agent depends on another
 read in that detail. The checker is built and works; there is almost nothing for it to check. Getting an
 answer means declaring the other eighteen first, which is weeks of unglamorous work and the only route to
 knowing whether the premise holds.
+
+Typed handoffs stop shape errors. A well-formed handoff can still describe work that did not happen. The
+question now turns on the world check: every reported path resolved on disk, and fields the machine already
+knows removed from the form the model fills.
 
 ## Can a system learn from its own history without entrenching its mistakes?
 

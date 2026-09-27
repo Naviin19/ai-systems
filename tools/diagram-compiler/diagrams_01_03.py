@@ -22,7 +22,7 @@ def d01(bare=False):
 
     b.append(labelled_box(105, 196, 470, 52, "Gates",
                           "Halt, route back, or warn", "coral",
-                          right="39 CI gate ids", dashed=True))
+                          right="42 CI gate ids", dashed=True))
     b.append(conn(340, 262, 340, 250, "gray", opacity="0.5"))
 
     b.append(labelled_box(70, 262, 264, 58, "Build-time factory",
@@ -34,10 +34,10 @@ def d01(bare=False):
 
     b.append(box(40, 336, 600, 62, "teal", sw=1.75))
     b.append(text(58, 361, "Knowledge substrate", TITLE_PX, "teal", weight=500))
-    b.append(text(622, 361, "219 skill files", SUB_PX, "teal",
+    b.append(text(622, 361, "221 skill files", SUB_PX, "teal",
                   anchor="end", weight=500, mono=True))
-    b.append(ticks(58, 366, 110, "teal", h=6, gap=2.6, w=2.4))
-    b.append(ticks(58, 376, 109, "teal", h=6, gap=2.6, w=2.4))
+    b.append(ticks(58, 366, 111, "teal", h=6, gap=2.6, w=2.4))
+    b.append(ticks(58, 376, 110, "teal", h=6, gap=2.6, w=2.4))
 
     return svg("01", "The operating system",
                "A build side and a run side over one corpus; four products built, one specced.",
@@ -48,7 +48,7 @@ def d01(bare=False):
                "with no repository yet. Whitespace Hunter is the one with a public URL, "
                "whitespace-hunter.vercel.app. The file count is drawn as ticks because it must "
                "reconcile with plate 06.",
-               "audited - counts at factory 2fe954ea (219 files, 20 agents, 39 CI gate ids); "
+               "audited - counts at factory 5d5fb3f1 (221 files, 20 agents, 42 CI gate ids); "
                "product status from Vercel production deployments, 14 Sep",
                bare=bare)
 
@@ -57,12 +57,12 @@ def d01(bare=False):
 # Measured at factory 5739a97, verification/skill-ref-counts.json, per_skill[].skills_internal:
 # the number of other skill files that cite each skill. Every node is drawn at a radius read
 # from its own count, so a larger node is a skill more files cite.
-HUB_CITATIONS = [42, 40, 38, 38, 31, 30, 27, 26, 25, 23, 21, 20, 20]
+HUB_CITATIONS = [42, 40, 38, 38, 31, 30, 27, 27, 25, 23, 21, 20, 20]
 DECLARED_ONLY = 18          # master-prompt-architecture.md: declared Level 0, measures 18
 OTHER_CITATIONS = (
-    [19] * 2 + [17] * 3 + [16] * 2 + [15] * 2 + [14] + [13] * 3 + [12] * 2 + [11] * 5
-    + [10] * 8 + [9] * 2 + [8] * 4 + [7] * 9 + [6] * 12 + [5] * 15 + [4] * 22
-    + [3] * 27 + [2] * 39 + [1] * 22 + [0] * 25)
+    [19] * 2 + [17] * 3 + [16] * 2 + [15] * 2 + [14] * 2 + [13] * 3 + [12] * 3 + [11] * 7
+    + [10] * 4 + [9] * 2 + [8] * 5 + [7] * 9 + [6] * 13 + [5] * 13 + [4] * 22
+    + [3] * 29 + [2] * 40 + [1] * 21 + [0] * 25)
 LAYERS = ("Foundational", "Governance", "Coordination", "Engineering", "Connectors",
           "Intelligence", "Operational", "Tracking", "Meta")
 
@@ -78,8 +78,8 @@ def d02(bare=False):
     often each skill is cited, not by whom. The Level-0 set is fourteen, thirteen
     measured and one declared. The defect edge comes from agent 00's config, outside
     the skill graph, and the checks named are the ones that catch its class."""
-    assert len(HUB_CITATIONS) + 1 + len(OTHER_CITATIONS) == 219
-    b = [section(M, 96, "219 skill files, each drawn at its measured citation count")]
+    assert len(HUB_CITATIONS) + 1 + len(OTHER_CITATIONS) == 221
+    b = [section(M, 96, "221 skill files, each drawn at its measured citation count")]
 
     GX, GY, GW, GH = M, 118, CW, 210
     b.append(region(GX, GY, GW, GH, "gray", r=8))

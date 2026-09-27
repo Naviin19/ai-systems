@@ -19,7 +19,7 @@ cannot be.
 
 ## Four principles
 
-Twelve mechanisms follow. They are instances of four ideas, and the four are the part worth
+Thirteen mechanisms follow. They are instances of four ideas, and the four are the part worth
 carrying somewhere else.
 
 **1 · Put the deterministic thing first.** Numbers are computed before a model may mention them.
@@ -51,6 +51,11 @@ Observable means the system emits enough to know what it did. Testable means a m
 that against what it claimed. Governable means a person sets the policy and the system enforces it
 without being asked twice.
 
+Governable has a mechanical form. Every enforcement switch defaults to block, advisory or off, and
+an advisory default must carry, beside the switch, the written condition under which it becomes
+blocking; a gate refuses to let a new advisory switch ship without one. Fifty-eight switches, thirty
+of them advisory, each with its condition.
+
 ---
 
 ## 1. An agent carries an index, not a library
@@ -65,20 +70,30 @@ competes for attention with everything else, so the marginal document is not fre
 the relevant one. An index costs almost nothing and defers the price of a document until a task
 proves it is needed.
 
-The corpus is 219 documents, roughly 917,000 words. No agent holds it. Each receives a fixed
-behavioural kernel of 3,981 tokens — byte-identical across all twenty agents — plus a one-line index
-of the documents its manifest declares, averaging 1,710 tokens. Total resident context runs from
-7,347 to 19,068 tokens.
+The corpus is 221 documents, roughly 949,000 words. No agent holds it. The nine agents the
+orchestrator dispatches itself receive a fixed behavioural kernel of 1,594 tokens plus a one-line
+index of the documents their manifest declares, averaging 2,102 tokens; resident context runs from
+8,086 to 20,291 tokens, estimated over the real assembled prompt. The eleven producer agents receive
+their generated playbook as the whole prompt, in a session of their own.
 
 When a task matches an index line, the agent calls `load_skill(filename, section?)` and gets that
 section — and a request matching nothing returns the file's section list rather than an error
 string. A separate check refuses any new manifest entry citing a file over a thousand lines without
 naming a section, so the index cannot quietly decay back into a library.
 
-The trade was measured rather than assumed. A controlled four-arm run on this stack — two
-independent runs of twenty, 480 calls each — found that having the right document present raises
-output grade by 0.617, while carrying more documents alongside it *lowers* the grade by 0.813.
-Retrieval beats residency, and an index is how you get retrieval without paying for residency.
+The index line is itself an engineered surface. A dispatched agent elects a document from one
+sentence, so that sentence is measured: descriptions are rewritten under a pre-committed stop rule,
+a regression gate compares each rewrite's committed scorecard against the last, and a promiscuity
+probe elects against tasks flatly outside the domain — unclogging a sink, pruning a tomato plant —
+where the right answer is zero documents, so a description that grabs more than it should is caught
+without an answer key.
+
+The trade was measured, and the measurement is unresolved. A four-arm run on a small model found
+the right document present raising output grade and extra resident documents lowering it, both
+effects carried by one skill of three; on the model the factory dispatches, a skill-independent
+rubric with a positive control found no measurable benefit from loading a document at all.
+Retrieval is cheaper than residency; whether it is better is the open question in
+[Hypotheses](HYPOTHESES.md).
 
 ---
 
@@ -111,6 +126,12 @@ lose the only information that tells a caller what to do next.
 cache *misses* — because they never read a cache, and reporting them as hits would overstate what
 the cache did.
 
+The same discipline holds at the front of a build. The first agent reads the specification it
+validates and returns every issue as a typed triage entry carrying a resolution class and the
+operator's verdict; nothing defaults to accepted. An engineering decision an agent takes on the way
+is recorded the same way — constraints read first, at least three real options, the one chosen,
+and the observable condition that would flip it.
+
 ---
 
 ## 3. One schema language, and everything downstream is generated
@@ -128,6 +149,17 @@ to drift.
 those registered. The handoff envelope between agents is a discriminated union of 24 variants, keyed
 on the boundary each one crosses, and every variant's schema becomes a tool definition the producing
 model is forced to call.
+
+The envelope is a protocol, not a message. Every one carries its schema version, and the consumer
+negotiates it: the same major with a newer minor proceeds, because additive growth is what the
+contract permits; a different major is refused with both numbers named; an unreadable version is
+never defaulted. The envelope also records which model produced it and whether that fact was
+*stamped* by the orchestrator or *declared* by the agent, so a producer emitting its own handoff
+cannot claim its value was observed. Its impact score is derived from its components at both
+assembly seams, never authored. And whether a model from another vendor can author a valid handoff
+is measured as a matrix — every variant against each candidate, with the in-house model as a
+control row, and a cell the control fails is unusable rather than a finding. One such frontier
+authored all twenty-four.
 
 In the product that needed a second language, one canonical schema derives **three** targets — the
 TypeScript validator, the Python one, and the contract embedded in the model's own system prompt.
@@ -251,7 +283,41 @@ claiming a failure that really failed is honest and gets a corrector loop capped
 
 ---
 
-## 8. A detector for failures that look exactly like success
+## 8. A claim is checked against the world, not against its envelope
+
+*Verification — can a claim be checked against the world?*
+
+**A schema validates the shape of a claim, never the claim.**
+
+A handoff can be well-formed, hashed and committed and still describe work that did not happen;
+nothing that reads only the envelope can tell. So what the envelope claims about the world is
+checked against the world.
+
+Every path an agent reports is resolved against disk. The fields that may carry one are declared,
+not pattern-matched — sixteen leaves: eleven naming files, one a URL route that a name-matching
+check would call missing on every run, four belonging to other systems — and the declaration is
+held to the generated schema in both directions, so a new path-shaped field cannot ship undecided.
+Zero handoffs reports as unevaluated, never as clean.
+
+The stronger half is upstream. Fields a machine already knows are removed from the form the model
+fills: under forced tool use the agent cannot type them, the orchestrator fills them from what was
+actually written, and an agent-authored value is refused. What the agent produces travels as
+content, and the orchestrator writes the file before the handoff that names it, so claim and
+artifact come from one hand. A fabrication that cannot be represented does not need to be caught.
+
+What an agent may say about its own dispatch is typed too — `blocked`, `better_route`,
+`open_question` — with a subject, a statement in its own words, and two independent booleans:
+*did you take it*, *did it work*. Validation is lenient by design: a strict schema on the field
+for saying "blocked" would be a new way to be blocked. Each entry is printed inline as the handoff
+is written, before any gate can halt the run, copied verbatim into the receipt, and locked by
+content hash so it cannot be reworded under questioning. An agent with no sanctioned outlet finds
+an unsanctioned one, so every persistent surface the factory writes is inventoried — thirty-nine,
+twenty-one reaching a prompt or a session, nineteen of those rewrite-invisible — and a detector
+holds the inventory to the tree. It bans nothing; it makes every channel visible.
+
+---
+
+## 9. A detector for failures that look exactly like success
 
 *Failure observability — can failure masquerade as success?*
 
@@ -280,7 +346,7 @@ silent fallback.
 
 ---
 
-## 9. Deterministic gates vote before the judge is allowed to
+## 10. Deterministic gates vote before the judge is allowed to
 
 *Gating — can cheap certainty eliminate work before probabilistic judgement?*
 
@@ -309,9 +375,13 @@ product's own contract gates — parse success, lint blocker rate, reference res
 in the leaderboard rather than being dropped, and the harness deliberately writes nothing back into
 policy. A person picks.
 
+Release in the factory is decided the same way. An agent's own score drives its revision loop; the
+score the release gate reads comes from a judge in another model family, with the agent's
+self-reported scores redacted, and a score the producer authored fails the gate however high it is.
+
 ---
 
-## 10. A twenty-minute pipeline inside a thirteen-minute function
+## 11. A twenty-minute pipeline inside a thirteen-minute function
 
 *Runtime — can the system survive its operating environment?*
 
@@ -341,9 +411,16 @@ client clamping progress to its maximum, because replay would otherwise drop the
 to 10%, and the terminal frame emitted only after the result is stored, so nobody is told
 "complete" before the data is fetchable.
 
+In the factory, a model call routes through one gateway — policy, cost accounting, call log,
+circuit breaker — as a transport swap beneath an unchanged tool loop, and the swap is checked for
+what it would silently lose: the prompt-cache breakpoint and the cache token counts, neither of
+which changes an output token. The loop marks the newest block of its history each turn, so loaded
+documents and served sources are cached across turns; a forced final turn is sent unmarked, because
+it can read nothing; and an extraction cut off by a token limit is never cached as an empty result.
+
 ---
 
-## 11. A build's lessons outlive the build
+## 12. A build's lessons outlive the build
 
 *Learning — does experience improve future runs?*
 
@@ -369,7 +446,7 @@ promotion side — writing a note costs nothing, and delivery is what has to be 
 
 ---
 
-## 12. The brief box grades you while you type
+## 13. The brief box grades you while you type
 
 *Product surface — can these principles reach the user?*
 
@@ -405,7 +482,7 @@ a pinned one was observed floating across dated snapshots.
 
 ## What transfers
 
-The four principles at the top are the answer, and the twelve mechanisms are the evidence that
+The four principles at the top are the answer, and the thirteen mechanisms are the evidence that
 they were applied rather than asserted. Put the deterministic thing first. Make the failure mode
 visible by construction. Let the interface carry the discipline. Point the same scepticism at your
 own instruments.

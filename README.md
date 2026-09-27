@@ -12,7 +12,7 @@ contract-bound and recoverable.
 
 Twenty agent configurations are dispatched in dependency waves, each into its own git worktree. Every
 handoff between them is parsed against a typed contract and passed through a verification stack.
-Behind all of it sits one corpus of 219 engineering documents. No agent carries it. Each carries an
+Behind all of it sits one corpus of 221 engineering documents. No agent carries it. Each carries an
 index of what exists, and fetches what the work turns out to need.
 
 ```
@@ -20,7 +20,7 @@ git clone https://github.com/Naviin19/ai-systems && cd ai-systems
 npm ci && npm run demo
 ```
 
-Nine demos need no API key, no account and no network, and CI runs them on Linux, macOS and Windows
+Twelve demos need no API key, no account and no network, and CI runs them on Linux, macOS and Windows
 with every outbound connection refused. One demo does need a key, runs on your own machine against
 your own account, and lives in [`demos/live/`](demos/live/) — `npm run demo` never reaches it.
 
@@ -30,7 +30,7 @@ your own account, and lives in [`demos/live/`](demos/live/) — `npm run demo` n
 
 | Document | The question it answers |
 |---|---|
-| [**Engineering Probabilistic Systems**](docs/ENGINEERING.md) | What was built, and why does each mechanism have to exist? Twelve mechanisms on one dependency spine, each stage answering a question the one before it cannot — from knowledge and specification through contracts, orchestration and abstention to verification, runtime, learning and the product surface. |
+| [**Engineering Probabilistic Systems**](docs/ENGINEERING.md) | What was built, and why does each mechanism have to exist? Thirteen mechanisms on one dependency spine, each stage answering a question the one before it cannot — from knowledge and specification through contracts, orchestration and abstention to verification, runtime, learning and the product surface. |
 | [**The Systems Thesis**](docs/THE-SYSTEMS-THESIS.md) | What do I hold to be true about building these systems, and how strong is the evidence for each claim? |
 | [**Executable Expertise**](docs/EXECUTABLE-EXPERTISE.md) | Can domain expertise be compiled into a system, or only described to one? |
 | [**Brand as an API**](docs/BRAND-AS-AN-API.md) | What does that look like in one domain? A brand book produced by one product and consumed as a typed object by two others, over a graph of the marketing canon. |
@@ -42,10 +42,10 @@ If you read one, read the first.
 
 ![The operating system](docs/diagrams/01-operating-system.svg)
 
-## The eleven plates
+## The thirteen plates
 
 Each plate shows one behaviour of the system in operation.
-[`docs/architecture.md`](docs/architecture.md) carries all eleven in prose, for anything that does not
+[`docs/architecture.md`](docs/architecture.md) carries all thirteen in prose, for anything that does not
 render images.
 
 | # | Plate | What it shows | Evidence |
@@ -61,6 +61,8 @@ render images.
 | 09 | [Runtime engine](docs/diagrams/09-runtime-engine.svg) | The packages a shipped product runs on, and the product that runs on them | shipped · audited caller |
 | 10 | [Two-lane execution](docs/diagrams/10-two-lane-execution.svg) | The constraint is scoped, not total | shipped · never run live |
 | 11 | [Prompts as specifications](docs/diagrams/11-prompts-as-specifications.svg) | A prompt is an artifact with a declared shape, graded before it is used | shipped · audited floors |
+| 12 | [Writable surface](docs/diagrams/12-writable-surface.svg) | Every place a note can land is on a row, and a detector holds the rows to the tree | shipped · advisory gate · audited counts |
+| 13 | [Gate ladder](docs/diagrams/13-gate-ladder.svg) | Enforcement is a ladder, not a wall: block, advisory with a written condition, off | shipped · audited counts |
 
 The reference set, with every plate, its reading and the evidence behind each figure, is
 [`docs/ai-operating-system.pdf`](docs/ai-operating-system.pdf). With Python and
@@ -70,7 +72,7 @@ diagrams:verify` regenerates the plates, checks every count on them against
 
 ## Demos
 
-Nine demos run code extracted from the factory and the products built with it.
+Twelve demos run code extracted from the factory and the products built with it.
 
 | Demo | Plate | Proves |
 |---|---|---|
@@ -83,6 +85,9 @@ Nine demos run code extracted from the factory and the products built with it.
 | [powerbar](demos/07-powerbar/) | — | Input quality is scored as the user types, and the interface does not depend on a model being reachable |
 | [silence](demos/08-silence/) | 05 | A detector must catch a defect it planted itself before it may report a corpus clean |
 | [abstain](demos/09-abstain/) | — | A signal with nothing to score on returns null rather than zero, and the composite renormalises over what reported |
+| [reported-paths](demos/10-reported-paths/) | — | Every path a handoff names is resolved against disk; a URL route is never a missing file, and zero handoffs is unevaluated, not clean |
+| [write-surface](demos/11-write-surface/) | 12 | A file that writes to disk and sits on no row, and a free-text key the envelope does not declare, are found before the tree is called clean |
+| [emitter-instructions](demos/12-emitter-instructions/) | — | An instruction an agent cannot perform is classed by the route it lacks, and a comment or a prose bullet is left alone |
 
 ## Products
 
@@ -101,7 +106,8 @@ private; a link below opens the running product.
 Every figure carries an evidence tier — **shipped** means a named file implements it, **audited**
 means counted at a named commit or on a named date — and nothing is tiered higher than its weakest
 input. Every figure is checked against the factory's code at a named commit by a script that
-resolves each citation to the lines that show it.
+resolves each citation to the lines that show it; counts and citations each carry their own
+date, and a manifest lists how every count is derived.
 [`docs/evidence.md`](docs/evidence.md) records how every figure was measured, and the diagram
 compiler checks the artwork against it, so a figure and the plate that draws it cannot be edited
 apart.

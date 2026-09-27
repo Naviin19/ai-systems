@@ -1,0 +1,7 @@
+{
+  "_readme": "What is already on record for the self-test playbook. One line is known; every other instruction in the playbook is new to the inventory.",
+  "agent": "agent-aa",
+  "evidence": [
+    "VERIFY_MISMATCH — 2: test -f already-known.md || exit 1"
+  ]
+}

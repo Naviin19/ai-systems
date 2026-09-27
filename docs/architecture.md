@@ -1,6 +1,6 @@
 # Architecture
 
-The eleven behaviours the plates show, in prose.
+The thirteen behaviours the plates show, in prose.
 
 Every section below is also a plate in `docs/diagrams/`. This file exists because some readers cannot see images — text-extracting systems, terminal readers, anything consuming the repository as plain text — and what survives only as a picture never reaches them. Nothing here depends on a diagram rendering.
 
@@ -28,7 +28,7 @@ One corpus of skill files carries both halves, and the layers taper, narrower ab
 
 [Whitespace Hunter](https://whitespace-hunter.vercel.app), live since 1 September, is a product a reader can open without trusting anything in this repository.
 
-*Evidence: audited — 219 skill files, 20 agents and 39 CI gate ids, counted at factory `2fe954ea`; product status from Vercel production deployments on 14 September.*
+*Evidence: audited — 221 skill files, 20 agents and 42 CI gate ids, counted at factory `5d5fb3f1`; product status from Vercel production deployments on 14 September.*
 
 ## 2. The knowledge substrate
 
@@ -68,7 +68,7 @@ Two surfaces are kept by hand and can drift: 46 per-agent input and output schem
 
 Handoffs are one contract, `HandoffEnvelopeSchema`, a union of 24 boundary variants, and each emitted payload is parsed against it before anything downstream reads it. Separately, in CI, `contract-compiler.ts` (R31) takes each of the 23 dependency edges, resolves the producer's real variant, and checks every read the consumer declares by structural subtyping. Five of the 23 edge declarations carry typed reads so far.
 
-`blast-radius.ts` walks the registry's import graph breadth-first, so what a schema change reaches is computed: schemas, tables, and the 32 prompt files that name a schema. It is run by hand. The widest reach in the registry today is one schema with five importers. Agent 12, a different mechanism, derives each product's prompt library in TypeScript without a model call.
+`blast-radius.ts` walks the registry's import graph breadth-first, so what a schema change reaches is computed: schemas, tables, and the 32 prompt files that name a schema. It is run by hand. The widest reach in the registry today is five importers, shared by three schemas. Agent 12, a different mechanism, derives each product's prompt library in TypeScript without a model call.
 
 *Evidence: shipped — `generate-json-schemas.ts`, `contracts-vs-json-schema.ts` (R22), `generate-registry.ts` (R32), `contract-compiler.ts` (R31), `HandoffEnvelopeSchema`, `blast-radius.ts`. Audited — 48 contracts, 48 generated schemas and 46 hand-kept schemas.*
 
@@ -163,6 +163,26 @@ The floor is not one number. Thirty surfaces each carry their own, at five level
 A prompt below its floor is rewritten once automatically and blocked on a second failure. What the gate does not reach is drawn on the plate: the score judges a prompt, not the output that prompt produces, and nothing connects the two. Of 1,116 graded prompts, 313 sit below their floor and are in the corpus anyway — the gate holds what passes through it, not what is already there.
 
 *Evidence: shipped — `craftsmanship-gate.ts`, `enrich-prompt.ts`, `SURFACE_FLOORS` in `craftsmanship-surface-policy.ts`, `prompt-multiplier.md`. Audited — 30 surfaces at five floor levels, and 1,116 graded prompts of which 313 below floor.*
+
+## 12. The writable surface
+
+Any persistent place more than one agent can write and later read can carry a message, so every such place is on file.
+
+`writable-surface-registry.json` holds one row per persistent surface the factory writes: who writes it, who reads it back and where, whether the content is free text, what the write path permits, whether a rewrite by another process would be noticed, and what watches it. There are 39 surfaces. 21 reach a model — 16 an agent's prompt, 5 a session's context at start. Of those 21, a rewrite by another process would go unnoticed on 19, and 4 are watched by nothing. The handoff envelope declares 18 free-text keys, each with its channel class. `detect-unregistered-write-surfaces.mjs` holds the registry to the tree inside `verify-all`: a file that writes to disk and sits on no row, an anchor that has left its file, an allowlisted file aimed at a path into a prompt, and a free-text key whose declared count is not the schema's. It is advisory, `WRITE_SURFACE_GATE_MODE` defaulting to WARN.
+
+An agent's statement about its own dispatch has a typed field, `route_reports[]`: at most 10 entries, each of kind `blocked`, `better_route` or `open_question`, with a `subject`, a `statement` in the agent's own words, and `executed` and `worked` answered separately. The orchestrator emits one `ROUTE_REPORT` event per entry when `handoff.json` is written, the receipt copies each entry verbatim as the agent's words, and the evidence lock commits it.
+
+*Evidence: shipped — `writable-surface-registry.json`, `detect-unregistered-write-surfaces.mjs`, `route-report.ts`, `ROUTE_REPORT` in the orchestrator, `receipt.ts`, `evidence-commitment.ts`. Audited — 39 surfaces, 21 reaching a prompt or a session, 19 rewrite-invisible, 4 unwatched, 18 free-text envelope keys, at factory `5d5fb3f1`.*
+
+## 13. The gate ladder
+
+A gate is a switch with three settings, and moving it is a recorded act.
+
+58 mode-gated switches are read through one module, `lib/env-mode.ts`. 20 default to BLOCK, 30 to WARN, 2 to OFF and 6 carry a bespoke setting. Every WARN default has a written flip condition beside it, and `verify-flip-conditions.mjs` fails a new WARN default without one; its exemption ledger, `flip-condition-exemptions.json`, is empty. 7 switches reached BLOCK by a recorded flip.
+
+A gate reports PASS, FAIL or UNEVALUATED, and UNEVALUATED is never a pass. Exit 2 means a gate refused to run, and no mode downgrades it.
+
+*Evidence: shipped — `env-mode.ts`, `verify-flip-conditions.mjs`, `flip-condition-exemptions.json`, `verify-all.ts`. Audited — 58 switches, 20 BLOCK, 30 WARN, 2 OFF, 6 bespoke, 0 exemptions, 7 recorded flips, at factory `5d5fb3f1`.*
 
 ---
 

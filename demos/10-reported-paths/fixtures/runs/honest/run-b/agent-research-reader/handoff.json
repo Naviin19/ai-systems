@@ -1,0 +1,12 @@
+{
+  "handoff_boundary": "READER_TO_GRAPH",
+  "boundary_payload": {
+    "session_id": "session-123",
+    "notes_emitted": [],
+    "concept_count_total": 0,
+    "ensemble_composition": "N/A"
+  },
+  "route_reports": [
+    { "kind": "blocked", "subject": { "type": "input", "ref": "research-corpus/" } }
+  ]
+}

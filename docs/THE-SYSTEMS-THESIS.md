@@ -12,15 +12,16 @@ what that required.
 Don't give an agent knowledge. Give it the ability to acquire knowledge. Awareness is resident; content is
 fetched. Every agent carries an index of what exists; any entry loads only when asked for.
 
-A four-arm controlled run — two independent n=20 arms, 480 calls each — found that having the right
-document present raises output grade by **+0.617**, while carrying more documents alongside it lowers grade
-by **−0.813**. Which other documents accompany it was not shown to matter.
+A four-arm run on a small model found the right document present raising output grade and extra resident
+documents lowering it, both carried by one skill of three. On the model the factory dispatches, a
+skill-independent rubric with a positive control found no measurable benefit. Whether an index makes work
+better rather than cheaper is open.
 
-The corpus is 219 documents: **1.78M tokens if an agent carried all of it.** An agent carries **7.3K–19.1K**,
-measured rather than estimated, reaching the whole corpus through an index averaging **1.7K** — a tenth of
-a percent of what it addresses. The index is the entire retrieval surface, which is why four documents once
-became unreachable when a parsing defect collapsed their visible line to their filename. They stayed
-present, referenced and counted, and could never be chosen.
+The corpus is 221 documents: **1.80M tokens if an agent carried all of it.** An agent carries **8.1K–20.3K**,
+by the factory's chars/4 estimate over its real assembled prompt, reaching the whole corpus through an index
+averaging **2.1K** — a tenth of a percent of what it addresses. The index is the entire retrieval surface,
+which is why four documents once became unreachable when a parsing defect collapsed their visible line to
+their filename. They stayed present, referenced and counted, and could never be chosen.
 
 ## 2 · Probabilistic workers need deterministic interfaces
 
@@ -75,6 +76,10 @@ receipt's separability statement is a schema literal, so a receipt claiming more
 build. The instrumentation earns its keep by producing uncomfortable numbers — 45 documents given and 0
 cited, in the fullest receipt that exists.
 
+A claim is checked against the world, not only its envelope. Every path an agent reports is resolved on
+disk. Fields the machine already knows are removed from the form the model fills. A typed
+`blocked` / `better_route` / `open_question` report is locked at emission and cannot be reworded after.
+
 ## 6 · Failures become invariants
 
 The unit of reliability engineering is not the fix. It is: defect → understanding → invariant → automated
@@ -114,6 +119,9 @@ candidate rule; one session, however often repeated, decays. **Decision ledger:*
 
 A defect found during an audit became a filed proposal and merged as a change to the governing document, by
 that path, with commits at every step.
+
+The gates run on 58 switches. 30 are advisory, and each carries a written condition that ends it; a gate
+refuses a new advisory switch without one. UNEVALUATED is never a pass.
 
 ---
 

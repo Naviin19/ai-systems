@@ -244,21 +244,21 @@ def d06(bare=False):
     b.append(text(FX + 24, 130, "Full inlining: 196K to 521K tokens", SUB_PX, ink="mute"))
     b.append(text(FX + 24, 150, "Kernel and index: 7K to 31K tokens", TITLE_PX, ink="mute"))
     b.append(text(FX + 24, 168, "Per agent, estimated, 1 June 2026", SUB_PX, ink="mute"))
-    b.append(text(FX + 24, 186, "Today 6.9K to 17.7K, estimated 14 Sep", SUB_PX, ink="mute"))
+    b.append(text(FX + 24, 186, "Today 8.1K to 20.3K, estimated 27 Sep", SUB_PX, ink="mute"))
 
     for y, name, sub, role in [
-            (200, "Agent kernel",               "Inlined into every assembled prompt", "teal"),
+            (200, "Agent kernel",               "Nine agents inline it; eleven producers do not", "teal"),
             (256, "Skill citation index",       "One @skill line and its description", "teal"),
             (312, "load_skill(file, §section)", "A numbered or named section",         "gray")]:
         b.append(labelled_box(FX + 16, y, FW - 32, 48, name, sub, role))
     b.append(text(FX + 24, 386, "Also resident: step plan and lessons", SUB_PX, ink="mute"))
 
     GX, GY, cols = 388, 112, 20
-    for i in range(219):
+    for i in range(221):
         b.append(f'<rect x="{GX + (i % cols) * 13}" y="{GY + (i // cols) * 13}" '
                  f'width="7" height="9" rx="0" fill="{L("gray","m")}" '
                  f'class="gray-m"/>')
-    b.append(text(GX, GY + 166, "219 files", TITLE_PX, "gray"))
+    b.append(text(GX, GY + 166, "221 files", TITLE_PX, "gray"))
     b.append(text(GX, GY + 184, "Paged in on demand, except the kernel", SUB_PX, "gray",
                   opacity="0.72"))
 

@@ -1,0 +1,9 @@
+{
+  "handoff_boundary": "FRONTEND_CORE_TO_BROWSER_TESTING",
+  "boundary_payload": {
+    "golden_master_routes": [
+      { "path": "/dashboard" },
+      { "path": "/settings" }
+    ]
+  }
+}

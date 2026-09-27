@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HandoffEnvelope, reduced to two boundaries",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "handoff_boundary": { "type": "string", "const": "A_TO_B" },
+        "handoff_id": { "type": "string", "format": "uuid" },
+        "schema_version": { "type": "string", "const": "1.4" },
+        "decisions_made": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "description": { "type": "string" },
+              "tier": { "type": "string", "enum": ["structural", "cosmetic"] }
+            }
+          }
+        },
+        "route_reports": {
+          "type": "array",
+          "maxItems": 10,
+          "items": {
+            "type": "object",
+            "properties": {
+              "kind": { "type": "string", "enum": ["blocked", "better_route", "open_question"] },
+              "subject": { "type": "string" },
+              "statement": { "type": "string", "maxLength": 2000 }
+            }
+          }
+        },
+        "boundary_payload": {
+          "type": "object",
+          "properties": {
+            "summary": { "type": "string", "maxLength": 50 },
+            "extra": { "type": "object", "additionalProperties": {} }
+          }
+        }
+      }
+    },
+    {
+      "type": "object",
+      "properties": {
+        "handoff_boundary": { "type": "string", "const": "B_TO_C" },
+        "handoff_id": { "type": "string", "format": "uuid" },
+        "schema_version": { "type": "string", "const": "1.4" },
+        "decisions_made": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "description": { "type": "string" },
+              "tier": { "type": "string", "enum": ["structural", "cosmetic"] }
+            }
+          }
+        },
+        "route_reports": {
+          "type": "array",
+          "maxItems": 10,
+          "items": {
+            "type": "object",
+            "properties": {
+              "kind": { "type": "string", "enum": ["blocked", "better_route", "open_question"] },
+              "subject": { "type": "string" },
+              "statement": { "type": "string", "maxLength": 2000 }
+            }
+          }
+        },
+        "boundary_payload": {
+          "type": "object",
+          "properties": {
+            "files_written": { "type": "array", "items": { "type": "string", "pattern": "^[^/].*$" } },
+            "notes": { "type": "string" }
+          }
+        }
+      }
+    }
+  ]
+}

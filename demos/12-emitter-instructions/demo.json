@@ -1,0 +1,22 @@
+{
+  "name": "emitter-instructions",
+  "command": "demo:emitter-instructions",
+  "kind": "reduced harness around the production path",
+  "extracted_on": "2026-09-27",
+  "extracted_from": [
+    { "path": "scripts/verify-emitter-instructions.mjs", "symbols": ["run", "selfTest", "the planted shapes", "SELF-TEST FAIL exit 2", "exit 0 pass / 1 findings / 2 could not run"] },
+    { "path": "scripts/lib/emitter-scan.mjs", "symbols": ["FS_COMMANDS", "FILE_TOKEN", "commandSpans", "fsCommandIn", "scanStepFile", "classify", "norm", "accountedFor"] }
+  ],
+  "volatile": [
+    "The production detector re-derives the emitter-path roster from configs/ and reads eight real playbooks against verification/lawa5-emitter-inventory.json; this demo names one agent and reads one fixture playbook against a fixture inventory.",
+    "The production gate runs under EMITTER_INSTRUCTIONS_MODE (OFF | WARN | BLOCK) and prints a coverage caveat: it cannot see npx, node, for-loop bodies or prose. This demo has no mode switch; findings exit 1.",
+    "The scanner and the classifier are the production text: no AST, no model."
+  ],
+  "tamper": {
+    "file": "demos/12-emitter-instructions/fixtures/self-test/agent-aa-steps.md",
+    "find": "`cat some-file-that-nobody-produces.md | jq .planted`",
+    "replace": "the `planted` field you emit is present",
+    "expect_exit": 2,
+    "expect_line": "SELF_TEST_FAILED — refusing to scan the playbook."
+  }
+}

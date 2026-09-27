@@ -34,18 +34,27 @@ for f in FILES:
         if float(px) not in SCALE:
             fails.append(f"{os.path.basename(f)}: unexpected font-size {px}")
 
-# The expected count is the number of plate modules that exist, so adding a
-# plate cannot leave the gate asserting the old number.
-EXPECTED_PLATES = len(glob.glob(os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                             'diagrams_*.py')))
-_declared = sum(len(re.findall(r'^\s*\("(\d\d)"',
-                open(m, encoding='utf-8').read(), re.M))
-                for m in glob.glob(os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                                'diagrams_*.py')))
+# The plates the modules declare -- every svg("NN", ...) a module returns -- must be exactly
+# the plates the build emitted. Derived from the sources, so adding a plate cannot leave this
+# asserting an old number; a module that declares a plate the build did not write, or a file
+# no module declares, fails by name.
+_HERE = os.path.dirname(os.path.abspath(__file__))
+DECLARED = set()
+for m in glob.glob(os.path.join(_HERE, 'diagrams_*.py')):
+    DECLARED |= set(re.findall(r'\bsvg\("(\d\d)"', open(m, encoding='utf-8').read()))
 if len(FILES) < 1:
     fails.append("no plates were emitted -- the gate has nothing to check")
 
 d = {os.path.basename(x)[:2]: x for x in FILES}
+if not DECLARED:
+    fails.append("no plate module declares a plate -- the gate cannot see the set")
+elif set(d) != DECLARED:
+    # Report and stop here: every check below opens plates by id, so a missing one would
+    # crash before this finding could be printed.
+    fails.append("plate set drifted: declared %s, emitted %s" % (sorted(DECLARED), sorted(d)))
+    print("=== FAILURES ===")
+    for x in fails: print(" !", x)
+    sys.exit(1)
 
 
 def small_rects(key, maxw):
@@ -115,7 +124,13 @@ TICKS = [("03", "coral", "preflight_features"),
          ("05", "coral", "route_back_cap"),
          ("07", "coral", "hardening_clean_rounds"),
          ("07", "gray",  "hardening_round_cap"),
-         ("08", "coral", "promotion_sessions")]
+         ("08", "coral", "promotion_sessions"),
+         ("12", "gray",  "write_surfaces"),
+         ("12", "teal",  "surfaces_reaching"),
+         ("12", "coral", "surfaces_rewrite_invisible"),
+         ("13", "coral", "switches_block"),
+         ("13", "teal",  "switches_advisory"),
+         ("13", "gray",  "switches_outside_ladder")]
 for k, role, key in TICKS:
     want = expect(key)
     if want is None:
@@ -131,6 +146,15 @@ if {"build_agents", "research_agents", "total_agents"} <= set(DRAWN):
     if parts != DRAWN["total_agents"]["value"]:
         fails.append(f"evidence doc is internally inconsistent: build + research = {parts}, "
                      f"total_agents = {DRAWN['total_agents']['value']}")
+
+# plate 13 draws each recorded flip as a teal dot (dot() emits the mark class, role-m, not
+# the fill class the hub circles carry); the count is a figure like any other
+if "flips_recorded" in DRAWN and "13" in d:
+    got = len(re.findall(r'<circle [^>]*class="teal-m"', open(d["13"], encoding='utf-8').read()))
+    want = DRAWN["flips_recorded"]["value"]
+    (fails if got != want else warns).append(
+        f"d13: {got} flip dots, evidence doc says flips_recorded = {want}"
+        + ("" if got == want else "  MISMATCH"))
 
 # plate 02 draws each measured hub as a teal circle; the count is a figure like any other
 if "level0_hubs" in DRAWN:
@@ -149,8 +173,21 @@ for key, spec in DRAWN.items():
                              f"unit ticks -- under the reconciliation rule that reads as "
                              f"agreement with an unrelated count of the same size")
 
+# a figure declared form=label is written on the plate as text, not drawn as marks; the
+# digits must be present in the plate's text, whole, so a label cannot silently go stale
+for key, spec in DRAWN.items():
+    if spec.get("form") == "label":
+        for k in spec.get("plates", []):
+            if k not in d:
+                continue
+            words = " ".join(re.findall(r'<text[^>]*>([^<]*)</text>',
+                                        open(d[k], encoding='utf-8').read()))
+            if not re.search(r'(?<![\d,.])%s(?![\d,.])' % re.escape(str(spec["value"])), words):
+                fails.append(f"d{k}: '{key}' is declared form=label but the plate's text "
+                             f"does not carry {spec['value']}")
+
 # --- 3. every drawn figure is accounted for in the evidence document ----------
-for n in ("218", "0.82", "0.70", "0.10", "30%", "20%", "SHA-256",
+for n in ("221", "0.82", "0.70", "0.10", "30%", "20%", "SHA-256",
           "classifyRouteBack", "receipt.ts", "skill-ref-count.ts", "contract-compiler.ts",
           "askDeclareHot", "divergence_id", "AGENTS.md", "5739a97"):
     if n not in ev:
@@ -179,7 +216,7 @@ if arch:
     import re as _re
     heads = _re.findall(r'^## (\d+)\. (.+)$', arch, _re.M)
     nums = {int(n) for n, _ in heads}
-    for i in range(1, 11):
+    for i in range(1, len(FILES) + 1):
         if i not in nums:
             fails.append(f"architecture.md has no section for plate {i:02d}")
     for f in FILES:

@@ -1,0 +1,301 @@
+{
+  "what": "Every figure the public ai-systems repo publishes about this factory, with the command that derives it. Consumers run the derivation; they do not copy the value. A number handed over in prose is stale the moment main moves, and main moves several times a day.",
+  "generated_from": "the skill-ecosystem working tree; no value in this file is hardcoded and no expected value is stored",
+  "figures": [
+    {
+      "id": "skill_files",
+      "value": 221,
+      "derivation": "count *.md under skills/*/ excluding CLAUDE.md",
+      "compare": "scalar",
+      "discovery": "from the ai-systems repo root: grep -rn \"\\b<value>\\b\" . | grep -v \"/node_modules/\" | grep -v \"/\\.git/\" | grep -v \"^\\./\\.build/\" — substitute the PREVIOUS value to find what must move, and the NEW one afterwards to prove nothing was missed",
+      "not_sites": [
+        "tools/diagram-compiler/diagrams_04_06.py — text(RX, 218, \"classifyRouteBack\", ...): a y-COORDINATE that happens to equal the figure. Excluded by hand by skill-ecosystem-00 and recorded here so nobody re-derives the exclusion.",
+        "demos/03-routeback/fixtures/cross-family-replay.jsonl — a recorded judge calibration sample. A replay fixture is EVIDENCE OF A PAST RUN and is never edited to match today's corpus."
+      ],
+      "note": "Two of the sites below are HISTORY, not live claims, and a redraw must leave them alone: docs/evidence.md section 5 and build_pdf.py's change table both record \"152, contested -> 218, audited\", which is what that revision settled. Two more are PINNED to a commit (\"counts at factory 5739a97\"), and a figure stated as-of a commit does not go stale when main moves — it is the correct way to publish a churning number, and the rest of the corpus would be better off copying it.",
+      "published": [
+        {
+          "file": "docs/evidence.md",
+          "form": "machine-readable",
+          "locator": "section 9 \"drawn\" block",
+          "key": "skill_files"
+        },
+        {
+          "file": "docs/evidence.md",
+          "form": "machine-readable",
+          "locator": "the figure table row beginning \"| Skill files |\""
+        },
+        {
+          "file": "docs/evidence.md",
+          "form": "prose",
+          "locator": "section 5 change table, row \"| 01, 06 |\" — HISTORY, do not update"
+        },
+        {
+          "file": "README.md",
+          "form": "prose",
+          "locator": "grep -n \"one corpus of\""
+        },
+        {
+          "file": "demos/README.md",
+          "form": "prose",
+          "locator": "the row for demo 02, \"the factory's N skill files\""
+        },
+        {
+          "file": "docs/architecture.md",
+          "form": "prose",
+          "locator": "grep -n \"The corpus is\" and \"skill files, which agents cite\""
+        },
+        {
+          "file": "docs/architecture.md",
+          "form": "prose",
+          "locator": "the Evidence italic under the opening section — PINNED to factory 5739a97, do not update"
+        },
+        {
+          "file": "docs/architecture.md",
+          "form": "prose",
+          "locator": "grep -n \"files in nine layers\" — the wording the old value-pinned locator could not see"
+        },
+        {
+          "file": "docs/architecture.md",
+          "form": "prose",
+          "locator": "the closing \"None of the figures the plates draw is contested\" paragraph"
+        },
+        {
+          "file": "tools/diagram-compiler/diagrams_01_03.py",
+          "form": "interlock",
+          "locator": "grep -n \"len(HUB_CITATIONS)\" — assert len(HUB_CITATIONS) + 1 + len(OTHER_CITATIONS) == N. The strongest guarantee on this figure anywhere: a redraw that forgets it FAILS THE BUILD instead of shipping quietly. It also makes the arrays a partition of the WHOLE corpus, so a parked skill that cites nothing still has to be added to OTHER_CITATIONS."
+        },
+        {
+          "file": "tools/diagram-compiler/diagrams_01_03.py",
+          "form": "drawn",
+          "locator": "grep -n \"ticks(\" on plate 01 — one tick mark PER FILE, so the count is the geometry"
+        },
+        {
+          "file": "tools/diagram-compiler/diagrams_01_03.py",
+          "form": "prose",
+          "locator": "the plate 01 caption text and the plate 02 section heading"
+        },
+        {
+          "file": "tools/diagram-compiler/diagrams_04_06.py",
+          "form": "drawn",
+          "locator": "grep -n \"for i in range(\" on plate 06 — one rect PER FILE"
+        },
+        {
+          "file": "tools/diagram-compiler/diagrams_04_06.py",
+          "form": "prose",
+          "locator": "the \"N files\" label beside that grid"
+        },
+        {
+          "file": "tools/diagram-compiler/build_pdf.py",
+          "form": "prose",
+          "locator": "the lede sentence and the evidence chip tuple"
+        },
+        {
+          "file": "tools/diagram-compiler/build_pdf.py",
+          "form": "prose",
+          "locator": "the contested-figures table row \"Skill files\" — HISTORY, do not update"
+        },
+        {
+          "file": "tools/diagram-compiler/build_pdf.py",
+          "form": "prose",
+          "locator": "the audited-figures table row \"Skill files\""
+        },
+        {
+          "file": "tools/diagram-compiler/verify.py",
+          "form": "machine-readable",
+          "locator": "the mention-probe tuple — the verifier's own list of figures to look for"
+        },
+        {
+          "file": "docs/diagrams/*.svg",
+          "form": "generated",
+          "locator": "5 tracked plates carry the rendered figure; REBUILD from the compilers, never hand-edit"
+        },
+        {
+          "file": "docs/ai-operating-system.pdf",
+          "form": "generated",
+          "locator": "rebuilt by build_pdf.py"
+        }
+      ]
+    },
+    {
+      "id": "ci_gate_ids",
+      "value": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39
+      ],
+      "compare": "element-wise",
+      "derivation": "scripts/verify-all.ts, matchAll(/^console.log('R(d{1,2}) /gm) - ANCHORED on the registration line",
+      "discovery": "from the ai-systems repo root: grep -rn \"\\b<value>\\b\" . | grep -v \"/node_modules/\" | grep -v \"/\\.git/\" | grep -v \"^\\./\\.build/\" on EACH id, plus grep -rn \"R1-R[0-9]\" for RANGE claims — a range names no individual id, so no single-value sweep will ever find one",
+      "published": [
+        {
+          "file": "docs/evidence.md",
+          "form": "machine-readable",
+          "locator": "section 9 \"drawn\" block",
+          "key": "ci_gate_ids"
+        },
+        {
+          "file": "docs/evidence.md",
+          "form": "machine-readable",
+          "locator": "section 9 \"stated_not_drawn\" block",
+          "key": "ci_gate_blocks"
+        },
+        {
+          "file": "tools/diagram-compiler/diagrams_01_03.py",
+          "form": "drawn",
+          "locator": "plate 01"
+        }
+      ],
+      "note": "NOT a bare R-token grep. That counts the serial-ownership comment and published 36 against a real 34 on 2026-09-20. R29 gateNumbers() uses this same anchored rule."
+    },
+    {
+      "id": "ci_gate_count",
+      "value": 39,
+      "derivation": "the length of ci_gate_ids",
+      "compare": "scalar",
+      "discovery": "from the ai-systems repo root: grep -rn \"\\b<value>\\b\" . | grep -v \"/node_modules/\" | grep -v \"/\\.git/\" | grep -v \"^\\./\\.build/\" — this figure is also stated inside prose carrying skill_files, so a sweep for either finds sites for both",
+      "published": [
+        {
+          "file": "docs/evidence.md",
+          "form": "machine-readable",
+          "locator": "section 9 \"stated_not_drawn\" block",
+          "key": "ci_gate_blocks"
+        }
+      ]
+    },
+    {
+      "id": "health_checks",
+      "value": 36,
+      "derivation": "count /^**⚡ Check d+:/gm in root CLAUDE.md",
+      "compare": "scalar",
+      "discovery": "from the ai-systems repo root: grep -rn \"\\b<value>\\b\" . | grep -v \"/node_modules/\" | grep -v \"/\\.git/\" | grep -v \"^\\./\\.build/\"",
+      "published": [
+        {
+          "file": "docs/evidence.md",
+          "form": "machine-readable",
+          "locator": "section 9 \"stated_not_drawn\" block",
+          "key": "health_checks"
+        }
+      ]
+    },
+    {
+      "id": "retired_skills",
+      "value": 30,
+      "derivation": "skills/meta/retired-skills.json, retired[].length",
+      "compare": "scalar",
+      "discovery": "from the ai-systems repo root: grep -rn \"\\b<value>\\b\" . | grep -v \"/node_modules/\" | grep -v \"/\\.git/\" | grep -v \"^\\./\\.build/\"",
+      "published": [
+        {
+          "file": "docs/evidence.md",
+          "form": "machine-readable",
+          "locator": "section 9 \"stated_not_drawn\" block",
+          "key": "retired_skills"
+        }
+      ]
+    },
+    {
+      "id": "skills_in_manifests",
+      "value": 191,
+      "derivation": "node scripts/verify-playbook-skills.js, the \"N referenced\" figure (it prints to STDERR)",
+      "compare": "scalar",
+      "discovery": "from the ai-systems repo root: grep -rn \"\\b<value>\\b\" . | grep -v \"/node_modules/\" | grep -v \"/\\.git/\" | grep -v \"^\\./\\.build/\"",
+      "published": [
+        {
+          "file": "docs/evidence.md",
+          "form": "machine-readable",
+          "locator": "section 9 \"stated_not_drawn\" block",
+          "key": "skills_in_manifests"
+        }
+      ]
+    },
+    {
+      "id": "plate02_hub_array",
+      "value": [
+        42,
+        40,
+        38,
+        38,
+        31,
+        30,
+        27,
+        27,
+        25,
+        23,
+        21,
+        20,
+        20
+      ],
+      "derivation": "verification/skill-ref-counts.json, per_skill[].skills_internal >= 20, descending",
+      "compare": "element-wise",
+      "discovery": "from the ai-systems repo root: grep -rn \"\\b<value>\\b\" . | grep -v \"/node_modules/\" | grep -v \"/\\.git/\" | grep -v \"^\\./\\.build/\" on EACH element, plus grep -n \"HUB_CITATIONS\" for the source list the node radii are computed from",
+      "published": [
+        {
+          "file": "tools/diagram-compiler/diagrams_01_03.py",
+          "form": "drawn",
+          "locator": "grep -n \"^HUB_CITATIONS = \" - one node radius per element, in order"
+        },
+        {
+          "file": "docs/evidence.md",
+          "form": "machine-readable",
+          "locator": "section 9 \"drawn\" block - the COUNT only, not the array",
+          "key": "level0_hubs"
+        }
+      ],
+      "note": "COMPARE ELEMENT-WISE. level0_hubs held at 13 across the drift while TWO radii were wrong (positions 4 and 8): the set was stable, the members were the same thirteen skills, and only the numbers behind them moved. A stable count is not evidence of a stable array. Regenerate with npx tsx scripts/skill-ref-count.ts BEFORE reading. The Level-0 register only checks a hub is NAMED in CLAUDE.md, never that the count beside it is right (proposal cue-002), so a stale count here is exactly the failure that is not gated."
+    },
+    {
+      "id": "plate06_residency",
+      "value": [
+        7951,
+        19877
+      ],
+      "derivation": "verification/token-budget-baseline.json, min and max of agents[].total_static",
+      "compare": "element-wise",
+      "discovery": "from the ai-systems repo root: grep -rn \"\\b<value>\\b\" . | grep -v \"/node_modules/\" | grep -v \"/\\.git/\" | grep -v \"^\\./\\.build/\" on each endpoint, plus grep -n \"K to .*K\" for the axis caption, which ROUNDS and so contains neither endpoint verbatim",
+      "published": [
+        {
+          "file": "tools/diagram-compiler/diagrams_04_06.py",
+          "form": "drawn",
+          "locator": "grep -n \"Today .*K to .*K, estimated\" - an axis caption, rendered as text"
+        }
+      ],
+      "note": "Written by verify-all R10 on a full run; a subset run of estimate-token-load.ts prints only and never writes it."
+    }
+  ]
+}

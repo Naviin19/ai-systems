@@ -1,0 +1,54 @@
+{
+  "_schema_version": "1.0",
+  "_about": "One row per SURFACE: a persistent place more than one agent can write and later read. Reduced from the factory's configs/writable-surface-registry.json to three rows over one scan tree.",
+  "scan_trees": ["scripts"],
+  "allowlist": [
+    { "path": "scripts/checks/", "reason": "Check scripts read real files and plant altered copies in a temp directory; their writes are scratch." }
+  ],
+  "surfaces": [
+    {
+      "id": "run-board",
+      "path_pattern": "run/board/*.md",
+      "path_literals": ["run/board"],
+      "writers": [{ "file": "scripts/board-writer.ts", "anchor": "const BOARD = 'run/board'" }],
+      "written_by": "Any session may also write a note here directly.",
+      "read_back": [{ "reader_file": "scripts/brief.ts", "anchor": "renderBoard", "reaches": "session_context" }],
+      "content": "free_text",
+      "integrity": "write_once",
+      "tamper_evident": false,
+      "watched_by": ["board gates"],
+      "channel_class": "sanctioned_agent_to_agent"
+    },
+    {
+      "id": "handoff-envelope",
+      "path_pattern": "verification/runs/*/agent-*/handoff.json",
+      "path_literals": ["verification/runs"],
+      "writers": [{ "file": "scripts/emit-handoff.ts", "anchor": "handoff.json" }],
+      "read_back": [{ "reader_file": "scripts/dispatch.ts", "anchor": "SEED_STATE", "reaches": "agent_prompt" }],
+      "content": "schema_shape_free_content",
+      "integrity": "write_once",
+      "tamper_evident": true,
+      "watched_by": ["handoff validation", "faithfulness audit"],
+      "channel_class": "sanctioned_agent_to_agent"
+    },
+    {
+      "id": "gate-reports",
+      "path_pattern": "verification/*-report.json",
+      "writers": [{ "file": "scripts/report-writer.ts" }],
+      "read_back": [],
+      "content": "schema_constrained",
+      "integrity": "overwritable",
+      "tamper_evident": false,
+      "watched_by": [],
+      "channel_class": "machine"
+    }
+  ],
+  "envelope_free_text": {
+    "schema": "handoff-envelope.schema.json",
+    "keys": {
+      "decisions_made": { "count": 1, "channel_class": "sanctioned_agent_to_agent" },
+      "route_reports": { "count": 2, "channel_class": "sanctioned_agent_to_agent", "note": "subject and statement; kind is an enum. A length cap does not make a string less free." }
+    },
+    "boundary_payload": { "per_boundary": { "A_TO_B": 2, "B_TO_C": 1 } }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "write-surface",
+  "command": "demo:write-surface",
+  "kind": "reduced copy of the production detector",
+  "extracted_on": "2026-09-27",
+  "extracted_from": [
+    { "path": "scripts/detect-unregistered-write-surfaces.mjs", "symbols": ["inspect", "validateRegistry", "writeCallsIn", "pathMatches", "destinationLiterals", "freeLeaves", "envelopeCensus", "selfTest", "exit 2 is never downgraded by mode"] },
+    { "path": "configs/writable-surface-registry.json", "symbols": ["surfaces[] row shape: id, path_pattern, path_literals, writers[].anchor, read_back[].reaches, content, integrity, tamper_evident, watched_by, channel_class", "allowlist[].reason", "envelope_free_text.keys", "envelope_free_text.boundary_payload.per_boundary"] }
+  ],
+  "volatile": [
+    "The production registry holds one row per factory surface over six scan trees and declares a count for every boundary of the real handoff envelope; this one holds three rows, one tree and a two-boundary schema written for the demo.",
+    "The production self-test plants 18 cases at run time; this one plants 13, and its file plants are committed under fixtures/planted/ and overlaid one at a time.",
+    "Dropped: the OFF/WARN/BLOCK mode switch, the report file, the --list/--census/--json flags, the `*` segment in scan trees, the symlink skip and the scan-size floor. The four checks and the exit-2 doctrine are copied unchanged, node built-ins only."
+  ],
+  "tamper": {
+    "file": "demos/11-write-surface/detector.ts",
+    "find": "const SYNC_WRITE = /\\b(writeFileSync|appendFileSync|renameSync|copyFileSync|cpSync|createWriteStream)\\s*\\(/;",
+    "replace": "const SYNC_WRITE = /\\b(writeFileSync|renameSync|copyFileSync|cpSync|createWriteStream)\\s*\\(/;",
+    "expect_exit": 2,
+    "expect_line": "SELF_TEST_FAILED — refusing to inspect the fixture tree."
+  }
+}

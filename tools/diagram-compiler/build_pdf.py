@@ -36,7 +36,28 @@ FIGS = [
   "becomes an artifact with a declared shape, scored against a bar set by what the "
   "prompt is for, before it is allowed to run.",
   [("shipped","craftsmanship-gate.ts, enrich-prompt.ts, SURFACE_FLOORS"),
-   ("audited","30 surfaces, 5 floor levels, 313 of 1,116 below floor")])
+   ("audited","30 surfaces, 5 floor levels, 313 of 1,116 below floor")]),
+
+ ("12","12-writable-surface","The writable surface",
+  "Every place a note can land is on a row.",
+  "One row per persistent surface the factory writes: who writes it, who reads it back and "
+  "where, whether the content is free text, whether a rewrite would be noticed, what watches "
+  "it. Thirty-nine rows; twenty-one reach a prompt or a session; nineteen of those are "
+  "rewrite-invisible; four are watched by nothing. A detector holds the registry to the tree.",
+  "Pressure makes a channel. An agent with no sanctioned place to say something finds an "
+  "unsanctioned one, so every channel is inventoried and none is banned.",
+  [("shipped","writable-surface-registry.json, detect-unregistered-write-surfaces.mjs (advisory)"),
+   ("audited","39 surfaces, 21 reaching, 19 rewrite-invisible, 4 unwatched, 18 free-text keys")]),
+
+ ("13","13-gate-ladder","The gate ladder",
+  "Enforcement is a ladder, not a wall.",
+  "Fifty-eight switches: twenty default to block, thirty to advisory, two to off, six to a "
+  "bespoke default. Every advisory switch carries, beside it, the written condition that ends "
+  "that, and a gate refuses a new advisory switch without one. Seven climbed on theirs.",
+  "A gate reports pass, fail or unevaluated, and unevaluated is never a pass; a gate that "
+  "refuses to run exits 2 in every mode.",
+  [("shipped","verify-flip-conditions.mjs, env-mode.ts"),
+   ("audited","58 switches: 20 block, 30 advisory, 2 off, 6 bespoke; 7 recorded flips")])
 ]
 
 
@@ -63,18 +84,18 @@ TIERS = [
 ]
 
 STRUCTURE = [
- ("Skill files","218","audited","skills/, per-layer indexes excluded","was 152, contested"),
- ("In a manifest, parked","170, 48","audited","agent configs, retired-skills.json","new"),
+ ("Skill files","221","audited","skills/, per-layer indexes excluded","was 152, contested"),
+ ("In a manifest, parked","202, 30","audited","agent configs, retired-skills.json","new"),
  ("Architecture layers","9","audited","architecture_layer in frontmatter","was 8 or 9"),
  ("Agents","20: 15 build, 5 research","audited","configs/agent-*.config.ts","unchanged"),
  ("Build waves","12, at most 2 at once","audited","dependsOn, the scheduler's rule","new"),
- ("CI gate ids","33","audited","verify-all.ts","was 30, contested"),
- ("Preflight features","19","audited","prompts/feature-descriptor.md","were called gates"),
- ("Registered contracts","48, in five tiers","audited","SCHEMA_REGISTRY","was 19, contested"),
- ("Generated JSON Schemas","48","audited","one per registry entry","was 43, contested"),
+ ("CI gate ids","42","audited","verify-all.ts","was 30, contested"),
+ ("Preflight features","20","audited","prompts/feature-descriptor.md","were called gates"),
+ ("Registered contracts","50, in five tiers","audited","SCHEMA_REGISTRY","was 19, contested"),
+ ("Generated JSON Schemas","52","audited","contracts/schemas, outside agents/","was 43, contested"),
  ("Per-agent I/O schemas","46","audited","contracts/schemas/agents","new"),
  ("Measured Level-0 hubs","13, in a set of 14","audited","skill-ref-counts.json","was 11"),
- ("Static prompt load","6,926 to 17,684 tokens","audited","token-budget-baseline.json","new"),
+ ("Static prompt load","8,086 to 20,291 tokens","audited","token-budget-baseline.json","new"),
 ]
 
 MECHANISM = [
@@ -138,7 +159,7 @@ def chips(ts):
 
 plate_pages = "\n".join(f'''
 <section class="page plate">
-  <p class="eyebrow">Plate {n} of 11</p>
+  <p class="eyebrow">Plate {n} of 13</p>
   <h2>{title}</h2>
   <p class="claim">{claim}</p>
   <div class="art">{svg}</div>
@@ -276,7 +297,7 @@ code{{font-family:var(--mono);font-size:.88em;background:var(--panel);
 <svg width="0" height="0" style="position:absolute"><style>{shared}</style></svg>
 
 <section class="cover">
-  <p class="eyebrow">Reference set · eleven plates · September 2026</p>
+  <p class="eyebrow">Reference set · thirteen plates · September 2026</p>
   <h1>AI operating system</h1>
   <p class="stand">Eleven diagrams, each showing a different behaviour of the same system.
   Every figure was measured against the factory's code on 14 September 2026, and every
@@ -290,7 +311,7 @@ code{{font-family:var(--mono);font-size:.88em;background:var(--panel);
   <div class="derived">
     <p class="lab">Derived from</p>
     <ul>
-      <li>skill-ecosystem at 5739a97 <em>— the factory, private, read at a named commit</em></li>
+      <li>skill-ecosystem <em>— the factory, private; figures at 5d5fb3f1 (27 September), citations at 5739a97 (14 September)</em></li>
       <li>four product repositories <em>— read-only, each at a named commit</em></li>
       <li>Vercel production deployments <em>— product status, 14 September 2026</em></li>
       <li>plans/ais-plate-claims.json <em>— every citation resolved by a script</em></li>
@@ -336,8 +357,9 @@ code{{font-family:var(--mono);font-size:.88em;background:var(--panel);
   <p class="eyebrow">Figures and evidence</p>
   <h2>Structure</h2>
   <p class="col">The counts that carry the structural argument, each measured at factory
-  commit 5739a97. A count is audited, not shipped, because no file implements a number;
-  the audit records how each one was measured.</p>
+  commit 5d5fb3f1 on 27 September; the citations behind them were audited at 5739a97. A count
+  is audited, not shipped, because no file implements a number; the audit records how each one
+  was measured.</p>
   <table><thead><tr><th>Figure</th><th>Value</th><th>Tier</th><th>Source</th>
   <th>Changed</th></tr></thead><tbody>{struct}</tbody></table>
   <hr class="rule">
