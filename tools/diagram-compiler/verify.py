@@ -275,7 +275,8 @@ if any(text for _, text in DOCS):
         (r'union of (\d+) boundary variants',       _STATED.get("envelope_variants", {}).get("value")),
         (r'(\d+) variants an agent emits',          _STATED.get("envelope_variants_emitted", {}).get("value")),
         (r'of which (\d+) are emitted by an agent', _STATED.get("envelope_variants_emitted", {}).get("value")),
-        (r'(\d+) (?:mode-gated )?switches',         _STATED.get("mode_switches", {}).get("value")),
+        (r'(\d+) mode-gated switches',              _STATED.get("mode_switches", {}).get("value")),
+        (r'run on (\d+) switches',                  _STATED.get("mode_switches", {}).get("value")),
         (r'(\d+) agents? configurations',           DRAWN.get("total_agents", {}).get("value")),
     ]
     for name, text in DOCS:
