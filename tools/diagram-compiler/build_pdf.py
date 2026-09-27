@@ -118,6 +118,13 @@ MECHANISM = [
  ("Amendment lane","A protocol whose human approval is the only tier in force","learning-loop.md","audited"),
  ("LLM gateway","Provider adapters and per-call latency; its cost cap cannot fire","llm-gateway","shipped"),
  ("MCP host","Three default servers, replayed in CI","mcp-infra","shipped"),
+ ("Craftsmanship gate","SHA-256 per prompt file; five dimensions, the lowest is the score; elevated once, then blocked","craftsmanship-gate.ts, enrich-prompt.ts","shipped"),
+ ("Surface floors","30 surfaces, five floor levels from 4.0 to 8.5","craftsmanship-surface-policy.ts","shipped"),
+ ("Surface registry","39 rows: writer, read-back, free text, tamper evidence, watcher","writable-surface-registry.json","shipped"),
+ ("Surface detector","Holds the registry to the tree; advisory","detect-unregistered-write-surfaces.mjs","shipped"),
+ ("Route reports","blocked, better_route, open_question; at most 10; locked at emission","route-report.ts, receipt.ts","shipped"),
+ ("Mode switches","58, one reading; block, advisory or off","env-mode.ts","shipped"),
+ ("Flip ratchet","A new advisory switch cannot ship without its written condition","verify-flip-conditions.mjs","shipped"),
  ("Imagination lanes","One flag-gated candidate at gate A; an opt-in product runtime","runtime-imagination, validate-handoff.ts","shipped"),
 ]
 

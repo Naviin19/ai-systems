@@ -34,7 +34,7 @@ One corpus of skill files carries both halves, and the layers taper, narrower ab
 
 Importance in the corpus is measured, and the measurement is checked.
 
-The skill files cite each other. A file is a measured hub when twenty or more other skill files cite it; the count is of distinct citing files, not of mentions. Thirteen files clear that line, measured by `scripts/skill-ref-count.ts`. Three files are also declared Level 0 by hand, and one of them, `master-prompt-architecture.md`, measures eighteen, so the Level-0 set is fourteen. Declaration is a judgement the measurement never revokes.
+The skill files cite each other. A file is a measured hub when twenty or more other skill files cite it; the count is of distinct citing files, not of mentions. Thirteen files clear that line, measured by `scripts/skill-ref-count.ts`. Three files are also declared Level 0 by hand; two of them are among the thirteen, and the third, `master-prompt-architecture.md`, measures eighteen, so the Level-0 set is fourteen. Declaration is a judgement the measurement never revokes.
 
 Three pre-commit checks hold the hubs. `skill-ref-count.ts --check-level0` blocks a commit when the factory's register stops naming a measured hub. `verify-hub-integrity.mjs` blocks one that breaks an anchor inside any of the fourteen. `audit-hub-citations.mjs` blocks a live file that cites a section that does not exist. CI runs the last two as R33. The per-hub counts written in the register are not checked, and they have drifted.
 

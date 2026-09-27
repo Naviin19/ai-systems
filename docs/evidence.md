@@ -2,7 +2,7 @@
 
 Every figure the plates draw and every mechanism they name: its value, what it rests on, and where to look.
 
-**Figures measured 27 September 2026 at factory commit `5d5fb3f1`; citations audited 14 September at `5739a97`.** Every figure the plates draw was checked against the factory (`skill-ecosystem`, private) and against the four product repositories at named commits, read-only. Each entry states what the code does and cites the lines that show it, and a script in the factory resolves every citation at the commit it names. No figure the plates draw has an unresolved conflicting source.
+**Figures measured 27 September 2026 at `5d5fb3f1` and citations audited 14 September at `5739a97` — both commits of the factory, `skill-ecosystem`, not of this repository.** Every figure the plates draw was checked against the factory (`skill-ecosystem`, private) and against the four product repositories at named commits, read-only. Each entry states what the code does and cites the lines that show it, and a script in the factory resolves every citation at the commit it names. No figure the plates draw has an unresolved conflicting source.
 
 ---
 
@@ -160,6 +160,16 @@ Grouped by the plate that draws each one. Every row is `shipped` unless it says 
 | Candidate contract | The whole candidate rides the envelope as an opaque rider; `divergence_id` is the key a verdict attaches to | `divergence-candidate.ts`, `handoff-envelope.ts` |
 | Guard | Flags a candidate from any agent other than 03c in the written handoffs; warns by default | `validate-handoff.ts` |
 | Verdict bridge | Records a person's verdict for both lanes, measured only as divergence-survival rate | `recordDivergenceVerdict`, `record-divergence-verdict.ts` |
+
+### Plate 11, prompts as specifications
+
+| Mechanism | What it does | Implemented in |
+|---|---|---|
+| Craftsmanship gate | Hashes each prompt file (SHA-256), looks its grade up in `.cache/prompt-enrichment/`, and otherwise grades it; a file below its floor is elevated once and blocked on a second failure | `craftsmanship-gate.ts`, `enrich-prompt.ts` |
+| Score | Five dimensions; the score is the lowest of them, never their mean | `enrich-prompt.ts`, `Math.min` over the median dimensions |
+| Surface floors | 30 declared prompt surfaces and five floor levels, 4.0 to 8.5, set by what the prompt is for | `configs/craftsmanship-surface-policy.ts`, `SURFACE_FLOORS` |
+| Grader | A primary grader with a fallback chain, and a liveness check that warns before a deprecation reaches a real grade | `craftsmanship-surface-policy.ts`, `verify-grader-liveness.ts` |
+| Grade corpus | `audited`, 22 September, on one machine: 1,118 grades cached, 1,116 carrying a verdict, 313 below their floor; the cache is gitignored, so the count is not reproducible from a clone | `.cache/prompt-enrichment/` |
 
 ### Plate 12, the writable surface
 
