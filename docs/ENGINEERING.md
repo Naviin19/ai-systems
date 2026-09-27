@@ -24,8 +24,8 @@ carrying somewhere else.
 
 **1 · Put the deterministic thing first.** Numbers are computed before a model may mention them.
 Cheap exact checks score candidates before a judge ranks them. A choice is made by counting
-satisfied criteria rather than by asking. The model is left to do the one thing it is genuinely
-better at — wording and selection — inside a frame that code has already made true.
+satisfied criteria rather than by asking. The model is left to do the things it is genuinely useful
+for — wording, selection and transformation — inside a frame that code has already made true.
 
 **2 · Make the failure mode visible by construction.** A degraded gate cannot report a clean pass;
 an abstention cannot be read as a zero; a judge that never reached the network cannot be recorded as
@@ -188,8 +188,9 @@ a contract change would reach.
 
 Agents working in parallel on one checkout is the obvious design and the one that loses work.
 Conventional isolation — each agent agreeing not to touch what it does not own — holds exactly
-until one agent is wrong about what it owns, and being wrong is silent. Physical isolation cannot be
-violated by mistake. A merge that refuses rather than reconciles then turns every remaining
+until one agent is wrong about what it owns, and being wrong is silent. Physical isolation makes
+repository-state interference explicit rather than accidental. A merge that refuses rather than
+reconciles then turns every remaining
 collision into a failure somebody sees.
 
 So work happens in a git worktree on its own branch, and merging back is fast-forward only: the tool

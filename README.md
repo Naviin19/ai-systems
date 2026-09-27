@@ -16,6 +16,10 @@ software with agents. **The products** — four, all live — were built with it
 `ai-systems`, is the factory's published architecture: what was built, the evidence behind every
 figure, and demos that run its code.
 
+The unit of reliability engineering here is not the fix. It is defect → understanding → invariant →
+automated enforcement, and every check in this repository was seen failing on a planted defect before
+its pass was trusted.
+
 Twenty agent configurations are dispatched in dependency waves, each into its own git worktree. Every
 handoff between them is parsed against a typed contract and passed through a verification stack.
 Behind all of it sits one corpus of 221 skill files, the factory's engineering documents. No agent

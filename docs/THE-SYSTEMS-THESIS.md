@@ -19,7 +19,8 @@ better rather than cheaper is open.
 
 The corpus is 221 documents: **1.80M tokens if an agent carried all of it.** An agent carries **8.1K–20.3K**,
 by the factory's chars/4 estimate over its real assembled prompt, reaching the whole corpus through an index
-averaging **2.1K** — a tenth of a percent of what it addresses. The index is the entire retrieval surface,
+averaging **2.1K** — a tenth of a percent of what it addresses. The index is the entire retrieval surface
+for the skill corpus,
 which is why four documents once became unreachable when a parsing defect collapsed their visible line to
 their filename. They stayed present, referenced and counted, and could never be chosen.
 
@@ -33,9 +34,10 @@ tool-choice means a malformed emission cannot be produced. A compiler proves eac
 is a structural subtype of the producer's real output.
 
 Edit a committed schema away from its source and the check names the drift at the exact path and exits
-non-zero — fifteen seconds, no network. In production, 85 of 93 generations finished on a clean tool call;
-the 5 that hit a token ceiling had arguments truncated mid-JSON, and because the schema was enforced the
-pipeline degraded to static content rather than shipping a half-parsed object. Worse in richness, better in
+non-zero — fifteen seconds, no network. In a committed export of 93 production generations, 83 ended on
+their own terms — 33 on a tool call, 50 on a stop — 7 hit a token ceiling and 3 returned a malformed
+function call. The ceiling cases had arguments truncated mid-JSON, and because the schema was enforced
+the pipeline degraded to static content rather than shipping a half-parsed object. Worse in richness, better in
 truthfulness.
 
 ## 3 · Quality is selected, not requested
@@ -56,7 +58,7 @@ When the system does not know something, it stores nothing and says why. The sch
 value and a fabricated number an illegal one.
 
 535 relationships, zero fabricated weights, confidence present on exactly 18 — precisely the 16 verified and
-2 inferred ones a real measurement touched. The other 516 carry neither. In a second product, a vendor
+2 inferred ones a real measurement touched. The other 517 — 516 unknown and 1 elected — carry neither. In a second product, a vendor
 timeout is recorded as `unmeasured` with the vendor's own run id attached, not as a zero.
 
 One production consequence worth naming: honest null data moves the burden onto every reader. A consumer
