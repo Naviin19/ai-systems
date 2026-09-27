@@ -16,7 +16,7 @@ The factory is twenty agent configurations: fifteen that build a product and fiv
 
 The run side is a set of packages: an LLM gateway, a model router and an MCP host for connectors. Author's app sends its model calls through its own copy of the gateway.
 
-Four products run on it and are live: [Ark](https://ark-now.vercel.app), [Author](https://author-now.vercel.app), [Archer](https://archer2.vercel.app) and [Whitespace Hunter](https://whitespace-hunter.vercel.app). A fifth, Auteur, is specced. This repository is the published architecture: what the system does, the evidence for each figure, and demonstrations that run the code itself.
+Three products run on it and are live: [Ark](https://ark-now.vercel.app), [Author](https://author-now.vercel.app) and [Archer](https://archer2.vercel.app). A fourth, Whitespace Hunter, is in development, and a fifth, Auteur, is specced. This repository is the published architecture: what the system does, the evidence for each figure, and demonstrations that run the code itself.
 
 ---
 
@@ -26,7 +26,7 @@ It is a system with a build side and a run side, not a folder of scripts.
 
 One corpus of skill files carries both halves, and the layers taper, narrower above wider, so the compression from the corpus to the products is a shape rather than an assertion. The build side is the orchestrator and its twenty agents. Model choices are recorded one per call site: CI fails when a model call in the factory's own code has no recorded decision, and the gateway refuses a call site it does not know.
 
-[Whitespace Hunter](https://whitespace-hunter.vercel.app), live since 1 September, is a product a reader can open without trusting anything in this repository.
+[Ark](https://ark-now.vercel.app), [Author](https://author-now.vercel.app) and [Archer](https://archer2.vercel.app) are products a reader can open without trusting anything in this repository.
 
 *Evidence: audited — 221 skill files, 20 agents and 42 CI gate ids, counted at factory `5d5fb3f1`; product status from Vercel production deployments on 14 September.*
 

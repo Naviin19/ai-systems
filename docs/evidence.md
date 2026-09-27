@@ -197,7 +197,7 @@ Grouped by the plate that draws each one. Every row is `shipped` unless it says 
 | [Ark](https://ark-now.vercel.app) | "Give Ark a URL. Twelve minutes later, a complete brand book" | Live; latest production deployment 7 September |
 | [Author](https://author-now.vercel.app) | "Content Playbook Compiler" | Live; latest production deployment 26 July |
 | [Archer](https://archer2.vercel.app) | "B2B sales intelligence" | Live; latest production deployment 26 July |
-| [Whitespace Hunter](https://whitespace-hunter.vercel.app) | "Internal whitespace-detection instrument" | Live since 1 September, 23:55 UTC; latest production deployment 6 September |
+| Whitespace Hunter | "Internal whitespace-detection instrument" | In development |
 | Auteur | AI creative production | Specced; no repository yet |
 
 Status is `audited` from each project's Vercel production deployments. The descriptions are quoted from each product's own repository.

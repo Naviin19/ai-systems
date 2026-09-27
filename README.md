@@ -12,7 +12,8 @@ recovery and governance: a compiler that turns specifications, knowledge, contra
 into coordinated agent execution, with every mechanism shown, measured and demonstrated.
 
 Three names recur. **The factory** is the private repository, `skill-ecosystem`, that builds
-software with agents. **The products** — four, all live — were built with it. This repository,
+software with agents. **The products** — three live, and a fourth in development — were built with
+it. This repository,
 `ai-systems`, is the factory's published architecture: what was built, the evidence behind every
 figure, and demos that run its code.
 
@@ -113,14 +114,14 @@ private; a link below opens the running product.
 | [Ark](https://ark-now.vercel.app) | Researches and writes a brand book from a URL |
 | [Author](https://author-now.vercel.app) | Compiles a multi-channel content playbook from that brand book, read as a typed object rather than as prose |
 | [Archer](https://archer2.vercel.app) | B2B sales intelligence: a verdict, target personas and pitch material for one account |
-| [Whitespace Hunter](https://whitespace-hunter.vercel.app) | Scores how much runway an emerging category has left, from search and SERP signals |
+| Whitespace Hunter | Scores how much runway an emerging category has left, from search and SERP signals — in development |
 
-Each product, as its public URL served it on 27 September 2026. The repositories stay private; the
-products do not.
+Each live product, as its public URL served it on 27 September 2026. The repositories stay private;
+the products do not.
 
 | [![Ark](docs/products/ark.png)](https://ark-now.vercel.app) | [![Author](docs/products/author.png)](https://author-now.vercel.app) |
 |---|---|
-| [![Archer](docs/products/archer.png)](https://archer2.vercel.app) | [![Whitespace Hunter](docs/products/whitespace-hunter.png)](https://whitespace-hunter.vercel.app) |
+| [![Archer](docs/products/archer.png)](https://archer2.vercel.app) | |
 
 ## What this rests on
 

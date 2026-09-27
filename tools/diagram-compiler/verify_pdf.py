@@ -94,7 +94,7 @@ for lig, plain in (("\ufb00","ff"),("\ufb01","fi"),("\ufb02","fl"),
 for probe in ("CI gate ids", "measured hubs", "merge.lock", "preflight",
               "contract-compiler.ts", "classifyRouteBack", "RECEIPT_GIVEN", "Declare hot?",
               "AGENTS.md", "decision-ledger.jsonl", "gatewayCall", "divergence_id",
-              "whitespace-hunter"):
+              "call-site discipline"):
     if probe not in alltext:
         fails.append(f"plate text not selectable in the PDF: {probe!r} missing")
 

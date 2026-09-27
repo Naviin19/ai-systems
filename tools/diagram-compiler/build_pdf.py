@@ -132,8 +132,7 @@ PRODUCTS = [
  ("Ark","A brand book researched and written from a URL","Live; deployed 7 Sep"),
  ("Author","A content playbook compiler, from a brand's URL","Live; deployed 26 Jul"),
  ("Archer","B2B sales intelligence for a target account","Live; deployed 26 Jul"),
- ("Whitespace Hunter","Runway scoring for emerging categories, at "
-  '<span style="white-space:nowrap">whitespace-hunter.vercel.app</span>',"Live since 1 Sep"),
+ ("Whitespace Hunter","Runway scoring for emerging categories","In development"),
  ("Auteur","AI creative production","Specced"),
 ]
 

@@ -240,7 +240,7 @@ is structurally impossible and an unanchored question is never shipped.
 
 **A system that cannot say "I don't know" will say something else instead.**
 
-[Whitespace Hunter](https://whitespace-hunter.vercel.app)'s signals either score or return `null` with a stated reason, and the
+Whitespace Hunter's signals either score or return `null` with a stated reason, and the
 distinction survives every layer: the composite renormalises its weights over only the signals that
 fired, and the breakdown still lists all six with `null` in the abstained slots — visible on the
 screen, named.

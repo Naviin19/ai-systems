@@ -10,11 +10,11 @@ def d01(bare=False):
     b = []
     b.append(section(124, 96, "Products built with the factory"))
     prods = [("Ark", "Live"), ("Author", "Live"), ("Archer", "Live"),
-             ("Whitespace", "Live"), ("Auteur", "Specced")]
+             ("Whitespace", "In development"), ("Auteur", "Specced")]
     px, pw = 124, 80
     for i, (n, st) in enumerate(prods):
         x = px + i * (pw + 8)
-        b.append(box(x, 112, pw, 44, "purple", dashed=(st == "Specced")))
+        b.append(box(x, 112, pw, 44, "purple", dashed=(st != "Live")))
         b.append(text(x + pw / 2, 130, n, TITLE_PX, "purple", anchor="middle",
                       weight=500))
         b.append(text(x + pw / 2, 146, st, SUB_PX, "purple", anchor="middle"))
@@ -40,14 +40,13 @@ def d01(bare=False):
     b.append(ticks(58, 376, 110, "teal", h=6, gap=2.6, w=2.4))
 
     return svg("01", "The operating system",
-               "A build side and a run side over one corpus; four products built, one specced.",
+               "A build side and a run side over one corpus; three products live, one in development.",
                "".join(b), 398,
                "The taper is the argument: one corpus of skill files carries the factory that "
                "builds products and the call-site discipline for each model call the factory "
-               "scan or the gateway sees. Four products are built and live; Auteur is specced, "
-               "with no repository yet. Whitespace Hunter is the one with a public URL, "
-               "whitespace-hunter.vercel.app. The file count is drawn as ticks because it must "
-               "reconcile with plate 06.",
+               "scan or the gateway sees. Three products are live and a fourth is in development; "
+               "Auteur is specced, with no repository yet. The file count is drawn as ticks "
+               "because it must reconcile with plate 06.",
                "audited - counts at factory 5d5fb3f1 (221 files, 20 agents, 42 CI gate ids); "
                "product status from Vercel production deployments, 14 Sep",
                bare=bare)
