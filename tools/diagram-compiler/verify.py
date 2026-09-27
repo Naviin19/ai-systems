@@ -242,11 +242,16 @@ if arch:
 # and 49 registered, against an evidence table that said otherwise -- some stale since the
 # previous audit. Every count either document attaches to one of these nouns must equal the
 # figure evidence.md holds for it.
-try:
-    eng = open(REPO + '/docs/ENGINEERING.md', encoding='utf-8').read()
-except FileNotFoundError:
-    eng = ""
-if arch or eng:
+def _doc(rel):
+    try:
+        return open(REPO + '/' + rel, encoding='utf-8').read()
+    except FileNotFoundError:
+        return ""
+eng = _doc('docs/ENGINEERING.md')
+DOCS = (("architecture.md", arch), ("ENGINEERING.md", eng), ("README.md", _doc('README.md')),
+        ("THE-SYSTEMS-THESIS.md", _doc('docs/THE-SYSTEMS-THESIS.md')),
+        ("HYPOTHESES.md", _doc('docs/HYPOTHESES.md')))
+if any(text for _, text in DOCS):
     def _ev_row(label):
         m = re.search(r'^\| ' + re.escape(label) + r' \| (\d[\d,]*)', ev, re.M)
         return int(m.group(1).replace(',', '')) if m else None
@@ -267,8 +272,13 @@ if arch or eng:
         (r'(\d+) hand-kept schemas',                DRAWN.get("per_agent_schemas", {}).get("value")),
         (r'(\d+) per-agent I/O schemas',            DRAWN.get("per_agent_schemas", {}).get("value")),
         (r'union of (\d+) variants',                _STATED.get("envelope_variants", {}).get("value")),
+        (r'union of (\d+) boundary variants',       _STATED.get("envelope_variants", {}).get("value")),
+        (r'(\d+) variants an agent emits',          _STATED.get("envelope_variants_emitted", {}).get("value")),
+        (r'of which (\d+) are emitted by an agent', _STATED.get("envelope_variants_emitted", {}).get("value")),
+        (r'(\d+) (?:mode-gated )?switches',         _STATED.get("mode_switches", {}).get("value")),
+        (r'(\d+) agents? configurations',           DRAWN.get("total_agents", {}).get("value")),
     ]
-    for name, text in (("architecture.md", arch), ("ENGINEERING.md", eng)):
+    for name, text in DOCS:
         for pat, want in PROSE:
             if want is None or not text:
                 continue

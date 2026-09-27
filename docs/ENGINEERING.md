@@ -149,8 +149,8 @@ are kept by hand outside that registry, and are named as such.
 55 source files hold 2,165 schema declarations. 52 JSON Schema files are generated from them, 50 of
 them registered, and 46 per-agent I/O schemas are kept by hand beside them. The handoff envelope
 between agents is a discriminated union of 24 variants, keyed
-on the boundary each one crosses, and every variant's schema becomes a tool definition the producing
-model is forced to call.
+on the boundary each one crosses; each of the 20 variants an agent emits becomes a tool definition
+the producing model is forced to call.
 
 The envelope is a protocol, not a message. Every one carries its schema version, and the consumer
 negotiates it: the same major with a newer minor proceeds, because additive growth is what the

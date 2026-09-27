@@ -287,6 +287,7 @@ Every count the plates draw, in one block. `tools/diagram-compiler/verify.py` pa
     "skills_in_manifests": {"value": 191, "tier": "audited"},
     "retired_skills":      {"value": 30,  "tier": "audited"},
     "envelope_variants":   {"value": 24,  "tier": "audited"},
+    "envelope_variants_emitted": {"value": 20, "tier": "audited"},
     "mcp_server_packages": {"value": 6,   "tier": "audited"},
     "mode_switches":       {"value": 58,  "tier": "audited"}
   }
