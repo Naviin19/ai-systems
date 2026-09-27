@@ -66,7 +66,7 @@ render images.
 | 02 | [Knowledge substrate](docs/diagrams/02-knowledge-substrate.svg) | Importance in the corpus is measured, and the measurement is checked | shipped checks · audited counts |
 | 03 | [Compiler spine](docs/diagrams/03-compiler-spine.svg) | Orchestration with isolation, not a prompt chain | shipped · audited waves |
 | 04 | [Contract spine](docs/diagrams/04-contract-spine.svg) | One source of truth, and the reach of changing it is computed | shipped · audited counts |
-| 05 | [Verification stack](docs/diagrams/05-verification-stack.svg) | Four outcomes, and a failure retrying can fix is told apart from one it cannot | shipped |
+| 05 | [Verification stack](docs/diagrams/05-verification-stack.svg) | Four outcomes, and a failure that retrying can fix is told apart from one it cannot | shipped |
 | 06 | [Context residency](docs/diagrams/06-context-residency.svg) | Budgeting is a measurement, and so is uptake | shipped · audited reduction |
 | 07 | [Hardening loop](docs/diagrams/07-hardening-loop.svg) | Promotion requires a proof of convergence | shipped |
 | 08 | [Learning loops](docs/diagrams/08-learning-loops.svg) | Two loops, and in both a person decides what becomes permanent | shipped · audited protocol |
