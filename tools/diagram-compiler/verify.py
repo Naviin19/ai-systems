@@ -147,6 +147,15 @@ if {"build_agents", "research_agents", "total_agents"} <= set(DRAWN):
         fails.append(f"evidence doc is internally inconsistent: build + research = {parts}, "
                      f"total_agents = {DRAWN['total_agents']['value']}")
 
+# the corpus must partition: every skill file is in an active manifest or parked, never both,
+# never neither. The table once said 202 + 30 against 221 and nothing here added it up.
+_stated = FIG.get("stated_not_drawn", {})
+if "skill_files" in DRAWN and {"skills_in_manifests", "retired_skills"} <= set(_stated):
+    parts = _stated["skills_in_manifests"]["value"] + _stated["retired_skills"]["value"]
+    if parts != DRAWN["skill_files"]["value"]:
+        fails.append(f"evidence doc is internally inconsistent: in a manifest + parked = {parts}, "
+                     f"skill_files = {DRAWN['skill_files']['value']}")
+
 # plate 13 draws each recorded flip as a teal dot (dot() emits the mark class, role-m, not
 # the fill class the hub circles carry); the count is a figure like any other
 if "flips_on_condition" in DRAWN and "13" in d:

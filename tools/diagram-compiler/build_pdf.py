@@ -85,7 +85,7 @@ TIERS = [
 
 STRUCTURE = [
  ("Skill files","221","audited","skills/, per-layer indexes excluded","was 152, contested"),
- ("In a manifest, parked","202, 30","audited","agent configs, retired-skills.json","new"),
+ ("In a manifest, parked","191, 30","audited","agent configs, retired-skills.json","new"),
  ("Architecture layers","9","audited","architecture_layer in frontmatter","was 8 or 9"),
  ("Agents","20: 15 build, 5 research","audited","configs/agent-*.config.ts","unchanged"),
  ("Build waves","12, at most 2 at once","audited","dependsOn, the scheduler's rule","new"),

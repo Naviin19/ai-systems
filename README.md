@@ -3,16 +3,23 @@
 [![diagrams](https://github.com/Naviin19/ai-systems/actions/workflows/diagrams.yml/badge.svg)](https://github.com/Naviin19/ai-systems/actions/workflows/diagrams.yml)
 [![demos](https://github.com/Naviin19/ai-systems/actions/workflows/demos.yml/badge.svg)](https://github.com/Naviin19/ai-systems/actions/workflows/demos.yml)
 
-A language model is a probabilistic component whose interface does not reliably distinguish a
-correct answer from an incorrect one. Right and wrong arrive through the same channel, in the same
-shape, at the same apparent confidence. This repository is the published architecture of a system
-built around that fact: a compiler that turns specifications, knowledge, contracts and policies
-into coordinated agent execution, and the mechanisms that make that execution observable,
-contract-bound and recoverable.
+**Making probabilistic systems observable, testable and governable.**
+
+A language model can return a correct answer and an incorrect one through the same interface, in
+the same shape, at the same apparent confidence. This repository is the published architecture of
+a system that surrounds that component with deterministic contracts, verification, provenance,
+recovery and governance: a compiler that turns specifications, knowledge, contracts and policies
+into coordinated agent execution, with every mechanism shown, measured and demonstrated.
+
+Three names recur. **The factory** is the private repository, `skill-ecosystem`, that builds
+software with agents. **The products** — four, all live — were built with it. This repository,
+`ai-systems`, is the factory's published architecture: what was built, the evidence behind every
+figure, and demos that run its code.
 
 Twenty agent configurations are dispatched in dependency waves, each into its own git worktree. Every
 handoff between them is parsed against a typed contract and passed through a verification stack.
-Behind all of it sits one corpus of 221 engineering documents. No agent carries it. Each carries an
+Behind all of it sits one corpus of 221 skill files, the factory's engineering documents. No agent
+carries it. Each carries an
 index of what exists, and fetches what the work turns out to need.
 
 ```
@@ -72,7 +79,8 @@ diagrams:verify` regenerates the plates, checks every count on them against
 
 ## Demos
 
-Twelve demos run code extracted from the factory and the products built with it.
+Twelve offline demos and one live demo run code extracted from the factory and the products built
+with it.
 
 | Demo | Plate | Proves |
 |---|---|---|

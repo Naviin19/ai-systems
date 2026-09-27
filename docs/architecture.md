@@ -188,7 +188,7 @@ A gate reports PASS, FAIL or UNEVALUATED, and UNEVALUATED is never a pass. Exit 
 
 ## Contested figures
 
-None of the figures the plates draw is contested. [`evidence.md`](evidence.md) records how each was measured.
+None of the figures the plates draw has an unresolved conflicting source. [`evidence.md`](evidence.md) records how each was measured.
 
 `evidence.md` is also the file the diagram compiler reads its expected counts from: change a figure there and the plate that draws it fails until it is redrawn; change a plate and it fails until the figure is corrected. Neither can be edited alone.
 

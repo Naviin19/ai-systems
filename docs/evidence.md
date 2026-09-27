@@ -2,7 +2,7 @@
 
 Every figure the plates draw and every mechanism they name: its value, what it rests on, and where to look.
 
-**Figures measured 27 September 2026 at factory commit `5d5fb3f1`; citations audited 14 September at `5739a97`.** Every figure the plates draw was checked against the factory (`skill-ecosystem`, private) and against the four product repositories at named commits, read-only. Each entry states what the code does and cites the lines that show it, and a script in the factory resolves every citation at the commit it names. No figure the set draws is contested.
+**Figures measured 27 September 2026 at factory commit `5d5fb3f1`; citations audited 14 September at `5739a97`.** Every figure the plates draw was checked against the factory (`skill-ecosystem`, private) and against the four product repositories at named commits, read-only. Each entry states what the code does and cites the lines that show it, and a script in the factory resolves every citation at the commit it names. No figure the plates draw has an unresolved conflicting source.
 
 ---
 
@@ -26,14 +26,14 @@ Measured at factory `5d5fb3f1` on 27 September 2026.
 | Figure | Value | Tier | How it was measured |
 |---|---|---|---|
 | Skill files | 221 | `audited` | `.md` files under `skills/`, not counting the per-layer `CLAUDE.md` indexes |
-| In an active manifest | 202 | `audited` | referenced by an agent config or by `skills/meta/universal-primitives.json` |
+| In an active manifest | 191 | `audited` | referenced by an agent config's manifest, or injected as one of the 12 universal primitives, per `verify-playbook-skills.js`; with the 30 parked, the 221 |
 | Parked | 30 | `audited` | listed in `skills/meta/retired-skills.json`; none of them is referenced |
 | Architecture layers | 9 | `audited` | distinct `architecture_layer` values in skill frontmatter: engineering 68, governance 51, intelligence 37, coordination 20, connectors 13, operational 12, foundational 10, tracking 7, meta 3 |
 | Agents | 20 | `audited` | `configs/agent-*.config.ts` |
 | Build agents | 15 | `audited` | the configs outside the research-cluster pattern |
 | Research agents | 5 | `audited` | `research-reader`, `research-graph-builder`, `research-synthesizer`, `marketing-availability-builder`, `marketing-availability-validator` |
-| Build waves | 12, at most 2 agents at once | `audited` | the scheduler's rule applied to `dependsOn`; with the research cluster, 12 waves and at most 3 at once |
-| Dependency edges | 23 | `audited` | `dependsOn` across the configs; the edge registry declares 24, one of them a read that crosses the graph, and 6 carry typed reads |
+| Build waves | 12, at most 2 agents at once | `audited` | the scheduler's rule applied to `dependsOn`: the build graph's widest wave holds 2 agents, 3 when the research cluster participates; the scheduler's own ceiling, `ORCH_MAX_PARALLEL`, is 4 by default, so the graph sets concurrency, not the ceiling |
+| Dependency edges | 23 | `audited` | `dependsOn` across the configs — the execution graph; the edge registry, which also declares what each consumer reads, holds 24, one of them a read that crosses the graph with no `dependsOn` edge, and 6 carry typed reads |
 | CI gate ids | 42, R1 to R42 | `audited` | `scripts/verify-all.ts`, which runs them as 43 blocks because R22 has a schema block and a database block |
 | Health checks | 39 | `audited` | the numbered checks in the factory's root `CLAUDE.md` |
 | Preflight features | 20, F1 to F20 | `audited` | `prompts/feature-descriptor.md`, run by the build-start prompt |
@@ -273,7 +273,7 @@ Every count the plates draw, in one block. `tools/diagram-compiler/verify.py` pa
   "stated_not_drawn": {
     "ci_gate_blocks":      {"value": 43,  "tier": "audited"},
     "health_checks":       {"value": 39,  "tier": "audited"},
-    "skills_in_manifests": {"value": 202, "tier": "audited"},
+    "skills_in_manifests": {"value": 191, "tier": "audited"},
     "retired_skills":      {"value": 30,  "tier": "audited"},
     "envelope_variants":   {"value": 24,  "tier": "audited"},
     "mcp_server_packages": {"value": 6,   "tier": "audited"},
