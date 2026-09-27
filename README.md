@@ -71,7 +71,7 @@ render images.
 | 07 | [Hardening loop](docs/diagrams/07-hardening-loop.svg) | Promotion requires a proof of convergence | shipped |
 | 08 | [Learning loops](docs/diagrams/08-learning-loops.svg) | Two loops, and in both a person decides what becomes permanent | shipped · audited protocol |
 | 09 | [Runtime engine](docs/diagrams/09-runtime-engine.svg) | The packages a shipped product runs on, and the product that runs on them | shipped · audited caller |
-| 10 | [Two-lane execution](docs/diagrams/10-two-lane-execution.svg) | The constraint is scoped, not total | shipped · never run live |
+| 10 | [Two-lane execution](docs/diagrams/10-two-lane-execution.svg) | The constraint is scoped, not total | shipped |
 | 11 | [Prompts as specifications](docs/diagrams/11-prompts-as-specifications.svg) | A prompt is an artifact with a declared shape, graded before it is used | shipped · audited floors |
 | 12 | [Writable surface](docs/diagrams/12-writable-surface.svg) | Every place a note can land is on a row, and a detector holds the rows to the tree | shipped · advisory gate · audited counts |
 | 13 | [Gate ladder](docs/diagrams/13-gate-ladder.svg) | Enforcement is a ladder, not a wall: block, advisory with a written condition, off | shipped · audited counts |
