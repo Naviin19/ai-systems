@@ -237,31 +237,45 @@ if arch:
                 warns.append(f"architecture.md does not name '{t}'")
 
 # --- 3c. the prose carries the audited numbers, never its own copies -------------
-# This file held the plates to evidence.md and never read architecture.md, so the prose
-# published 219 files, 52 Zod files and 48 contracts against an evidence table that said
-# 221, 55 and 50 -- two of them stale since the previous audit. Every count the prose
-# attaches to one of these nouns must equal the figure evidence.md holds for it.
-if arch:
+# This file held the plates to evidence.md and never read the prose, so architecture.md
+# published 219 files, 52 Zod files and 48 contracts, and ENGINEERING.md 97 generated schemas
+# and 49 registered, against an evidence table that said otherwise -- some stale since the
+# previous audit. Every count either document attaches to one of these nouns must equal the
+# figure evidence.md holds for it.
+try:
+    eng = open(REPO + '/docs/ENGINEERING.md', encoding='utf-8').read()
+except FileNotFoundError:
+    eng = ""
+if arch or eng:
     def _ev_row(label):
         m = re.search(r'^\| ' + re.escape(label) + r' \| (\d[\d,]*)', ev, re.M)
         return int(m.group(1).replace(',', '')) if m else None
+    _STATED = FIG.get("stated_not_drawn", {})
     PROSE = [
-        (r'(\d[\d,]*) skill files',           DRAWN.get("skill_files", {}).get("value")),
-        (r'(\d[\d,]*) files in nine layers',  DRAWN.get("skill_files", {}).get("value")),
-        (r'(\d+) CI gate ids',                DRAWN.get("ci_gate_ids", {}).get("value")),
-        (r'Zod: (\d+) files',                 DRAWN.get("zod_source_files", {}).get("value")),
-        (r'registers (\d+) contracts',        _ev_row("Registered contracts")),
-        (r'Audited — (\d+) contracts',   _ev_row("Registered contracts")),
-        (r'(\d+) generated schemas',          DRAWN.get("generated_schemas", {}).get("value")),
-        (r'(\d+) hand-kept schemas',          DRAWN.get("per_agent_schemas", {}).get("value")),
+        (r'(\d[\d,]*) skill files',                 DRAWN.get("skill_files", {}).get("value")),
+        (r'The corpus is (\d[\d,]*) documents',     DRAWN.get("skill_files", {}).get("value")),
+        (r'(\d[\d,]*) files in nine layers',        DRAWN.get("skill_files", {}).get("value")),
+        (r'(\d+) CI gate ids',                      DRAWN.get("ci_gate_ids", {}).get("value")),
+        (r'Zod: (\d+) files',                       DRAWN.get("zod_source_files", {}).get("value")),
+        (r'(\d+) source files hold',                DRAWN.get("zod_source_files", {}).get("value")),
+        (r'(\d[\d,]*) schema declarations',         _ev_row("Schema declarations")),
+        (r'registers (\d+) contracts',              _ev_row("Registered contracts")),
+        (r'Audited — (\d+) contracts',         _ev_row("Registered contracts")),
+        (r'(\d+) of\s+them registered',             _ev_row("Registered contracts")),
+        (r'(\d+) generated schemas',                DRAWN.get("generated_schemas", {}).get("value")),
+        (r'(\d+) JSON Schema files are generated',  DRAWN.get("generated_schemas", {}).get("value")),
+        (r'(\d+) hand-kept schemas',                DRAWN.get("per_agent_schemas", {}).get("value")),
+        (r'(\d+) per-agent I/O schemas',            DRAWN.get("per_agent_schemas", {}).get("value")),
+        (r'union of (\d+) variants',                _STATED.get("envelope_variants", {}).get("value")),
     ]
-    for pat, want in PROSE:
-        if want is None:
-            continue
-        for m in re.finditer(pat, arch):
-            got = int(m.group(1).replace(',', ''))
-            if got != want:
-                fails.append(f"architecture.md says '{m.group(0)}' but evidence.md holds {want}")
+    for name, text in (("architecture.md", arch), ("ENGINEERING.md", eng)):
+        for pat, want in PROSE:
+            if want is None or not text:
+                continue
+            for m in re.finditer(pat, text):
+                got = int(m.group(1).replace(',', ''))
+                if got != want:
+                    fails.append(f"{name} says '{m.group(0)}' but evidence.md holds {want}")
     # anything contested on a plate must be named as contested in the prose too
     if "Contested figures" not in arch:
         fails.append("architecture.md does not declare the contested figures")

@@ -145,8 +145,9 @@ defence is not discipline, because discipline is exactly what fails under deadli
 derivation: one source of truth, everything else generated from it, so there is no second copy left
 to drift.
 
-55 source files hold 2,099 schema declarations. 97 JSON Schema files are generated from them, 49 of
-those registered. The handoff envelope between agents is a discriminated union of 24 variants, keyed
+55 source files hold 2,165 schema declarations. 52 JSON Schema files are generated from them, 50 of
+them registered, and 46 per-agent I/O schemas are kept by hand beside them. The handoff envelope
+between agents is a discriminated union of 24 variants, keyed
 on the boundary each one crosses, and every variant's schema becomes a tool definition the producing
 model is forced to call.
 

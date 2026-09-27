@@ -38,12 +38,13 @@ Measured at factory `5d5fb3f1` on 27 September 2026.
 | Health checks | 39 | `audited` | the numbered checks in the factory's root `CLAUDE.md` |
 | Preflight features | 20, F1 to F20 | `audited` | `prompts/feature-descriptor.md`, run by the build-start prompt |
 | Zod source files | 55 | `audited` | files under `contracts/types` that import zod |
+| Schema declarations | 2,165 | `audited` | `z.` calls across `contracts/types` |
 | Registered contracts | 50, in five tiers | `audited` | `SCHEMA_REGISTRY`: governance 15, operational 13, measurement 11, foundational 7, knowledge 4 |
 | Generated JSON Schemas | 52 | `audited` | under `contracts/schemas`, outside `agents/`: one per registry entry, and two the registry does not name |
 | Per-agent I/O schemas | 46 | `audited` | `contracts/schemas/agents`, kept by hand |
 | Contract examples | 27 | `audited` | the example checks in `verify-all.ts` |
 | Traced prompt files | 32 | `audited` | prompt files the generated registry links to a schema |
-| Handoff envelope variants | 24, of which 20 are emitted by an agent | `audited` | the generated contract catalog |
+| Handoff envelope variants | 24, of which 20 are emitted by an agent | `audited` | the generated contract catalog; the other four are `GENERIC`, the placeholder no configuration may use, and three boundaries the union defines that no current configuration is assigned |
 | Measured Level-0 hubs | 13 | `audited` | skills cited by 20 or more other skill files, from `verification/skill-ref-counts.json` |
 | Level-0 set | 14 | `audited` | the measured hubs plus `master-prompt-architecture.md`, which is declared and measures 18 |
 | MCP server packages | 6, of which 3 are in the default lineup | `audited` | `packages/mcp-server-*` and `DEFAULT_SERVER_KEYS` |

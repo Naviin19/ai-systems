@@ -31,9 +31,10 @@ git clone https://github.com/Naviin19/ai-systems && cd ai-systems
 npm ci && npm run demo
 ```
 
-Twelve demos need no API key, no account and no network, and CI runs them on Linux, macOS and Windows
-with every outbound connection refused. One demo does need a key, runs on your own machine against
-your own account, and lives in [`demos/live/`](demos/live/) — `npm run demo` never reaches it.
+Twelve offline demos need no API key, no account and no network, and CI runs them on Linux, macOS and
+Windows with every outbound connection refused. One opt-in live demo does need a key, runs on your own
+machine against your own account, and lives in [`demos/live/`](demos/live/) — `npm run demo` never
+reaches it.
 
 ---
 
