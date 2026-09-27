@@ -88,6 +88,7 @@ Twelve demos run code extracted from the factory and the products built with it.
 | [reported-paths](demos/10-reported-paths/) | — | Every path a handoff names is resolved against disk; a URL route is never a missing file, and zero handoffs is unevaluated, not clean |
 | [write-surface](demos/11-write-surface/) | 12 | A file that writes to disk and sits on no row, and a free-text key the envelope does not declare, are found before the tree is called clean |
 | [emitter-instructions](demos/12-emitter-instructions/) | — | An instruction an agent cannot perform is classed by the route it lacks, and a comment or a prose bullet is left alone |
+| [enrich](demos/live/enrich/) · live | — | Forced tool choice returns schema-valid structure from a real model, and five concurrent identical calls make one dispatch; reads your own key, at most three calls, and `npm run demo` never reaches it |
 
 ## Products
 
