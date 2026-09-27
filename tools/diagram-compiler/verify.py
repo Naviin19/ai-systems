@@ -149,11 +149,11 @@ if {"build_agents", "research_agents", "total_agents"} <= set(DRAWN):
 
 # plate 13 draws each recorded flip as a teal dot (dot() emits the mark class, role-m, not
 # the fill class the hub circles carry); the count is a figure like any other
-if "flips_recorded" in DRAWN and "13" in d:
+if "flips_on_condition" in DRAWN and "13" in d:
     got = len(re.findall(r'<circle [^>]*class="teal-m"', open(d["13"], encoding='utf-8').read()))
-    want = DRAWN["flips_recorded"]["value"]
+    want = DRAWN["flips_on_condition"]["value"]
     (fails if got != want else warns).append(
-        f"d13: {got} flip dots, evidence doc says flips_recorded = {want}"
+        f"d13: {got} flip dots, evidence doc says flips_on_condition = {want}"
         + ("" if got == want else "  MISMATCH"))
 
 # plate 02 draws each measured hub as a teal circle; the count is a figure like any other

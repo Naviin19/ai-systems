@@ -178,11 +178,11 @@ An agent's statement about its own dispatch has a typed field, `route_reports[]`
 
 A gate is a switch with three settings, and moving it is a recorded act.
 
-58 mode-gated switches are read through one module, `lib/env-mode.ts`. 20 default to BLOCK, 30 to WARN, 2 to OFF and 6 carry a bespoke setting. Every WARN default has a written flip condition beside it, and `verify-flip-conditions.mjs` fails a new WARN default without one; its exemption ledger, `flip-condition-exemptions.json`, is empty. 7 switches reached BLOCK by a recorded flip.
+58 mode-gated switches are read through the same reading — `lib/env-mode.ts`, or a local copy of it in six `.mjs` gates. 20 default to BLOCK, 30 to WARN, 2 to OFF and 6 carry a bespoke setting. Every WARN default has a written flip condition beside it, and `verify-flip-conditions.mjs` fails a new WARN default without one; its exemption ledger, `flip-condition-exemptions.json`, is empty. 6 switches reached BLOCK on their written condition; two more by operator override.
 
 A gate reports PASS, FAIL or UNEVALUATED, and UNEVALUATED is never a pass. Exit 2 means a gate refused to run, and no mode downgrades it.
 
-*Evidence: shipped — `env-mode.ts`, `verify-flip-conditions.mjs`, `flip-condition-exemptions.json`, `verify-all.ts`. Audited — 58 switches, 20 BLOCK, 30 WARN, 2 OFF, 6 bespoke, 0 exemptions, 7 recorded flips, at factory `5d5fb3f1`.*
+*Evidence: shipped — `env-mode.ts`, `verify-flip-conditions.mjs`, `flip-condition-exemptions.json`, `verify-all.ts`. Audited — 58 switches, 20 BLOCK, 30 WARN, 2 OFF, 6 bespoke, 0 exemptions, 6 flips on their written condition, at factory `5d5fb3f1`.*
 
 ---
 

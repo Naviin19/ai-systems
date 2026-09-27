@@ -53,11 +53,11 @@ FIGS = [
   "Enforcement is a ladder, not a wall.",
   "Fifty-eight switches: twenty default to block, thirty to advisory, two to off, six to a "
   "bespoke default. Every advisory switch carries, beside it, the written condition that ends "
-  "that, and a gate refuses a new advisory switch without one. Seven climbed on theirs.",
+  "that, and a gate refuses a new advisory switch without one. Six climbed on theirs.",
   "A gate reports pass, fail or unevaluated, and unevaluated is never a pass; a gate that "
   "refuses to run exits 2 in every mode.",
   [("shipped","verify-flip-conditions.mjs, env-mode.ts"),
-   ("audited","58 switches: 20 block, 30 advisory, 2 off, 6 bespoke; 7 recorded flips")])
+   ("audited","58 switches: 20 block, 30 advisory, 2 off, 6 bespoke; 6 flips on their written condition")])
 ]
 
 

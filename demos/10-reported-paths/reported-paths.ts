@@ -113,7 +113,7 @@ export function scanReportedPaths(
     state: 'UNEVALUATED', runsScanned: 0, handoffsScanned: 0, claims: 0, resolved: 0, missing: [],
   };
   if (!existsSync(runsRoot)) {
-    out.reason = `no ${runsRoot} directory (it is gitignored; a CI checkout has none)`;
+    out.reason = `no ${runsRoot} directory`;
     return out;
   }
 
@@ -164,7 +164,7 @@ export function scanReportedPaths(
 
   if (out.claims === 0) {
     out.reason = out.handoffsScanned === 0
-      ? `0 handoffs under ${runsRoot} (the directory is gitignored; a CI checkout has none)`
+      ? `0 handoffs under ${runsRoot}`
       : `0 declared path-typed fields present in ${out.handoffsScanned} handoff(s)`;
     return out;
   }

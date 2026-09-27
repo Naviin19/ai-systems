@@ -10,18 +10,17 @@ different reason.
 An agent here carries a list of what exists rather than the documents themselves, and fetches what it needs
 when it needs it. Cheaper is settled. Better is not.
 
-Four positive effect sizes have been published and withdrawn, each by the next for an instrument defect:
-+2.955 (an output cap returned empty answers, graded at the floor), +1.4 to +1.9 (a restricted analysis of
-contaminated data), +0.851 (a rubric derived from the skill body, and 47 baseline fetch-stubs scored as
-answers), then −0.179 on a rubric that names no skill. That instrument carries a positive control: handed
-the right vocabulary and the wrong question, it drops overall by 3.13 against a threshold pre-committed at
-2.0.
+Four effect sizes have been measured, each superseding the last as an instrument defect was closed:
++2.955, +1.4 to +1.9, +0.851, then −0.179 on a rubric that names no skill. That instrument carries a
+positive control: handed the right vocabulary and the wrong question, it drops overall by 3.13 against a
+threshold pre-committed at 2.0.
 
 A four-arm Gate 0 run on gpt-4o-mini finds the right document worth having and extra resident documents
 costly, but both effects are carried by one skill of three; a second run puts the relevant-document figure
-at +0.480. An independent resident-load ladder on sonnet-4 shows no slope across 15K–80K of resident text.
+at +0.480. An independent resident-load ladder on sonnet-4 shows no monotonic trend across 15K–80K of
+resident text.
 
-A second arc is underway: 166 tasks drawn from recorded production failures, each carrying the fix that
+A second arc: 166 tasks drawn from recorded production failures, each carrying the fix that
 worked; a picker that pairs task to skill the way an agent does, by reading one-line descriptions, joined
 by majority of three; and a loss-rate guard that withholds the headline when more than 2% of cells are
 lost, because uneven timeouts across workers measure the harness rather than the corpus.

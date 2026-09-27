@@ -45,9 +45,9 @@ def d13(bare=False):
     y_from = y_adv + RH / 2
     y_to = y_block + RH / 2
     b.append(path(f"M{M + RW + 24},{y_from} H{ax} V{y_to} H{RX + RW + 4}", "teal"))
-    for i in range(7):
+    for i in range(6):
         b.append(dot(ax, y_from - 10 - i * 10, 3, "teal"))
-    for i, ln in enumerate(wrap("7 climbed on their written condition", 20)):
+    for i, ln in enumerate(wrap("6 climbed on their written condition", 20)):
         b.append(text(ax + 14, 202 + i * 17, ln, SUB_PX, "teal", weight=500))
 
     body_end = y_off + RH

@@ -48,6 +48,7 @@ Measured at factory `5d5fb3f1` on 27 September 2026.
 | Level-0 set | 14 | `audited` | the measured hubs plus `master-prompt-architecture.md`, which is declared and measures 18 |
 | MCP server packages | 6, of which 3 are in the default lineup | `audited` | `packages/mcp-server-*` and `DEFAULT_SERVER_KEYS` |
 | Static prompt load | 8,086 to 20,291 tokens per agent | `audited` | `verification/token-budget-baseline.json`, estimate mode, 27 September |
+| Switches that climbed on their written condition | 6 | `audited` | a mode declaration whose source records `FLIPPED` on its pre-committed condition: RIGOR, V6_FIELDS, R22, R23, PITCH_CLAIMS, ELECTION_SURFACE; two more record a flip by operator override with the condition still open, and are not counted |
 
 The hub counts, highest first: five-laws-ai-systems 42, structured-output-schemas 40, agent-constitution 38, prompt-craftsmanship-constitution 38, discovery-frame 31, prompt-multiplier 30, epistemic-vigilance 27, design-principles 27, api-integration-patterns 25, prompt-constitution 23, testing-and-validation-playbook 21, marketing-analysis-frameworks 20, deployment-environment-configuration 20.
 
@@ -172,7 +173,7 @@ Grouped by the plate that draws each one. Every row is `shipped` unless it says 
 
 | Mechanism | What it does | Implemented in |
 |---|---|---|
-| Mode switches | Every enforcement switch is read through one reader and defaults to `BLOCK`, `WARN` or `OFF`, or to a bespoke value it declares | `lib/env-mode.ts` |
+| Mode switches | Every enforcement switch is read through the same reading — `lib/env-mode.ts`, or a local copy of it in six `.mjs` gates — and defaults to `BLOCK`, `WARN` or `OFF`, or to a bespoke value it declares | `lib/env-mode.ts` |
 | Flip ratchet | Fails a new `WARN` default that carries no written flip condition beside it; the exemption ledger is empty | `verify-flip-conditions.mjs`, `configs/flip-condition-exemptions.json` |
 | Three outcomes | A gate reports `PASS`, `FAIL` or `UNEVALUATED`, and `UNEVALUATED` is never counted as a pass; exit 2 means the gate refused to run, and no mode downgrades it | `verify-all.ts` |
 
@@ -267,7 +268,7 @@ Every count the plates draw, in one block. `tools/diagram-compiler/verify.py` pa
     "switches_block":           {"value": 20,  "tier": "audited", "plates": ["13"]},
     "switches_advisory":        {"value": 30,  "tier": "audited", "plates": ["13"]},
     "switches_outside_ladder":  {"value": 8,   "tier": "audited", "plates": ["13"]},
-    "flips_recorded":           {"value": 7,   "tier": "audited", "plates": ["13"]}
+    "flips_on_condition":       {"value": 6,   "tier": "audited", "plates": ["13"]}
   },
   "stated_not_drawn": {
     "ci_gate_blocks":      {"value": 43,  "tier": "audited"},

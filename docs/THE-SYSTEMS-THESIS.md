@@ -129,7 +129,7 @@ refuses a new advisory switch without one. UNEVALUATED is never a pass.
 
 | Hypothesis | Instrument |
 |---|---|
-| Does addressable expertise improve task quality, or only cost? | Four-arm harness, no-effect band 0.239 |
+| Does addressable expertise improve task quality, or only cost? | A skill-independent rubric with a positive control, on the model the factory dispatches; a paired delta on production-failure tasks with no arm at the ceiling |
 | Do typed handoffs reduce downstream failure propagation? | Contract compiler |
 | Can institutional learning improve future runs without entrenching error? | Decision ledger + context injection + contradiction check |
 | Can bounded divergence raise solution diversity while holding verification rates? | Divergence lane; survival rate only |
