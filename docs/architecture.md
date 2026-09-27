@@ -150,7 +150,7 @@ The lanes run in separate contexts but share one contract and one verdict path. 
 
 The code is shipped; the factory lane has never been switched on. No other agent gains this wiring until ten candidates have been judged, and the last reading was zero.
 
-*Evidence: shipped — `divergence-candidate.ts` and the envelope rider, `applyImaginationFlag` in the orchestrator, `packages/runtime-imagination`, `validate-handoff.ts`, `record-divergence-verdict.ts`, `recordDivergenceVerdict`. Audited — never run live, and zero judged candidates at the last reading.*
+*Evidence: shipped — `divergence-candidate.ts` and the envelope rider, `applyImaginationFlag` in the orchestrator, `packages/runtime-imagination`, `validate-handoff.ts`, `record-divergence-verdict.ts`, `recordDivergenceVerdict`. Audited — zero judged candidates at the last reading.*
 
 ## 11. Prompts as specifications
 

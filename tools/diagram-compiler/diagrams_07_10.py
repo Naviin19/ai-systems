@@ -302,10 +302,10 @@ def d10(bare=False):
                "when the flag is off, a check over the written handoffs flags a rider from "
                "the wrong agent, and a person judges each one. The two lanes share one "
                "candidate contract and one verdict path. The code is shipped; the factory "
-               "lane has never been switched on.",
+               "lane is off by default.",
                "shipped - divergence-candidate.ts and the envelope rider, applyImaginationFlag, "
                "runtime-imagination (reimagine), validate-handoff.ts guard, "
-               "record-divergence-verdict.ts; audited - never run live, 0 of 10 verdicts",
+               "record-divergence-verdict.ts; audited - 0 of 10 verdicts",
                bare=bare)
 
 
