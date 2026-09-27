@@ -12,7 +12,7 @@ Each section was written from the factory's code at commit `5739a97`, on 14 Sept
 
 A factory that builds software products with AI agents, and the runtime packages those products can run on, over one corpus of skill files.
 
-The factory is twenty agent configurations: fifteen that build a product and five that run a research pipeline. An orchestrator dispatches them in dependency waves, each agent in its own git worktree. Every handoff between agents is parsed against a typed contract and passed through a verification stack before the next agent reads it. The corpus is 219 skill files, which agents cite and load a section at a time rather than carrying whole.
+The factory is twenty agent configurations: fifteen that build a product and five that run a research pipeline. An orchestrator dispatches them in dependency waves, each agent in its own git worktree. Every handoff between agents is parsed against a typed contract and passed through a verification stack before the next agent reads it. The corpus is 221 skill files, which agents cite and load a section at a time rather than carrying whole.
 
 The run side is a set of packages: an LLM gateway, a model router and an MCP host for connectors. Author's app sends its model calls through its own copy of the gateway.
 
@@ -42,7 +42,7 @@ The factory records how often each skill is cited, not by whom, so the plate siz
 
 The checks exist because of a real defect. `configs/agent-00.config.ts` cited a section of `agent-constitution.md` that did not exist, so agent 00, the spec validator and first in the pipeline, was handed the literal string `[section not found]` where its constitution should have been. The entry was removed on 12 September, and since 14 September a citation to a missing section fails before it lands.
 
-*Evidence: shipped — `skill-ref-count.ts`, `verify-hub-integrity.mjs`, `audit-hub-citations.mjs`, `.husky/pre-commit`, R33. Audited — thirteen measured hubs in a set of fourteen, and 219 files in nine layers.*
+*Evidence: shipped — `skill-ref-count.ts`, `verify-hub-integrity.mjs`, `audit-hub-citations.mjs`, `.husky/pre-commit`, R33. Audited — thirteen measured hubs in a set of fourteen, and 221 files in nine layers.*
 
 ## 3. The compiler spine
 
@@ -62,7 +62,7 @@ The plate once drew a linear chain. That was right about the code until the sche
 
 One source of truth, and the reach of changing it is computed.
 
-The source is hand-written Zod: 52 files under `contracts/types`, from which `SCHEMA_REGISTRY` registers 48 contracts in five tiers. The JSON Schemas, the contract registry and its catalog are generated from the registry. R22 regenerates every schema in memory and fails CI on any difference, and R32 fails when the registry or the catalog is stale. TypeScript types come from the same source by inference; they are typechecked, not generated.
+The source is hand-written Zod: 55 files under `contracts/types`, from which `SCHEMA_REGISTRY` registers 50 contracts in five tiers. The JSON Schemas, the contract registry and its catalog are generated from the registry. R22 regenerates every schema in memory and fails CI on any difference, and R32 fails when the registry or the catalog is stale. TypeScript types come from the same source by inference; they are typechecked, not generated.
 
 Two surfaces are kept by hand and can drift: 46 per-agent input and output schemas, checked only for existence, and the database migrations, whose parity check is advisory and skips without a database. The plate draws them at the same size as the generated surfaces.
 
@@ -70,7 +70,7 @@ Handoffs are one contract, `HandoffEnvelopeSchema`, a union of 24 boundary varia
 
 `blast-radius.ts` walks the registry's import graph breadth-first, so what a schema change reaches is computed: schemas, tables, and the 32 prompt files that name a schema. It is run by hand. The widest reach in the registry today is five importers, shared by three schemas. Agent 12, a different mechanism, derives each product's prompt library in TypeScript without a model call.
 
-*Evidence: shipped — `generate-json-schemas.ts`, `contracts-vs-json-schema.ts` (R22), `generate-registry.ts` (R32), `contract-compiler.ts` (R31), `HandoffEnvelopeSchema`, `blast-radius.ts`. Audited — 48 contracts, 48 generated schemas and 46 hand-kept schemas.*
+*Evidence: shipped — `generate-json-schemas.ts`, `contracts-vs-json-schema.ts` (R22), `generate-registry.ts` (R32), `contract-compiler.ts` (R31), `HandoffEnvelopeSchema`, `blast-radius.ts`. Audited — 50 contracts, 52 generated schemas and 46 hand-kept schemas.*
 
 ## 5. The verification stack
 

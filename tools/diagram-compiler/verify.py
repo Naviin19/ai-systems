@@ -226,6 +226,33 @@ if arch:
             stem = t.split(None, 1)[1] if t.lower().startswith("the ") else t
             if stem.lower() not in arch.lower():
                 warns.append(f"architecture.md does not name '{t}'")
+
+# --- 3c. the prose carries the audited numbers, never its own copies -------------
+# This file held the plates to evidence.md and never read architecture.md, so the prose
+# published 219 files, 52 Zod files and 48 contracts against an evidence table that said
+# 221, 55 and 50 -- two of them stale since the previous audit. Every count the prose
+# attaches to one of these nouns must equal the figure evidence.md holds for it.
+if arch:
+    def _ev_row(label):
+        m = re.search(r'^\| ' + re.escape(label) + r' \| (\d[\d,]*)', ev, re.M)
+        return int(m.group(1).replace(',', '')) if m else None
+    PROSE = [
+        (r'(\d[\d,]*) skill files',           DRAWN.get("skill_files", {}).get("value")),
+        (r'(\d[\d,]*) files in nine layers',  DRAWN.get("skill_files", {}).get("value")),
+        (r'(\d+) CI gate ids',                DRAWN.get("ci_gate_ids", {}).get("value")),
+        (r'Zod: (\d+) files',                 DRAWN.get("zod_source_files", {}).get("value")),
+        (r'registers (\d+) contracts',        _ev_row("Registered contracts")),
+        (r'Audited — (\d+) contracts',   _ev_row("Registered contracts")),
+        (r'(\d+) generated schemas',          DRAWN.get("generated_schemas", {}).get("value")),
+        (r'(\d+) hand-kept schemas',          DRAWN.get("per_agent_schemas", {}).get("value")),
+    ]
+    for pat, want in PROSE:
+        if want is None:
+            continue
+        for m in re.finditer(pat, arch):
+            got = int(m.group(1).replace(',', ''))
+            if got != want:
+                fails.append(f"architecture.md says '{m.group(0)}' but evidence.md holds {want}")
     # anything contested on a plate must be named as contested in the prose too
     if "Contested figures" not in arch:
         fails.append("architecture.md does not declare the contested figures")
