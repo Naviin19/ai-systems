@@ -1,4 +1,4 @@
-# The lab
+# The workshop
 
 The other documents describe what is built. This one describes what is being built next, and what each
 piece is for. The factory is never finished: every month a few of its mechanisms are tightened, a few new
