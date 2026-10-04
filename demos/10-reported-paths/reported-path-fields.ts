@@ -1,4 +1,4 @@
-// Extracted from the factory repository (skill-ecosystem, private),
+// Extracted from the software factory (private),
 // contracts/enforcement/reported-path-fields.ts at 5d5fb3f1, on 2026-09-27.
 // Changed on extraction:
 //   - PathFieldRow is imported from ./reported-paths, extracted alongside

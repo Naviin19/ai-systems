@@ -1,4 +1,4 @@
-// Extracted from the factory repository (skill-ecosystem, private),
+// Extracted from the software factory (private),
 // contracts/enforcement/compatibility/contract-compiler.ts at d490466, on 2026-09-14.
 // Changed on extraction:
 //   - the CLI section at the end (its self-test, the report printer and the `require.main` guard) is removed: this repository runs as ES modules, and demos/01-contract/run.ts is the entry point

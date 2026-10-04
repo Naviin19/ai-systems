@@ -1,4 +1,4 @@
-// Extracted from the factory repository (skill-ecosystem, private),
+// Extracted from the software factory (private),
 // scripts/lib/evidence-commitment.ts at d490466, on 2026-09-14.
 // Changed on extraction:
 //   - the self-test at the end of the file is removed; run.ts exercises the same functions

@@ -1,4 +1,4 @@
-// Extracted from the factory repository (skill-ecosystem, private), at d490466, on 2026-09-14.
+// Extracted from the software factory (private), at d490466, on 2026-09-14.
 //   renderSchema: scripts/generate-json-schemas.ts, which writes the committed contracts/schemas/ tree.
 //   deepEqual, sortKeys and firstDiff: scripts/contracts-vs-json-schema.ts, verify-all gate R22, which regenerates
 //   every schema and compares it with what is committed.

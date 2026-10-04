@@ -1,4 +1,4 @@
-// Extracted from the factory repository (skill-ecosystem, private),
+// Extracted from the software factory (private),
 // scripts/lib/cross-family-pass.ts at d490466, on 2026-09-14.
 // Changed on extraction:
 //   - the live judge (verifyHandoffCrossFamily, an OpenRouter call) is not imported, so a judge must be injected

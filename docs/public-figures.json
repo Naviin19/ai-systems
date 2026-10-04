@@ -1,6 +1,6 @@
 {
   "what": "Every figure the public ai-systems repo publishes about this factory, with the command that derives it. Consumers run the derivation; they do not copy the value. A number handed over in prose is stale the moment main moves, and main moves several times a day.",
-  "generated_from": "the skill-ecosystem working tree; no value in this file is hardcoded and no expected value is stored",
+  "generated_from": "the software factory's working tree; no value in this file is hardcoded and no expected value is stored",
   "figures": [
     {
       "id": "skill_files",
@@ -9,7 +9,7 @@
       "compare": "scalar",
       "discovery": "from the ai-systems repo root: grep -rn \"\\b<value>\\b\" . | grep -v \"/node_modules/\" | grep -v \"/\\.git/\" | grep -v \"^\\./\\.build/\" — substitute the PREVIOUS value to find what must move, and the NEW one afterwards to prove nothing was missed",
       "not_sites": [
-        "tools/diagram-compiler/diagrams_04_06.py — text(RX, 218, \"classifyRouteBack\", ...): a y-COORDINATE that happens to equal the figure. Excluded by hand by skill-ecosystem-00 and recorded here so nobody re-derives the exclusion.",
+        "tools/diagram-compiler/diagrams_04_06.py — text(RX, 218, \"classifyRouteBack\", ...): a y-COORDINATE that happens to equal the figure. Excluded by hand and recorded here so nobody re-derives the exclusion.",
         "demos/03-routeback/fixtures/cross-family-replay.jsonl — a recorded judge calibration sample. A replay fixture is EVIDENCE OF A PAST RUN and is never edited to match today's corpus."
       ],
       "note": "Two of the sites below are HISTORY, not live claims, and a redraw must leave them alone: docs/evidence.md section 5 and build_pdf.py's change table both record \"152, contested -> 218, audited\", which is what that revision settled. Two more are PINNED to a commit (\"counts at factory 5739a97\"), and a figure stated as-of a commit does not go stale when main moves — it is the correct way to publish a churning number, and the rest of the corpus would be better off copying it.",
