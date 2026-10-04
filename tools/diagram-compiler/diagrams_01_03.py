@@ -42,14 +42,8 @@ def d01(bare=False):
     return svg("01", "The operating system",
                "A build side and a run side over one corpus; three products live, one in development.",
                "".join(b), 398,
-               "The taper is the argument: one corpus of skill files carries the factory that "
-               "builds products and the call-site discipline for each model call the factory "
-               "scan or the gateway sees. Three products are live and a fourth is in development; "
-               "Auteur is specced, with no repository yet. The file count is drawn as ticks "
-               "because it must reconcile with plate 06.",
-               "audited - counts at factory 5d5fb3f1 (221 files, 20 agents, 42 CI gate ids); "
-               "product status from Vercel production deployments, 14 Sep",
-               bare=bare)
+               "", "",
+               bare=bare, footer=False)
 
 
 # ============================================== 02 - the knowledge substrate

@@ -244,7 +244,7 @@ def wrap(s, limit):
 
 # ------------------------------------------------------------------ document
 
-def svg(num, title, sub, body, body_end, caption, tier, bare=False):
+def svg(num, title, sub, body, body_end, caption, tier, bare=False, footer=True):
     """body_end is the y of the lowest drawn element; the footer is measured
     from it so no diagram has to know its own total height.
 
@@ -272,6 +272,11 @@ def svg(num, title, sub, body, body_end, caption, tier, bare=False):
         foot.append(text(M, y, line, CAPTION_PX, ink="mute"))
         y += 18
     height = y + 1
+
+    if not footer:
+        # A plate that stands alone under a README heading carries no caption of its own.
+        foot = []
+        height = body_end + 24
 
     if bare:
         LIFT = 88

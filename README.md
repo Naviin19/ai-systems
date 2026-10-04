@@ -5,19 +5,13 @@
 
 A language model is a probabilistic component whose interface does not reliably distinguish a
 correct answer from an incorrect one. Right and wrong arrive through the same channel, in the same
-shape, at the same apparent confidence. This repository is the published architecture of a system
+shape, at the same apparent confidence. This is the architecture of a system
 built around that fact: a compiler that turns specifications, knowledge, contracts and policies
 into coordinated agent execution, and the mechanisms that make that execution observable,
 contract-bound and recoverable.
 
-Three names recur. **The factory** is the private repository, `skill-ecosystem`, that builds
-software with agents. **The products** — three live, and a fourth in development — were built with
-it. This repository,
-`ai-systems`, is the factory's published architecture: what was built, the evidence behind every
-figure, and demos that run its code.
-
-The unit of reliability engineering here is not the fix. It is defect → understanding → invariant →
-automated enforcement. 
+The unit of reliability engineering here is defect → understanding → invariant → automated
+enforcement.
 
 Twenty agent configurations are dispatched in dependency waves, each into its own git worktree. Every
 handoff between them is parsed against a typed contract and passed through a verification stack.
@@ -46,8 +40,6 @@ reaches it.
 | [**Executable Expertise**](docs/EXECUTABLE-EXPERTISE.md) | Can domain expertise be compiled into a system, or only described to one? |
 | [**Brand as an API**](docs/BRAND-AS-AN-API.md) | What does that look like in one domain? A brand book produced by one product and consumed as a typed object by two others, over a graph of the marketing canon. |
 | [**The lab**](docs/LAB.md) | What is being built next, and the questions that work is meant to answer. |
-
-If you read one, read the first.
 
 ---
 
