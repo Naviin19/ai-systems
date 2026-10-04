@@ -3,13 +3,12 @@
 [![diagrams](https://github.com/Naviin19/ai-systems/actions/workflows/diagrams.yml/badge.svg)](https://github.com/Naviin19/ai-systems/actions/workflows/diagrams.yml)
 [![demos](https://github.com/Naviin19/ai-systems/actions/workflows/demos.yml/badge.svg)](https://github.com/Naviin19/ai-systems/actions/workflows/demos.yml)
 
-**Making probabilistic systems observable, testable and governable.**
-
-A language model can return a correct answer and an incorrect one through the same interface, in
-the same shape, at the same apparent confidence. This repository is the published architecture of
-a system that surrounds that component with deterministic contracts, verification, provenance,
-recovery and governance: a compiler that turns specifications, knowledge, contracts and policies
-into coordinated agent execution, with every mechanism shown, measured and demonstrated.
+A language model is a probabilistic component whose interface does not reliably distinguish a
+correct answer from an incorrect one. Right and wrong arrive through the same channel, in the same
+shape, at the same apparent confidence. This repository is the published architecture of a system
+built around that fact: a compiler that turns specifications, knowledge, contracts and policies
+into coordinated agent execution, and the mechanisms that make that execution observable,
+contract-bound and recoverable.
 
 Three names recur. **The factory** is the private repository, `skill-ecosystem`, that builds
 software with agents. **The products** — three live, and a fourth in development — were built with
