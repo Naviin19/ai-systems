@@ -1,4 +1,4 @@
-// Extracted from the factory repository (skill-ecosystem, private),
+// Extracted from the software factory (private),
 // scripts/calibration/measure-judge-catch-rate.ts at d490466, on 2026-09-14.
 // Changed on extraction:
 //   - kept: HARNESS, EXAMPLES_DIR, TASK_CONTEXT, the Corpus type and the sample builder (collectArtifacts, seedDefect, benignVariant, collectContractExamples, readLabels, buildSamples)

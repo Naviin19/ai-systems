@@ -1,4 +1,4 @@
-# The lab
+# The workshop
 
 The other documents describe what is built. This one describes what is being built next, and what each
 piece is for. The factory is never finished: every month a few of its mechanisms are tightened, a few new
@@ -40,6 +40,13 @@ satisfaction measure. For each scenario, what fraction of independent runs would
 Alongside it, a recorded copy of the product's own database, kept in step with the live one, lets the
 factory test against realistic data without touching production.
 
+It is now central: a private holdout plus a sealed prediction, both written before the first run. A round copy
+can't read the holdout. The scorer still waits on update 2.
+
+### Turn records
+
+Turn records are now the evidence trail for every round, with credentials redacted and never edited in place.
+
 ### A shared language for agents
 
 The work on how agents talk to each other, so that a handoff names what it read, what it blocked on and
@@ -62,12 +69,12 @@ what it would do instead, is finished.
 
 ## What I want to find out
 
-Four questions the work above is built to answer. Each has an instrument, and each is at a different stage.
+Five questions the work above is built to answer. Each has an instrument, and each is at a different stage.
 
 ### Does an index make the work better, or only cheaper?
 
 An agent here carries a list of what exists and fetches the document it needs. Cheaper is settled. Better is
-the question, and The instrument has been through four generations so far, each one
+the question. The instrument has been through four generations so far, each one
 removing a flaw the last exposed, the latest scored on a rubric that names no skill and carries a positive
 control, so a real effect has somewhere to show up. A second arc uses 166 tasks drawn from recorded
 production failures, each with the fix that worked, and a picker that chooses documents the way an agent
@@ -99,3 +106,8 @@ to its work, nothing downstream acts on it, and a person decides whether to keep
 deliberately plain, how often a kept idea survives that judgment, because scoring the ideas would teach the
 channel to write ideas that score well. The lane is built and off by default; the first judged ideas are
 ahead.
+
+### Can a claim carry how well it is known?
+
+A claim an agent makes carries its own state, and the gate that checks it can only downgrade a claim, never
+raise it.

@@ -1,4 +1,4 @@
-// Extracted from the factory repository (skill-ecosystem, private),
+// Extracted from the software factory (private),
 // contracts/types/operational/handoff-envelope.ts at d490466, on 2026-09-14.
 // Unchanged apart from this header.
 

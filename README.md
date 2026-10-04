@@ -39,7 +39,7 @@ reaches it.
 | [**The Systems Thesis**](docs/THE-SYSTEMS-THESIS.md) | What do I hold to be true about building these systems, and how strong is the evidence for each claim? |
 | [**Executable Expertise**](docs/EXECUTABLE-EXPERTISE.md) | Can domain expertise be compiled into a system, or only described to one? |
 | [**Brand as an API**](docs/BRAND-AS-AN-API.md) | What does that look like in one domain? A brand book produced by one product and consumed as a typed object by two others, over a graph of the marketing canon. |
-| [**The lab**](docs/LAB.md) | What is being built next, and the questions that work is meant to answer. |
+| [**The workshop**](docs/WORKSHOP.md) | What is being built next, and the questions that work is meant to answer. |
 
 ---
 

@@ -1,4 +1,4 @@
-// Extracted from the factory repository (skill-ecosystem, private),
+// Extracted from the software factory (private),
 // lib/v6-router/cross-family-verify.ts at d490466, on 2026-09-14.
 // Changed on extraction:
 //   - only the verdict types and parseJudgeReply are kept; the request builder and the network call are not

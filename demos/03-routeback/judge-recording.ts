@@ -1,4 +1,4 @@
-// Extracted from the factory repository (skill-ecosystem, private),
+// Extracted from the software factory (private),
 // scripts/calibration/lib/judge-recording.ts at d490466, on 2026-09-14.
 // Changed on extraction:
 //   - canonicalJson and sha256 are imported from ./canonical-json, extracted alongside

@@ -1,4 +1,4 @@
-// Extracted from the factory repository (skill-ecosystem, private),
+// Extracted from the software factory (private),
 // scripts/lib/evidence-commitment.ts at d490466, on 2026-09-14.
 // Changed on extraction:
 //   - only canonicalJson and sha256 are kept, with the node:crypto import they need

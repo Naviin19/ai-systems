@@ -15,7 +15,7 @@ fetched. Every agent carries an index of what exists; any entry loads only when 
 A four-arm run on a small model found the right document present raising output grade and extra resident
 documents lowering it, both carried by one skill of three. On the model the factory dispatches, a
 skill-independent rubric with a positive control found no measurable benefit. Whether an index makes work
-better as well as cheaper is the question the lab is built around.
+better as well as cheaper is the question the workshop is built around.
 
 The corpus is 221 documents: **1.80M tokens if an agent carried all of it.** An agent carries **8.1K–20.3K**,
 by the factory's chars/4 estimate over its real assembled prompt, reaching the whole corpus through an index
@@ -127,7 +127,7 @@ refuses a new advisory switch without one. UNEVALUATED is never a pass.
 
 ---
 
-## In the lab
+## In the workshop
 
 | Question | Instrument |
 |---|---|
@@ -140,4 +140,4 @@ refuses a new advisory switch without one. UNEVALUATED is never a pass.
 | Can agents tell a person exactly what they could not do? | Typed blocked, better-route and open-question reports, read across finished handoffs with a verdict on each finding |
 | When is retrieval worth adding to a product's own knowledge? | Cost per brand and call error rate per stage, measured on the live product. The decision follows the numbers |
 
-Each of these, with what is running now and what is planned, is in [the lab](LAB.md).
+Each of these, with what is running now and what is planned, is in [the workshop](WORKSHOP.md).

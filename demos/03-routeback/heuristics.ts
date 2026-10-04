@@ -1,4 +1,4 @@
-// Extracted from the factory repository (skill-ecosystem, private),
+// Extracted from the software factory (private),
 // scripts/master-agentic-orchestrator.ts at d490466, on 2026-09-14.
 // Changed on extraction:
 //   - only HeuristicPattern, loadHeuristics and matchHeuristic are kept, with the node:fs import they need

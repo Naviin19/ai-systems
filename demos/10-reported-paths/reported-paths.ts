@@ -1,4 +1,4 @@
-// Extracted from the factory repository (skill-ecosystem, private),
+// Extracted from the software factory (private),
 // scripts/lib/reported-paths.ts and contracts/enforcement/reported-path-types.ts at 5d5fb3f1, on 2026-09-27.
 // Changed on extraction:
 //   - PathKind and PathFieldRow are inlined from reported-path-types.ts

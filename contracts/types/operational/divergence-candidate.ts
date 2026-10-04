@@ -1,6 +1,6 @@
-// Extracted from the factory repository (skill-ecosystem, private),
+// Extracted from the software factory (private),
 // contracts/types/operational/divergence-candidate.ts at d490466, on 2026-09-14.
-// Unchanged apart from this header.
+// Unchanged apart from this header and one package name.
 
 import { z } from 'zod';
 
@@ -10,7 +10,7 @@ import { z } from 'zod';
  * the single source of truth; Auteur's composer-io.ts copy re-homes to it via
  * their amendments log).
  *
- * Produced by @skill-ecosystem/runtime-imagination `reimagine()` (which mints
+ * Produced by the factory's runtime-imagination package `reimagine()` (which mints
  * `divergence_id` deterministically as playbook:operator:dimension:hash8) and
  * judged by a HUMAN — the runtime never realizes or auto-applies a candidate
  * (imagination-protocol.md §1 Judge row, §4). Verdicts key on `divergence_id`

@@ -318,7 +318,7 @@ code{{font-family:var(--mono);font-size:.88em;background:var(--panel);
   <div class="derived">
     <p class="lab">Derived from</p>
     <ul>
-      <li>skill-ecosystem <em>— the factory, private; figures at 5d5fb3f1 (27 September), citations at 5739a97 (14 September)</em></li>
+      <li>the software factory <em>— private; figures at 5d5fb3f1 (27 September), citations at 5739a97 (14 September)</em></li>
       <li>four product repositories <em>— read-only, each at a named commit</em></li>
       <li>Vercel production deployments <em>— product status, 14 September 2026</em></li>
       <li>plans/ais-plate-claims.json <em>— every citation resolved by a script</em></li>
