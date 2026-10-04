@@ -1,9 +1,9 @@
 # Demos
 
-Six demos, each running code extracted from the factory over data the factory recorded. None needs a key, an account or the network.
+Twelve demos, each running code extracted from the factory over data the factory recorded. None needs a key, an account or the network.
 
 ```
-npm run demo              # all six: what each proves, and whether it held
+npm run demo              # all twelve: what each proves, and whether it held
 npm run demo:<name>       # one of them, with its full output
 ```
 

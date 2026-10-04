@@ -88,12 +88,12 @@ probe elects against tasks flatly outside the domain — unclogging a sink, prun
 where the right answer is zero documents, so a description that grabs more than it should is caught
 without an answer key.
 
-The trade was measured, and the measurement is unresolved. A four-arm run on a small model found
-the right document present raising output grade and extra resident documents lowering it, both
-effects carried by one skill of three; on the model the factory dispatches, a skill-independent
-rubric with a positive control found no measurable benefit from loading a document at all.
-Retrieval is cheaper than residency; whether it is better is the open question in
-[Hypotheses](HYPOTHESES.md).
+What the trade buys is settled: an index is a tenth of a percent of the context a library would cost. Whether it
+also raises the quality of the work is the question the lab is working through. A four-arm run on a small model
+found the right document present raising output grade and extra resident documents lowering it, both effects
+carried by one skill of three. On the model the factory dispatches, a skill-independent rubric with a positive
+control found no measurable benefit from loading a document at all, and the next measurement, on tasks drawn
+from production failures, is described in [the lab](LAB.md).
 
 ---
 
