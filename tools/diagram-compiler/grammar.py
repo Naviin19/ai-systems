@@ -257,6 +257,12 @@ def svg(num, title, sub, body, body_end, caption, tier, bare=False, footer=False
         text(M, 73, sub, TITLE_PX, ink="mute"),
     ]
 
+    # Plates whose first section label sits close under the subtitle are lowered to the
+    # same gap the others have.
+    if not bare and num in ("01", "02", "03", "04", "06", "08", "09", "10"):
+        body = f'<g transform="translate(0,16)">{body}</g>'
+        body_end += 16
+
     cap = wrap(caption, 82)
     rule_y = body_end + 26
     foot = [f'<line x1="{M}" y1="{rule_y}" x2="{W - M}" y2="{rule_y}" '

@@ -8,10 +8,10 @@ def d01(bare=False):
     Vercel production deployments; Auteur is specced. The gates are the thirty-three
     CI gate ids in verify-all.ts, measured at factory 5739a97."""
     b = []
-    b.append(section(124, 96, "Products built with the factory"))
+    b.append(section(59, 96, "Products built with the software factory"))
     prods = [("Ark", "Live"), ("Author", "Live"), ("Archer", "Live"),
              ("Whitespace", "In development"), ("Auteur", "Specced")]
-    px, pw = 124, 80
+    px, pw = 59, 106
     for i, (n, st) in enumerate(prods):
         x = px + i * (pw + 8)
         b.append(box(x, 112, pw, 44, "purple", dashed=(st != "Live")))

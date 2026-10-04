@@ -250,7 +250,8 @@ def _doc(rel):
 eng = _doc('docs/ENGINEERING.md')
 DOCS = (("architecture.md", arch), ("ENGINEERING.md", eng), ("README.md", _doc('README.md')),
         ("THE-SYSTEMS-THESIS.md", _doc('docs/THE-SYSTEMS-THESIS.md')),
-        ("LAB.md", _doc('docs/LAB.md')))
+        ("LAB.md", _doc('docs/LAB.md')),
+        ("04-contract-spine.svg", re.sub(r'<[^>]+>', ' ', _doc('docs/diagrams/04-contract-spine.svg'))))
 if any(text for _, text in DOCS):
     def _ev_row(label):
         m = re.search(r'^\| ' + re.escape(label) + r' \| (\d[\d,]*)', ev, re.M)
@@ -278,6 +279,10 @@ if any(text for _, text in DOCS):
         (r'(\d+) mode-gated switches',              _STATED.get("mode_switches", {}).get("value")),
         (r'run on (\d+) switches',                  _STATED.get("mode_switches", {}).get("value")),
         (r'(\d+) agents? configurations',           DRAWN.get("total_agents", {}).get("value")),
+        (r'(\d+) Zod source files',                 DRAWN.get("zod_source_files", {}).get("value")),
+        (r'(\d+) in SCHEMA_REGISTRY',               _ev_row("Registered contracts")),
+        (r'(\d+) generated, drift blocks CI',       DRAWN.get("generated_schemas", {}).get("value")),
+        (r'(\d+) hand-kept JSON files',             DRAWN.get("per_agent_schemas", {}).get("value")),
     ]
     for name, text in DOCS:
         for pat, want in PROSE:
