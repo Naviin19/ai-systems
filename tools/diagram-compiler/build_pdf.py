@@ -7,7 +7,7 @@ BARE = OUT_BARE
 
 # num, slug, title, claim, reading (the diagram's own caption), what changed, tiers
 FIGS = [
- ('01', '01-operating-system', 'The operating system', 'A system with a build side and a run side, not a folder of scripts.', 'The taper is the argument: one corpus of skill files carries the factory that builds products and the call-site discipline for its model calls. Narrower layers sit above wider ones, so the compression from the corpus to the products is visible rather than asserted.', 'An AI system becomes an organization. Two halves under one corpus, with the same rules governing who may do what on each side. The question it answers is organizational rather than technical: what does each part own, and what must it hand over.', [('audited', '218 files, 20 agents, 33 CI gate ids'), ('audited', 'product status, 14 Sep')]),
+ ('01', '01-operating-system', 'The operating system', 'A system with a build side and a run side, not a folder of scripts.', '', 'An AI system becomes an organization. Two halves under one corpus, with the same rules governing who may do what on each side. The question it answers is organizational rather than technical: what does each part own, and what must it hand over.', [('audited', '218 files, 20 agents, 33 CI gate ids'), ('audited', 'product status, 14 Sep')]),
 
  ('02', '02-knowledge-substrate', 'The knowledge substrate', 'Importance in the corpus is measured, and the measurement is checked.', "A skill file is a measured hub when twenty or more other skill files cite it, and every node is drawn at the size of its own count. Three files are declared by hand, so the Level-0 set is fourteen, and pre-commit checks hold the hubs' names and anchors.", 'Knowledge becomes a substrate. Documents stop being reference material an author consults and become an addressable layer the system reads, with importance measured rather than asserted and the measurement itself checked.', [('shipped', 'skill-ref-count.ts, verify-hub-integrity.mjs, audit-hub-citations.mjs'), ('audited', '13 measured hubs, a set of 14')]),
 
@@ -169,8 +169,8 @@ plate_pages = "\n".join(f'''
   <h2>{title}</h2>
   <p class="claim">{claim}</p>
   <div class="art">{svg}</div>
-  <div class="meta">
-    <div><p class="lab">Reading</p><p>{reading}</p></div>
+  <div class="meta{' one' if not reading else ''}">
+    {('<div><p class="lab">Reading</p><p>' + reading + '</p></div>') if reading else ''}
     <div><p class="lab">The transformation</p><p>{note}</p>
          <p class="lab lab2">Evidence</p><div class="chips">{chips(ts)}</div></div>
   </div>
@@ -291,6 +291,7 @@ tbody th{{font-weight:400;font-family:var(--sans);width:31%}}
 .art svg text{{font-family:var(--sans)}}
 .meta{{display:grid;grid-template-columns:1fr 1fr;gap:9mm;padding-top:4mm;
  border-top:1px solid var(--rule)}}
+.meta.one{{grid-template-columns:1fr}}
 .meta p{{font-size:8.6pt;line-height:1.5;color:var(--ink2);margin:0}}
 
 .owed ul{{margin:0 0 4mm;padding-left:5mm;display:grid;gap:1.8mm;color:var(--ink2);

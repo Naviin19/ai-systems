@@ -250,7 +250,7 @@ def _doc(rel):
 eng = _doc('docs/ENGINEERING.md')
 DOCS = (("architecture.md", arch), ("ENGINEERING.md", eng), ("README.md", _doc('README.md')),
         ("THE-SYSTEMS-THESIS.md", _doc('docs/THE-SYSTEMS-THESIS.md')),
-        ("HYPOTHESES.md", _doc('docs/HYPOTHESES.md')))
+        ("LAB.md", _doc('docs/LAB.md')))
 if any(text for _, text in DOCS):
     def _ev_row(label):
         m = re.search(r'^\| ' + re.escape(label) + r' \| (\d[\d,]*)', ev, re.M)

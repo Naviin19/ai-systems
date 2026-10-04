@@ -15,7 +15,7 @@ fetched. Every agent carries an index of what exists; any entry loads only when 
 A four-arm run on a small model found the right document present raising output grade and extra resident
 documents lowering it, both carried by one skill of three. On the model the factory dispatches, a
 skill-independent rubric with a positive control found no measurable benefit. Whether an index makes work
-better rather than cheaper is open.
+better as well as cheaper is the question the lab is built around.
 
 The corpus is 221 documents: **1.80M tokens if an agent carried all of it.** An agent carries **8.1K–20.3K**,
 by the factory's chars/4 estimate over its real assembled prompt, reaching the whole corpus through an index
@@ -127,13 +127,13 @@ refuses a new advisory switch without one. UNEVALUATED is never a pass.
 
 ---
 
-## What is still open
+## In the lab
 
-| Hypothesis | Instrument |
+| Question | Instrument |
 |---|---|
 | Does addressable expertise improve task quality, or only cost? | A skill-independent rubric with a positive control, on the model the factory dispatches; a paired delta on production-failure tasks with no arm at the ceiling |
 | Do typed handoffs reduce downstream failure propagation? | Contract compiler |
 | Can institutional learning improve future runs without entrenching error? | Decision ledger + context injection + contradiction check |
 | Can bounded divergence raise solution diversity while holding verification rates? | Divergence lane; survival rate only |
 
-Each of these, with what is already answered and what is blocked, is in [HYPOTHESES.md](HYPOTHESES.md).
+Each of these, with what is running now and what is planned, is in [the lab](LAB.md).

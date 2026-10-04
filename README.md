@@ -3,26 +3,19 @@
 [![diagrams](https://github.com/Naviin19/ai-systems/actions/workflows/diagrams.yml/badge.svg)](https://github.com/Naviin19/ai-systems/actions/workflows/diagrams.yml)
 [![demos](https://github.com/Naviin19/ai-systems/actions/workflows/demos.yml/badge.svg)](https://github.com/Naviin19/ai-systems/actions/workflows/demos.yml)
 
-**Making probabilistic systems observable, testable and governable.**
+A language model is a probabilistic component whose interface does not reliably distinguish a
+correct answer from an incorrect one. Right and wrong arrive through the same channel, in the same
+shape, at the same apparent confidence. This is the architecture of a system
+built around that fact: a compiler that turns specifications, knowledge, contracts and policies
+into coordinated agent execution, and the mechanisms that make that execution observable,
+contract-bound and recoverable.
 
-A language model can return a correct answer and an incorrect one through the same interface, in
-the same shape, at the same apparent confidence. This repository is the published architecture of
-a system that surrounds that component with deterministic contracts, verification, provenance,
-recovery and governance: a compiler that turns specifications, knowledge, contracts and policies
-into coordinated agent execution, with every mechanism shown, measured and demonstrated.
-
-Three names recur. **The factory** is the private repository, `skill-ecosystem`, that builds
-software with agents. **The products** — three live, and a fourth in development — were built with
-it. This repository,
-`ai-systems`, is the factory's published architecture: what was built, the evidence behind every
-figure, and demos that run its code.
-
-The unit of reliability engineering here is not the fix. It is defect → understanding → invariant →
-automated enforcement. 
+The unit of reliability engineering here is defect → understanding → invariant → automated
+enforcement.
 
 Twenty agent configurations are dispatched in dependency waves, each into its own git worktree. Every
 handoff between them is parsed against a typed contract and passed through a verification stack.
-Behind all of it sits one corpus of 221 skill files, the factory's engineering documents. No agent
+Behind all of it sits one corpus of 221 skill files, the software factory's engineering documents. No agent
 carries it. Each carries an
 index of what exists, and fetches what the work turns out to need.
 
@@ -46,9 +39,7 @@ reaches it.
 | [**The Systems Thesis**](docs/THE-SYSTEMS-THESIS.md) | What do I hold to be true about building these systems, and how strong is the evidence for each claim? |
 | [**Executable Expertise**](docs/EXECUTABLE-EXPERTISE.md) | Can domain expertise be compiled into a system, or only described to one? |
 | [**Brand as an API**](docs/BRAND-AS-AN-API.md) | What does that look like in one domain? A brand book produced by one product and consumed as a typed object by two others, over a graph of the marketing canon. |
-| [**Hypotheses**](docs/HYPOTHESES.md) | What is still unknown, and what would settle it? |
-
-If you read one, read the first.
+| [**The lab**](docs/LAB.md) | What is being built next, and the questions that work is meant to answer. |
 
 ---
 
@@ -56,7 +47,7 @@ If you read one, read the first.
 
 ## The thirteen plates
 
-Each plate shows one behaviour of the factory in operation.
+Each plate shows one behaviour of the software factory in operation.
 [`docs/architecture.md`](docs/architecture.md) carries all thirteen in prose, for anything that does not
 render images.
 
@@ -84,7 +75,7 @@ diagrams:verify` regenerates the plates, checks every count on them against
 
 ## Demos
 
-Twelve offline demos and one live demo run code extracted from the factory and the products built
+Twelve offline demos and one live demo run code extracted from the software factory and the products built
 with it.
 
 | Demo | Plate | Proves |
@@ -105,7 +96,7 @@ with it.
 
 ## Products
 
-Built with the factory, and the reason any of the above is worth reading. The repositories are
+Built with the software factory, and the reason any of the above is worth reading. The repositories are
 private; a link below opens the running product.
 
 | Product | What it does |
@@ -126,7 +117,7 @@ the products do not.
 
 Every figure carries an evidence tier — **shipped** means a named file implements it, **audited**
 means counted at a named commit or on a named date — and nothing is tiered higher than its weakest
-input. Every figure is checked against the factory's code at a named commit by a script that
+input. Every figure is checked against the software factory's code at a named commit by a script that
 resolves each citation to the lines that show it; counts and citations each carry their own
 date, and a manifest lists how every count is derived.
 [`docs/evidence.md`](docs/evidence.md) records how every figure was measured, and the diagram
