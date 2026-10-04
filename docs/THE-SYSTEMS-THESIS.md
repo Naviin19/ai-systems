@@ -135,5 +135,9 @@ refuses a new advisory switch without one. UNEVALUATED is never a pass.
 | Do typed handoffs reduce downstream failure propagation? | Contract compiler |
 | Can institutional learning improve future runs without entrenching error? | Decision ledger + context injection + contradiction check |
 | Can bounded divergence raise solution diversity while holding verification rates? | Divergence lane; survival rate only |
+| Does one gateway for every model call hold cost, latency and quality steady? | Per-product baselines taken from the production database and logs before the change, then policy, cost projection, scoring and fallback applied at a single point, with one trace per run |
+| Does routing pick the right skill for a task? | The router run against production-shaped tasks with a live model. A mock baseline is committed. |
+| Can agents tell a person exactly what they could not do? | Typed blocked, better-route and open-question reports, read across finished handoffs with a verdict on each finding |
+| When is retrieval worth adding to a product's own knowledge? | Cost per brand and call error rate per stage, measured on the live product. The decision follows the numbers |
 
 Each of these, with what is running now and what is planned, is in [the lab](LAB.md).
