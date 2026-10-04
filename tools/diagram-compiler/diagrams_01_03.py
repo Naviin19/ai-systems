@@ -43,7 +43,7 @@ def d01(bare=False):
                "A build side and a run side over one corpus; three products live, one in development.",
                "".join(b), 398,
                "", "",
-               bare=bare, footer=False)
+               bare=bare)
 
 
 # ============================================== 02 - the knowledge substrate

@@ -244,7 +244,7 @@ def wrap(s, limit):
 
 # ------------------------------------------------------------------ document
 
-def svg(num, title, sub, body, body_end, caption, tier, bare=False, footer=True):
+def svg(num, title, sub, body, body_end, caption, tier, bare=False, footer=False):
     """body_end is the y of the lowest drawn element; the footer is measured
     from it so no diagram has to know its own total height.
 
