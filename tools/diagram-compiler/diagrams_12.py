@@ -50,7 +50,7 @@ def d12(bare=False):
     by = sy + 20
     bw = (CW - 12) / 2
     b.append(pbox(M, by, bw, 52, "writable-surface-registry.json",
-                  "One row per surface, one entry per free-text key", "gray"))
+                  "One row per surface, one per free-text key", "gray"))
     b.append(pbox(M + bw + 12, by, bw, 52, "the tree",
                   "Files that write to disk, and prompt paths", "gray",
                   mono=False))

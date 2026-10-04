@@ -12,9 +12,9 @@ def d04(bare=False):
     b = [section(M, 96, "One source, written by hand")]
     b.append(box(M, 106, CW, 56, "teal"))
     b.append(text(M + 18, 130, "contracts/types", TITLE_PX, "teal"))
-    b.append(text(M + 18, 149, "52 Zod source files; the registry sorts them into five tiers",
+    b.append(text(M + 18, 149, "55 Zod source files; the registry sorts them into five tiers",
                   SUB_PX, "teal", opacity="0.74"))
-    b.append(text(M + CW - 18, 130, "48 in SCHEMA_REGISTRY", SUB_PX, "teal",
+    b.append(text(M + CW - 18, 130, "50 in SCHEMA_REGISTRY", SUB_PX, "teal",
                   anchor="end", opacity="0.78"))
     b.append(conn(340, 162, 340, 184, "gray", opacity="0.6"))
 
@@ -25,7 +25,7 @@ def d04(bare=False):
     b.append(conn(340, 236, 340, 256, "gray", opacity="0.6"))
 
     b.append(section(M, 272, "What the source reaches"))
-    surfaces = [("JSON Schema",           "48 generated, drift blocks CI",                  "teal"),
+    surfaces = [("JSON Schema",           "52 generated, drift blocks CI",                  "teal"),
                 ("TypeScript types",      "Inferred from the source, typechecked in CI",    "teal"),
                 ("Contract examples",     "27 checked with safeParse on every verify-all",  "teal"),
                 ("Registry and catalog",  "Generated; R32 fails when either is stale",      "teal"),
@@ -60,7 +60,7 @@ def d04(bare=False):
     b.append(section(M, y, "Change impact"))
     b.append(box(M, y + 10, CW, 56, "teal"))
     b.append(text(M + 18, y + 33, "blast-radius.ts", TITLE_PX, "teal"))
-    b.append(text(M + 18, y + 51, "Walks 48 schemas and 32 traced prompts; run by hand",
+    b.append(text(M + 18, y + 51, "Walks the registry and 32 traced prompts; run by hand",
                   SUB_PX, "teal", opacity="0.72"))
     # the widest reach the generated registry holds: one schema, five importers
     fx, fy = M + CW - 120, y + 38
@@ -247,7 +247,7 @@ def d06(bare=False):
     b.append(text(FX + 24, 186, "Today 8.1K to 20.3K, estimated 27 Sep", SUB_PX, ink="mute"))
 
     for y, name, sub, role in [
-            (200, "Agent kernel",               "Nine agents inline it; eleven producers do not", "teal"),
+            (200, "Agent kernel",               "Nine inline it; eleven producers do not", "teal"),
             (256, "Skill citation index",       "One @skill line and its description", "teal"),
             (312, "load_skill(file, §section)", "A numbered or named section",         "gray")]:
         b.append(labelled_box(FX + 16, y, FW - 32, 48, name, sub, role))
