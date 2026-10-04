@@ -187,6 +187,14 @@ be rewritten after the fact.
 A model from a different family then reviews the work, and the factory re-runs the checks each agent
 says it passed. An agent that claims a pass where the check fails halts the run.
 
+The same rule holds for the builder. A plan becomes a ledger of units, each with a fast check that
+proves it. After every edit, a hook runs the current unit's check, and the result arrives as tool
+output rather than as something the agent reports. A second hook refuses to end the turn while the
+check is red, so "complete" means the command passed. After three attempts at the same unit it lets
+go and marks it failed for a person, because a fourth attempt is thrashing. A third hook rebuilds a
+short brief at every session start and after every compaction, so progress survives the context
+being summarised.
+
 ---
 
 ## 8. A claim is checked against the world, not against its envelope
