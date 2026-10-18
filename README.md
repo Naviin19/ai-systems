@@ -41,12 +41,13 @@ reaches it.
 | [**Brand as an API**](docs/BRAND-AS-AN-API.md) | What does that look like in one domain? A brand book produced by one product and consumed as a typed object by two others, over a graph of the marketing canon. |
 | [**The workshop**](docs/WORKSHOP.md) | What is being built next, and the questions that work is meant to answer. |
 
-Two more record what the proposal does not: the choices behind it, and what it has not solved.
+Three more record what the proposal does not yet claim: the choices behind it, what it has not solved, and the instruments that watch before they steer.
 
 | Document | The question it answers |
 |---|---|
 | [**Design decisions**](docs/DESIGN-DECISIONS.md) | Which choices were deliberate, what each one cost, and whether it held? |
 | [**Open problems**](docs/OPEN-PROBLEMS.md) | What does this architecture still fail to solve, ordered by what it would cost someone who relied on it? |
+| [**Grounding**](docs/GROUNDING.md) | Where is an agent likely to be wrong, and what does it know when it hands off? Five instruments that record before they are trusted, and what each must show before it steers. |
 
 ---
 

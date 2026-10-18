@@ -1,5 +1,5 @@
 // Extracted from the software factory (private),
-// contracts/types/measurement/receipt.ts at d490466, on 2026-09-14.
+// contracts/types/measurement/receipt.ts at 87fae286, on 2026-10-18.
 // Unchanged apart from this header.
 
 import { z } from 'zod';
@@ -84,6 +84,18 @@ export const ReceiptDepartureSchema = z.object({
   worked: z.boolean().nullable().default(null),
 });
 
+/** [WSI-3] One route_reports entry, as the agent wrote it. The receipt COPIES it: `report` is the entry verbatim and
+ *  is not re-validated here, because a receipt is built post-hoc for any run, a failed one included, and one
+ *  malformed entry must not cost the whole receipt. `kind` is the agent's OWN classification, lifted out so the
+ *  three kinds can be counted; "unknown" when the entry carried none. No validity verdict is attached: whether
+ *  the agent was right to say it was blocked is for a person. The two stamps say who wrote the words. */
+export const ReceiptRouteReportSchema = z.object({
+  kind: z.string().min(1),
+  report: z.unknown(),
+  authored_by: z.literal('agent'),
+  source_field: z.literal('route_reports'),
+});
+
 export const ReceiptDoneSchema = z.object({
   cited_in_output: z.array(z.string()),   // @skill: citations found in the emitted artifacts
   // [AIS5-4] The same citations at section grain: `@skill: x.md §3` is {skill: 'x.md', section: '§3'}, and
@@ -92,6 +104,16 @@ export const ReceiptDoneSchema = z.object({
   given_not_cited: z.array(z.string()),
   loaded_not_cited: z.array(z.string()),
   out_of_scope_findings: z.number().int().nonnegative().nullable(),
+  // [WSI-2] Every out_of_scope_findings entry, verbatim and in order. The count above and the one `out_of_scope`
+  // departure kept 160 characters of the first entry; on 2026-09-19 both real uses of the field were blocked
+  // reports of 285 to 417 characters, so the receipt recorded that something was said and lost what. Copying an
+  // agent's words is recording, not judging. Optional with NO default: a handoff without the field keeps its
+  // null-with-reason and gets no key, and R19 reads a defaulted field as NEWLY_REQUIRED.
+  out_of_scope_entries: z.array(z.string()).optional(),
+  // [WSI-3] The handoff's route_reports, in their OWN array and never among the departures: a departure is
+  // something the orchestrator observed, a route report is something the agent said, and folding one into the
+  // other would inflate the departure counts [170] reads. Optional with no default, for the same reasons as above.
+  route_reports: z.array(ReceiptRouteReportSchema).optional(),
   departures: z.array(ReceiptDepartureSchema),
   separability_statement: z.literal(RECEIPT_SEPARABILITY_STATEMENT),
 });
@@ -149,6 +171,24 @@ export const ReceiptSchema = z.object({
   run_outcome: RunOutcomeSchema,
   // [TTR-6] optional so pre-existing receipts validate (R19-additive).
   residuals: ReceiptResidualsSchema.optional(),
+  // [U2-2.1] receipt v2 (2026-10-08): six fields, each optional with NO default (R19 reads a defaulted field as
+  // NEWLY_REQUIRED), each RECORDED, never judged, and each absent with a reason in nulls[] when the run did not
+  // record it. schema_version stays 1.0: nothing reads it, and a version nobody reads is the theatre [LANGF9-5]
+  // named; the fields are the version.
+  //   state_before / state_after — boundary ids (EPS-B2): this handoff's boundary, and the boundary of every
+  //     upstream handoff whose stamped consuming_agent_ids name this agent, joined by ','.
+  //   preamble_variant — read from the RECEIPT_GIVEN event once EPS-B1 records it there.
+  //   dispatch_topology — the trace scorer's reading, written by SLP-C6 (ruling R-C6); declared here.
+  //   narrative_present — whether agent-NN/narrative.md exists, for a handoff stamped envelope 1.5 or later
+  //     (EPI-4); below that, EPI-6's copy step does not exist, so the value is null with a reason, never false.
+  //   factory_commit — the commit of the round's update tag: the parent of the round copy's recipe commit
+  //     (15- §1.3, LF0-9), read from the checkout the RECEIPT_GIVEN event recorded.
+  state_before: z.string().min(1).optional(),
+  state_after: z.string().min(1).optional(),
+  preamble_variant: z.enum(['with', 'without']).optional(),
+  dispatch_topology: z.enum(['pipeline', 'debate', 'parallel-pv']).optional(),
+  narrative_present: z.boolean().optional(),
+  factory_commit: z.string().regex(/^[0-9a-f]{40}$/).optional(),
   nulls: z.array(NullReasonSchema), // every honestly-unpopulatable field, with its reason
 });
 

@@ -130,13 +130,13 @@ Each build also stores its outcomes as Feedback rows: gate results, receipt coun
 
 The packages a product runs on, and the product that runs on them.
 
-The run side is three packages. The model router resolves a model for the tier its caller names — FORENSIC, SYNTHESIS, NARRATIVE or VISION — preferring a model the request or the stage pins. Nothing in it classifies how hard a task is. The LLM gateway dispatches each call through a provider adapter, OpenRouter always and Anthropic directly when a key is set, and records the call's latency. The MCP host starts connector servers, and its default lineup is three: Apify, Apollo and human steering. CI replays all three as real processes against recorded fixtures, and a build gives agents their tools only when `MCP_TOOLS_ENABLED` is set.
+The run side is three packages. The model router resolves a model for the tier its caller names — FORENSIC, SYNTHESIS, NARRATIVE or VISION — preferring a model the request or the stage pins. Nothing in it classifies how hard a task is. The LLM gateway dispatches each call through a provider adapter, OpenRouter always and Anthropic directly when a key is set, and records the call's latency. It also presents itself to the AI SDK as a language model, pinned to the provider package at 4.0.19 and its v4 specification, so an app written against the SDK calls through the gateway. A provider fault is retried. A 4xx the caller must fix, such as a failed key, a rate limit or a malformed request, fails at once, except 408 and 409. A second model is tried only when the request names one, and a second adapter only when the first one's circuit breaker is open and the policy declares a fallback for that model family. The MCP host starts connector servers, and its default lineup is three: Apify, Apollo and human steering. CI replays all three as real processes against recorded fixtures, and a build gives agents their tools only when `MCP_TOOLS_ENABLED` is set.
 
 Cost does not stop a run. The gateway's cost cap prices a call at zero tokens, so it cannot trip, and the factory has no run cost cap, by operator ruling. At the end of each build the factory compares every agent's tokens and wall time with its baseline and flags an agent at +30% or +20%; the comparison is advisory.
 
 Author's app is the production caller: it sends its pipeline's model calls through its own copy of the gateway, one call site per stage. Whitespace Hunter uses none of these packages; it collects from DataForSEO on a weekly cron.
 
-*Evidence: shipped — `packages/llm-gateway`, `packages/model-router`, `packages/mcp-infra`, `test-connector-replay.ts`, `scripts/benchmark/measure-routing.ts`. Audited — Author's `gateway-client.ts` at `833dec6`, and Whitespace Hunter's code at `1c0529c`.*
+*Evidence: shipped — `packages/llm-gateway` with its AI SDK provider `provider/ai-sdk.ts`, `packages/model-router`, `packages/mcp-infra`, `test-connector-replay.ts`, `scripts/benchmark/measure-routing.ts`. Audited — Author's `gateway-client.ts` at `833dec6`, and Whitespace Hunter's code at `1c0529c`.*
 
 ## 10. Two-lane execution
 
