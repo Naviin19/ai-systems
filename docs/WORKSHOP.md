@@ -52,6 +52,13 @@ Turn records are now the evidence trail for every round, with credentials redact
 The work on how agents talk to each other, so that a handoff names what it read, what it blocked on and
 what it would do instead, is finished.
 
+### Instruments that watch before they steer
+
+*Added 18 October.* Five instruments now record where an agent is likely to be wrong and what it knows at
+each handoff: the anti-map, claim states, state-legible prompts, trace physics and an early sensor. None of
+them steers a run, and each names in its own source what it must show first. [Grounding](GROUNDING.md) gives
+each one's tier.
+
 ---
 
 ## Planned
@@ -110,4 +117,5 @@ ahead.
 ### Can a claim carry how well it is known?
 
 A claim an agent makes carries its own state, and the gate that checks it can only downgrade a claim, never
-raise it.
+raise it. It is designed and not yet built. Before it may block anything, a pass rule written down ahead of
+the round that tests it has to hold on that round.

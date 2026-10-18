@@ -145,6 +145,9 @@ Grouped by the plate that draws each one. Every row is `shipped` unless it says 
 | Mechanism | What it does | Implemented in |
 |---|---|---|
 | LLM gateway | Dispatches through a provider adapter and records each call's latency; its cost cap prices a call at zero tokens, so it cannot fire | `packages/llm-gateway` |
+| AI SDK provider | Presents the gateway to the AI SDK as a language model, pinned to the provider package at 4.0.19 and its v4 specification | `provider/ai-sdk.ts`, at factory `87fae286` |
+| Failure handling | Retries a provider fault; fails a 4xx the caller must fix at once, except 408 and 409; tries a second model only when the request names one, and a second adapter only when the first's circuit breaker is open and the policy declares a fallback | `core/gateway.ts`, `adapters/types.ts` |
+| Prompt caching | Marks cacheable blocks with `cache_control` in the request body, in the Anthropic and OpenRouter adapters | `adapters/anthropic-direct.ts`, `adapters/openrouter.ts` |
 | Model router | Resolves a model for the tier the caller names: FORENSIC, SYNTHESIS, NARRATIVE or VISION | `packages/model-router` |
 | MCP host | Starts connector servers, three in the default lineup; a build gives agents their tools only when `MCP_TOOLS_ENABLED` is set | `packages/mcp-infra` |
 | Connector replay | Runs the three default servers as real processes against recorded fixtures in CI | `test-connector-replay.ts` |
