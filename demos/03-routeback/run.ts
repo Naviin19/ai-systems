@@ -154,7 +154,7 @@ rows([
   ['decision', verdict],
 ]);
 table([['defect class', 'caught'], ...Object.entries(perClass).map(([k, v]) => [k, `${v.caught} / ${v.total}`])]);
-line('  Route-back resolution rate: not measured. The factory has no recorded route-back runs to score it against.');
+line('  Route-back resolution rate: not measured. Route-back has fired in live runs, but a recovery emits no event to score.');
 
 if (verdict !== 'adopt') {
   line(`\nGATE FAILED: decision ${verdict}. This demo holds itself to the same bar the judge is held to.`);

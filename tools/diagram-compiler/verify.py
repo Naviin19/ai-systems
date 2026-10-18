@@ -251,6 +251,8 @@ eng = _doc('docs/ENGINEERING.md')
 DOCS = (("architecture.md", arch), ("ENGINEERING.md", eng), ("README.md", _doc('README.md')),
         ("THE-SYSTEMS-THESIS.md", _doc('docs/THE-SYSTEMS-THESIS.md')),
         ("WORKSHOP.md", _doc('docs/WORKSHOP.md')),
+        ("DESIGN-DECISIONS.md", _doc('docs/DESIGN-DECISIONS.md')),
+        ("OPEN-PROBLEMS.md", _doc('docs/OPEN-PROBLEMS.md')),
         ("04-contract-spine.svg", re.sub(r'<[^>]+>', ' ', _doc('docs/diagrams/04-contract-spine.svg'))))
 if any(text for _, text in DOCS):
     def _ev_row(label):
