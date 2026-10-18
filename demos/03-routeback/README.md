@@ -94,7 +94,7 @@ No key, no account, no network.
   contradiction               2 / 2
   unsupported_decision        2 / 2
   real_vacuous_contradiction  2 / 2
-  Route-back resolution rate: not measured. The factory has no recorded route-back runs to score it against.
+  Route-back resolution rate: not measured. Route-back has fired in live runs, but a recovery emits no event to score.
 
 The judge clears its bar, and route-back retries only the failures it can learn from.
 ```

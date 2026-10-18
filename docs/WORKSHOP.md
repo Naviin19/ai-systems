@@ -95,7 +95,7 @@ work that did not happen.
 
 Decisions are recorded as they are made, and the relevant ones are carried into later work so the same
 ground is not argued twice. A separate check reads the original record rather than the summary, so a fault
-in one cannot hide in the other. Three conventions have been promoted in nine months, so this loop is young,
+in one cannot hide in the other. Three conventions have been promoted in seven months, so this loop is young,
 and the thing to watch is whether work that starts from further along stays correct as it goes.
 
 ### Where does a new idea come from?
