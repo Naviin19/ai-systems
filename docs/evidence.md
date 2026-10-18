@@ -2,7 +2,7 @@
 
 Every figure the plates draw and every mechanism they name: its value, what it rests on, and where to look. This public repository holds the architecture and its verification artifacts; the figures are audited against the private factory at the pinned commits named below.
 
-**Figures measured 27 September 2026 at `5d5fb3f1` and citations audited 14 September at `5739a97` — both commits of the software factory (private), not of this repository.** Every figure the plates draw was checked against the software factory (private) and against the four product repositories at named commits, read-only. Each entry states what the code does and cites the lines that show it, and a script in the factory resolves every citation at the commit it names. No figure the plates draw has an unresolved conflicting source.
+**Figures measured 18 October 2026 at `87fae286` and citations audited 14 September at `5739a97` — both commits of the software factory (private), not of this repository.** Every figure the plates draw was checked against the software factory (private) and against the four product repositories at named commits, read-only. Each entry states what the code does and cites the lines that show it, and a script in the factory resolves every citation at the commit it names. No figure the plates draw has an unresolved conflicting source.
 
 ---
 
@@ -21,26 +21,26 @@ Nothing is tiered higher than its weakest input. A plate whose mechanism is ship
 
 ## 2. Structure
 
-Measured at factory `5d5fb3f1` on 27 September 2026.
+Measured at factory `87fae286` on 18 October 2026.
 
 | Figure | Value | Tier | How it was measured |
 |---|---|---|---|
-| Skill files | 221 | `audited` | `.md` files under `skills/`, not counting the per-layer `CLAUDE.md` indexes |
-| In an active manifest | 191 | `audited` | referenced by an agent config's manifest, or injected as one of the 12 universal primitives, per `verify-playbook-skills.js`; with the 30 parked, the 221 |
-| Parked | 30 | `audited` | listed in `skills/meta/retired-skills.json`; none of them is referenced |
-| Architecture layers | 9 | `audited` | distinct `architecture_layer` values in skill frontmatter: engineering 68, governance 51, intelligence 37, coordination 20, connectors 13, operational 12, foundational 10, tracking 7, meta 3 |
+| Skill files | 223 | `audited` | `.md` files under `skills/`, not counting the per-layer `CLAUDE.md` indexes |
+| In an active manifest | 192 | `audited` | referenced by an agent config's manifest, or injected as one of the 12 universal primitives, per `verify-playbook-skills.js`; with the 31 parked, the 223 |
+| Parked | 31 | `audited` | listed in `skills/meta/retired-skills.json`; none of them is referenced |
+| Architecture layers | 9 | `audited` | distinct `architecture_layer` values in skill frontmatter: engineering 69, governance 52, intelligence 37, coordination 20, connectors 13, operational 12, foundational 10, tracking 7, meta 3 |
 | Agents | 20 | `audited` | `configs/agent-*.config.ts` |
 | Build agents | 15 | `audited` | the configs outside the research-cluster pattern |
 | Research agents | 5 | `audited` | `research-reader`, `research-graph-builder`, `research-synthesizer`, `marketing-availability-builder`, `marketing-availability-validator` |
 | Build waves | 12, at most 2 agents at once | `audited` | the scheduler's rule applied to `dependsOn`: the build graph's widest wave holds 2 agents, 3 when the research cluster participates; the scheduler's own ceiling, `ORCH_MAX_PARALLEL`, is 4 by default, so the graph sets concurrency, not the ceiling |
 | Dependency edges | 23 | `audited` | `dependsOn` across the configs — the execution graph; the edge registry, which also declares what each consumer reads, holds 24, one of them a read that crosses the graph with no `dependsOn` edge, and 6 carry typed reads |
-| CI gate ids | 42, R1 to R42 | `audited` | `scripts/verify-all.ts`, which runs them as 43 blocks because R22 has a schema block and a database block |
-| Health checks | 39 | `audited` | the numbered checks in the factory's root `CLAUDE.md` |
-| Preflight features | 20, F1 to F20 | `audited` | `prompts/feature-descriptor.md`, run by the build-start prompt |
-| Zod source files | 55 | `audited` | files under `contracts/types` that import zod |
-| Schema declarations | 2,165 | `audited` | `z.` calls across `contracts/types` |
-| Registered contracts | 50, in five tiers | `audited` | `SCHEMA_REGISTRY`: governance 15, operational 13, measurement 11, foundational 7, knowledge 4 |
-| Generated JSON Schemas | 52 | `audited` | under `contracts/schemas`, outside `agents/`: one per registry entry, and two the registry does not name |
+| CI gate ids | 43, R1 to R43 | `audited` | `scripts/verify-all.ts`, which runs them as 44 blocks because R22 has a schema block and a database block |
+| Health checks | 43 | `audited` | the numbered checks in the factory's root guide reference, `docs/claude-reference.md` |
+| Preflight features | 19, F1 to F19 | `audited` | `prompts/feature-descriptor.md`, run by the build-start prompt |
+| Zod source files | 57 | `audited` | files under `contracts/types` that import zod |
+| Schema declarations | 2,370 | `audited` | `z.` calls across `contracts/types` |
+| Registered contracts | 58, in five tiers | `audited` | `SCHEMA_REGISTRY`: governance 21, operational 13, measurement 13, foundational 7, knowledge 4 |
+| Generated JSON Schemas | 60 | `audited` | under `contracts/schemas`, outside `agents/`: one per registry entry, and two the registry does not name |
 | Per-agent I/O schemas | 46 | `audited` | `contracts/schemas/agents`, kept by hand |
 | Contract examples | 27 | `audited` | the example checks in `verify-all.ts` |
 | Traced prompt files | 32 | `audited` | prompt files the generated registry links to a schema |
@@ -48,10 +48,10 @@ Measured at factory `5d5fb3f1` on 27 September 2026.
 | Measured Level-0 hubs | 13 | `audited` | skills cited by 20 or more other skill files, from `verification/skill-ref-counts.json` |
 | Level-0 set | 14 | `audited` | the measured hubs plus `master-prompt-architecture.md`, which is declared and measures 18 |
 | MCP server packages | 6, of which 3 are in the default lineup | `audited` | `packages/mcp-server-*` and `DEFAULT_SERVER_KEYS` |
-| Static prompt load | 8,086 to 20,291 tokens per agent | `audited` | `verification/token-budget-baseline.json`, estimate mode, 27 September |
+| Static prompt load | 8,146 to 20,813 tokens per agent | `audited` | `scripts/estimate-token-load.ts`, estimate mode, run on the tree at `87fae286`; the baseline file committed there, `verification/token-budget-baseline.json`, was last written on 2 October and gives 8,137 to 20,690, the range `public-figures.json` carries |
 | Switches that climbed on their written condition | 6 | `audited` | a mode declaration whose source records `FLIPPED` on its pre-committed condition: RIGOR, V6_FIELDS, R22, R23, PITCH_CLAIMS, ELECTION_SURFACE; two more record a flip by operator override with the condition still open, and are not counted |
 
-The hub counts, highest first: five-laws-ai-systems 42, structured-output-schemas 40, agent-constitution 38, prompt-craftsmanship-constitution 38, discovery-frame 31, prompt-multiplier 30, epistemic-vigilance 27, design-principles 27, api-integration-patterns 25, prompt-constitution 23, testing-and-validation-playbook 21, marketing-analysis-frameworks 20, deployment-environment-configuration 20.
+The hub counts, highest first: five-laws-ai-systems 42, structured-output-schemas 42, agent-constitution 39, prompt-craftsmanship-constitution 38, discovery-frame 31, prompt-multiplier 30, epistemic-vigilance 28, design-principles 27, api-integration-patterns 25, prompt-constitution 24, testing-and-validation-playbook 21, marketing-analysis-frameworks 20, deployment-environment-configuration 20.
 
 ---
 
@@ -95,7 +95,7 @@ Grouped by the plate that draws each one. Every row is `shipped` unless it says 
 | Mechanism | What it does | Implemented in |
 |---|---|---|
 | Evidence commitment | Takes a SHA-256 over the step attestations, the evidence references and the files they name when an agent emits, and verifies it before any judge reads the handoff; a producer's handoff is committed when first seen | `evidence-commitment.ts` |
-| Route-back | `classifyRouteBack` retries three classes (quality gate, schema on write, D3) when an error heuristic matches, cuts A-B-A oscillation, and stops at three attempts in all | `route-back.ts`, orchestrator |
+| Route-back | `classifyRouteBack` retries four classes (quality gate, artifact claim, schema on write, D3) when an error heuristic matches, cuts A-B-A oscillation, and stops at three attempts in all | `route-back.ts`, orchestrator |
 | Rollback context | Sends the failure, masked of run ids, timestamps and sandbox paths, with the heuristic's fix, as `ROLLBACK_CONTEXT`; a producer's re-dispatch carries it too | orchestrator |
 | Faithfulness judge | Scores the narrative against the JSON from 0 to 10 at temperature 0.2; warns, and blocks at gates A and B | `verify-handoff-faithfulness.ts` |
 | Output contradictions | R24 compares an output with recorded ledger verdicts; warns by default | `verify-output-contradictions.ts` |
@@ -184,7 +184,7 @@ Grouped by the plate that draws each one. Every row is `shipped` unless it says 
 
 | Mechanism | What it does | Implemented in |
 |---|---|---|
-| Mode switches | Every enforcement switch is read through the same reading — `lib/env-mode.ts`, or a local copy of it in six `.mjs` gates — and defaults to `BLOCK`, `WARN` or `OFF`, or to a bespoke value it declares | `lib/env-mode.ts` |
+| Mode switches | Every enforcement switch is read through the same reading — `lib/env-mode.ts`, or a local copy of it in nine `.mjs` gates — and defaults to `BLOCK`, `WARN` or `OFF`, or to a bespoke value it declares | `lib/env-mode.ts` |
 | Flip ratchet | Fails a new `WARN` default that carries no written flip condition beside it; the exemption ledger is empty | `verify-flip-conditions.mjs`, `configs/flip-condition-exemptions.json` |
 | Three outcomes | A gate reports `PASS`, `FAIL` or `UNEVALUATED`, and `UNEVALUATED` is never counted as a pass; exit 2 means the gate refused to run, and no mode downgrades it | `verify-all.ts` |
 
@@ -226,7 +226,7 @@ The audit lives in the factory as `plans/ais-plate-claims.json`. Two checks ther
 
 In this repository, `tools/diagram-compiler/verify.py` fails a plate whose drawn count disagrees with §7.
 
-The two dates at the top are deliberate. Counts are re-measured whenever the figures are refreshed, and every figure the factory derives for this repository is listed with its derivation in [`public-figures.json`](public-figures.json) — generated in the factory, copied here unchanged, storing no expected value — so a reader re-derives a number rather than trusting it. A citation is true at the commit it names, and the citation audit is re-run as a whole, not per refresh.
+The two dates at the top are deliberate. Counts are re-measured whenever the figures are refreshed, and every figure the factory derives for this repository is listed with its derivation in [`public-figures.json`](public-figures.json) — generated in the factory and copied here with only the factory's private name reworded, storing no expected value — so a reader re-derives a number rather than trusting it. A citation is true at the commit it names, and the citation audit is re-run as a whole, not per refresh.
 
 ---
 
@@ -237,12 +237,12 @@ Every count the plates draw, in one block. `tools/diagram-compiler/verify.py` pa
 ```json
 {
   "drawn": {
-    "skill_files":              {"value": 221, "tier": "audited", "plates": ["01", "06"]},
+    "skill_files":              {"value": 223, "tier": "audited", "plates": ["01", "06"]},
     "total_agents":             {"value": 20,  "tier": "audited", "plates": ["01", "03"]},
     "build_agents":             {"value": 15,  "tier": "audited", "plates": ["03"]},
     "research_agents":          {"value": 5,   "tier": "audited", "plates": ["03"]},
-    "ci_gate_ids":              {"value": 42,  "tier": "audited", "plates": ["01"]},
-    "preflight_features":       {"value": 20,  "tier": "audited", "plates": ["03"]},
+    "ci_gate_ids":              {"value": 43,  "tier": "audited", "plates": ["01"]},
+    "preflight_features":       {"value": 19,  "tier": "audited", "plates": ["03"]},
     "build_waves":              {"value": 12,  "tier": "audited", "plates": ["03"]},
     "max_build_agents_at_once": {"value": 2,   "tier": "audited", "plates": ["03"]},
     "level0_hubs":              {"value": 13,  "tier": "audited", "plates": ["02"]},
@@ -250,13 +250,13 @@ Every count the plates draw, in one block. `tools/diagram-compiler/verify.py` pa
     "level0_threshold":         {"value": 20,  "tier": "shipped", "plates": ["02"],
                                  "form": "numeral"},
     "architecture_layers":      {"value": 9,   "tier": "audited", "plates": ["02"]},
-    "zod_source_files":         {"value": 55,  "tier": "audited", "plates": ["04"]},
-    "generated_schemas":        {"value": 52,  "tier": "audited", "plates": ["04"]},
+    "zod_source_files":         {"value": 57,  "tier": "audited", "plates": ["04"]},
+    "generated_schemas":        {"value": 60,  "tier": "audited", "plates": ["04"]},
     "per_agent_schemas":        {"value": 46,  "tier": "audited", "plates": ["04"]},
     "contract_examples":        {"value": 27,  "tier": "audited", "plates": ["04"]},
     "dependency_edges":         {"value": 23,  "tier": "audited", "plates": ["04"]},
     "traced_prompts":           {"value": 32,  "tier": "audited", "plates": ["04"]},
-    "route_back_classes":       {"value": 3,   "tier": "audited", "plates": ["05"]},
+    "route_back_classes":       {"value": 4,   "tier": "audited", "plates": ["05"]},
     "route_back_cap":           {"value": 3,   "tier": "shipped", "plates": ["05"]},
     "hardening_clean_rounds":   {"value": 2,   "tier": "shipped", "plates": ["07"]},
     "hardening_round_cap":      {"value": 5,   "tier": "shipped", "plates": ["07"]},
@@ -269,27 +269,27 @@ Every count the plates draw, in one block. `tools/diagram-compiler/verify.py` pa
                                  "form": "numeral"},
     "prompt_floor_levels":      {"value": 5,   "tier": "audited", "plates": ["11"],
                                  "form": "numeral"},
-    "write_surfaces":           {"value": 39,  "tier": "audited", "plates": ["12"]},
-    "surfaces_reaching":        {"value": 21,  "tier": "audited", "plates": ["12"]},
-    "surfaces_rewrite_invisible": {"value": 19, "tier": "audited", "plates": ["12"]},
+    "write_surfaces":           {"value": 49,  "tier": "audited", "plates": ["12"]},
+    "surfaces_reaching":        {"value": 23,  "tier": "audited", "plates": ["12"]},
+    "surfaces_rewrite_invisible": {"value": 21, "tier": "audited", "plates": ["12"]},
     "surfaces_unwatched":       {"value": 4,   "tier": "audited", "plates": ["12"],
                                  "form": "label"},
     "envelope_free_text_keys":  {"value": 18,  "tier": "audited", "plates": ["12"],
                                  "form": "label"},
-    "switches_block":           {"value": 20,  "tier": "audited", "plates": ["13"]},
-    "switches_advisory":        {"value": 30,  "tier": "audited", "plates": ["13"]},
-    "switches_outside_ladder":  {"value": 8,   "tier": "audited", "plates": ["13"]},
+    "switches_block":           {"value": 21,  "tier": "audited", "plates": ["13"]},
+    "switches_advisory":        {"value": 37,  "tier": "audited", "plates": ["13"]},
+    "switches_outside_ladder":  {"value": 10,  "tier": "audited", "plates": ["13"]},
     "flips_on_condition":       {"value": 6,   "tier": "audited", "plates": ["13"]}
   },
   "stated_not_drawn": {
-    "ci_gate_blocks":      {"value": 43,  "tier": "audited"},
-    "health_checks":       {"value": 39,  "tier": "audited"},
-    "skills_in_manifests": {"value": 191, "tier": "audited"},
-    "retired_skills":      {"value": 30,  "tier": "audited"},
+    "ci_gate_blocks":      {"value": 44,  "tier": "audited"},
+    "health_checks":       {"value": 43,  "tier": "audited"},
+    "skills_in_manifests": {"value": 192, "tier": "audited"},
+    "retired_skills":      {"value": 31,  "tier": "audited"},
     "envelope_variants":   {"value": 24,  "tier": "audited"},
     "envelope_variants_emitted": {"value": 20, "tier": "audited"},
     "mcp_server_packages": {"value": 6,   "tier": "audited"},
-    "mode_switches":       {"value": 58,  "tier": "audited"}
+    "mode_switches":       {"value": 68,  "tier": "audited"}
   }
 }
 ```

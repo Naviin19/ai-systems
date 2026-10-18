@@ -23,6 +23,7 @@
     "demo:write-surface": "tsx demos/11-write-surface/run.ts",
     "demo:emitter-instructions": "tsx demos/12-emitter-instructions/run.ts",
     "demo:enrich": "tsx demos/live/enrich/run.ts",
+    "check:private": "node tools/check-private.mjs",
     "diagrams": "python tools/diagram-compiler/build.py",
     "diagrams:verify": "python tools/diagram-compiler/verify.py",
     "reference-set": "python tools/diagram-compiler/build_pdf.py && python tools/diagram-compiler/to_pdf.py && python tools/diagram-compiler/verify_pdf.py"

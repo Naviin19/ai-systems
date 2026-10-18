@@ -63,10 +63,10 @@ scan aborts, because a check that has never failed may be one that cannot.
 Context is an agent's scarcest resource, and every extra document is a tax on the relevant one. An
 index costs almost nothing and defers the price of a document until a task proves it is needed.
 
-The corpus is 221 documents, roughly 949,000 words, and no agent holds it. The nine agents the
+The corpus is 223 documents, roughly 965,000 words, and no agent holds it. The eight agents the
 orchestrator dispatches itself receive a fixed behavioural kernel of 1,594 tokens plus a one-line
-index of the documents their manifest declares, averaging 2,102 tokens; resident context runs from
-8,086 to 20,291 tokens, estimated over the real assembled prompt. The eleven producer agents receive
+index of the documents their manifest declares, averaging 2,130 tokens; resident context runs from
+8,146 to 20,813 tokens, estimated over the real assembled prompt. The twelve producer agents receive
 their generated playbook as the whole prompt. When a task matches an index line, the agent calls
 `load_skill(filename, section?)` and receives that section; a request that matches nothing returns
 the file's section list instead of an error.
@@ -110,7 +110,7 @@ defence is derivation, not discipline: one source of truth for every registered 
 everything downstream generated from it. The 46 per-agent I/O schemas are kept by hand outside that
 registry, and are named as such.
 
-55 source files hold 2,165 schema declarations. From them, 52 JSON Schema files are generated, 50 of
+57 source files hold 2,370 schema declarations. From them, 60 JSON Schema files are generated, 58 of
 them registered. The handoff envelope between agents is a discriminated union of 24 variants, keyed
 on the boundary each one crosses, and each of the 20 variants an agent emits becomes a tool
 definition the producing model is forced to call. Every envelope carries its schema version: a newer

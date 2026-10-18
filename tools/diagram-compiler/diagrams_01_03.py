@@ -5,8 +5,8 @@ from grammar import *
 # ============================================================ 01 - the OS map
 def d01(bare=False):
     """Redrawn 14 September. Four products are built and live, audited from their
-    Vercel production deployments; Auteur is specced. The gates are the thirty-three
-    CI gate ids in verify-all.ts, measured at factory 5739a97."""
+    Vercel production deployments; Auteur is specced. The gates are the forty-three
+    CI gate ids in verify-all.ts, counted at factory 87fae286."""
     b = []
     b.append(section(59, 96, "Products built with the software factory"))
     prods = [("Ark", "Live"), ("Author", "Live"), ("Archer", "Live"),
@@ -22,7 +22,7 @@ def d01(bare=False):
 
     b.append(labelled_box(105, 196, 470, 52, "Gates",
                           "Halt, route back, or warn", "coral",
-                          right="42 CI gate ids", dashed=True))
+                          right="43 CI gate ids", dashed=True))
     b.append(conn(340, 262, 340, 250, "gray", opacity="0.5"))
 
     b.append(labelled_box(70, 262, 264, 58, "Build-time factory",
@@ -34,10 +34,10 @@ def d01(bare=False):
 
     b.append(box(40, 336, 600, 62, "teal", sw=1.75))
     b.append(text(58, 361, "Knowledge substrate", TITLE_PX, "teal", weight=500))
-    b.append(text(622, 361, "221 skill files", SUB_PX, "teal",
+    b.append(text(622, 361, "223 skill files", SUB_PX, "teal",
                   anchor="end", weight=500, mono=True))
-    b.append(ticks(58, 366, 111, "teal", h=6, gap=2.6, w=2.4))
-    b.append(ticks(58, 376, 110, "teal", h=6, gap=2.6, w=2.4))
+    b.append(ticks(58, 366, 112, "teal", h=6, gap=2.6, w=2.4))
+    b.append(ticks(58, 376, 111, "teal", h=6, gap=2.6, w=2.4))
 
     return svg("01", "The operating system",
                "A build side and a run side over one corpus; three products live, one in development.",
@@ -47,15 +47,16 @@ def d01(bare=False):
 
 
 # ============================================== 02 - the knowledge substrate
-# Measured at factory 5739a97, verification/skill-ref-counts.json, per_skill[].skills_internal:
+# Measured at factory 87fae286 by skill-ref-count.ts, per_skill[].skills_internal, regenerated
+# because the committed verification/skill-ref-counts.json is one citation behind:
 # the number of other skill files that cite each skill. Every node is drawn at a radius read
 # from its own count, so a larger node is a skill more files cite.
-HUB_CITATIONS = [42, 40, 38, 38, 31, 30, 27, 27, 25, 23, 21, 20, 20]
+HUB_CITATIONS = [42, 42, 39, 38, 31, 30, 28, 27, 25, 24, 21, 20, 20]
 DECLARED_ONLY = 18          # master-prompt-architecture.md: declared Level 0, measures 18
 OTHER_CITATIONS = (
-    [19] * 2 + [17] * 3 + [16] * 2 + [15] * 2 + [14] * 2 + [13] * 3 + [12] * 3 + [11] * 7
-    + [10] * 4 + [9] * 2 + [8] * 5 + [7] * 9 + [6] * 13 + [5] * 13 + [4] * 22
-    + [3] * 29 + [2] * 40 + [1] * 21 + [0] * 25)
+    [19] * 2 + [18] * 2 + [17] * 2 + [16] * 2 + [15] * 1 + [14] * 2 + [13] * 3 + [12] * 4
+    + [11] * 6 + [10] * 4 + [9] * 2 + [8] * 5 + [7] * 11 + [6] * 11 + [5] * 17 + [4] * 20
+    + [3] * 30 + [2] * 37 + [1] * 23 + [0] * 25)
 LAYERS = ("Foundational", "Governance", "Coordination", "Engineering", "Connectors",
           "Intelligence", "Operational", "Tracking", "Meta")
 
@@ -71,8 +72,8 @@ def d02(bare=False):
     often each skill is cited, not by whom. The Level-0 set is fourteen, thirteen
     measured and one declared. The defect edge comes from agent 00's config, outside
     the skill graph, and the checks named are the ones that catch its class."""
-    assert len(HUB_CITATIONS) + 1 + len(OTHER_CITATIONS) == 221
-    b = [section(M, 96, "221 skill files, each drawn at its measured citation count")]
+    assert len(HUB_CITATIONS) + 1 + len(OTHER_CITATIONS) == 223
+    b = [section(M, 96, "223 skill files, each drawn at its measured citation count")]
 
     GX, GY, GW, GH = M, 118, CW, 210
     b.append(region(GX, GY, GW, GH, "gray", r=8))
@@ -105,7 +106,7 @@ def d02(bare=False):
     b.append(text(138, 128, "Level 0: 13 measured hubs, 1 declared", SUB_PX, "teal"))
     b.append(numeral(424, 318, "Measured: cited by 20 or more skill files", "teal", SUB_PX,
                      anchor="end"))
-    b.append(text(GX + GW - 16, GY + GH - 12, "204 others", SUB_PX, "gray",
+    b.append(text(GX + GW - 16, GY + GH - 12, f"{len(OTHER_CITATIONS)} others", SUB_PX, "gray",
                   anchor="end", opacity="0.7"))
 
     # two panels: the checks, and the defect behind the third
@@ -154,7 +155,7 @@ def d02(bare=False):
                "to nothing, drawn from the config that made it.",
                "shipped - skill-ref-count.ts --check-level0, verify-hub-integrity.mjs and "
                "audit-hub-citations.mjs (.husky/pre-commit, R33); audited - counts from "
-               "skill-ref-counts.json at 5739a97",
+               "skill-ref-count.ts, regenerated at 87fae286",
                bare=bare)
 
 
@@ -164,7 +165,8 @@ BUILD_AGENTS = [
     "Synthesis · Frontend Core · Frontend Intelligence · Admin · Testing",
     "Browser Testing · Craftsmanship · Deployment · Sugar Trainer · Prompt Manager",
 ]
-# The build graph's waves, computed from dependsOn in configs/agent-*.config.ts at 5739a97.
+# The build graph's waves, computed from dependsOn in configs/agent-*.config.ts at 5739a97 and
+# recomputed, unchanged, at 87fae286.
 WAVES = [["00"], ["01"], ["02"], ["03a"], ["03b", "12"], ["03c"], ["04"],
          ["05", "08"], ["06", "09"], ["07"], ["10"], ["11"]]
 
@@ -180,9 +182,9 @@ def d03(bare=False):
     b.append(text(M + 18, 127, "Preflight", TITLE_PX, "coral"))
     b.append(text(M + 18, 143, "Checked by the build-start prompt before dispatch",
                   SUB_PX, "coral", opacity="0.72"))
-    b.append(text(M + CW - 18, 127, "20 preflight features", SUB_PX, "coral",
+    b.append(text(M + CW - 18, 127, "19 preflight features", SUB_PX, "coral",
                   anchor="end", weight=500))
-    b.append(ticks(M + CW - 18 - ticks_width(20), 134, 20, "coral", h=9))
+    b.append(ticks(M + CW - 18 - ticks_width(19), 134, 19, "coral", h=9))
     b.append(labelled_box(M, 158, CW, 40, "Start gates in main()", None, "coral",
                           right="baseline · install guard · preflight check", dashed=True))
     b.append(conn(340, 198, 340, 214, "gray", opacity="0.6"))
@@ -235,11 +237,11 @@ def d03(bare=False):
                "overlap. Results reach trunk one at a time, through a rebase and fast-forward "
                "under a file lock, and a human gate holds only the agents that depend on it. "
                "The nineteen preflight features are run by the build-start prompt, a different "
-               "object from the orchestrator's start gates and from the thirty-three CI gate "
+               "object from the orchestrator's start gates and from the forty-three CI gate "
                "ids in verify-all.ts.",
                "shipped - master-agentic-orchestrator.ts with agent-scheduler.ts, merge-lock.ts, "
                "review-gate.ts and preflight-gate.ts; prompts/feature-descriptor.md; audited - "
-               "waves from the configs at 5739a97",
+               "waves from the configs at 87fae286",
                bare=bare)
 
 

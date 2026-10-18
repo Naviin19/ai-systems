@@ -17,6 +17,12 @@ npm run demo:<name>       # one of them, with its full output
 | [receipts](04-receipts/) | 06 Context residency | A dispatch leaves a receipt of what the agent was given, what it loaded and what it cited, and the receipt will not claim more than that proves. | production path |
 | [isolation](05-isolation/) | 03 Compiler spine | The orchestrator runs agents together wherever the dependency graph allows, each in its own git worktree, and their merges reach main because they are serialised. | reduced harness |
 | [attest](06-attest/) | 05 Verification stack | The evidence behind an agent's claims is hash-locked when the agent emits, before any gate or judge reads it. | reduced harness |
+| [powerbar](07-powerbar/) | — | Input quality is scored while the user types, and the interface does not depend on a model being reachable. | reduced harness around the production path |
+| [silence](08-silence/) | 05 Verification stack | A detector must catch a defect it planted itself before it is allowed to report a corpus clean. | reduced harness around the production path |
+| [abstain](09-abstain/) | — | A signal with nothing to score on returns null rather than zero, and the composite renormalises over what reported. | reduced harness around the production path |
+| [reported-paths](10-reported-paths/) | — | A path an agent reports in its handoff is a claim about disk, and the scanner resolves it, while a route is never resolved and zero handoffs is never a pass. | production path over fixture handoffs |
+| [write-surface](11-write-surface/) | 12 Writable surface | Every persistent surface two agents share is on file, and the detector that holds the file to the tree catches its own planted cases before it may call the tree clean. | reduced copy of the production detector |
+| [emitter-instructions](12-emitter-instructions/) | — | An agent is never ordered to fetch data it has no route to, and the detector that checks this fires on an order it planted before it reads a playbook. | reduced harness around the production path |
 
 ## Production path, reduced harness
 
@@ -40,7 +46,7 @@ Every demo's README says which of the two it is, and what it stages.
 | Plate | Why there is no demo |
 |---|---|
 | 01 Operating system | It maps the whole factory and the products built from it. The demos exercise its parts. The products run live, and nothing in this repository touches them. |
-| 02 Knowledge substrate | Its checks run over the factory's 218 skill files and their registry, which are not published here. |
+| 02 Knowledge substrate | Its checks run over the factory's 223 skill files and their registry, which are not published here. |
 | 07 Hardening loop | Agent 11 hardens a deployed product through repeated browser runs against its staging site. There is no staging deployment here, and the loop has not yet run against a real product. |
 | 08 Learning loops | Nothing becomes permanent without a person. The loops capture on their own, and promote only when someone approves. A self-contained demo would have to play that person. |
 | 09 Runtime engine | Its packages serve products at run time and are not on the factory's build path. This repository runs no product. |

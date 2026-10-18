@@ -1,8 +1,8 @@
 # Diagram source
 
-The ten plates are compiled, not drawn. `grammar.py` holds the visual grammar as
+The thirteen plates are compiled, not drawn. `grammar.py` holds the visual grammar as
 primitives — colour roles, box, tick, numeral, gate, connector, taper, node, citation
-edge — and the three `diagrams_*.py` files describe each figure in terms of those
+edge — and the six `diagrams_*.py` files describe each figure in terms of those
 primitives. Nothing sets a colour or a text size directly.
 
 This is deliberate. The brief requires that the set read as one system, and the cheapest

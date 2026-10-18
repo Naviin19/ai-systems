@@ -22,14 +22,14 @@ def d13(bare=False):
 
     # --- rung 1: block ----------------------------------------------------------
     y_block = 132
-    b.append(rung(RX, y_block, RW, RH, 20, "block", "coral"))
+    b.append(rung(RX, y_block, RW, RH, 21, "block", "coral"))
 
     # --- rung 2: advisory, inside the one gate ------------------------------------
     gy = 210
     gh = 116
     b.append(box(M, gy, RW + 24, gh, "coral", dashed=True))
     y_adv = gy + 12
-    b.append(rung(RX, y_adv, RW, RH, 30,
+    b.append(rung(RX, y_adv, RW, RH, 37,
                   "advisory — a written condition beside every switch", "teal"))
     gate_label = wrap("a new advisory switch cannot ship without its condition · "
                       "holds this rung only", 50)
@@ -38,7 +38,7 @@ def d13(bare=False):
 
     # --- rung 3: off and bespoke ----------------------------------------------------
     y_off = gy + gh + 22
-    b.append(rung(RX, y_off, RW, RH, 8, "2 off · 6 bespoke", "gray"))
+    b.append(rung(RX, y_off, RW, RH, 10, "4 off · 6 bespoke", "gray"))
 
     # --- the climb: advisory up to block, one dot per recorded flip -----------------
     ax = 488
@@ -59,7 +59,7 @@ def d13(bare=False):
                "beside it the condition that ends it, and a gate refuses a new advisory "
                "switch without one. UNEVALUATED is a third outcome and never a pass.",
                "shipped - lib/env-mode.ts, verify-flip-conditions.mjs, verify-all.ts; "
-               "audited - counts at factory 5d5fb3f1",
+               "audited - counts at factory 87fae286",
                bare=bare)
 
 
