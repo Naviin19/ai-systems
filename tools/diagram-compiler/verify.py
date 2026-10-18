@@ -196,7 +196,7 @@ for key, spec in DRAWN.items():
                              f"does not carry {spec['value']}")
 
 # --- 3. every drawn figure is accounted for in the evidence document ----------
-for n in ("221", "0.82", "0.70", "0.10", "30%", "20%", "SHA-256",
+for n in ("223", "0.82", "0.70", "0.10", "30%", "20%", "SHA-256",
           "classifyRouteBack", "receipt.ts", "skill-ref-count.ts", "contract-compiler.ts",
           "askDeclareHot", "divergence_id", "AGENTS.md", "5739a97"):
     if n not in ev:

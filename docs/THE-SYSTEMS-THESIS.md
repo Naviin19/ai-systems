@@ -17,7 +17,7 @@ documents lowering it, both carried by one skill of three. On the model the fact
 skill-independent rubric with a positive control found no measurable benefit. Whether an index makes work
 better as well as cheaper is the question the workshop is built around.
 
-The corpus is 221 documents: **1.80M tokens if an agent carried all of it.** An agent carries **8.1K–20.3K**,
+The corpus is 223 documents: **1.84M tokens if an agent carried all of it.** An agent carries **8.1K–20.8K**,
 by the factory's chars/4 estimate over its real assembled prompt, reaching the whole corpus through an index
 averaging **2.1K** — a tenth of a percent of what it addresses. The index is the entire retrieval surface
 for the skill corpus,
@@ -101,7 +101,7 @@ is not the absence of intervention — it is the ability to run without continuo
 remaining recoverable.
 
 Brief → specification → dependency graph → execution waves → isolated worktrees → typed outputs → one merge
-lock. Three classes of failure route back with the failure as input, capped, with an oscillation guard.
+lock. Four classes of failure route back with the failure as input, capped, with an oscillation guard.
 Every other class halts.
 
 Remove the merge lock and run it: processes rebase simultaneously, one commit lands, another hits git's own
@@ -122,7 +122,7 @@ candidate rule; one session, however often repeated, decays. **Decision ledger:*
 A defect found during an audit became a filed proposal and merged as a change to the governing document, by
 that path, with commits at every step.
 
-The gates run on 58 switches. 30 are advisory, and each carries a written condition that ends it; a gate
+The gates run on 68 switches. 37 are advisory, and each carries a written condition that ends it; a gate
 refuses a new advisory switch without one. UNEVALUATED is never a pass.
 
 ---

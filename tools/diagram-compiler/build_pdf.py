@@ -7,15 +7,15 @@ BARE = OUT_BARE
 
 # num, slug, title, claim, reading (the diagram's own caption), what changed, tiers
 FIGS = [
- ('01', '01-operating-system', 'The operating system', 'A system with a build side and a run side, not a folder of scripts.', '', 'An AI system becomes an organization. Two halves under one corpus, with the same rules governing who may do what on each side. The question it answers is organizational rather than technical: what does each part own, and what must it hand over.', [('audited', '221 files, 20 agents, 42 CI gate ids'), ('audited', 'product status, 14 Sep')]),
+ ('01', '01-operating-system', 'The operating system', 'A system with a build side and a run side, not a folder of scripts.', '', 'An AI system becomes an organization. Two halves under one corpus, with the same rules governing who may do what on each side. The question it answers is organizational rather than technical: what does each part own, and what must it hand over.', [('audited', '223 files, 20 agents, 43 CI gate ids'), ('audited', 'product status, 14 Sep')]),
 
  ('02', '02-knowledge-substrate', 'The knowledge substrate', 'Importance in the corpus is measured, and the measurement is checked.', "A skill file is a measured hub when twenty or more other skill files cite it, and every node is drawn at the size of its own count. Three files are declared by hand, so the Level-0 set is fourteen, and pre-commit checks hold the hubs' names and anchors.", 'Knowledge becomes a substrate. Documents stop being reference material an author consults and become an addressable layer the system reads, with importance measured rather than asserted and the measurement itself checked.', [('shipped', 'skill-ref-count.ts, verify-hub-integrity.mjs, audit-hub-citations.mjs'), ('audited', '13 measured hubs, a set of 14')]),
 
  ('03', '03-compiler-spine', 'The compiler spine', 'Orchestration with isolation, not a prompt chain.', "Every agent whose dependencies have finished starts at once, up to four, each in its own git worktree, and results reach trunk one at a time under a file lock. The strip is the build graph's real twelve waves.", "A build process becomes a compiler, and agents become workers. Ambiguous work is decomposed into a dependency graph, scheduled in waves, and executed by workers that cannot see or corrupt each other's state. The isolation is physical, a worktree each, not a convention.", [('shipped', 'agent-scheduler.ts, merge-lock.ts, review-gate.ts'), ('audited', '12 waves, at most 2 at once')]),
 
- ('04', '04-contract-spine', 'The contract spine', 'One source of truth, and the reach of changing it is computed.', 'Zod is the source. What is generated is gated in CI, and what is kept by hand is drawn in coral because it can drift. Each emitted handoff is parsed against its boundary schema, and the contract compiler checks declared reads by structural subtyping.', 'Handoffs become contracts. What passes between two agents stops being a message one hopes the next can read, and becomes a typed shape a compiler proves the consumer can accept.', [('shipped', 'R22, R31, R32, HandoffEnvelopeSchema'), ('audited', '50 contracts, 46 hand-kept schemas')]),
+ ('04', '04-contract-spine', 'The contract spine', 'One source of truth, and the reach of changing it is computed.', 'Zod is the source. What is generated is gated in CI, and what is kept by hand is drawn in coral because it can drift. Each emitted handoff is parsed against its boundary schema, and the contract compiler checks declared reads by structural subtyping.', 'Handoffs become contracts. What passes between two agents stops being a message one hopes the next can read, and becomes a typed shape a compiler proves the consumer can accept.', [('shipped', 'R22, R31, R32, HandoffEnvelopeSchema'), ('audited', '58 contracts, 46 hand-kept schemas')]),
 
- ('05', '05-verification-stack', 'The verification stack', 'Four outcomes, and a failure that retrying can fix is told apart from one it cannot.', 'Direction encodes outcome: up and to the left returns, down terminates, straight continues. Evidence is committed when an agent emits. Only the first three checks can route back, and every later failure halts.', 'Agent trust becomes verification. Nothing an agent says about its own work is taken on its word. Each claim is checked against evidence fixed before the question was asked, and a failure that retrying can fix is told apart from one it cannot.', [('shipped', 'route-back.ts, evidence-commitment.ts, semantic-drift.ts, attestation-verifier.ts')]),
+ ('05', '05-verification-stack', 'The verification stack', 'Four outcomes, and a failure that retrying can fix is told apart from one it cannot.', 'Direction encodes outcome: up and to the left returns, down terminates, straight continues. Evidence is committed when an agent emits. Only the first four checks can route back, and every later failure halts.', 'Agent trust becomes verification. Nothing an agent says about its own work is taken on its word. Each claim is checked against evidence fixed before the question was asked, and a failure that retrying can fix is told apart from one it cannot.', [('shipped', 'route-back.ts, evidence-commitment.ts, semantic-drift.ts, attestation-verifier.ts')]),
 
  ('06', '06-context-residency', 'Context residency', 'Budgeting is a measurement, and so is uptake.', 'What sits inside the window and what waits outside it. Token reduction is a cost claim; receipts make the harder one, recording what was given against what the agent cited, and the receipt contract says a citation proves injection, not influence.', 'Knowledge becomes addressable on demand. An agent carries an index rather than a library, and fetches what the work turns out to need. Residency is budgeted, and uptake is measured separately, because being given a document is not the same as using one.', [('shipped', 'load_skill, skill-sections.ts, receipt.ts'), ('audited', "the reduction and today's loads, estimated")]),
 
@@ -42,22 +42,22 @@ FIGS = [
   "Every place a note can land is on a row.",
   "One row per persistent surface the factory writes: who writes it, who reads it back and "
   "where, whether the content is free text, whether a rewrite would be noticed, what watches "
-  "it. Thirty-nine rows; twenty-one reach a prompt or a session; nineteen of those are "
+  "it. Forty-nine rows; twenty-three reach a prompt or a session; twenty-one of those are "
   "rewrite-invisible; four are watched by nothing. A detector holds the registry to the tree.",
   "Pressure makes a channel. An agent with no sanctioned place to say something finds an "
   "unsanctioned one, so every channel is inventoried and none is banned.",
   [("shipped","writable-surface-registry.json, detect-unregistered-write-surfaces.mjs (advisory)"),
-   ("audited","39 surfaces, 21 reaching, 19 rewrite-invisible, 4 unwatched, 18 free-text keys")]),
+   ("audited","49 surfaces, 23 reaching, 21 rewrite-invisible, 4 unwatched, 18 free-text keys")]),
 
  ("13","13-gate-ladder","The gate ladder",
   "Enforcement is a ladder, not a wall.",
-  "Fifty-eight switches: twenty default to block, thirty to advisory, two to off, six to a "
+  "Sixty-eight switches: twenty-one default to block, thirty-seven to advisory, four to off, six to a "
   "bespoke default. Every advisory switch carries, beside it, the written condition that ends "
   "that, and a gate refuses a new advisory switch without one. Six climbed on theirs.",
   "A gate reports pass, fail or unevaluated, and unevaluated is never a pass; a gate that "
   "refuses to run exits 2 in every mode.",
   [("shipped","verify-flip-conditions.mjs, env-mode.ts"),
-   ("audited","58 switches: 20 block, 30 advisory, 2 off, 6 bespoke; 6 flips on their written condition")])
+   ("audited","68 switches: 21 block, 37 advisory, 4 off, 6 bespoke; 6 flips on their written condition")])
 ]
 
 
@@ -84,18 +84,18 @@ TIERS = [
 ]
 
 STRUCTURE = [
- ("Skill files","221","audited","skills/, per-layer indexes excluded","was 152, contested"),
- ("In a manifest, parked","191, 30","audited","agent configs, retired-skills.json","new"),
+ ("Skill files","223","audited","skills/, per-layer indexes excluded","was 152, contested"),
+ ("In a manifest, parked","192, 31","audited","agent configs, retired-skills.json","new"),
  ("Architecture layers","9","audited","architecture_layer in frontmatter","was 8 or 9"),
  ("Agents","20: 15 build, 5 research","audited","configs/agent-*.config.ts","unchanged"),
  ("Build waves","12, at most 2 at once","audited","dependsOn, the scheduler's rule","new"),
- ("CI gate ids","42","audited","verify-all.ts","was 30, contested"),
- ("Preflight features","20","audited","prompts/feature-descriptor.md","were called gates"),
- ("Registered contracts","50, in five tiers","audited","SCHEMA_REGISTRY","was 19, contested"),
- ("Generated JSON Schemas","52","audited","contracts/schemas, outside agents/","was 43, contested"),
+ ("CI gate ids","43","audited","verify-all.ts","was 30, contested"),
+ ("Preflight features","19","audited","prompts/feature-descriptor.md","were called gates"),
+ ("Registered contracts","58, in five tiers","audited","SCHEMA_REGISTRY","was 19, contested"),
+ ("Generated JSON Schemas","60","audited","contracts/schemas, outside agents/","was 43, contested"),
  ("Per-agent I/O schemas","46","audited","contracts/schemas/agents","new"),
  ("Measured Level-0 hubs","13, in a set of 14","audited","skill-ref-counts.json","was 11"),
- ("Static prompt load","8,086 to 20,291 tokens","audited","token-budget-baseline.json","new"),
+ ("Static prompt load","8,146 to 20,813 tokens","audited","token-budget-baseline.json","new"),
 ]
 
 MECHANISM = [
@@ -304,21 +304,21 @@ code{{font-family:var(--mono);font-size:.88em;background:var(--panel);
 <svg width="0" height="0" style="position:absolute"><style>{shared}</style></svg>
 
 <section class="cover">
-  <p class="eyebrow">Reference set · thirteen plates · September 2026</p>
+  <p class="eyebrow">Reference set · thirteen plates · October 2026</p>
   <h1>AI operating system</h1>
-  <p class="stand">Eleven diagrams, each showing a different behaviour of the same system.
-  Every figure was measured against the factory's code on 14 September 2026, and every
+  <p class="stand">Thirteen diagrams, each showing a different behaviour of the same system.
+  Every figure was measured against the factory's code on 18 October 2026, and every
   plate was drawn from the measurement. Prepared as reference artwork for the public
   <span style="font-family:var(--mono);font-size:.9em">ai-systems</span>
   repository.</p>
   <ul class="facts">
-    <li><b>11</b>plates</li><li><b>0</b>figures unverified</li>
+    <li><b>13</b>plates</li><li><b>0</b>figures unverified</li>
     <li><b>0</b>figures contested</li><li><b>{today}</b>compiled</li>
   </ul>
   <div class="derived">
     <p class="lab">Derived from</p>
     <ul>
-      <li>the software factory <em>— private; figures at 5d5fb3f1 (27 September), citations at 5739a97 (14 September)</em></li>
+      <li>the software factory <em>— private; figures at 87fae286 (18 October), citations at 5739a97 (14 September)</em></li>
       <li>four product repositories <em>— read-only, each at a named commit</em></li>
       <li>Vercel production deployments <em>— product status, 14 September 2026</em></li>
       <li>plans/ais-plate-claims.json <em>— every citation resolved by a script</em></li>
@@ -364,7 +364,7 @@ code{{font-family:var(--mono);font-size:.88em;background:var(--panel);
   <p class="eyebrow">Figures and evidence</p>
   <h2>Structure</h2>
   <p class="col">The counts that carry the structural argument, each measured at factory
-  commit 5d5fb3f1 on 27 September; the citations behind them were audited at 5739a97. A count
+  commit 87fae286 on 18 October; the citations behind them were audited at 5739a97. A count
   is audited, not shipped, because no file implements a number; the audit records how each one
   was measured.</p>
   <table><thead><tr><th>Figure</th><th>Value</th><th>Tier</th><th>Source</th>

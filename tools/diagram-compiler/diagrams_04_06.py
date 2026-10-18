@@ -12,9 +12,9 @@ def d04(bare=False):
     b = [section(M, 96, "One source, written by hand")]
     b.append(box(M, 106, CW, 56, "teal"))
     b.append(text(M + 18, 130, "contracts/types", TITLE_PX, "teal"))
-    b.append(text(M + 18, 149, "55 Zod source files; the registry sorts them into five tiers",
+    b.append(text(M + 18, 149, "57 Zod source files; the registry sorts them into five tiers",
                   SUB_PX, "teal", opacity="0.74"))
-    b.append(text(M + CW - 18, 130, "50 in SCHEMA_REGISTRY", SUB_PX, "teal",
+    b.append(text(M + CW - 18, 130, "58 in SCHEMA_REGISTRY", SUB_PX, "teal",
                   anchor="end", opacity="0.78"))
     b.append(conn(340, 162, 340, 184, "gray", opacity="0.6"))
 
@@ -25,7 +25,7 @@ def d04(bare=False):
     b.append(conn(340, 236, 340, 256, "gray", opacity="0.6"))
 
     b.append(section(M, 272, "What the source reaches"))
-    surfaces = [("JSON Schema",           "52 generated, drift blocks CI",                  "teal"),
+    surfaces = [("JSON Schema",           "60 generated, drift blocks CI",                  "teal"),
                 ("TypeScript types",      "Inferred from the source, typechecked in CI",    "teal"),
                 ("Contract examples",     "27 checked with safeParse on every verify-all",  "teal"),
                 ("Registry and catalog",  "Generated; R32 fails when either is stale",      "teal"),
@@ -93,7 +93,8 @@ def d05(bare=False):
     """Redrawn 14 September against the orchestrator's per-agent path, in the order
     the code runs it. Direction encodes outcome: up and left returns, down terminates,
     straight continues. Only failures inside the route-back loop are classified; every
-    later failure halts, and the drift audit runs after the merge.
+    later failure halts, and the drift audit runs after the merge. The artifact-claim
+    layer, a fourth retryable class, was added at the re-pin to factory 87fae286.
 
     Nothing is placed above y=96, because the print build crops the plate to its
     artwork and anything higher is silently lost."""
@@ -124,6 +125,7 @@ def d05(bare=False):
     # overload a role to fix a plate. The warn/route-back distinction stays in the
     # right-hand label, where a reader who wants it will look.
     layers = [("Quality gates",      "Per-agent commands, such as tsc",           "routes back",       "teal"),
+              ("Artifact claim",     "Listed files against what was written",     "routes back",       "teal"),
               ("Schema on write",    "HandoffEnvelopeSchema.safeParse",           "routes back",       "teal"),
               ("D3 absorption",      "When absorption is declared",               "routes back",       "teal"),
               ("Commitment verified", "The evidence has not moved",               "halts on mismatch", "coral"),
@@ -137,7 +139,7 @@ def d05(bare=False):
         if y > 196:
             b.append(conn(CX, y - 6, CX, y - 1, "gray", opacity="0.6"))
         # 36-tall boxes six apart sat closer to each other than their own text sat to
-        # their edges, so the seven read as one object. Twelve apart separates them.
+        # their edges, so the eight read as one object. Twelve apart separates them.
         y += 48
     b.append(conn(CX, y - 6, CX, y - 1, "gray", opacity="0.6"))
     b.append(labelled_box(SX, y, SW, 30, "Merged to trunk", None, "gray", pad=18,
@@ -149,15 +151,15 @@ def d05(bare=False):
     mids.append(y + 18)
     spine_end = y + 36
 
-    # route back: the first three layers collect into the classifier
-    for i in (0, 1, 2):
+    # route back: the first four layers collect into the classifier
+    for i in (0, 1, 2, 3):
         b.append(conn(SX + SW, mids[i], 452, mids[i], "coral", arrow=False, opacity="0.75"))
-    b.append(conn(452, mids[0], 452, mids[2], "coral", arrow=False, opacity="0.6"))
+    b.append(conn(452, mids[0], 452, mids[3], "coral", arrow=False, opacity="0.6"))
     b.append(conn(452, mids[1], BX - 2, mids[1], "coral", opacity="0.8"))
 
     b.append(box(BX, 196, BW, 120, "coral", dashed=True))
     b.append(text(RX, 218, "classifyRouteBack", TITLE_PX, "coral", anchor="middle"))
-    b.append(text(RX, 236, "3 retryable classes", SUB_PX, "coral",
+    b.append(text(RX, 236, "4 retryable classes", SUB_PX, "coral",
                   anchor="middle", opacity="0.74"))
     b.append(text(RX, 252, "A-B-A oscillation cut", SUB_PX, "coral",
                   anchor="middle", opacity="0.74"))
@@ -170,12 +172,12 @@ def d05(bare=False):
     # halt: the classifier gives up, or a later layer fails
     rail = spine_end + 16
     b.append(conn(RX, 316, RX, rail - 6, "coral", opacity="0.8"))
-    for i in (3, 6, 7):
+    for i in (4, 7, 8):
         b.append(conn(SX + SW, mids[i], 460, mids[i], "coral", arrow=False, opacity="0.75"))
-    for i in (4, 5):
+    for i in (5, 6):
         b.append(conn(SX + SW, mids[i], 460, mids[i], "coral", arrow=False, dashed=True,
                       opacity="0.65"))
-    b.append(conn(460, mids[3], 460, rail + 5, "coral", arrow=False, opacity="0.6"))
+    b.append(conn(460, mids[4], 460, rail + 5, "coral", arrow=False, opacity="0.6"))
     b.append(conn(460, rail + 5, BX - 2, rail + 5, "coral", opacity="0.8"))
     b.append(f'<rect x="{BX}" y="{rail}" width="{BW}" height="10" rx="5" '
              f'fill="{L("coral","f")}" stroke="{L("coral","s")}" stroke-width="0.5" '
@@ -187,10 +189,10 @@ def d05(bare=False):
                   opacity="0.6"))
 
     # warn: the judge and the checks after it, by default, turn and rejoin the spine
-    rejoin = mids[5] + 21
-    b.append(conn(SX, mids[4], 48, mids[4], "coral", arrow=False, opacity="0.8"))
+    rejoin = mids[6] + 21
     b.append(conn(SX, mids[5], 48, mids[5], "coral", arrow=False, opacity="0.8"))
-    b.append(path(f"M48,{mids[4]} L48,{rejoin} L{SX - 2},{rejoin}", "coral", opacity="0.8"))
+    b.append(conn(SX, mids[6], 48, mids[6], "coral", arrow=False, opacity="0.8"))
+    b.append(path(f"M48,{mids[5]} L48,{rejoin} L{SX - 2},{rejoin}", "coral", opacity="0.8"))
 
     ly = spine_end + 32
     for dy, label in ((0, "Route back: the failure is the next input, 3 attempts"),
@@ -220,9 +222,10 @@ def d05(bare=False):
                "Direction encodes outcome: up and to the left returns, down terminates, "
                "straight continues. Evidence is committed when an agent emits and verified "
                "before any judge reads it; a producer's handoff is committed when the "
-               "orchestrator first sees it. Three failure classes route back with the failure "
+               "orchestrator first sees it. Four failure classes route back with the failure "
                "as the next input, three attempts in all, when an error heuristic matches: a "
-               "quality gate such as tsc, schema on write, and D3. Every later failure halts, "
+               "quality gate such as tsc, a list of written files that does not match what was "
+               "written, schema on write, and D3. Every later failure halts, "
                "the drift audit after the agent's work has merged, and the faithfulness judge "
                "warns except at the two human gates.",
                "shipped - master-agentic-orchestrator.ts, route-back.ts, evidence-commitment.ts, "
@@ -244,21 +247,21 @@ def d06(bare=False):
     b.append(text(FX + 24, 130, "Full inlining: 196K to 521K tokens", SUB_PX, ink="mute"))
     b.append(text(FX + 24, 150, "Kernel and index: 7K to 31K tokens", TITLE_PX, ink="mute"))
     b.append(text(FX + 24, 168, "Per agent, estimated, 1 June 2026", SUB_PX, ink="mute"))
-    b.append(text(FX + 24, 186, "Today 8.1K to 20.3K, estimated 27 Sep", SUB_PX, ink="mute"))
+    b.append(text(FX + 24, 186, "Today 8.1K to 20.8K, estimated 18 Oct", SUB_PX, ink="mute"))
 
     for y, name, sub, role in [
-            (200, "Agent kernel",               "Nine inline it; eleven producers do not", "teal"),
+            (200, "Agent kernel",               "Eight inline it; twelve producers do not", "teal"),
             (256, "Skill citation index",       "One @skill line and its description", "teal"),
             (312, "load_skill(file, §section)", "A numbered or named section",         "gray")]:
         b.append(labelled_box(FX + 16, y, FW - 32, 48, name, sub, role))
     b.append(text(FX + 24, 386, "Also resident: step plan and lessons", SUB_PX, ink="mute"))
 
     GX, GY, cols = 388, 112, 20
-    for i in range(221):
+    for i in range(223):
         b.append(f'<rect x="{GX + (i % cols) * 13}" y="{GY + (i // cols) * 13}" '
                  f'width="7" height="9" rx="0" fill="{L("gray","m")}" '
                  f'class="gray-m"/>')
-    b.append(text(GX, GY + 166, "221 files", TITLE_PX, "gray"))
+    b.append(text(GX, GY + 166, "223 files", TITLE_PX, "gray"))
     b.append(text(GX, GY + 184, "Paged in on demand, except the kernel", SUB_PX, "gray",
                   opacity="0.72"))
 

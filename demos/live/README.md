@@ -1,6 +1,6 @@
 # Live demos
 
-Everything in `demos/01-…` through `demos/09-…` runs with no key, no account and no network, and CI runs
+Everything in `demos/01-…` through `demos/12-…` runs with no key, no account and no network, and CI runs
 those on Linux, macOS and Windows with every outbound connection refused. **Nothing in this directory
 does.**
 

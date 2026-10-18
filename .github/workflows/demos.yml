@@ -21,6 +21,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx tsc --noEmit
+      # Nothing that belongs to the private factory (its name, paths, addresses, project refs) may be tracked here.
+      - run: npm run check:private
       # Each demo runs the factory's extracted code over its recorded data, with no key and no account.
       - name: npm run demo, with every TCP connection refused
         run: npm run demo

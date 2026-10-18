@@ -15,7 +15,7 @@ enforcement.
 
 Twenty agent configurations are dispatched in dependency waves, each into its own git worktree. Every
 handoff between them is parsed against a typed contract and passed through a verification stack.
-Behind all of it sits one corpus of 221 skill files, the software factory's engineering documents. No agent
+Behind all of it sits one corpus of 223 skill files, the software factory's engineering documents. No agent
 carries it. Each carries an
 index of what exists, and fetches what the work turns out to need.
 

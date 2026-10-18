@@ -25,13 +25,13 @@ def d12(bare=False):
 
     # --- three reconciling tick rows ---------------------------------------------
     TX = 396                                  # ticks share one left edge
-    rows = [(39, "gray",  "39 surfaces, one row each"),
-            (21, "teal",  "21 reach an agent prompt (16) or a session context (5)"),
-            (19, "coral", "19 of those 21 are rewrite-invisible")]
+    rows = [(49, "gray",  "49 surfaces, one row each"),
+            (23, "teal",  "23 reach an agent prompt (17) or a session context (6)"),
+            (21, "coral", "21 of those 23 are rewrite-invisible")]
     y = 132
     for n, role, label in rows:
         b.append(text(M, y + 10, label, SUB_PX, role, weight=500))
-        b.append(ticks(TX, y, n, role))
+        b.append(ticks(TX, y, n, role, gap=2.6))   # 49 at the default gap overran the plate
         y += 30
     b.append(text(M, y + 4, "Rewrite-invisible: a rewrite by another process would be noticed "
                             "by nothing.", SUB_PX, ink="mute"))
@@ -80,7 +80,7 @@ def d12(bare=False):
                "a free-text envelope key whose declared count is not the schema's.",
                "shipped - configs/writable-surface-registry.json, "
                "scripts/detect-unregistered-write-surfaces.mjs, "
-               "contracts/types/operational/route-report.ts; audited - counts at factory 5d5fb3f1",
+               "contracts/types/operational/route-report.ts; audited - counts at factory 87fae286",
                bare=bare)
 
 

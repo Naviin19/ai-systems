@@ -4,7 +4,7 @@
   "figures": [
     {
       "id": "skill_files",
-      "value": 221,
+      "value": 223,
       "derivation": "count *.md under skills/*/ excluding CLAUDE.md",
       "compare": "scalar",
       "discovery": "from the ai-systems repo root: grep -rn \"\\b<value>\\b\" . | grep -v \"/node_modules/\" | grep -v \"/\\.git/\" | grep -v \"^\\./\\.build/\" — substitute the PREVIOUS value to find what must move, and the NEW one afterwards to prove nothing was missed",
@@ -158,7 +158,11 @@
         36,
         37,
         38,
-        39
+        39,
+        40,
+        41,
+        42,
+        43
       ],
       "compare": "element-wise",
       "derivation": "scripts/verify-all.ts, matchAll(/^console.log('R(d{1,2}) /gm) - ANCHORED on the registration line",
@@ -186,7 +190,7 @@
     },
     {
       "id": "ci_gate_count",
-      "value": 39,
+      "value": 43,
       "derivation": "the length of ci_gate_ids",
       "compare": "scalar",
       "discovery": "from the ai-systems repo root: grep -rn \"\\b<value>\\b\" . | grep -v \"/node_modules/\" | grep -v \"/\\.git/\" | grep -v \"^\\./\\.build/\" — this figure is also stated inside prose carrying skill_files, so a sweep for either finds sites for both",
@@ -201,7 +205,7 @@
     },
     {
       "id": "health_checks",
-      "value": 36,
+      "value": 43,
       "derivation": "count /^**⚡ Check d+:/gm in root CLAUDE.md",
       "compare": "scalar",
       "discovery": "from the ai-systems repo root: grep -rn \"\\b<value>\\b\" . | grep -v \"/node_modules/\" | grep -v \"/\\.git/\" | grep -v \"^\\./\\.build/\"",
@@ -216,7 +220,7 @@
     },
     {
       "id": "retired_skills",
-      "value": 30,
+      "value": 31,
       "derivation": "skills/meta/retired-skills.json, retired[].length",
       "compare": "scalar",
       "discovery": "from the ai-systems repo root: grep -rn \"\\b<value>\\b\" . | grep -v \"/node_modules/\" | grep -v \"/\\.git/\" | grep -v \"^\\./\\.build/\"",
@@ -231,7 +235,7 @@
     },
     {
       "id": "skills_in_manifests",
-      "value": 191,
+      "value": 192,
       "derivation": "node scripts/verify-playbook-skills.js, the \"N referenced\" figure (it prints to STDERR)",
       "compare": "scalar",
       "discovery": "from the ai-systems repo root: grep -rn \"\\b<value>\\b\" . | grep -v \"/node_modules/\" | grep -v \"/\\.git/\" | grep -v \"^\\./\\.build/\"",
@@ -248,15 +252,15 @@
       "id": "plate02_hub_array",
       "value": [
         42,
-        40,
-        38,
+        42,
+        39,
         38,
         31,
         30,
-        27,
+        28,
         27,
         25,
-        23,
+        24,
         21,
         20,
         20
@@ -282,8 +286,8 @@
     {
       "id": "plate06_residency",
       "value": [
-        7951,
-        19877
+        8137,
+        20690
       ],
       "derivation": "verification/token-budget-baseline.json, min and max of agents[].total_static",
       "compare": "element-wise",

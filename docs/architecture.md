@@ -12,7 +12,7 @@ Each section was written from the factory's code at commit `5739a97`, on 14 Sept
 
 A factory that builds software products with AI agents, and the runtime packages those products can run on, over one corpus of skill files.
 
-The factory is twenty agent configurations: fifteen that build a product and five that run a research pipeline. An orchestrator dispatches them in dependency waves, each agent in its own git worktree. Every handoff between agents is parsed against a typed contract and passed through a verification stack before the next agent reads it. The corpus is 221 skill files, which agents cite and load a section at a time rather than carrying whole.
+The factory is twenty agent configurations: fifteen that build a product and five that run a research pipeline. An orchestrator dispatches them in dependency waves, each agent in its own git worktree. Every handoff between agents is parsed against a typed contract and passed through a verification stack before the next agent reads it. The corpus is 223 skill files, which agents cite and load a section at a time rather than carrying whole.
 
 The run side is a set of packages: an LLM gateway, a model router and an MCP host for connectors. Author's app sends its model calls through its own copy of the gateway.
 
@@ -28,7 +28,7 @@ One corpus of skill files carries both halves, and the layers taper, narrower ab
 
 [Ark](https://ark-now.vercel.app), [Author](https://author-now.vercel.app) and [Archer](https://archer2.vercel.app) are products a reader can open without trusting anything in this repository.
 
-*Evidence: audited — 221 skill files, 20 agents and 42 CI gate ids, counted at factory `5d5fb3f1`; product status from Vercel production deployments on 14 September.*
+*Evidence: audited — 223 skill files, 20 agents and 43 CI gate ids, counted at factory `87fae286`; product status from Vercel production deployments on 14 September.*
 
 ## 2. The knowledge substrate
 
@@ -42,7 +42,7 @@ The factory records how often each skill is cited, not by whom, so the plate siz
 
 The checks exist because of a real defect. `configs/agent-00.config.ts` cited a section of `agent-constitution.md` that did not exist, so agent 00, the spec validator and first in the pipeline, was handed the literal string `[section not found]` where its constitution should have been. The entry was removed on 12 September, and since 14 September a citation to a missing section fails before it lands.
 
-*Evidence: shipped — `skill-ref-count.ts`, `verify-hub-integrity.mjs`, `audit-hub-citations.mjs`, `.husky/pre-commit`, R33. Audited — thirteen measured hubs in a set of fourteen, and 221 files in nine layers.*
+*Evidence: shipped — `skill-ref-count.ts`, `verify-hub-integrity.mjs`, `audit-hub-citations.mjs`, `.husky/pre-commit`, R33. Audited — thirteen measured hubs in a set of fourteen, and 223 files in nine layers.*
 
 ## 3. The compiler spine
 
@@ -52,7 +52,7 @@ The agents form a dependency graph. The orchestrator's scheduler starts every ag
 
 Each agent works in its own git worktree under `.sandboxes/`. Results reach trunk one at a time: inside the lock at `.sandboxes/.merge.lock` the orchestrator rebases the agent's branch onto main and fast-forwards. Human gate A, after synthesis, and gate B, after frontend core, hold only the agents that depend on them, while the rest keep running.
 
-Before any agent starts, the orchestrator refuses to run on a drifted session baseline, an install command in the build, or a failed preflight check. Separately, the build-start prompt checks nineteen preflight features in `prompts/feature-descriptor.md`. Both are different objects from the thirty-three CI gate ids in `verify-all.ts`.
+Before any agent starts, the orchestrator refuses to run on a drifted session baseline, an install command in the build, or a failed preflight check. Separately, the build-start prompt checks nineteen preflight features in `prompts/feature-descriptor.md`. Both are different objects from the forty-three CI gate ids in `verify-all.ts`.
 
 The plate once drew a linear chain. That was right about the code until the scheduler landed, and wrong after it.
 
@@ -62,7 +62,7 @@ The plate once drew a linear chain. That was right about the code until the sche
 
 One source of truth, and the reach of changing it is computed.
 
-The source is hand-written Zod: 55 files under `contracts/types`, from which `SCHEMA_REGISTRY` registers 50 contracts in five tiers. The JSON Schemas, the contract registry and its catalog are generated from the registry. R22 regenerates every schema in memory and fails CI on any difference, and R32 fails when the registry or the catalog is stale. TypeScript types come from the same source by inference; they are typechecked, not generated.
+The source is hand-written Zod: 57 files under `contracts/types`, from which `SCHEMA_REGISTRY` registers 58 contracts in five tiers. The JSON Schemas, the contract registry and its catalog are generated from the registry. R22 regenerates every schema in memory and fails CI on any difference, and R32 fails when the registry or the catalog is stale. TypeScript types come from the same source by inference; they are typechecked, not generated.
 
 Two surfaces are kept by hand and can drift: 46 per-agent input and output schemas, checked only for existence, and the database migrations, whose parity check is advisory and skips without a database. The plate draws them at the same size as the generated surfaces.
 
@@ -70,15 +70,15 @@ Handoffs are one contract, `HandoffEnvelopeSchema`, a union of 24 boundary varia
 
 `blast-radius.ts` walks the registry's import graph breadth-first, so what a schema change reaches is computed: schemas, tables, and the 32 prompt files that name a schema. It is run by hand. The widest reach in the registry today is five importers, shared by three schemas. Agent 12, a different mechanism, derives each product's prompt library in TypeScript without a model call.
 
-*Evidence: shipped — `generate-json-schemas.ts`, `contracts-vs-json-schema.ts` (R22), `generate-registry.ts` (R32), `contract-compiler.ts` (R31), `HandoffEnvelopeSchema`, `blast-radius.ts`. Audited — 50 contracts, 52 generated schemas and 46 hand-kept schemas.*
+*Evidence: shipped — `generate-json-schemas.ts`, `contracts-vs-json-schema.ts` (R22), `generate-registry.ts` (R32), `contract-compiler.ts` (R31), `HandoffEnvelopeSchema`, `blast-radius.ts`. Audited — 58 contracts, 60 generated schemas and 46 hand-kept schemas, at factory `87fae286`.*
 
 ## 5. The verification stack
 
 Four outcomes, and a failure that retrying can fix is told apart from one it cannot.
 
-When an agent emits, the orchestrator commits the evidence behind its claims: a SHA-256 over its step attestations, the evidence references in its handoff, and the files those references name. Quality gates run next, such as `tsc` in the agent's sandbox, then schema on write and the D3 absorption check. Before any judge reads the handoff, the orchestrator recomputes the commitment and halts if anything moved. A producer's handoff, written by a separate session, is committed when the orchestrator first sees it, after schema on write and D3.
+When an agent emits, the orchestrator commits the evidence behind its claims: a SHA-256 over its step attestations, the evidence references in its handoff, and the files those references name. Quality gates run next, such as `tsc` in the agent's sandbox, then the artifact claim, which holds the files the agent lists against the files it actually wrote through `write_artifact`, then schema on write and the D3 absorption check. Before any judge reads the handoff, the orchestrator recomputes the commitment and halts if anything moved. A producer's handoff, written by a separate session, is committed when the orchestrator first sees it, after schema on write and D3.
 
-Only those first three checks can route back. `classifyRouteBack` decides from three facts: a retryable class, no A-B-A oscillation, and the attempt cap of three attempts in all. The orchestrator re-dispatches only when an error heuristic also matches, and sends the failure, masked of run ids, timestamps and sandbox paths, as `ROLLBACK_CONTEXT`. Without a matching heuristic the first failure halts.
+Only those first four checks can route back. `classifyRouteBack` decides from three facts: a retryable class, no A-B-A oscillation, and the attempt cap of three attempts in all. The orchestrator re-dispatches only when an error heuristic also matches, and sends the failure, masked of run ids, timestamps and sandbox paths, as `ROLLBACK_CONTEXT`. Without a matching heuristic the first failure halts.
 
 Everything after that halts or warns. The post-emit chain runs the faithfulness judge, which scores the narrative against the JSON from 0 to 10 and warns, except at gates A and B, where it blocks; the output-contradiction check R24, which warns; semantic drift; and the release gate. Step attestation re-runs each step's verify command and halts on a mismatch, a missing attestation or an honest failure. The agent's work then merges, and the drift audit checks that every declared skill was indexed in the prompt the agent was given, halting after the merge if one was not. A halt stops new agents from starting; earlier merges stand.
 
@@ -168,21 +168,21 @@ A prompt below its floor is rewritten once automatically and blocked on a second
 
 Any persistent place more than one agent can write and later read can carry a message, so every such place is on file.
 
-`writable-surface-registry.json` holds one row per persistent surface the factory writes: who writes it, who reads it back and where, whether the content is free text, what the write path permits, whether a rewrite by another process would be noticed, and what watches it. There are 39 surfaces. 21 reach a model — 16 an agent's prompt, 5 a session's context at start. Of those 21, a rewrite by another process would go unnoticed on 19, and 4 are watched by nothing. The handoff envelope declares 18 free-text keys, each with its channel class. `detect-unregistered-write-surfaces.mjs` holds the registry to the tree inside `verify-all`: a file that writes to disk and sits on no row, an anchor that has left its file, an allowlisted file aimed at a path into a prompt, and a free-text key whose declared count is not the schema's. It is advisory, `WRITE_SURFACE_GATE_MODE` defaulting to WARN.
+`writable-surface-registry.json` holds one row per persistent surface the factory writes: who writes it, who reads it back and where, whether the content is free text, what the write path permits, whether a rewrite by another process would be noticed, and what watches it. There are 49 surfaces. 23 reach a model — 17 an agent's prompt, 6 a session's context at start. Of those 23, a rewrite by another process would go unnoticed on 21, and 4 are watched by nothing. The handoff envelope declares 18 free-text keys, each with its channel class. `detect-unregistered-write-surfaces.mjs` holds the registry to the tree inside `verify-all`: a file that writes to disk and sits on no row, an anchor that has left its file, an allowlisted file aimed at a path into a prompt, and a free-text key whose declared count is not the schema's. It is advisory, `WRITE_SURFACE_GATE_MODE` defaulting to WARN.
 
 An agent's statement about its own dispatch has a typed field, `route_reports[]`: at most 10 entries, each of kind `blocked`, `better_route` or `open_question`, with a `subject`, a `statement` in the agent's own words, and `executed` and `worked` answered separately. The orchestrator emits one `ROUTE_REPORT` event per entry when `handoff.json` is written, the receipt copies each entry verbatim as the agent's words, and the evidence lock commits it.
 
-*Evidence: shipped — `writable-surface-registry.json`, `detect-unregistered-write-surfaces.mjs`, `route-report.ts`, `ROUTE_REPORT` in the orchestrator, `receipt.ts`, `evidence-commitment.ts`. Audited — 39 surfaces, 21 reaching a prompt or a session, 19 rewrite-invisible, 4 unwatched, 18 free-text envelope keys, at factory `5d5fb3f1`.*
+*Evidence: shipped — `writable-surface-registry.json`, `detect-unregistered-write-surfaces.mjs`, `route-report.ts`, `ROUTE_REPORT` in the orchestrator, `receipt.ts`, `evidence-commitment.ts`. Audited — 49 surfaces, 23 reaching a prompt or a session, 21 rewrite-invisible, 4 unwatched, 18 free-text envelope keys, at factory `87fae286`.*
 
 ## 13. The gate ladder
 
 A gate is a switch with three settings, and moving it is a recorded act.
 
-58 mode-gated switches are read through the same reading — `lib/env-mode.ts`, or a local copy of it in six `.mjs` gates. 20 default to BLOCK, 30 to WARN, 2 to OFF and 6 carry a bespoke setting. Every WARN default has a written flip condition beside it, and `verify-flip-conditions.mjs` fails a new WARN default without one; its exemption ledger, `flip-condition-exemptions.json`, is empty. 6 switches reached BLOCK on their written condition; two more by operator override.
+68 mode-gated switches are read through the same reading — `lib/env-mode.ts`, or a local copy of it in nine `.mjs` gates. 21 default to BLOCK, 37 to WARN, 4 to OFF and 6 carry a bespoke setting. Every WARN default has a written flip condition beside it, and `verify-flip-conditions.mjs` fails a new WARN default without one; its exemption ledger, `flip-condition-exemptions.json`, is empty. 6 switches reached BLOCK on their written condition; two more by operator override.
 
 A gate reports PASS, FAIL or UNEVALUATED, and UNEVALUATED is never a pass. Exit 2 means a gate refused to run, and no mode downgrades it.
 
-*Evidence: shipped — `env-mode.ts`, `verify-flip-conditions.mjs`, `flip-condition-exemptions.json`, `verify-all.ts`. Audited — 58 switches, 20 BLOCK, 30 WARN, 2 OFF, 6 bespoke, 0 exemptions, 6 flips on their written condition, at factory `5d5fb3f1`.*
+*Evidence: shipped — `env-mode.ts`, `verify-flip-conditions.mjs`, `flip-condition-exemptions.json`, `verify-all.ts`. Audited — 68 switches, 21 BLOCK, 37 WARN, 4 OFF, 6 bespoke, 0 exemptions, 6 flips on their written condition, at factory `87fae286`.*
 
 ---
 
