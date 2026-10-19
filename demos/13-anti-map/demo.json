@@ -1,0 +1,23 @@
+{
+  "name": "anti-map",
+  "command": "demo:anti-map",
+  "kind": "reduced harness around the production path",
+  "extracted_on": "2026-10-18",
+  "extracted_from": [
+    { "sha": "87fae286", "path": "contracts/types/governance/anti-map.ts", "symbols": ["ExperientialRegionSchema", "RewardBiasKindSchema", "GroundingRegionSchema", "ClaimGroundingSchema", "assumed_default required when unanchored", "ANTI_MAP_PRIOR_MEANS", "RISK_MULTIPLIERS_PLACEHOLDER", "AntiMapScoreLogSchema", "routes: z.literal('nothing')"] },
+    { "sha": "87fae286", "path": "scripts/lib/anti-map.ts", "symbols": ["seedCells", "priorFindings", "lookupCell", "riskOf", "findClaims", "scoreHandoff", "NO_TAGGED_CLAIMS_REASON", "logLine"] }
+  ],
+  "volatile": [
+    "The six claims in fixtures/handoff.json are written for this demo and tagged by hand. In the factory no claim carries a region tag yet, because the claim tagger is not built, so every real run logs zero scored claims; part 4 shows that state.",
+    "The store is seeded in memory. The factory keeps it in build-log/anti-map/cells.json, holding the same seven prior cells.",
+    "Whether the prompt carried a leading frame is stated by the demo. The factory reads it from the saved prompt with its prompt linter, which is not extracted.",
+    "The multipliers and priors are the contract's placeholders, named PLACEHOLDER in the source, not fitted values."
+  ],
+  "tamper": {
+    "file": "contracts/types/governance/anti-map.ts",
+    "find": "  if (!c.anchored && c.region !== null && !c.assumed_default?.trim()) {",
+    "replace": "  if (false) {",
+    "expect_exit": 1,
+    "expect_line": "an unanchored claim that states no assumption is refused          FAILED"
+  }
+}

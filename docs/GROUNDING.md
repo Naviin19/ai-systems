@@ -65,7 +65,7 @@ sentence that gives an agent permission to report a gap. It warns.
 *Evidence: shipped — `contracts/types/governance/anti-map.ts`, `scripts/lib/anti-map.ts`,
 `scripts/lib/prompt-linter.ts`. The logger is on by default, and `PROMPT_LINTER_MODE` defaults to WARN.
 Audited — seven prior cells, no observations, no scored claim. Unbuilt — the claim tagger, fitting the cells,
-and routing on risk.*
+and routing on risk. [Demo 13](../demos/13-anti-map/) runs the scorer over hand-tagged claims.*
 
 ## 2. Claim states
 
@@ -142,7 +142,7 @@ orchestrator writes a record for every dispatch and for every run, including hal
 *Evidence: shipped — `contracts/types/measurement/trace-physics.ts`, `scripts/lib/trace-physics.ts` and the
 `TRACE_PHYSICS` event. There is no switch, because it controls nothing. Unverified — no committed real run
 carries a score. Its own condition for blocking is the self-test's ordering holding in two sessions at least
-a week apart, plus five real runs with a score.*
+a week apart, plus five real runs with a score. [Demo 15](../demos/15-trace-physics/) runs it.*
 
 ## 5. The early sensor
 

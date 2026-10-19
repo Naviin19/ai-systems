@@ -24,7 +24,7 @@ git clone https://github.com/Naviin19/ai-systems && cd ai-systems
 npm ci && npm run demo
 ```
 
-Twelve offline demos need no API key, no account and no network, and CI runs them on Linux, macOS and
+Sixteen offline demos need no API key, no account and no network, and CI runs them on Linux, macOS and
 Windows with every outbound connection refused. One opt-in live demo does need a key, runs on your own
 machine against your own account, and lives in [`demos/live/`](demos/live/) — `npm run demo` never
 reaches it.
@@ -83,7 +83,7 @@ diagrams:verify` regenerates the plates, checks every count on them against
 
 ## Demos
 
-Twelve offline demos and one live demo run code extracted from the software factory and the products built
+Sixteen offline demos and one live demo run code extracted from the software factory and the products built
 with it.
 
 | Demo | Plate | Proves |
@@ -100,6 +100,10 @@ with it.
 | [reported-paths](demos/10-reported-paths/) | — | Every path a handoff names is resolved against disk; a URL route is never a missing file, and zero handoffs is unevaluated, not clean |
 | [write-surface](demos/11-write-surface/) | 12 | A file that writes to disk and sits on no row, and a free-text key the envelope does not declare, are found before the tree is called clean |
 | [emitter-instructions](demos/12-emitter-instructions/) | — | An instruction an agent cannot perform is classed by the route it lacks, and a comment or a prose bullet is left alone |
+| [anti-map](demos/13-anti-map/) | — | Hallucination risk is scored per region where the model cannot check itself, every factor is logged beside the risk, and nothing is routed on it |
+| [receipt-v2](demos/14-receipt-v2/) | 06 | Six fields join the receipt with no default, so every old receipt validates and comes back from the parser unchanged |
+| [trace-physics](demos/15-trace-physics/) | — | A run is scored by how it moved; a value nobody recorded stays null instead of becoming a zero that would rank it |
+| [assembled-prompt](demos/16-assembled-prompt/) | 11 | Two fragments that are each correct contradict each other once assembled, and a stale assembled copy is unevaluated, not a pass |
 | [enrich](demos/live/enrich/) · live | — | Forced tool choice returns schema-valid structure from a real model, and five concurrent identical calls make one dispatch; reads your own key, at most three calls, and `npm run demo` never reaches it |
 
 ## Products

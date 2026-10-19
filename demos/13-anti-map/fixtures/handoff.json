@@ -1,0 +1,30 @@
+{
+  "handoff_boundary": "RESEARCH_TO_SYNTHESIS",
+  "epistemic": {
+    "claims": [
+      {
+        "text": "The category's annual spend is about ₹37 crore.",
+        "extension": { "region": "magnitude", "anchored": false, "assumed_default": "the unit the source table uses, which this handoff did not see", "sparsity": 0.6, "stance_inherited": false, "gap_declared": false, "hedge_present": false }
+      },
+      {
+        "text": "Search interest has risen for the last eight weeks.",
+        "extension": { "region": "duration", "anchored": true, "sparsity": 0.2, "stance_inherited": false, "gap_declared": false, "hedge_present": true }
+      },
+      {
+        "text": "As the brief says, the window for a new entrant is wide open.",
+        "extension": { "region": "reward_bias", "anchored": false, "assumed_default": "the brief's own reading of the market", "sparsity": 0.3, "stance_inherited": true, "gap_declared": false, "hedge_present": false }
+      },
+      {
+        "text": "The source table lists 214 products.",
+        "extension": { "region": null, "anchored": true, "sparsity": 0, "stance_inherited": false, "gap_declared": false, "hedge_present": false }
+      },
+      {
+        "text": "Most buyers compare at least three products before buying."
+      },
+      {
+        "text": "A setup takes an afternoon.",
+        "extension": { "region": "friction", "anchored": false, "sparsity": 0.5, "stance_inherited": false, "gap_declared": false, "hedge_present": false }
+      }
+    ]
+  }
+}

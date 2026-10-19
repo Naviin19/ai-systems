@@ -174,6 +174,7 @@ Grouped by the plate that draws each one. Every row is `shipped` unless it says 
 | Surface floors | 30 declared prompt surfaces and five floor levels, 4.0 to 8.5, set by what the prompt is for | `configs/craftsmanship-surface-policy.ts`, `SURFACE_FLOORS` |
 | Grader | A primary grader with a fallback chain, and a liveness check that warns before a deprecation reaches a real grade | `craftsmanship-surface-policy.ts`, `verify-grader-liveness.ts` |
 | Grade corpus | `audited`, 22 September, on one machine: 1,118 grades cached, 1,116 carrying a verdict, 313 below their floor; the cache is gitignored, so the count is not reproducible from a clone | `.cache/prompt-enrichment/` |
+| Assembled-prompt gate | R27 checks the prompt each agent receives, assembled, for six defect shapes that have shipped; a corpus with no stamp, or a stamp its inputs no longer match, is UNEVALUATED with exit 3; runs under WARN | `verify-assembled-prompts.mjs`, `deterministic-prompt-checks.mjs`, `corpus-stamp.mjs` |
 
 ### Plate 12, the writable surface
 
