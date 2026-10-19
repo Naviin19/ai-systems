@@ -162,7 +162,9 @@ The floor is not one number. Thirty surfaces each carry their own, at five level
 
 A prompt below its floor is rewritten once automatically and blocked on a second failure. What the gate does not reach is drawn on the plate: the score judges a prompt, not the output that prompt produces, and nothing connects the two. Of 1,116 graded prompts, 313 sit below their floor and are in the corpus anyway — the gate holds what passes through it, not what is already there.
 
-*Evidence: shipped — `craftsmanship-gate.ts`, `enrich-prompt.ts`, `SURFACE_FLOORS` in `craftsmanship-surface-policy.ts`, `prompt-multiplier.md`. Audited — 30 surfaces at five floor levels, and 1,116 graded prompts of which 313 below floor.*
+Every one of those grades reads a file, and no agent reads a file. It reads a prompt assembled at dispatch from a kernel, an index, a step plan, the orchestrator's own rule text and a steering block, some of them kept or dropped by runtime switches. R27 reads that assembled prompt. The kernel once said a corrector could run at most two cycles while a string in the orchestrator said one, 1,962 assembled lines apart in every prompt for three months, and every per-file gate passed. The assembled corpus carries a hash of every input, so a corpus that has gone stale is UNEVALUATED rather than a pass. The check's deterministic half found 6% of what a full reading found, and the gate runs under WARN.
+
+*Evidence: shipped — `craftsmanship-gate.ts`, `enrich-prompt.ts`, `SURFACE_FLOORS` in `craftsmanship-surface-policy.ts`, `prompt-multiplier.md`, and R27 in `verify-assembled-prompts.mjs` ([demo 16](../demos/16-assembled-prompt/)). Audited — 30 surfaces at five floor levels, and 1,116 graded prompts of which 313 below floor.*
 
 ## 12. The writable surface
 

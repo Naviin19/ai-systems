@@ -1,9 +1,9 @@
 # Demos
 
-Twelve demos, each running code extracted from the factory over data the factory recorded. None needs a key, an account or the network.
+Sixteen demos, each running code extracted from the factory over data the factory recorded. None needs a key, an account or the network.
 
 ```
-npm run demo              # all twelve: what each proves, and whether it held
+npm run demo              # all sixteen: what each proves, and whether it held
 npm run demo:<name>       # one of them, with its full output
 ```
 
@@ -23,6 +23,10 @@ npm run demo:<name>       # one of them, with its full output
 | [reported-paths](10-reported-paths/) | — | A path an agent reports in its handoff is a claim about disk, and the scanner resolves it, while a route is never resolved and zero handoffs is never a pass. | production path over fixture handoffs |
 | [write-surface](11-write-surface/) | 12 Writable surface | Every persistent surface two agents share is on file, and the detector that holds the file to the tree catches its own planted cases before it may call the tree clean. | reduced copy of the production detector |
 | [emitter-instructions](12-emitter-instructions/) | — | An agent is never ordered to fetch data it has no route to, and the detector that checks this fires on an order it planted before it reads a playbook. | reduced harness around the production path |
+| [anti-map](13-anti-map/) | — | Hallucination risk is scored where the model cannot check itself, every factor is logged beside the risk, and the record says it routed nothing. | reduced harness around the production path |
+| [receipt-v2](14-receipt-v2/) | 06 Context residency | Six fields join the receipt without breaking a single old one: each is optional with no default, so an old receipt comes back from the parser unchanged, and a value of the wrong shape is refused. | production path |
+| [trace-physics](15-trace-physics/) | — | A run is scored by how it moved, a value nobody recorded stays null instead of becoming a zero, and the input's score sits beside the run's score, never inside it. | production path over fixture events |
+| [assembled-prompt](16-assembled-prompt/) | 11 Prompts as specifications | A prompt assembled from fragments can contradict itself while every fragment is correct on its own, so the check reads the assembled prompt, and a stale copy of it is UNEVALUATED rather than a pass. | reduced harness around the production path |
 
 ## Production path, reduced harness
 

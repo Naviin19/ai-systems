@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "00000000-0000-4000-8000-000000000001",
+  "run_id": "run-pre-v2-fixture",
+  "agent_id": "fixture.agent-01-foundation",
+  "emitted_at": "2026-09-14T00:00:00.000Z",
+  "given": {
+    "index_injected": [
+      {
+        "skill": "design-principles.md",
+        "spec": "§6",
+        "source": "domain"
+      }
+    ],
+    "loaded": [
+      {
+        "file": "design-principles.md",
+        "section": "§6",
+        "iter": 1,
+        "chars": 800,
+        "tokens_estimate": 200
+      }
+    ],
+    "prompt_chars": 4000,
+    "prompt_tokens_estimate": 1000,
+    "token_estimate_method": "chars/4"
+  },
+  "done": {
+    "cited_in_output": [
+      "agent-kernel.md",
+      "design-principles.md"
+    ],
+    "cited_sections": [
+      {
+        "skill": "agent-kernel.md",
+        "section": "§full"
+      },
+      {
+        "skill": "design-principles.md",
+        "section": "§6"
+      }
+    ],
+    "given_not_cited": [],
+    "loaded_not_cited": [],
+    "out_of_scope_findings": 0,
+    "out_of_scope_entries": [],
+    "departures": [],
+    "separability_statement": "The done half records acknowledgement-class evidence only (citations, attestations, findings). With what is on disk, 'shaped the output' cannot be separated from 'was acknowledged': a citation proves injection into the index — not acknowledgement, not load, not influence (P1 B2). Influence is provable by nothing currently recorded."
+  },
+  "gate_verdicts": [
+    {
+      "gate": "attestation",
+      "mode": null,
+      "result": "PASS",
+      "detail": "attested 2/2"
+    }
+  ],
+  "run_outcome": {
+    "status": "succeeded",
+    "rerun_by": null,
+    "detail": null
+  },
+  "residuals": {
+    "craftsmanship": [],
+    "verification_commands": []
+  },
+  "nulls": [
+    {
+      "field": "residuals.craftsmanship",
+      "reason": "no craftsmanship grade in .cache/prompt-enrichment matches this run's handoff.md or this agent's playbook"
+    }
+  ]
+}

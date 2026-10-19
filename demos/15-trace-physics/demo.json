@@ -1,0 +1,23 @@
+{
+  "name": "trace-physics",
+  "command": "demo:trace-physics",
+  "kind": "production path over fixture events",
+  "extracted_on": "2026-10-18",
+  "extracted_from": [
+    { "sha": "87fae286", "path": "scripts/lib/trace-physics.ts", "symbols": ["WEIGHTS", "traceScore", "scoreAgentTrace", "scoreRun", "null never becomes 0", "input score beside, never inside"] },
+    { "sha": "87fae286", "path": "scripts/lib/dispatch-topology.ts", "symbols": ["dispatchTopology"] },
+    { "sha": "87fae286", "path": "contracts/types/measurement/trace-physics.ts", "symbols": ["TracePhysicsAgentSchema", "TracePhysicsRunSchema", "TRACE_PHYSICS_CALIBRATION"] }
+  ],
+  "volatile": [
+    "The run's events in fixtures/events.jsonl and the three handoff sizes are written for this demo, in the shape the orchestrator writes them. No committed real run in the factory carries a score yet.",
+    "The input score is written by the demo. In the factory nothing yet writes input-state.json, so meta.input_score is null with a reason on every run.",
+    "loadRunTrace, which reads a run's folder from disk, is not extracted; the demo hands scoreRun the parsed events and sizes directly, which is what loadRunTrace does."
+  ],
+  "tamper": {
+    "file": "demos/15-trace-physics/trace-physics.ts",
+    "find": "  if (compression === null) return null;",
+    "replace": "  if (compression === null) return traceScore(0, jerk, schemaFriction);",
+    "expect_exit": 1,
+    "expect_line": "a dispatch with no token record has no score       FAILED  score 0.600"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "receipt-v2",
+  "command": "demo:receipt-v2",
+  "kind": "production path",
+  "extracted_on": "2026-10-18",
+  "extracted_from": [
+    { "sha": "87fae286", "path": "contracts/types/measurement/receipt.ts", "symbols": ["ReceiptSchema", "state_before", "state_after", "preamble_variant", "dispatch_topology", "narrative_present", "factory_commit", "each optional with no default", "schema_version stays 1.0"] },
+    { "sha": "87fae286", "path": "tests/fixtures/receipts/pre-v2.json", "symbols": ["a receipt written before the six fields"] },
+    { "sha": "87fae286", "path": "tests/receipt-v2.test.ts", "symbols": ["the six fields are optional in the schema, and a value of the wrong shape is refused", "a receipt from before receipt v2 still validates"] }
+  ],
+  "volatile": [
+    "The receipt with all six fields is the pre-v2 fixture plus six values written for this demo. The factory's receipt builder, which reads each field from what the run recorded and gives an absent field its reason, is not extracted.",
+    "The empty state_before row is added by this demo; the factory's test checks the other four wrong shapes."
+  ],
+  "tamper": {
+    "file": "contracts/types/measurement/receipt.ts",
+    "find": "  narrative_present: z.boolean().optional(),",
+    "replace": "  narrative_present: z.boolean().default(false),",
+    "expect_exit": 1,
+    "expect_line": "parsing an old receipt adds no key         FAILED  added narrative_present"
+  }
+}

@@ -7,7 +7,7 @@ on:
 
 jobs:
   demos:
-    name: Twelve demos on ${{ matrix.os }}
+    name: Sixteen demos on ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:

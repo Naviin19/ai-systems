@@ -1,0 +1,16 @@
+{"ts":"2026-10-18T09:00:00.000Z","run_id":"run-trace-demo","agent_id":"demo.agent-01-foundation","event_type":"AGENT_START","payload":{}}
+{"ts":"2026-10-18T09:00:20.000Z","run_id":"run-trace-demo","agent_id":"demo.agent-01-foundation","event_type":"SKILL_LOADED","payload":{"file":"design-principles.md","section":"§6"}}
+{"ts":"2026-10-18T09:00:40.000Z","run_id":"run-trace-demo","agent_id":"demo.agent-01-foundation","event_type":"SKILL_LOADED","payload":{"file":"structured-output-schemas.md","section":"§2"}}
+{"ts":"2026-10-18T09:03:50.000Z","run_id":"run-trace-demo","agent_id":"demo.agent-01-foundation","event_type":"ATTESTATION_VERIFIED","payload":{"cycle":1,"attested":6}}
+{"ts":"2026-10-18T09:04:00.000Z","run_id":"run-trace-demo","agent_id":"demo.agent-01-foundation","event_type":"AGENT_COMPLETE","payload":{},"token_usage":{"input":20000,"output":3000,"cache_read":0,"cache_write":0},"wall_time_ms":240000}
+{"ts":"2026-10-18T09:05:00.000Z","run_id":"run-trace-demo","agent_id":"demo.agent-02-collection","event_type":"AGENT_START","payload":{}}
+{"ts":"2026-10-18T09:05:30.000Z","run_id":"run-trace-demo","agent_id":"demo.agent-02-collection","event_type":"SKILL_LOADED","payload":{"file":"api-integration-patterns.md","section":"§3"}}
+{"ts":"2026-10-18T09:06:00.000Z","run_id":"run-trace-demo","agent_id":"demo.agent-02-collection","event_type":"SKILL_LOADED","payload":{"file":"api-integration-patterns.md","section":"§3"}}
+{"ts":"2026-10-18T09:08:00.000Z","run_id":"run-trace-demo","agent_id":"demo.agent-02-collection","event_type":"ROUTE_BACK","payload":{"action":"retry","class":"schema-on-write","attempt":1}}
+{"ts":"2026-10-18T09:08:05.000Z","run_id":"run-trace-demo","agent_id":"demo.agent-02-collection","event_type":"AGENT_START","payload":{}}
+{"ts":"2026-10-18T09:11:00.000Z","run_id":"run-trace-demo","agent_id":"demo.agent-02-collection","event_type":"ROUTE_BACK","payload":{"action":"retry","class":"quality-gate","attempt":2}}
+{"ts":"2026-10-18T09:14:30.000Z","run_id":"run-trace-demo","agent_id":"demo.agent-02-collection","event_type":"ATTESTATION_VERIFIED","payload":{"cycle":2,"attested":5}}
+{"ts":"2026-10-18T09:15:00.000Z","run_id":"run-trace-demo","agent_id":"demo.agent-02-collection","event_type":"AGENT_COMPLETE","payload":{},"token_usage":{"input":40000,"output":6000,"cache_read":0,"cache_write":0},"wall_time_ms":600000}
+{"ts":"2026-10-18T09:16:00.000Z","run_id":"run-trace-demo","agent_id":"demo.agent-03-analysis","event_type":"AGENT_START","payload":{}}
+{"ts":"2026-10-18T09:19:00.000Z","run_id":"run-trace-demo","agent_id":"demo.agent-03-analysis","event_type":"ATTESTATION_VERIFIED","payload":{"cycle":1,"attested":4}}
+{"ts":"2026-10-18T09:20:00.000Z","run_id":"run-trace-demo","agent_id":"demo.agent-03-analysis","event_type":"AGENT_COMPLETE","payload":{},"token_usage":null,"wall_time_ms":240000}

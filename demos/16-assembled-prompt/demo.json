@@ -1,0 +1,24 @@
+{
+  "name": "assembled-prompt",
+  "command": "demo:assembled-prompt",
+  "kind": "reduced harness around the production path",
+  "extracted_on": "2026-10-18",
+  "extracted_from": [
+    { "sha": "87fae286", "path": "scripts/audit/deterministic-prompt-checks.mjs", "symbols": ["checkAssembled", "D1 numeric-bound disagreement", "D6 tool ordered but undescribed"] },
+    { "sha": "87fae286", "path": "scripts/audit/corpus-stamp.mjs", "symbols": ["computeInputHash", "SHA-256 over (path, text) sorted", "CRLF folded to LF"] },
+    { "sha": "87fae286", "path": "scripts/verify-assembled-prompts.mjs", "symbols": ["no stamp: UNEVALUATED", "stale stamp: UNEVALUATED", "exit 3, never 0, on every UNEVALUATED path"] }
+  ],
+  "volatile": [
+    "The five prompt fragments are written for this demo. The factory's kernel, playbooks and orchestrator text are private, and its assembler lives in the orchestrator and is not extracted; assemble.ts is a toy that joins the fragments.",
+    "retry-rule.md stands in for a string literal in the factory's orchestrator, which is where the one-cycle half of the real contradiction lived.",
+    "The gate's verdict is reduced to its order of decisions. A finding is shown as FAIL, exit 1, which is the gate under BLOCK; the factory runs it under WARN, its default, where a finding is reported and the run continues.",
+    "The reading half of the gate, a paid two-stage model pass, is not extracted."
+  ],
+  "tamper": {
+    "file": "demos/16-assembled-prompt/checks.ts",
+    "find": "  if (distinct.length > 1) {",
+    "replace": "  if (distinct.length > 2) {",
+    "expect_exit": 1,
+    "expect_line": "assembled, the two bounds are caught disagreeing      FAILED  D1 did not fire"
+  }
+}
