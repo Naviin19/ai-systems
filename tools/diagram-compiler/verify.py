@@ -4,7 +4,7 @@ Three things are checked, in descending order of how easily they are missed:
 a grammar violation (an off-palette colour, an unexpected text size), a count
 that disagrees with its own label, and text geometry measured in a real browser
 rather than estimated. The third is the one that actually catches problems."""
-import glob, json, os, pathlib, re, sys
+import collections, glob, json, os, pathlib, re, sys
 import xml.etree.ElementTree as ET
 from playwright.sync_api import sync_playwright
 
@@ -12,7 +12,8 @@ from playwright.sync_api import sync_playwright
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from grammar import (ROLES, INK_LIGHT, INK_DARK, MUTE_LIGHT, MUTE_DARK,
                      RULE_LIGHT, RULE_DARK, SURF_LIGHT, SURF_DARK,
-                     SCALE, TICK_W, OUT_FULL, OUT_BARE, REPO)
+                     SCALE, TICK_W, OUT_FULL, OUT_BARE, REPO,
+                     WORDS, cite_radius, spelled)
 
 FILES = sorted(glob.glob(OUT_FULL + '*.svg'))
 fails, warns = [], []
@@ -173,6 +174,64 @@ if "level0_hubs" in DRAWN:
         f"d02: {got} hub circles, evidence doc says level0_hubs = {want}"
         + ("" if got == want else "  MISMATCH"))
 
+# Plate 02 sizes each hub by its own count, and per-hub counts drift: the factory's register
+# carries a set nobody checks. Every hub drawn must be the size cite_radius() gives one of the
+# counts evidence.md lists, so a stale array in the plate fails here instead of shipping a
+# node at the wrong size. The radii are compared as a multiset; positions are not data.
+if "02" in d:
+    src02 = open(d["02"], encoding='utf-8').read()
+    _hubs = re.search(r'^The hub counts, highest first: (.+)$', ev, re.M)
+    if not _hubs:
+        fails.append("evidence doc lists no per-hub counts -- plate 02's node sizes have "
+                     "nothing to be checked against")
+    else:
+        counts = [int(x) for x in re.findall(r' (\d+)(?=[,.])', _hubs.group(1))]
+        if "level0_hubs" in DRAWN and len(counts) != DRAWN["level0_hubs"]["value"]:
+            fails.append(f"evidence doc is internally inconsistent: {len(counts)} per-hub "
+                         f"counts listed, level0_hubs = {DRAWN['level0_hubs']['value']}")
+        want = sorted(cite_radius(n) for n in counts)
+        got = sorted(float(r) for r in
+                     re.findall(r'<circle [^>]* r="([\d.]+)"[^>]*class="teal-f"', src02))
+        (fails if got != want else warns).append(
+            f"d02: hub radii {'match' if got == want else 'do not match'} the per-hub counts "
+            f"in the evidence doc" + ("" if got == want else f"  MISMATCH drawn {got}, "
+                                                            f"counts give {want}"))
+    # One node per skill file: the "others" label once said 204 for a corpus that had moved
+    # to 223. Every node on the plate -- the others, the measured hubs, the declared one --
+    # must add up to the corpus the evidence doc holds.
+    if "skill_files" in DRAWN:
+        got = len(re.findall(r'<circle [^>]*class="(?:gray-m|teal-f|teal-o)"', src02))
+        want = DRAWN["skill_files"]["value"]
+        (fails if got != want else warns).append(
+            f"d02: {got} skill nodes drawn, evidence doc says skill_files = {want}"
+            + ("" if got == want else "  MISMATCH"))
+
+# Plate 03 once drew a linear chain, which stopped being true when the scheduler landed. The
+# wave strip is the build graph's waves: one column per wave, one cell per build agent. A chain
+# redrawn would be fifteen columns of one and fail all three. The cell size is matched as
+# drawn; if it moves, the count goes to zero and fails against the evidence rather than passing.
+if {"build_waves", "max_build_agents_at_once", "build_agents"} <= set(DRAWN) and "03" in d:
+    cells = re.findall(r'<rect x="([\d.]+)" y="[\d.]+" width="48" height="20"[^>]*class="teal-f"',
+                       open(d["03"], encoding='utf-8').read())
+    cols = collections.Counter(cells)
+    for got, key, what in ((len(cols), "build_waves", "wave columns"),
+                           (max(cols.values(), default=0), "max_build_agents_at_once",
+                            "agents in the widest wave"),
+                           (len(cells), "build_agents", "agents in the strip")):
+        want = DRAWN[key]["value"]
+        (fails if got != want else warns).append(
+            f"d03: {got} {what}, evidence doc says {key} = {want}"
+            + ("" if got == want else "  MISMATCH"))
+
+# Plate 05 was redrawn when artifact claim became the fourth retryable class. Each layer that
+# feeds classifyRouteBack is labelled "routes back", and their number is a figure like any other.
+if "route_back_classes" in DRAWN and "05" in d:
+    got = len(re.findall(r'<text[^>]*>routes back</text>', open(d["05"], encoding='utf-8').read()))
+    want = DRAWN["route_back_classes"]["value"]
+    (fails if got != want else warns).append(
+        f"d05: {got} layers route back, evidence doc says route_back_classes = {want}"
+        + ("" if got == want else "  MISMATCH"))
+
 # a figure declared as a numeral must not appear as ticks anywhere
 for key, spec in DRAWN.items():
     if spec.get("form") == "numeral":
@@ -295,6 +354,26 @@ if any(text for _, text in DOCS):
                 got = int(m.group(1).replace(',', ''))
                 if got != want:
                     fails.append(f"{name} says '{m.group(0)}' but evidence.md holds {want}")
+    # The corpus token figure is stated in prose and drawn nowhere, so nothing held it: 1.80M
+    # was published for weeks and could not be reproduced by any definition. It is a figure
+    # evidence.md holds now, and every "N.NNM tokens" in the prose must be that figure.
+    _tok = _STATED.get("corpus_tokens_millions", {}).get("value")
+    for name, text in DOCS:
+        for m in re.finditer(r'(\d+(?:\.\d+)?)M tokens', text):
+            if _tok is None:
+                fails.append(f"{name} says '{m.group(0)}' but evidence.md holds no "
+                             f"corpus_tokens_millions to check it against")
+            elif float(m.group(1)) != _tok:
+                fails.append(f"{name} says '{m.group(0)}' but evidence.md holds {_tok}M")
+    # A plate count written as a word is a copy like any other. The reference set's cover said
+    # eleven diagrams and its contents page ten plates while thirteen existed, and nothing read
+    # either. Every spelled count of plates or diagrams must be the number of plates emitted.
+    _words = "|".join(WORDS)
+    for name, text in DOCS + (("diagram-compiler/README.md",
+                               _doc('tools/diagram-compiler/README.md')),):
+        for m in re.finditer(r'\b(%s) (?:plates|diagrams)\b' % _words, text, re.I):
+            if m.group(1).lower() != spelled(len(FILES)):
+                fails.append(f"{name} says '{m.group(0)}' but {len(FILES)} plates are emitted")
     # anything contested on a plate must be named as contested in the prose too
     if "Contested figures" not in arch:
         fails.append("architecture.md does not declare the contested figures")

@@ -48,6 +48,7 @@ Measured at factory `87fae286` on 18 October 2026.
 | Measured Level-0 hubs | 13 | `audited` | skills cited by 20 or more other skill files, from `verification/skill-ref-counts.json` |
 | Level-0 set | 14 | `audited` | the measured hubs plus `master-prompt-architecture.md`, which is declared and measures 18 |
 | MCP server packages | 6, of which 3 are in the default lineup | `audited` | `packages/mcp-server-*` and `DEFAULT_SERVER_KEYS` |
+| Corpus tokens | 1.84M | `audited` | the factory's chars/4 estimate over the 223 skill files at `87fae286`: what an agent would carry if it carried the whole corpus |
 | Static prompt load | 8,146 to 20,813 tokens per agent | `audited` | `scripts/estimate-token-load.ts`, estimate mode, run on the tree at `87fae286`; the baseline file committed there, `verification/token-budget-baseline.json`, was last written on 2 October and gives 8,137 to 20,690, the range `public-figures.json` carries |
 | Switches that climbed on their written condition | 6 | `audited` | a mode declaration whose source records `FLIPPED` on its pre-committed condition: RIGOR, V6_FIELDS, R22, R23, PITCH_CLAIMS, ELECTION_SURFACE; two more record a flip by operator override with the condition still open, and are not counted |
 
@@ -228,7 +229,7 @@ The audit lives in the factory as `plans/ais-plate-claims.json`. Two checks ther
 - **AIS7-1** resolves every citation: each factory citation at the audited commit, each product citation at its recorded commit, with the cited text on the cited line or within two lines of it.
 - **AIS7-2** requires the plates to regenerate unchanged, `verify.py` to pass in two fonts, the reference set to rebuild and verify, every figure in §7 to equal the audit's, and no phrase the audit retired to survive in the plates, the README, `architecture.md` or this file inside a section headed as a correction or history.
 
-In this repository, `tools/diagram-compiler/verify.py` fails a plate whose drawn count disagrees with §7.
+In this repository, `tools/diagram-compiler/verify.py` fails a plate whose drawn count disagrees with §7, and plate 02 when a hub is drawn at a size other than its count in §2 gives.
 
 The two dates at the top are deliberate. Counts are re-measured whenever the figures are refreshed, and every figure the factory derives for this repository is listed with its derivation in [`public-figures.json`](public-figures.json) — generated in the factory and copied here with only the factory's private name reworded, storing no expected value — so a reader re-derives a number rather than trusting it. A citation is true at the commit it names, and the citation audit is re-run as a whole, not per refresh.
 
@@ -241,7 +242,7 @@ Every count the plates draw, in one block. `tools/diagram-compiler/verify.py` pa
 ```json
 {
   "drawn": {
-    "skill_files":              {"value": 223, "tier": "audited", "plates": ["01", "06"]},
+    "skill_files":              {"value": 223, "tier": "audited", "plates": ["01", "02", "06"]},
     "total_agents":             {"value": 20,  "tier": "audited", "plates": ["01", "03"]},
     "build_agents":             {"value": 15,  "tier": "audited", "plates": ["03"]},
     "research_agents":          {"value": 5,   "tier": "audited", "plates": ["03"]},
@@ -293,7 +294,8 @@ Every count the plates draw, in one block. `tools/diagram-compiler/verify.py` pa
     "envelope_variants":   {"value": 24,  "tier": "audited"},
     "envelope_variants_emitted": {"value": 20, "tier": "audited"},
     "mcp_server_packages": {"value": 6,   "tier": "audited"},
-    "mode_switches":       {"value": 68,  "tier": "audited"}
+    "mode_switches":       {"value": 68,  "tier": "audited"},
+    "corpus_tokens_millions": {"value": 1.84, "tier": "audited"}
   }
 }
 ```

@@ -336,6 +336,14 @@ def dot(cx, cy, r, role="gray", opacity=None):
             f'fill="{L(role,"m")}"{_cls(role + "-m")}/>')
 
 
+def cite_radius(n):
+    """A skill node's radius, read from the number of skill files that cite it. One scale
+    for every node: hubs from 3.5 at twenty citations, the rest below. It lives here, not
+    in the plate, so verify.py sizes the evidence document's hub counts with the same
+    function and compares them with the circles actually drawn."""
+    return round(3.5 + (n - 20) * 4.5 / 22, 2) if n >= 20 else round(1.3 + n * 0.1, 2)
+
+
 def hair(x1, y1, x2, y2, role="teal", opacity=None, dashed=False):
     """A citation edge. Thinner than a connector because it is a relation, not a flow."""
     d = ' stroke-dasharray="3 2"' if dashed else ""
@@ -363,6 +371,18 @@ def rng(seed):
         s[0] = (s[0] * 1103515245 + 12345) & 0x7FFFFFFF
         return s[0] / 0x7FFFFFFF
     return nxt
+
+
+WORDS = ("zero one two three four five six seven eight nine ten eleven twelve thirteen "
+         "fourteen fifteen sixteen seventeen eighteen nineteen twenty").split()
+
+
+def spelled(n):
+    """The number of plates as prose writes it. The reference set's cover said eleven
+    diagrams after there were thirteen, and its contents page said ten: a count typed as
+    a word is a copy like any other, so the build spells it from the plates and the
+    verifiers read every spelled count back against them."""
+    return WORDS[n]
 
 
 def emit(name, fn):

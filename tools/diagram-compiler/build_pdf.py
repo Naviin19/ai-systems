@@ -1,6 +1,6 @@
 import os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from grammar import OUT_FULL, OUT_BARE, REPO
+from grammar import OUT_FULL, OUT_BARE, REPO, spelled
 import re, os, datetime
 
 BARE = OUT_BARE
@@ -59,6 +59,18 @@ FIGS = [
   [("shipped","verify-flip-conditions.mjs, env-mode.ts"),
    ("audited","68 switches: 21 block, 37 advisory, 4 off, 6 bespoke; 6 flips on their written condition")])
 ]
+
+# The cover, the contents page and the plate pages count the plates from FIGS, and the cover
+# dates the figures from the evidence document. Neither is a literal any more: the cover said
+# eleven diagrams and September, and the contents page ten plates, long after the set had
+# moved past both, and verify_pdf.py now reads each of them back.
+NP, NW = len(FIGS), spelled(len(FIGS))
+_measured = re.search(r'Figures measured (\d+) (\w+) (\d{4}) at `([0-9a-f]+)`',
+                      open(os.path.join(REPO, 'docs', 'evidence.md'), encoding='utf-8').read())
+if not _measured:
+    sys.exit("evidence.md does not say when and where its figures were measured -- "
+             "the cover has nothing to date them by")
+M_DAY, M_MONTH, M_YEAR, M_AT = _measured.groups()
 
 
 
@@ -165,7 +177,7 @@ def chips(ts):
 
 plate_pages = "\n".join(f'''
 <section class="page plate">
-  <p class="eyebrow">Plate {n} of 13</p>
+  <p class="eyebrow">Plate {n} of {NP}</p>
   <h2>{title}</h2>
   <p class="claim">{claim}</p>
   <div class="art">{svg}</div>
@@ -304,21 +316,21 @@ code{{font-family:var(--mono);font-size:.88em;background:var(--panel);
 <svg width="0" height="0" style="position:absolute"><style>{shared}</style></svg>
 
 <section class="cover">
-  <p class="eyebrow">Reference set · thirteen plates · October 2026</p>
+  <p class="eyebrow">Reference set · {NW} plates · {M_MONTH} {M_YEAR}</p>
   <h1>AI operating system</h1>
-  <p class="stand">Thirteen diagrams, each showing a different behaviour of the same system.
-  Every figure was measured against the factory's code on 18 October 2026, and every
+  <p class="stand">{NW.capitalize()} diagrams, each showing a different behaviour of the same system.
+  Every figure was measured against the factory's code on {M_DAY} {M_MONTH} {M_YEAR}, and every
   plate was drawn from the measurement. Prepared as reference artwork for the public
   <span style="font-family:var(--mono);font-size:.9em">ai-systems</span>
   repository.</p>
   <ul class="facts">
-    <li><b>13</b>plates</li><li><b>0</b>figures unverified</li>
+    <li><b>{NP}</b>plates</li><li><b>0</b>figures unverified</li>
     <li><b>0</b>figures contested</li><li><b>{today}</b>compiled</li>
   </ul>
   <div class="derived">
     <p class="lab">Derived from</p>
     <ul>
-      <li>the software factory <em>— private; figures at 87fae286 (18 October), citations at 5739a97 (14 September)</em></li>
+      <li>the software factory <em>— private; figures at {M_AT} ({M_DAY} {M_MONTH}), citations at 5739a97 (14 September)</em></li>
       <li>four product repositories <em>— read-only, each at a named commit</em></li>
       <li>Vercel production deployments <em>— product status, 14 September 2026</em></li>
       <li>plans/ais-plate-claims.json <em>— every citation resolved by a script</em></li>
@@ -350,9 +362,9 @@ code{{font-family:var(--mono);font-size:.88em;background:var(--panel);
 
 <section class="page">
   <p class="eyebrow">Contents</p>
-  <h2>The ten plates</h2>
+  <h2>The {NW} plates</h2>
   <p class="col">Each plate proves one claim. Where two would prove the same thing, one
-  of them is wrong — so the set is not ten views of the architecture, it is ten separate
+  of them is wrong — so the set is not {NW} views of the architecture, it is {NW} separate
   arguments about it.</p>
   <ul class="toc">{toc}</ul>
 </section>
@@ -364,7 +376,7 @@ code{{font-family:var(--mono);font-size:.88em;background:var(--panel);
   <p class="eyebrow">Figures and evidence</p>
   <h2>Structure</h2>
   <p class="col">The counts that carry the structural argument, each measured at factory
-  commit 87fae286 on 18 October; the citations behind them were audited at 5739a97. A count
+  commit {M_AT} on {M_DAY} {M_MONTH}; the citations behind them were audited at 5739a97. A count
   is audited, not shipped, because no file implements a number; the audit records how each one
   was measured.</p>
   <table><thead><tr><th>Figure</th><th>Value</th><th>Tier</th><th>Source</th>

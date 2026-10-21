@@ -1,6 +1,6 @@
 import os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from grammar import OUT_FULL, OUT_BARE, REPO
+from grammar import OUT_FULL, OUT_BARE, REPO, WORDS, spelled
 """Verification for the print build: the plates must not overflow or collide once
 re-set in Carlito, and the PDF must keep its artwork vector and its text selectable."""
 import glob, os, re, warnings
@@ -81,11 +81,16 @@ if _embedded and not any(d in e.replace('-', '').replace(' ', '')
                  "this machine's rather than the one build_pdf.py names. Install the "
                  "declared face, embed it, or change the declaration to the truth.")
 
-alltext = "\n".join(pg.extract_text() for pg in r.pages)
-# the typeface sets fi/fl as ligatures, so probes are compared against unligatured text
-for lig, plain in (("\ufb00","ff"),("\ufb01","fi"),("\ufb02","fl"),
-                   ("\ufb03","ffi"),("\ufb04","ffl")):
-    alltext = alltext.replace(lig, plain)
+# The typeface sets fi/fl as ligatures, so probes are compared against unligatured text --
+# every page's, once. The structure page was re-extracted raw further down, so under Carlito,
+# the face the build declares, it read "Pre\ufb02ight features" and failed against evidence.md.
+def _unlig(s):
+    for lig, plain in (("\ufb00","ff"),("\ufb01","fi"),("\ufb02","fl"),
+                       ("\ufb03","ffi"),("\ufb04","ffl")):
+        s = s.replace(lig, plain)
+    return s
+_texts = [_unlig(pg.extract_text()) for pg in r.pages]
+alltext = "\n".join(_texts)
 # one probe per plate, so a plate that silently failed to embed is caught
 # One probe per plate, so a plate that silently failed to embed is caught. The
 # probes name IDENTIFIERS, never figures: "19 preflight" and "33 CI gate ids" were
@@ -115,10 +120,28 @@ else:
         if str(n) not in {a.lstrip('0') or '0' for a, _ in _labels}:
             fails.append(f"plate {n:02d} missing from the document")
 
+# The "plate N of M" labels were right while the cover said eleven diagrams and September and
+# the contents page said ten plates: nothing read the words. Every plate count the document
+# spells must be the plates on disk, and the cover must carry them as a word and a numeral, and
+# the date the evidence document says the figures were measured.
+_flat = re.sub(r'\s+', ' ', alltext).lower()
+_w = spelled(len(_plates))
+for m in re.finditer(r'\b(%s) (?:plates|diagrams)\b' % "|".join(WORDS), _flat):
+    if m.group(1) != _w:
+        fails.append(f"the PDF says '{m.group(0)}' but {len(_plates)} plates exist")
+_cover = re.sub(r'\s+', ' ', _texts[0]).lower()
+_ev = open(os.path.join(REPO, 'docs', 'evidence.md'), encoding='utf-8').read()
+_when = re.search(r'Figures measured (\d+ \w+ \d{4})', _ev)
+for probe in (f"{_w} plates", f"{_w} diagrams", f"{len(_plates)} plates",
+              _when.group(1).lower() if _when else "the date evidence.md gives"):
+    if probe not in _cover:
+        fails.append(f"the cover does not read '{probe}'")
+if "contents" in _flat and f"the {_w} plates" not in _flat:
+    fails.append(f"the contents page does not read 'the {_w} plates'")
+
 # counts still reconcile in the files that ship to the repo, against the evidence document's
 # figures rather than a literal, so this file is not a third place the number lives
 import json
-_ev = open(os.path.join(REPO, 'docs', 'evidence.md'), encoding='utf-8').read()
 _files = json.loads(re.findall(r'```json\s*(\{.*?\})\s*```', _ev, re.S)[-1])['drawn']['skill_files']['value']
 for f, want, mw in (('01-operating-system', _files, 3.0), ('06-context-residency', _files, 7.0)):
     src = open(OUT_FULL + f + '.svg', encoding='utf-8').read()
@@ -144,8 +167,8 @@ _expect = {
     'Per-agent I/O schemas':  f"{_drawn['per_agent_schemas']['value']}",
     'Static prompt load':     _row('Static prompt load').replace(' per agent', ''),
 }
-_page = next((pg.extract_text() for pg in r.pages
-              if 'Static prompt load' in pg.extract_text() and 'Registered contracts' in pg.extract_text()), None)
+_page = next((t for t in _texts
+              if 'Static prompt load' in t and 'Registered contracts' in t), None)
 if _page is None:
     fails.append("the structure page (Figure / Value / Tier / Source / Changed) was not found")
 else:

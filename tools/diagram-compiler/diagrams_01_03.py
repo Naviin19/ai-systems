@@ -50,7 +50,8 @@ def d01(bare=False):
 # Measured at factory 87fae286 by skill-ref-count.ts, per_skill[].skills_internal, regenerated
 # because the committed verification/skill-ref-counts.json is one citation behind:
 # the number of other skill files that cite each skill. Every node is drawn at a radius read
-# from its own count, so a larger node is a skill more files cite.
+# from its own count by cite_radius(), so a larger node is a skill more files cite. verify.py
+# holds the hub radii to the counts evidence.md lists, and the node total to its skill_files.
 HUB_CITATIONS = [42, 42, 39, 38, 31, 30, 28, 27, 25, 24, 21, 20, 20]
 DECLARED_ONLY = 18          # master-prompt-architecture.md: declared Level 0, measures 18
 OTHER_CITATIONS = (
@@ -59,11 +60,6 @@ OTHER_CITATIONS = (
     + [3] * 30 + [2] * 37 + [1] * 23 + [0] * 25)
 LAYERS = ("Foundational", "Governance", "Coordination", "Engineering", "Connectors",
           "Intelligence", "Operational", "Tracking", "Meta")
-
-
-def radius(n):
-    """One scale for every node: hubs from 3.5 at twenty citations, the rest below."""
-    return round(3.5 + (n - 20) * 4.5 / 22, 2) if n >= 20 else round(1.3 + n * 0.1, 2)
 
 
 def d02(bare=False):
@@ -86,7 +82,7 @@ def d02(bare=False):
     r = rng(20260912)
     for n in OTHER_CITATIONS:
         x, y = GX + 18 + r() * (GW - 176), GY + 26 + r() * (GH - 44)
-        b.append(dot(x, y, radius(n), "gray", "0.4"))
+        b.append(dot(x, y, cite_radius(n), "gray", "0.4"))
 
     # the defect the checks now catch: a citation from a config, into a hub, to nothing
     b.append(box(520, 150, 116, 30, "gray"))
@@ -96,9 +92,9 @@ def d02(bare=False):
              f'stroke-width="1.3" stroke-linecap="round" class="coral-o"/>')
 
     for (hx, hy), n in zip(hubs, HUB_CITATIONS):
-        b.append(f'<circle cx="{hx}" cy="{hy}" r="{radius(n)}" fill="{L("teal","f")}" '
+        b.append(f'<circle cx="{hx}" cy="{hy}" r="{cite_radius(n)}" fill="{L("teal","f")}" '
                  f'stroke="{L("teal","s")}" stroke-width="1" class="teal-f"/>')
-    b.append(f'<circle cx="{declared[0]}" cy="{declared[1]}" r="{radius(DECLARED_ONLY) + 0.8}" '
+    b.append(f'<circle cx="{declared[0]}" cy="{declared[1]}" r="{cite_radius(DECLARED_ONLY) + 0.8}" '
              f'fill="none" stroke="{L("teal","s")}" stroke-width="1" stroke-dasharray="2 1.5" '
              f'class="teal-o"/>')
 
@@ -108,6 +104,13 @@ def d02(bare=False):
                      anchor="end"))
     b.append(text(GX + GW - 16, GY + GH - 12, f"{len(OTHER_CITATIONS)} others", SUB_PX, "gray",
                   anchor="end", opacity="0.7"))
+    # Why there are no lines between the nodes. The reason lived only in the prose, so the
+    # plate a README renders, captionless, read as a network graph that had lost its edges.
+    # It sits in the column right of the scatter, which the dots never reach.
+    for k, line in enumerate(wrap("No edges: the factory records how often a skill is "
+                                  "cited, not by whom.", 19)):
+        b.append(text(GX + GW - 16, 228 + k * 16, line, SUB_PX, "gray", anchor="end",
+                      opacity="0.7"))
 
     # two panels: the checks, and the defect behind the third
     y = 352
