@@ -232,6 +232,38 @@ if "route_back_classes" in DRAWN and "05" in d:
         f"d05: {got} layers route back, evidence doc says route_back_classes = {want}"
         + ("" if got == want else "  MISMATCH"))
 
+# Plate 04 drew the two hand-kept surfaces as rows of the generated stack, at its size and
+# under the generator's arrow, which claimed a parity they do not have. The box each one's
+# label sits in must now be an outline, not a filled surface, and no arrow may end on it:
+# nothing generates it. A label the check cannot find fails rather than passing unread.
+if "04" in d:
+    src04 = open(d["04"], encoding='utf-8').read()
+    rects = [(float(x), float(y), float(w), float(h), c) for x, y, w, h, c in re.findall(
+        r'<rect x="([\d.]+)" y="([\d.]+)" width="([\d.]+)" height="([\d.]+)"[^>]*class="([a-z-]+)"',
+        src04) if c != "surface"]
+    heads = [(float(x), float(y)) for x, y in re.findall(
+        r'<line [^>]*x2="([\d.]+)" y2="([\d.]+)"[^>]*marker-end', src04)]
+    heads += [(float(x), float(y)) for x, y in re.findall(
+        r'<path d="[^"]*?([\d.]+),([\d.]+)"[^>]*marker-end', src04)]
+    for label in ("hand-kept JSON files", "Hand-written migrations"):
+        t = re.search(r'<text x="([\d.]+)" y="([\d.]+)"[^>]*>[^<]*%s' % re.escape(label), src04)
+        if not t:
+            fails.append(f"d04: no text carries '{label}', so the hand-kept surface cannot be checked")
+            continue
+        tx, ty = float(t.group(1)), float(t.group(2))
+        held = [r for r in rects if r[0] <= tx <= r[0] + r[2] and r[1] <= ty <= r[1] + r[3]]
+        if not held:
+            fails.append(f"d04: '{label}' sits in no box")
+            continue
+        x, y, w, h, cls = min(held, key=lambda r: r[2] * r[3])
+        if cls != "coral-o":
+            fails.append(f"d04: '{label}' is drawn in a {cls} box -- a hand-kept surface is a "
+                         f"coral outline, not a filled surface at the generated ones' parity")
+        if any(x - 4 <= hx <= x + w + 4 and y - 4 <= hy <= y + h + 4 for hx, hy in heads):
+            fails.append(f"d04: an arrow ends on the box holding '{label}' -- nothing generates it")
+        else:
+            warns.append(f"d04: '{label}' is a {cls} box that no arrow reaches")
+
 # a figure declared as a numeral must not appear as ticks anywhere
 for key, spec in DRAWN.items():
     if spec.get("form") == "numeral":

@@ -8,39 +8,71 @@ def d04(bare=False):
     catalog are generated and gated (R32), and contract-compiler.ts is a blocking CI
     gate (R31) that checks declared consumer reads by structural subtyping. It does not
     run at dispatch: what runs at each boundary during a build is schema on write. The
-    blast-radius frontier is the largest one the registry holds, not an illustration."""
+    blast-radius frontier is the largest one the registry holds, not an illustration.
+
+    Redrawn 21 October. The two surfaces kept by hand were six identical rows with the
+    generated ones, in one stack under the generator's arrow, told apart by colour alone,
+    which drew a parity that does not exist. Position now says it before colour does: the
+    source's column holds what it reaches, and the hand-kept surfaces stand in a column of
+    their own with nothing drawn into them, coral because they can drift, outlined because
+    nothing generates them. The arrow through generate-json-schemas.ts ends on JSON Schema,
+    the one surface that script writes; the other three name their own mechanism. verify.py
+    fails the plate if a hand-kept surface is filled or an arrow lands on one."""
+    LW = 372                                    # the source's column, M .. M + LW
+    AX = M + LW / 2                             # its axis: the flow from the source
+    RX, RW = M + LW + 24, CW - LW - 24          # the hand-kept column, apart from it
+
     b = [section(M, 96, "One source, written by hand")]
-    b.append(box(M, 106, CW, 56, "teal"))
+    b.append(box(M, 106, LW, 56, "teal"))
     b.append(text(M + 18, 130, "contracts/types", TITLE_PX, "teal"))
-    b.append(text(M + 18, 149, "57 Zod source files; the registry sorts them into five tiers",
+    b.append(text(M + 18, 149, "57 Zod source files; the registry has five tiers",
                   SUB_PX, "teal", opacity="0.74"))
-    b.append(text(M + CW - 18, 130, "58 in SCHEMA_REGISTRY", SUB_PX, "teal",
+    b.append(text(M + LW - 18, 130, "58 in SCHEMA_REGISTRY", SUB_PX, "teal",
                   anchor="end", opacity="0.78"))
-    b.append(conn(340, 162, 340, 184, "gray", opacity="0.6"))
+    b.append(conn(AX, 162, AX, 184, "gray", opacity="0.6"))
 
-    b.append(box(150, 186, 380, 48, "coral", dashed=True))
-    b.append(text(340, 206, "generate-json-schemas.ts", TITLE_PX, "coral", anchor="middle"))
-    b.append(text(340, 223, "Regenerated and deep-diffed by R22, blocking in CI",
+    b.append(box(M + 12, 186, LW - 24, 48, "coral", dashed=True))
+    b.append(text(AX, 206, "generate-json-schemas.ts", TITLE_PX, "coral", anchor="middle"))
+    b.append(text(AX, 223, "Regenerated and diffed by R22, blocking in CI",
                   SUB_PX, "coral", anchor="middle", opacity="0.74"))
-    b.append(conn(340, 236, 340, 256, "gray", opacity="0.6"))
 
-    b.append(section(M, 272, "What the source reaches"))
-    surfaces = [("JSON Schema",           "60 generated, drift blocks CI",                  "teal"),
-                ("TypeScript types",      "Inferred from the source, typechecked in CI",    "teal"),
-                ("Contract examples",     "27 checked with safeParse on every verify-all",  "teal"),
-                ("Registry and catalog",  "Generated; R32 fails when either is stale",      "teal"),
-                ("Per-agent I/O schemas", "46 hand-kept JSON files",                        "coral"),
-                ("Database columns",      "Hand-written migrations, parity advisory",       "coral")]
-    y = 282
-    for name, mech, role in surfaces:
-        b.append(box(M, y, CW, 32, role))
-        b.append(text(M + 18, y + 21, name, TITLE_PX, role))
-        b.append(text(M + CW - 18, y + 21, mech, SUB_PX, role, anchor="end", opacity="0.74"))
-        y += 38
-    b.append(swatch(M, y + 12, "Generated or gated in CI", "teal"))
-    b.append(swatch(M + 250, y + 12, "Kept by hand, can drift", "coral"))
+    # What the source holds: a common region, not a gate. Each surface names the mechanism
+    # that holds it, and the generator's arrow crosses the region to the one it writes.
+    PITCH, RH = 51, 43
+    b.append(section(M, 272, "Held to the source"))
+    surfaces = [("JSON Schema",          "60 generated, drift blocks CI"),
+                ("TypeScript types",     "Inferred from the source, typechecked in CI"),
+                ("Contract examples",    "27 checked with safeParse on every verify-all"),
+                ("Registry and catalog", "Generated; R32 fails when either is stale")]
+    for i, (name, mech) in enumerate(surfaces):
+        y = 290 + i * PITCH
+        b.append(box(M + 10, y, LW - 20, RH, "teal"))
+        b.append(text(M + 26, y + 17, name, TITLE_PX, "teal"))
+        b.append(text(M + 26, y + 34, mech, SUB_PX, "teal", opacity="0.74"))
+    reg_end = 290 + 3 * PITCH + RH + 10
+    b.append(region(M, 280, LW, reg_end - 280, "gray", r=8))
+    b.append(conn(AX, 236, AX, 288, "gray", opacity="0.6"))
 
-    y += 36
+    # Kept by hand: nothing in, nothing out, no fill, and the boxes share one height so the
+    # column reads as one thing rather than two leftovers.
+    b.append(section(RX, 272, "Kept by hand, can drift"))
+    kept = [("Per-agent I/O schemas", wrap("46 hand-kept JSON files, outside the registry, "
+                                           "checked only for existence", 27)),
+            ("Database columns",      wrap("Hand-written migrations; parity advisory, "
+                                           "skips without a database", 27))]
+    kh = 27 + 17 * max(len(lines) for _, lines in kept)
+    y = 290
+    for name, lines in kept:
+        b.append(box(RX, y, RW, kh, "coral", fill=False))
+        b.append(text(RX + 16, y + 20, name, TITLE_PX, "coral"))
+        for k, line in enumerate(lines):
+            b.append(text(RX + 16, y + 37 + 17 * k, line, SUB_PX, "coral", opacity="0.74"))
+        y += kh + 8
+    for k, line in enumerate(wrap("Not derived from the source; no blocking check holds "
+                                  "them to it", 32)):
+        b.append(text(RX, reg_end - 21 + 17 * k, line, SUB_PX, ink="mute"))
+
+    y = reg_end + 28
     b.append(section(M, y, "At the agent boundary, and before any build"))
     by = y + 10
     b.append(box(M, by, 300, 62, "coral", dashed=True))
@@ -72,11 +104,14 @@ def d04(bare=False):
     end = y + 66
 
     return svg("04", "The contract spine",
-               "Zod is the source: what is generated is gated, what is hand-kept is marked.",
+               "Zod is the source: what is generated is gated, what is hand-kept stands apart.",
                "".join(b), end,
                "JSON Schema, the contract registry and its catalog are generated from the Zod "
                "source, and CI blocks on any difference; types come from the same source by "
-               "inference. What is kept by hand is drawn in coral because it can drift. Each "
+               "inference, and the 27 contract examples are parsed against it. The 46 per-agent "
+               "I/O schemas and the database migrations are kept by hand and drawn apart, in "
+               "coral outline with nothing flowing into them: the schemas are checked only for "
+               "existence, and migration parity is advisory and skips without a database. Each "
                "emitted handoff is parsed against its boundary schema, and in CI "
                "contract-compiler.ts checks each consumer's declared reads against its "
                "producer's schema; five of its twenty-three edges declare typed reads so far. "
