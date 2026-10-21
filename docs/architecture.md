@@ -64,7 +64,7 @@ One source of truth, and the reach of changing it is computed.
 
 The source is hand-written Zod: 57 files under `contracts/types`, from which `SCHEMA_REGISTRY` registers 58 contracts in five tiers. The JSON Schemas, the contract registry and its catalog are generated from the registry. R22 regenerates every schema in memory and fails CI on any difference, and R32 fails when the registry or the catalog is stale. TypeScript types come from the same source by inference; they are typechecked, not generated.
 
-Two surfaces are kept by hand and can drift: 46 per-agent input and output schemas, checked only for existence, and the database migrations, whose parity check is advisory and skips without a database. The plate draws them apart from the surfaces the source reaches, in outline, with nothing flowing into them. It once drew them at the same size, in the same stack, under the generator's arrow.
+Two surfaces are kept by hand and can drift: 46 per-agent input and output schemas, checked only for existence, and the database migrations, whose parity check is advisory and skips without a database. The plate draws them apart from the surfaces held to the source, in outline, with nothing flowing into them. It once drew them at the same size, in the same stack, under the generator's arrow.
 
 Handoffs are one contract, `HandoffEnvelopeSchema`, a union of 24 boundary variants, and each emitted payload is parsed against it before anything downstream reads it. Separately, in CI, `contract-compiler.ts` (R31) takes each of the 23 dependency edges, resolves the producer's real variant, and checks every read the consumer declares by structural subtyping. Five of the 23 edge declarations carry typed reads so far.
 

@@ -243,8 +243,42 @@ if "04" in d:
         src04) if c != "surface"]
     heads = [(float(x), float(y)) for x, y in re.findall(
         r'<line [^>]*x2="([\d.]+)" y2="([\d.]+)"[^>]*marker-end', src04)]
-    heads += [(float(x), float(y)) for x, y in re.findall(
-        r'<path d="[^"]*?([\d.]+),([\d.]+)"[^>]*marker-end', src04)]
+
+    def _pen_end(dstr):
+        """Where a path's pen stops, followed through absolute and relative M, L, H and V --
+        every command path() is handed in this set. Plate 13 ends its arrows on H and V, so
+        reading only a trailing "x,y" pair missed them. Anything else returns None."""
+        x = y = 0.0
+        cmd, toks, i = None, re.findall(r'[A-Za-z]|-?\d*\.?\d+', dstr), 0
+        try:
+            while i < len(toks):
+                if toks[i].isalpha():
+                    cmd, i = toks[i], i + 1
+                    if cmd not in "MLHVmlhv":
+                        return None
+                    continue
+                if cmd is None:
+                    return None
+                if cmd in "MLml":
+                    dx, dy = float(toks[i]), float(toks[i + 1]); i += 2
+                    x, y = (x + dx, y + dy) if cmd.islower() else (dx, dy)
+                elif cmd in "Hh":
+                    x = x + float(toks[i]) if cmd == "h" else float(toks[i]); i += 1
+                elif cmd in "Vv":
+                    y = y + float(toks[i]) if cmd == "v" else float(toks[i]); i += 1
+                else:
+                    return None
+        except (IndexError, ValueError):
+            return None
+        return (x, y) if cmd else None
+
+    for dstr in re.findall(r'<path d="([^"]*)"[^>]*marker-end', src04):
+        end = _pen_end(dstr)
+        if end is None:
+            fails.append(f"d04: an arrow drawn as path d={dstr!r} cannot be followed to its end, "
+                         f"so whether it lands on a hand-kept surface is unknown")
+        else:
+            heads.append(end)
     for label in ("hand-kept JSON files", "Hand-written migrations"):
         t = re.search(r'<text x="([\d.]+)" y="([\d.]+)"[^>]*>[^<]*%s' % re.escape(label), src04)
         if not t:

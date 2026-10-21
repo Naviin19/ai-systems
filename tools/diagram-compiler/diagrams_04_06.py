@@ -13,7 +13,7 @@ def d04(bare=False):
     Redrawn 21 October. The two surfaces kept by hand were six identical rows with the
     generated ones, in one stack under the generator's arrow, told apart by colour alone,
     which drew a parity that does not exist. Position now says it before colour does: the
-    source's column holds what it reaches, and the hand-kept surfaces stand in a column of
+    source's column holds what is held to it, and the hand-kept surfaces stand in a column of
     their own with nothing drawn into them, coral because they can drift, outlined because
     nothing generates them. The arrow through generate-json-schemas.ts ends on JSON Schema,
     the one surface that script writes; the other three name their own mechanism. verify.py
@@ -38,18 +38,22 @@ def d04(bare=False):
 
     # What the source holds: a common region, not a gate. Each surface names the mechanism
     # that holds it, and the generator's arrow crosses the region to the one it writes.
-    PITCH, RH = 51, 43
+    # Both columns set a title one offset below its box's top and each line one LH_SUB below
+    # that, so their first rows share a baseline across the gutter. Titles keep the plate's
+    # regular weight; labelled_box would set these heavier than every other title on it.
+    TOP, PAD = round(CAP * TITLE_PX) + 8, 9     # title baseline from the top; last line to the edge
+    RH = TOP + LH_SUB + PAD                     # a held surface: its name and one line
     b.append(section(M, 272, "Held to the source"))
     surfaces = [("JSON Schema",          "60 generated, drift blocks CI"),
                 ("TypeScript types",     "Inferred from the source, typechecked in CI"),
                 ("Contract examples",    "27 checked with safeParse on every verify-all"),
                 ("Registry and catalog", "Generated; R32 fails when either is stale")]
     for i, (name, mech) in enumerate(surfaces):
-        y = 290 + i * PITCH
+        y = 290 + i * (RH + 8)
         b.append(box(M + 10, y, LW - 20, RH, "teal"))
-        b.append(text(M + 26, y + 17, name, TITLE_PX, "teal"))
-        b.append(text(M + 26, y + 34, mech, SUB_PX, "teal", opacity="0.74"))
-    reg_end = 290 + 3 * PITCH + RH + 10
+        b.append(text(M + 26, y + TOP, name, TITLE_PX, "teal"))
+        b.append(text(M + 26, y + TOP + LH_SUB, mech, SUB_PX, "teal", opacity="0.74"))
+    reg_end = y + RH + 10
     b.append(region(M, 280, LW, reg_end - 280, "gray", r=8))
     b.append(conn(AX, 236, AX, 288, "gray", opacity="0.6"))
 
@@ -60,19 +64,22 @@ def d04(bare=False):
                                            "checked only for existence", 27)),
             ("Database columns",      wrap("Hand-written migrations; parity advisory, "
                                            "skips without a database", 27))]
-    kh = 27 + 17 * max(len(lines) for _, lines in kept)
+    kh = TOP + LH_SUB * max(len(lines) for _, lines in kept) + PAD
     y = 290
     for name, lines in kept:
         b.append(box(RX, y, RW, kh, "coral", fill=False))
-        b.append(text(RX + 16, y + 20, name, TITLE_PX, "coral"))
+        b.append(text(RX + 16, y + TOP, name, TITLE_PX, "coral"))
         for k, line in enumerate(lines):
-            b.append(text(RX + 16, y + 37 + 17 * k, line, SUB_PX, "coral", opacity="0.74"))
+            b.append(text(RX + 16, y + TOP + LH_SUB * (k + 1), line, SUB_PX, "coral",
+                          opacity="0.74"))
         y += kh + 8
-    for k, line in enumerate(wrap("Not derived from the source; no blocking check holds "
-                                  "them to it", 32)):
-        b.append(text(RX, reg_end - 21 + 17 * k, line, SUB_PX, ink="mute"))
+    # The note ends level with the region when there is room, and below the boxes when not.
+    note = wrap("Not derived from the source; no blocking check holds them to it", 32)
+    ny = max(reg_end - 4 - LH_SUB * (len(note) - 1), y - 8 + 21)
+    for k, line in enumerate(note):
+        b.append(text(RX, ny + LH_SUB * k, line, SUB_PX, ink="mute"))
 
-    y = reg_end + 28
+    y = max(reg_end, ny + LH_SUB * (len(note) - 1) + 4) + 28
     b.append(section(M, y, "At the agent boundary, and before any build"))
     by = y + 10
     b.append(box(M, by, 300, 62, "coral", dashed=True))
